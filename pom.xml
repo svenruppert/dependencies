@@ -410,9 +410,9 @@
           <groupId>org.eluder.coveralls</groupId>
           <artifactId>coveralls-maven-plugin</artifactId>
           <version>3.1.0</version>
-          <configuration>
-            <repoToken>KMHtA4a1JE18NXrfejbMeHP0bsobH09To</repoToken>
-          </configuration>
+          <!--<configuration>-->
+            <!--<repoToken>KMHtA4a1JE18NXrfejbMeHP0bsobH09To</repoToken>-->
+          <!--</configuration>-->
         </plugin>
         <plugin>
           <groupId>org.pitest</groupId>
@@ -646,6 +646,9 @@
       <plugin>
         <groupId>org.eluder.coveralls</groupId>
         <artifactId>coveralls-maven-plugin</artifactId>
+        <configuration>
+        <repoToken>PVjxLL7z80TYKPmIrFWCcF8gSsRlcSCMm</repoToken>
+        </configuration>
       </plugin>
 
     </plugins>
