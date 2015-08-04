@@ -801,7 +801,7 @@
                   <checkstyleRules>
                     <module name="Checker">
                       <!--<module name="JavadocPackage"/>-->
-                      <module name="NewlineAtEndOfFile"/>
+                      <!--<module name="NewlineAtEndOfFile"/>-->
                       <module name="FileTabCharacter"/>
 
                       <module name="RegexpSingleline">
