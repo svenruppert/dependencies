@@ -24,8 +24,7 @@
   <groupId>org.rapidpm</groupId>
   <artifactId>rapidpm-dependencies</artifactId>
   <packaging>pom</packaging>
-
-  <version>1.0.0-SNAPSHOT</version>
+  <version>3.0.0-SNAPSHOT</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -77,7 +76,59 @@
 
 
   <dependencyManagement>
+
+
+    <!--project versions-->
     <dependencies>
+      <!--<dependency>-->
+      <!--<groupId>org.rapidpm</groupId>-->
+      <!--<artifactId>rapidpm-dependencies</artifactId>-->
+      <!--<version>1.0.0-SNAPSHOT</version>-->
+      <!--</dependency>-->
+
+      <!--<dependency>-->
+      <!--<groupId>org.rapidpm.proxybuilder</groupId>-->
+      <!--<artifactId>rapidpm-proxybuilder</artifactId>-->
+      <!--<version>0.0.2-SNAPSHOT</version>-->
+      <!--</dependency>-->
+
+      <dependency>
+        <groupId>org.rapidpm.proxybuilder</groupId>
+        <artifactId>rapidpm-proxybuilder-modules-builder</artifactId>
+        <version>0.0.2-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.proxybuilder</groupId>
+        <artifactId>rapidpm-proxybuilder-modules-dynamicobjectadapter-generator-annotations</artifactId>
+        <version>0.0.2-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.proxybuilder</groupId>
+        <artifactId>rapidpm-proxybuilder-modules-dynamicobjectadapter-generator-processors</artifactId>
+        <version>0.0.2-SNAPSHOT</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.rapidpm.dynamic-cdi</groupId>
+        <artifactId>rapidpm-dynamic-cdi</artifactId>
+        <version>0.0.2-SNAPSHOT</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>rapidpm-microservice-modules-core</artifactId>
+        <version>0.0.2-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>rapidpm-microservice-modules-persistence-jdbc</artifactId>
+        <version>0.0.2-SNAPSHOT</version>
+      </dependency>
+
+
+      <!--project versions-->
       <!--Undertow-->
       <dependency>
         <groupId>io.undertow</groupId>
@@ -207,6 +258,13 @@
         <groupId>com.google.code.findbugs</groupId>
         <artifactId>jsr305</artifactId>
         <version>3.0.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.zaxxer</groupId>
+        <artifactId>HikariCP</artifactId>
+        <version>2.4.0</version>
+        <scope>compile</scope>
       </dependency>
 
       <dependency>
@@ -423,7 +481,7 @@
           <artifactId>coveralls-maven-plugin</artifactId>
           <version>3.1.0</version>
           <!--<configuration>-->
-            <!--<repoToken>KMHtA4a1JE18NXrfejbMeHP0bsobH09To</repoToken>-->
+          <!--<repoToken>KMHtA4a1JE18NXrfejbMeHP0bsobH09To</repoToken>-->
           <!--</configuration>-->
         </plugin>
         <plugin>
@@ -659,7 +717,7 @@
         <groupId>org.eluder.coveralls</groupId>
         <artifactId>coveralls-maven-plugin</artifactId>
         <configuration>
-        <!--<repoToken>PVjxLL7z80TYKPmIrFWCcF8gSsRlcSCMm</repoToken>-->
+          <!--<repoToken>PVjxLL7z80TYKPmIrFWCcF8gSsRlcSCMm</repoToken>-->
         </configuration>
       </plugin>
 
