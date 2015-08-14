@@ -769,7 +769,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>findbugs-maven-plugin</artifactId>
-        <version>3.0.1</version>
+        <version>3.0.2</version>
         <configuration>
           <!--
               Enables analysis which takes more memory but finds more bugs.
@@ -788,7 +788,7 @@
       <plugin>
         <groupId>org.pitest</groupId>
         <artifactId>pitest-maven</artifactId>
-        <version>1.1.5</version>
+        <version>1.1.6</version>
         <reportSets>
           <reportSet>
             <reports>
@@ -839,6 +839,32 @@
       </build>
     </profile>
 
+
+    <profile>
+      <id>sys-nexus-deploy-gpg</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <!--<phase>install</phase>-->
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+
+    </profile>
 
 
 
