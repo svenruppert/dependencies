@@ -14,5 +14,9 @@ jdk:
 #  - openjdk7
 #  - openjdk6
 
+os:
+  - linux
+  - osx
+
 after_success:
   - mvn clean cobertura:cobertura coveralls:report
