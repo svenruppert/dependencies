@@ -610,87 +610,6 @@
 
       </plugin>
 
-      <!-- Enable mutation testing -->
-      <plugin>
-        <groupId>org.pitest</groupId>
-        <artifactId>pitest-maven</artifactId>
-        <configuration>
-          <targetClasses>
-            <param>org.rapidpm.*</param>
-          </targetClasses>
-          <targetTests>
-            <param>org.rapidpm.*</param>
-            <param>junit.org.rapidpm.*</param>
-          </targetTests>
-        </configuration>
-      </plugin>
-
-
-      <!--<plugin>-->
-      <!--<groupId>org.apache.maven.plugins</groupId>-->
-      <!--<artifactId>maven-surefire-plugin</artifactId>-->
-      <!--<configuration>-->
-      <!--<forkMode>always</forkMode>-->
-      <!--</configuration>-->
-      <!--</plugin>-->
-
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>default-instrument</id>
-            <goals>
-              <goal>instrument</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>default-restore-instrumented-classes</id>
-            <goals>
-              <goal>restore-instrumented-classes</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>default-report</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>default-check</id>
-            <goals>
-              <goal>check</goal>
-            </goals>
-            <configuration>
-              <rules>
-                <!--  implementation is needed only for Maven 2  -->
-                <rule implementation="org.jacoco.maven.RuleConfiguration">
-                  <element>BUNDLE</element>
-                  <limits>
-                    <!--  implementation is needed only for Maven 2  -->
-                    <limit implementation="org.jacoco.report.check.Limit">
-                      <counter>COMPLEXITY</counter>
-                      <value>COVEREDRATIO</value>
-                      <minimum>0.60</minimum>
-                    </limit>
-                  </limits>
-                </rule>
-              </rules>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <systemPropertyVariables>
-            <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-          </systemPropertyVariables>
-        </configuration>
-      </plugin>
-
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -769,7 +688,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>findbugs-maven-plugin</artifactId>
-        <version>3.0.2</version>
+        <version>3.0.1</version>
         <configuration>
           <!--
               Enables analysis which takes more memory but finds more bugs.
@@ -802,6 +721,100 @@
 
 
   <profiles>
+
+    <profile>
+      <id>qm-qs-pitest</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <!-- Enable mutation testing -->
+          <plugin>
+            <groupId>org.pitest</groupId>
+            <artifactId>pitest-maven</artifactId>
+            <configuration>
+              <targetClasses>
+                <param>org.rapidpm.*</param>
+              </targetClasses>
+              <targetTests>
+                <param>org.rapidpm.*</param>
+                <param>junit.org.rapidpm.*</param>
+              </targetTests>
+            </configuration>
+          </plugin>
+
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>qm-qs-jacoco</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>default-instrument</id>
+                <goals>
+                  <goal>instrument</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>default-restore-instrumented-classes</id>
+                <goals>
+                  <goal>restore-instrumented-classes</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>default-report</id>
+                <phase>prepare-package</phase>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>default-check</id>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+                <configuration>
+                  <rules>
+                    <!--  implementation is needed only for Maven 2  -->
+                    <rule implementation="org.jacoco.maven.RuleConfiguration">
+                      <element>BUNDLE</element>
+                      <limits>
+                        <!--  implementation is needed only for Maven 2  -->
+                        <limit implementation="org.jacoco.report.check.Limit">
+                          <counter>COMPLEXITY</counter>
+                          <value>COVEREDRATIO</value>
+                          <minimum>0.60</minimum>
+                        </limit>
+                      </limits>
+                    </rule>
+                  </rules>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <systemPropertyVariables>
+                <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+              </systemPropertyVariables>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
 
     <profile>
       <id>sys-nexus-deploy</id>
@@ -845,17 +858,14 @@
           </plugin>
         </plugins>
       </build>
-
     </profile>
-
-
 
     <!-- embedded profiles -->
     <profile>
+      <id>qm-qs-junit</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <id>junit</id>
       <build>
         <plugins>
           <plugin>
@@ -874,8 +884,9 @@
         </plugins>
       </build>
     </profile>
+
     <profile>
-      <id>checks</id>
+      <id>qm-qs-checkstyle</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
