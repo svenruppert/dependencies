@@ -72,6 +72,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <undertow.version>1.2.10.Final</undertow.version>
     <resteasy-undertow.version>3.0.11.Final</resteasy-undertow.version>
+    <vwscdn.version>1.3.4</vwscdn.version>
+    <vaadin.version>7.5.3</vaadin.version>
   </properties>
 
 
@@ -330,16 +332,26 @@
         <artifactId>javapoet</artifactId>
         <version>1.3.0-SNAPSHOT</version>
       </dependency>
+
+
+      <dependency>
+        <groupId>in.virit.vwscdn</groupId>
+        <artifactId>vwscdn-client</artifactId>
+        <version>${vwscdn.version}</version>
+      </dependency>
+
     </dependencies>
+
+
   </dependencyManagement>
 
 
   <dependencies>
 
-    <dependency>
-      <groupId>org.jetbrains.kotlin</groupId>
-      <artifactId>kotlin-stdlib</artifactId>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.jetbrains.kotlin</groupId>-->
+      <!--<artifactId>kotlin-stdlib</artifactId>-->
+    <!--</dependency>-->
 
 
     <!--tdd-->
@@ -364,7 +376,7 @@
     <dependency>
       <groupId>org.openjdk.jmh</groupId>
       <artifactId>jmh-core</artifactId>
-      <!--<scope>test</scope>-->
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.openjdk.jmh</groupId>
@@ -374,7 +386,7 @@
     <dependency>
       <groupId>org.openjdk.jmh</groupId>
       <artifactId>jmh-generator-annprocess</artifactId>
-      <!--<scope>provided</scope>-->
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.openjdk.jmh</groupId>
@@ -499,6 +511,15 @@
           <artifactId>exec-maven-plugin</artifactId>
           <version>1.4.0</version>
         </plugin>
+
+        <!--Vaadin Widget external -->
+        <plugin>
+          <groupId>in.virit.vwscdn</groupId>
+          <artifactId>vwscdn-maven-plugin</artifactId>
+          <version>${vwscdn.version}</version>
+        </plugin>
+
+
       </plugins>
     </pluginManagement>
 
@@ -515,29 +536,29 @@
         </configuration>
       </plugin>
 
-      <plugin>
-        <artifactId>kotlin-maven-plugin</artifactId>
-        <groupId>org.jetbrains.kotlin</groupId>
-        <version>${kotlin.version}</version>
+      <!--<plugin>-->
+        <!--<artifactId>kotlin-maven-plugin</artifactId>-->
+        <!--<groupId>org.jetbrains.kotlin</groupId>-->
+        <!--<version>${kotlin.version}</version>-->
 
-        <executions>
-          <execution>
-            <id>compile</id>
-            <phase>process-sources</phase>
-            <goals>
-              <goal>compile</goal>
-            </goals>
-          </execution>
+        <!--<executions>-->
+          <!--<execution>-->
+            <!--<id>compile</id>-->
+            <!--<phase>process-sources</phase>-->
+            <!--<goals>-->
+              <!--<goal>compile</goal>-->
+            <!--</goals>-->
+          <!--</execution>-->
 
-          <execution>
-            <id>test-compile</id>
-            <phase>process-test-sources</phase>
-            <goals>
-              <goal>test-compile</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+          <!--<execution>-->
+            <!--<id>test-compile</id>-->
+            <!--<phase>process-test-sources</phase>-->
+            <!--<goals>-->
+              <!--<goal>test-compile</goal>-->
+            <!--</goals>-->
+          <!--</execution>-->
+        <!--</executions>-->
+      <!--</plugin>-->
 
 
       <plugin>
@@ -902,6 +923,9 @@
                   <goal>check</goal>
                 </goals>
                 <configuration>
+                  <!--<excludes>**/generated/**/*</excludes>-->
+                  <!--<excludes>**/generated-sources/vwscdn/*</excludes>-->
+                  <excludes>in/virit/*,com/acme/**/*</excludes>
                   <checkstyleRules>
                     <module name="Checker">
                       <!--<module name="JavadocPackage"/>-->
