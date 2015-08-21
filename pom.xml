@@ -168,6 +168,8 @@
         <artifactId>metrics-core</artifactId>
         <version>3.1.2</version>
       </dependency>
+
+      <!--Google stuff-->
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
@@ -181,6 +183,13 @@
         <optional>true</optional>
         <!-- case: when no json de/serialization -->
       </dependency>
+      <dependency>
+        <groupId>com.google.auto.service</groupId>
+        <artifactId>auto-service</artifactId>
+        <version>1.0-rc2</version>
+        <!--<optional>true</optional>-->
+      </dependency>
+      <!--Google stuff-->
 
 
       <!--Reflection Utils-->
@@ -246,6 +255,13 @@
         <version>2.3</version>
       </dependency>
 
+      <dependency>
+        <groupId>com.zaxxer</groupId>
+        <artifactId>HikariCP</artifactId>
+        <version>2.4.0</version>
+        <scope>compile</scope>
+      </dependency>
+
       <!--tdd-->
 
       <dependency>
@@ -260,13 +276,6 @@
         <groupId>com.google.code.findbugs</groupId>
         <artifactId>jsr305</artifactId>
         <version>3.0.0</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.zaxxer</groupId>
-        <artifactId>HikariCP</artifactId>
-        <version>2.4.0</version>
-        <scope>compile</scope>
       </dependency>
 
       <dependency>
@@ -292,7 +301,7 @@
         <groupId>org.openjdk.jmh</groupId>
         <artifactId>jmh-core</artifactId>
         <version>${jmh.version}</version>
-        <!--<scope>test</scope>-->
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.openjdk.jmh</groupId>
@@ -313,6 +322,16 @@
         <scope>test</scope>
       </dependency>
 
+      <dependency>
+        <groupId>org.zeroturnaround</groupId>
+        <artifactId>zt-exec</artifactId>
+        <version>1.8</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!--tdd-->
+
+
       <!--Brian Goetz Concurrency Annotations-->
       <dependency>
         <groupId>net.jcip</groupId>
@@ -320,20 +339,13 @@
         <version>1.0</version>
       </dependency>
 
-
-      <dependency>
-        <groupId>com.google.auto.service</groupId>
-        <artifactId>auto-service</artifactId>
-        <version>1.0-rc2</version>
-        <!--<optional>true</optional>-->
-      </dependency>
       <dependency>
         <groupId>com.squareup</groupId>
         <artifactId>javapoet</artifactId>
         <version>1.3.0-SNAPSHOT</version>
       </dependency>
 
-
+      <!--Vaadin Based stuff-->
       <dependency>
         <groupId>in.virit.vwscdn</groupId>
         <artifactId>vwscdn-client</artifactId>
@@ -341,16 +353,14 @@
       </dependency>
 
     </dependencies>
-
-
   </dependencyManagement>
 
 
   <dependencies>
 
     <!--<dependency>-->
-      <!--<groupId>org.jetbrains.kotlin</groupId>-->
-      <!--<artifactId>kotlin-stdlib</artifactId>-->
+    <!--<groupId>org.jetbrains.kotlin</groupId>-->
+    <!--<artifactId>kotlin-stdlib</artifactId>-->
     <!--</dependency>-->
 
 
@@ -537,27 +547,27 @@
       </plugin>
 
       <!--<plugin>-->
-        <!--<artifactId>kotlin-maven-plugin</artifactId>-->
-        <!--<groupId>org.jetbrains.kotlin</groupId>-->
-        <!--<version>${kotlin.version}</version>-->
+      <!--<artifactId>kotlin-maven-plugin</artifactId>-->
+      <!--<groupId>org.jetbrains.kotlin</groupId>-->
+      <!--<version>${kotlin.version}</version>-->
 
-        <!--<executions>-->
-          <!--<execution>-->
-            <!--<id>compile</id>-->
-            <!--<phase>process-sources</phase>-->
-            <!--<goals>-->
-              <!--<goal>compile</goal>-->
-            <!--</goals>-->
-          <!--</execution>-->
+      <!--<executions>-->
+      <!--<execution>-->
+      <!--<id>compile</id>-->
+      <!--<phase>process-sources</phase>-->
+      <!--<goals>-->
+      <!--<goal>compile</goal>-->
+      <!--</goals>-->
+      <!--</execution>-->
 
-          <!--<execution>-->
-            <!--<id>test-compile</id>-->
-            <!--<phase>process-test-sources</phase>-->
-            <!--<goals>-->
-              <!--<goal>test-compile</goal>-->
-            <!--</goals>-->
-          <!--</execution>-->
-        <!--</executions>-->
+      <!--<execution>-->
+      <!--<id>test-compile</id>-->
+      <!--<phase>process-test-sources</phase>-->
+      <!--<goals>-->
+      <!--<goal>test-compile</goal>-->
+      <!--</goals>-->
+      <!--</execution>-->
+      <!--</executions>-->
       <!--</plugin>-->
 
 
