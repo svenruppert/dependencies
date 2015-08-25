@@ -877,7 +877,7 @@
         </repository>
         <snapshotRepository>
           <id>snapshotsReply</id>
-          <url>https://10.64.54.53/content/repositories/snapshots</url>
+          <url>http://10.64.54.53/content/repositories/snapshots</url>
         </snapshotRepository>
       </distributionManagement>
     </profile>
