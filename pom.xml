@@ -255,10 +255,36 @@
         <version>2.3</version>
       </dependency>
 
+
+
+      <!--persistence-->
+      <dependency>
+        <groupId>com.orientechnologies</groupId>
+        <artifactId>orientdb-core</artifactId>
+        <version>2.1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.orientechnologies</groupId>
+        <artifactId>orientdb-graphdb</artifactId>
+        <version>2.1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.orientechnologies</groupId>
+        <artifactId>orientdb-object</artifactId>
+        <version>2.1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.tinkerpop.blueprints</groupId>
+        <artifactId>blueprints-core</artifactId>
+        <version>2.6.0</version>
+      </dependency>
+
+
+
       <dependency>
         <groupId>com.zaxxer</groupId>
         <artifactId>HikariCP</artifactId>
-        <version>2.4.0</version>
+        <version>2.4.1</version>
         <scope>compile</scope>
       </dependency>
 
@@ -327,6 +353,13 @@
         <artifactId>zt-exec</artifactId>
         <version>1.8</version>
         <scope>test</scope>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.stagemonitor</groupId>
+        <artifactId>stagemonitor-web</artifactId>
+        <version>0.17.2</version>
       </dependency>
 
       <!--tdd-->
@@ -627,19 +660,7 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
 
-      </plugin>
 
 
       <plugin>
@@ -750,6 +771,30 @@
 
 
   <profiles>
+
+    <profile>
+      <id>gen-javadoc</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
 
     <profile>
       <id>qm-qs-pitest</id>
