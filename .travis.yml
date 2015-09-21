@@ -16,7 +16,7 @@ jdk:
 
 os:
   - linux
-  - osx
+#  - osx
 
 after_success:
   - mvn clean cobertura:cobertura coveralls:report
