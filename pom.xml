@@ -24,7 +24,7 @@
   <groupId>org.rapidpm</groupId>
   <artifactId>rapidpm-dependencies</artifactId>
   <packaging>pom</packaging>
-  <version>3.0.0-SNAPSHOT</version>
+  <version>3.0.0</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -32,6 +32,9 @@
     <name>RapidPM</name>
     <url>http://www.rapidpm.org</url>
   </organization>
+  <url>https://github.com/RapidPM/rapidpm-dependencies</url>
+  <name>RapidPM Dependencies</name>
+  <description>Dependencies for the RapidPM projects</description>
   <scm>
     <url>https://github.com/RapidPM/rapidpm-dependencies</url>
     <connection>scm:git:https://github.com/RapidPM/rapidpm-dependencies.git</connection>
@@ -83,70 +86,58 @@
 
     <!--project versions-->
     <dependencies>
-      <!--<dependency>-->
-      <!--<groupId>org.rapidpm</groupId>-->
-      <!--<artifactId>rapidpm-dependencies</artifactId>-->
-      <!--<version>1.0.0-SNAPSHOT</version>-->
-      <!--</dependency>-->
-
-      <!--<dependency>-->
-      <!--<groupId>org.rapidpm.proxybuilder</groupId>-->
-      <!--<artifactId>rapidpm-proxybuilder</artifactId>-->
-      <!--<version>0.0.2-SNAPSHOT</version>-->
-      <!--</dependency>-->
-
       <dependency>
         <groupId>org.rapidpm.proxybuilder</groupId>
         <artifactId>rapidpm-proxybuilder-modules-builder</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.2</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm.proxybuilder</groupId>
         <artifactId>rapidpm-proxybuilder-modules-dynamicobjectadapter-generator-annotations</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.2</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm.proxybuilder</groupId>
         <artifactId>rapidpm-proxybuilder-modules-dynamicobjectadapter-generator-processors</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.2</version>
       </dependency>
 
 
       <dependency>
         <groupId>org.rapidpm.dynamic-cdi</groupId>
         <artifactId>rapidpm-dynamic-cdi</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.2</version>
       </dependency>
 
 
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-core</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.2</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-optionals-cli</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.2</version>
       </dependency>
 
       <!--TDD-->
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-core-testutils</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.2</version>
       </dependency>
       <!--TDD-->
 
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-persistence-jdbc</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.2</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-persistence-local-hashmap</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.2</version>
       </dependency>
 
 
@@ -287,7 +278,6 @@
       </dependency>
 
 
-
       <!--persistence-->
       <dependency>
         <groupId>com.orientechnologies</groupId>
@@ -309,7 +299,6 @@
         <artifactId>blueprints-core</artifactId>
         <version>2.6.0</version>
       </dependency>
-
 
 
       <dependency>
@@ -708,7 +697,6 @@
           </execution>
         </executions>
       </plugin>
-
 
 
       <plugin>
