@@ -24,7 +24,7 @@
   <groupId>org.rapidpm</groupId>
   <artifactId>rapidpm-dependencies</artifactId>
   <packaging>pom</packaging>
-  <version>3.0.1-SNAPSHOT</version>
+  <version>3.0.1</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -89,55 +89,55 @@
       <dependency>
         <groupId>org.rapidpm.proxybuilder</groupId>
         <artifactId>rapidpm-proxybuilder-modules-builder</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.3</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm.proxybuilder</groupId>
         <artifactId>rapidpm-proxybuilder-modules-dynamicobjectadapter-generator-annotations</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.3</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm.proxybuilder</groupId>
         <artifactId>rapidpm-proxybuilder-modules-dynamicobjectadapter-generator-processors</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.3</version>
       </dependency>
 
 
       <dependency>
         <groupId>org.rapidpm.dynamic-cdi</groupId>
         <artifactId>rapidpm-dynamic-cdi</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.3</version>
       </dependency>
 
 
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-core</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.3</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-optionals-cli</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.3</version>
       </dependency>
 
       <!--TDD-->
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-core-testutils</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.3</version>
       </dependency>
       <!--TDD-->
 
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-persistence-jdbc</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.3</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-persistence-local-hashmap</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.3</version>
       </dependency>
 
 
