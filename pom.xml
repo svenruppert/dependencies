@@ -94,12 +94,12 @@
       </dependency>
       <dependency>
         <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-dynamicobjectadapter-generator-annotations</artifactId>
+        <artifactId>rapidpm-proxybuilder-modules-objectadapter-generator-annotations</artifactId>
         <version>${rapidpm.version}</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-dynamicobjectadapter-generator-processors</artifactId>
+        <artifactId>rapidpm-proxybuilder-modules-objectadapter-generator-processors</artifactId>
         <version>${rapidpm.version}</version>
       </dependency>
 
