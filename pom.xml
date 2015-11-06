@@ -92,6 +92,21 @@
         <artifactId>rapidpm-proxybuilder-modules-builder</artifactId>
         <version>${rapidpm.version}</version>
       </dependency>
+
+      <dependency>
+        <groupId>org.rapidpm.proxybuilder</groupId>
+        <artifactId>rapidpm-proxybuilder-modules-dynamic</artifactId>
+        <version>${rapidpm.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.proxybuilder</groupId>
+        <artifactId>rapidpm-proxybuilder-modules-static</artifactId>
+        <version>${rapidpm.version}</version>
+      </dependency>
+
+
+
+
       <dependency>
         <groupId>org.rapidpm.proxybuilder</groupId>
         <artifactId>rapidpm-proxybuilder-modules-objectadapter-generator-annotations</artifactId>
