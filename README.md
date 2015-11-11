@@ -5,10 +5,11 @@
 [![Build Status - drone.io](https://drone.io/github.com/RapidPM/rapidpm-dependencies/status.png)](https://drone.io/github.com/RapidPM/rapidpm-dependencies/latest)
 
 branch:
-+ master:
+
+master:
 [![Dependency Status](https://www.versioneye.com/user/projects/55a3a5fb323939001700053b/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55a3a5fb323939001700053b)
 
-+ develop:
+develop:
 [![Dependency Status](https://www.versioneye.com/user/projects/55ccca799a2f09001600001e/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55ccca799a2f09001600001e)
 
 ## SNAPSHOTS
