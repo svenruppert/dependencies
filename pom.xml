@@ -24,7 +24,7 @@
   <groupId>org.rapidpm</groupId>
   <artifactId>rapidpm-dependencies</artifactId>
   <packaging>pom</packaging>
-  <version>3.0.2-SNAPSHOT</version>
+  <version>3.0.2</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -78,7 +78,8 @@
     <vwscdn.version>1.3.6</vwscdn.version>
     <vaadin.version>7.5.9</vaadin.version>
     <orientdb.version>2.1.5</orientdb.version>
-    <rapidpm.version>0.0.4-SNAPSHOT</rapidpm.version>
+    <rapidpm.version>0.0.4</rapidpm.version>
+    <!--<rapidpm.version>0.0.5-SNAPSHOT</rapidpm.version>-->
   </properties>
 
 
