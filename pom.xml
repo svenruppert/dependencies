@@ -24,7 +24,7 @@
   <groupId>org.rapidpm</groupId>
   <artifactId>rapidpm-dependencies</artifactId>
   <packaging>pom</packaging>
-  <version>3.0.1</version>
+  <version>3.0.2</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -70,14 +70,16 @@
 
 
   <properties>
-    <jmh.version>1.11</jmh.version>
-    <kotlin.version>0.12.1230</kotlin.version>
+    <jmh.version>1.11.2</jmh.version>
+    <kotlin.version>0.14.451</kotlin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <undertow.version>1.2.12.Final</undertow.version>
-    <resteasy-undertow.version>3.0.12.Final</resteasy-undertow.version>
-    <vwscdn.version>1.3.4</vwscdn.version>
-    <vaadin.version>7.5.6</vaadin.version>
-    <orientdb.version>2.1.2</orientdb.version>
+    <undertow.version>1.3.5.Final</undertow.version>
+    <resteasy-undertow.version>3.0.13.Final</resteasy-undertow.version>
+    <vwscdn.version>1.3.6</vwscdn.version>
+    <vaadin.version>7.5.9</vaadin.version>
+    <orientdb.version>2.1.5</orientdb.version>
+    <rapidpm.version>0.0.4</rapidpm.version>
+    <!--<rapidpm.version>0.0.5-SNAPSHOT</rapidpm.version>-->
   </properties>
 
 
@@ -89,55 +91,68 @@
       <dependency>
         <groupId>org.rapidpm.proxybuilder</groupId>
         <artifactId>rapidpm-proxybuilder-modules-builder</artifactId>
-        <version>0.0.3</version>
+        <version>${rapidpm.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.rapidpm.proxybuilder</groupId>
+        <artifactId>rapidpm-proxybuilder-modules-dynamic</artifactId>
+        <version>${rapidpm.version}</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-dynamicobjectadapter-generator-annotations</artifactId>
-        <version>0.0.3</version>
+        <artifactId>rapidpm-proxybuilder-modules-static</artifactId>
+        <version>${rapidpm.version}</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.rapidpm.proxybuilder</groupId>
+        <artifactId>rapidpm-proxybuilder-modules-objectadapter-generator-annotations</artifactId>
+        <version>${rapidpm.version}</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-dynamicobjectadapter-generator-processors</artifactId>
-        <version>0.0.3</version>
+        <artifactId>rapidpm-proxybuilder-modules-objectadapter-generator-processors</artifactId>
+        <version>${rapidpm.version}</version>
       </dependency>
 
 
       <dependency>
         <groupId>org.rapidpm.dynamic-cdi</groupId>
         <artifactId>rapidpm-dynamic-cdi</artifactId>
-        <version>0.0.3</version>
+        <version>${rapidpm.version}</version>
       </dependency>
 
 
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-core</artifactId>
-        <version>0.0.3</version>
+        <version>${rapidpm.version}</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-optionals-cli</artifactId>
-        <version>0.0.3</version>
+        <version>${rapidpm.version}</version>
       </dependency>
 
       <!--TDD-->
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-core-testutils</artifactId>
-        <version>0.0.3</version>
+        <version>${rapidpm.version}</version>
       </dependency>
       <!--TDD-->
 
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-persistence-jdbc</artifactId>
-        <version>0.0.3</version>
+        <version>${rapidpm.version}</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-persistence-local-hashmap</artifactId>
-        <version>0.0.3</version>
+        <version>${rapidpm.version}</version>
       </dependency>
 
 
@@ -174,7 +189,7 @@
       <dependency>
         <groupId>org.jboss.resteasy</groupId>
         <artifactId>jaxrs-api</artifactId>
-        <version>${resteasy-undertow.version}</version>
+        <version>3.0.12.Final</version>
       </dependency>
 
       <!--RestEasy-->
@@ -196,7 +211,7 @@
       <dependency>
         <groupId>com.google.code.gson</groupId>
         <artifactId>gson</artifactId>
-        <version>2.3.1</version>
+        <version>2.4</version>
         <optional>true</optional>
         <!-- case: when no json de/serialization -->
       </dependency>
@@ -239,12 +254,12 @@
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
-        <version>4.5</version>
+        <version>4.5.1</version>
       </dependency>
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>fluent-hc</artifactId>
-        <version>4.5</version>
+        <version>4.5.1</version>
       </dependency>
 
 
@@ -268,13 +283,13 @@
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
-        <version>2.3</version>
+        <version>2.4.1</version>
         <scope>compile</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-1.2-api</artifactId>
-        <version>2.3</version>
+        <version>2.4.1</version>
       </dependency>
 
 
@@ -304,7 +319,7 @@
       <dependency>
         <groupId>com.zaxxer</groupId>
         <artifactId>HikariCP</artifactId>
-        <version>2.4.1</version>
+        <version>2.4.2</version>
         <scope>compile</scope>
       </dependency>
 
@@ -321,7 +336,7 @@
       <dependency>
         <groupId>com.google.code.findbugs</groupId>
         <artifactId>jsr305</artifactId>
-        <version>3.0.0</version>
+        <version>3.0.1</version>
       </dependency>
 
       <dependency>
@@ -339,7 +354,7 @@
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
-        <version>3.1.0</version>
+        <version>3.2.0</version>
         <scope>test</scope>
       </dependency>
       <!--Microbenchmarking-->
@@ -379,7 +394,7 @@
       <dependency>
         <groupId>org.stagemonitor</groupId>
         <artifactId>stagemonitor-web</artifactId>
-        <version>0.17.2</version>
+        <version>0.18.1</version>
       </dependency>
 
       <!--tdd-->
@@ -395,7 +410,7 @@
       <dependency>
         <groupId>com.squareup</groupId>
         <artifactId>javapoet</artifactId>
-        <version>1.3.0</version>
+        <version>1.4.0</version>
       </dependency>
 
       <!--Vaadin Based stuff-->
@@ -492,6 +507,7 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
           <version>2.5.2</version>
+          <!--<version>3.0-r1585899</version>-->
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -521,12 +537,12 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-clean-plugin</artifactId>
-          <version>2.6.1</version>
+          <version>3.0.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.18.1</version>
+          <version>2.19</version>
         </plugin>
         <plugin>
           <groupId>org.jacoco</groupId>
@@ -556,12 +572,12 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>2.16</version>
+          <version>2.17</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-shade-plugin</artifactId>
-          <version>2.4.1</version>
+          <version>2.4.2</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -576,7 +592,7 @@
         <plugin>
           <groupId>org.eluder.coveralls</groupId>
           <artifactId>coveralls-maven-plugin</artifactId>
-          <version>3.2.0</version>
+          <version>4.0.0</version>
           <!--<configuration>-->
           <!--<repoToken>KMHtA4a1JE18NXrfejbMeHP0bsobH09To</repoToken>-->
           <!--</configuration>-->
@@ -584,7 +600,7 @@
         <plugin>
           <groupId>org.pitest</groupId>
           <artifactId>pitest-maven</artifactId>
-          <version>1.1.6</version>
+          <version>1.1.7</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -598,7 +614,11 @@
           <artifactId>vwscdn-maven-plugin</artifactId>
           <version>${vwscdn.version}</version>
         </plugin>
-
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>findbugs-maven-plugin</artifactId>
+          <version>3.0.3</version>
+        </plugin>
 
       </plugins>
     </pluginManagement>
@@ -644,7 +664,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.3</version>
+        <!--<version>3.3</version>-->
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
@@ -774,7 +794,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>findbugs-maven-plugin</artifactId>
-        <version>3.0.1</version>
+        <!--<version>3.0.2</version>-->
         <configuration>
           <!--
               Enables analysis which takes more memory but finds more bugs.
@@ -793,7 +813,7 @@
       <plugin>
         <groupId>org.pitest</groupId>
         <artifactId>pitest-maven</artifactId>
-        <version>1.1.6</version>
+        <!--<version>1.1.7</version>-->
         <reportSets>
           <reportSet>
             <reports>
@@ -911,17 +931,17 @@
                       </limits>
                     </rule>
                     <!--<rule>-->
-                      <!--<element>CLASS</element>-->
-                      <!--<excludes>-->
-                        <!--<exclude>**/junit/**</exclude>-->
-                      <!--</excludes>-->
-                      <!--<limits>-->
-                        <!--<limit>-->
-                          <!--<counter>LINE</counter>-->
-                          <!--<value>COVEREDRATIO</value>-->
-                          <!--<minimum>0.50</minimum>-->
-                        <!--</limit>-->
-                      <!--</limits>-->
+                    <!--<element>CLASS</element>-->
+                    <!--<excludes>-->
+                    <!--<exclude>**/junit/**</exclude>-->
+                    <!--</excludes>-->
+                    <!--<limits>-->
+                    <!--<limit>-->
+                    <!--<counter>LINE</counter>-->
+                    <!--<value>COVEREDRATIO</value>-->
+                    <!--<minimum>0.50</minimum>-->
+                    <!--</limit>-->
+                    <!--</limits>-->
                     <!--</rule>-->
                   </rules>
                 </configuration>
