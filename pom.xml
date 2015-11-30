@@ -437,6 +437,16 @@
       </dependency>
       <dependency>
         <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-push</artifactId>
+        <version>${vaadin.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-client</artifactId>
+        <version>${vaadin.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
         <artifactId>vaadin-testbench-api</artifactId>
         <version>${vaadin-testbench-api.version}</version>
         <scope>test</scope>
@@ -899,13 +909,13 @@
                 <include>**/org/rapidpm/**/*</include>
               </includes>
               <!--<fileSets>-->
-                <!--&lt;!&ndash; Implementation attribute not needed in Maven 3 &ndash;&gt;-->
-                <!--<fileSet implementation="org.apache.maven.shared.model.fileset.FileSet">-->
-                  <!--<directory>${project.build.directory}</directory>-->
-                  <!--<includes>-->
-                    <!--<include>**/*.exec</include>-->
-                  <!--</includes>-->
-                <!--</fileSet>-->
+              <!--&lt;!&ndash; Implementation attribute not needed in Maven 3 &ndash;&gt;-->
+              <!--<fileSet implementation="org.apache.maven.shared.model.fileset.FileSet">-->
+              <!--<directory>${project.build.directory}</directory>-->
+              <!--<includes>-->
+              <!--<include>**/*.exec</include>-->
+              <!--</includes>-->
+              <!--</fileSet>-->
               <!--</fileSets>-->
               <!--&lt;!&ndash; File containing the merged data &ndash;&gt;-->
               <!--&lt;!&ndash;<destFile>${project.parent.build.directory}/jacoco.exec</destFile>&ndash;&gt;-->
