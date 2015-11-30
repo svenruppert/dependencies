@@ -71,7 +71,7 @@
 
   <properties>
     <jmh.version>1.11.2</jmh.version>
-    <kotlin.version>0.14.451</kotlin.version>
+    <kotlin.version>1.0.0-beta-2423</kotlin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <undertow.version>1.3.6.Final</undertow.version>
     <resteasy-undertow.version>3.0.13.Final</resteasy-undertow.version>
@@ -79,7 +79,6 @@
     <vaadin.version>7.5.9</vaadin.version>
     <vaadin-testbench-api.version>4.0.3</vaadin-testbench-api.version>
     <orientdb.version>2.1.5</orientdb.version>
-    <!--<rapidpm.version>0.0.4</rapidpm.version>-->
     <rapidpm.version>0.0.5-SNAPSHOT</rapidpm.version>
   </properties>
 
@@ -335,6 +334,11 @@
         <scope>test</scope>
       </dependency>
       <dependency>
+        <groupId>org.jacoco</groupId>
+        <artifactId>org.jacoco.ant</artifactId>
+        <version>0.7.5.201505241946</version>
+      </dependency>
+      <dependency>
         <groupId>com.google.code.findbugs</groupId>
         <artifactId>jsr305</artifactId>
         <version>3.0.1</version>
@@ -444,21 +448,14 @@
 
   <dependencies>
 
-    <!--<dependency>-->
-    <!--<groupId>org.jetbrains.kotlin</groupId>-->
-    <!--<artifactId>kotlin-stdlib</artifactId>-->
-    <!--</dependency>-->
-
-
-    <!--tdd-->
     <dependency>
-      <!--  must be on the classpath  -->
-      <groupId>org.jacoco</groupId>
-      <artifactId>org.jacoco.agent</artifactId>
-      <classifier>runtime</classifier>
-      <scope>test</scope>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib</artifactId>
     </dependency>
+
+
     <dependency>
+      <!--TDD-->
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
@@ -584,6 +581,13 @@
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>cobertura-maven-plugin</artifactId>
           <version>2.7</version>
+          <dependencies>
+            <dependency>
+              <groupId>org.ow2.asm</groupId>
+              <artifactId>asm</artifactId>
+              <version>5.0.4</version>
+            </dependency>
+          </dependencies>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -594,9 +598,6 @@
           <groupId>org.eluder.coveralls</groupId>
           <artifactId>coveralls-maven-plugin</artifactId>
           <version>4.0.0</version>
-          <!--<configuration>-->
-          <!--<repoToken>KMHtA4a1JE18NXrfejbMeHP0bsobH09To</repoToken>-->
-          <!--</configuration>-->
         </plugin>
         <plugin>
           <groupId>org.pitest</groupId>
@@ -637,29 +638,29 @@
         </configuration>
       </plugin>
 
-      <!--<plugin>-->
-      <!--<artifactId>kotlin-maven-plugin</artifactId>-->
-      <!--<groupId>org.jetbrains.kotlin</groupId>-->
-      <!--<version>${kotlin.version}</version>-->
+      <plugin>
+        <artifactId>kotlin-maven-plugin</artifactId>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <version>${kotlin.version}</version>
 
-      <!--<executions>-->
-      <!--<execution>-->
-      <!--<id>compile</id>-->
-      <!--<phase>process-sources</phase>-->
-      <!--<goals>-->
-      <!--<goal>compile</goal>-->
-      <!--</goals>-->
-      <!--</execution>-->
+        <executions>
+          <execution>
+            <id>compile</id>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
 
-      <!--<execution>-->
-      <!--<id>test-compile</id>-->
-      <!--<phase>process-test-sources</phase>-->
-      <!--<goals>-->
-      <!--<goal>test-compile</goal>-->
-      <!--</goals>-->
-      <!--</execution>-->
-      <!--</executions>-->
-      <!--</plugin>-->
+          <execution>
+            <id>test-compile</id>
+            <phase>process-test-sources</phase>
+            <goals>
+              <goal>test-compile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 
 
       <plugin>
@@ -724,33 +725,10 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-repository-plugin</artifactId>
       </plugin>
-      <!-- Configure Cobertura support for evaluating test case coverage -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>cobertura-maven-plugin</artifactId>
-        <configuration>
-          <aggregate>true</aggregate>
-          <instrumentation>
-            <excludes>
-              <!--<exclude>${cobertura.exclude.benchmark.generated}</exclude>-->
-              <exclude>org/openjdk/jmh/infra/generated/**/*.class</exclude>
-              <!--<exclude>${cobertura.exclude.benchmark.runner}</exclude>-->
-              <!--<exclude>${cobertura.exclude.android.test}</exclude>-->
-            </excludes>
-          </instrumentation>
-          <formats>
-            <format>html</format>
-            <format>xml</format>
-          </formats>
-          <check/>
-        </configuration>
-      </plugin>
-      <!-- Generate coveralls reports from Travis -->
       <plugin>
         <groupId>org.eluder.coveralls</groupId>
         <artifactId>coveralls-maven-plugin</artifactId>
         <configuration>
-          <!--<repoToken>PVjxLL7z80TYKPmIrFWCcF8gSsRlcSCMm</repoToken>-->
         </configuration>
       </plugin>
 
@@ -780,7 +758,7 @@
             <configuration>
               <sources>
                 <source>${project.build.directory}/generated-sources/annotations</source>
-                <source>${project.build.directory}/generated-test-sources/annotations</source>
+                <source>${project.build.directory}/generated-test-sources/test-annotations</source>
               </sources>
             </configuration>
           </execution>
@@ -788,43 +766,6 @@
       </plugin>
     </plugins>
   </build>
-
-
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <!--<version>3.0.2</version>-->
-        <configuration>
-          <!--
-              Enables analysis which takes more memory but finds more bugs.
-              If you run out of memory, changes the value of the effort element
-              to 'low'.
-          -->
-          <effort>Max</effort>
-          <!-- Reports all bugs (other values are medium and max) -->
-          <threshold>Low</threshold>
-          <!-- Produces XML report -->
-          <xmlOutput>true</xmlOutput>
-          <!-- Configures the directory in which the XML report is created -->
-          <findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.pitest</groupId>
-        <artifactId>pitest-maven</artifactId>
-        <!--<version>1.1.7</version>-->
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>report</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-    </plugins>
-  </reporting>
 
 
   <profiles>
@@ -853,6 +794,39 @@
       </build>
     </profile>
 
+
+    <profile>
+      <id>qm-qs-findbugs</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <reporting>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>findbugs-maven-plugin</artifactId>
+            <configuration>
+              <onlyAnalyze>org.rapidpm.*</onlyAnalyze>
+              <!--
+                  Enables analysis which takes more memory but finds more bugs.
+                  If you run out of memory, changes the value of the effort element
+                  to 'low'.
+              -->
+              <effort>Max</effort>
+              <!-- Reports all bugs (other values are medium and max) -->
+              <threshold>Low</threshold>
+              <!-- Produces XML report -->
+              <xmlOutput>true</xmlOutput>
+              <!-- Configures the directory in which the XML report is created -->
+              <findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
+              <!--<visitors>FindDeadLocalStores,UnreadFields</visitors>-->
+            </configuration>
+          </plugin>
+        </plugins>
+      </reporting>
+
+    </profile>
+
     <profile>
       <id>qm-qs-pitest</id>
       <activation>
@@ -877,6 +851,21 @@
 
         </plugins>
       </build>
+      <reporting>
+        <plugins>
+          <plugin>
+            <groupId>org.pitest</groupId>
+            <artifactId>pitest-maven</artifactId>
+            <reportSets>
+              <reportSet>
+                <reports>
+                  <report>report</report>
+                </reports>
+              </reportSet>
+            </reportSets>
+          </plugin>
+        </plugins>
+      </reporting>
     </profile>
 
     <profile>
@@ -884,6 +873,16 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
+      <dependencies>
+        <!--tdd-->
+        <dependency>
+          <!--  must be on the classpath  -->
+          <groupId>org.jacoco</groupId>
+          <artifactId>org.jacoco.agent</artifactId>
+          <classifier>runtime</classifier>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
       <build>
         <plugins>
           <plugin>
@@ -893,6 +892,18 @@
               <includes>
                 <include>**/org/rapidpm/**/*</include>
               </includes>
+              <!--<fileSets>-->
+                <!--&lt;!&ndash; Implementation attribute not needed in Maven 3 &ndash;&gt;-->
+                <!--<fileSet implementation="org.apache.maven.shared.model.fileset.FileSet">-->
+                  <!--<directory>${project.build.directory}</directory>-->
+                  <!--<includes>-->
+                    <!--<include>**/*.exec</include>-->
+                  <!--</includes>-->
+                <!--</fileSet>-->
+              <!--</fileSets>-->
+              <!--&lt;!&ndash; File containing the merged data &ndash;&gt;-->
+              <!--&lt;!&ndash;<destFile>${project.parent.build.directory}/jacoco.exec</destFile>&ndash;&gt;-->
+              <!--<destFile>${user.dir}/target/jacoco.exec</destFile>-->
             </configuration>
             <executions>
               <execution>
@@ -905,6 +916,11 @@
                 <id>default-restore-instrumented-classes</id>
                 <goals>
                   <goal>restore-instrumented-classes</goal>
+                </goals>
+              </execution>
+              <execution>
+                <goals>
+                  <goal>prepare-agent</goal>
                 </goals>
               </execution>
               <execution>
@@ -927,7 +943,8 @@
                         <limit>
                           <counter>COMPLEXITY</counter>
                           <value>COVEREDRATIO</value>
-                          <minimum>0.60</minimum>
+                          <!--<minimum>0.60</minimum>-->
+                          <minimum>0.00</minimum>
                         </limit>
                       </limits>
                     </rule>
@@ -962,14 +979,104 @@
               </includes>
               <forkMode>always</forkMode>
               <reportFormat>xml</reportFormat>
+              <reportFormat>html</reportFormat>
               <!--<classesDirectory>target/generated-classes/emma/classes</classesDirectory>-->
             </configuration>
           </plugin>
+          <!-- Directory plugin to find parent root directory absolute path -->
+
         </plugins>
       </build>
     </profile>
 
+    <profile>
+      <id>qm-qs-cobertura</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
 
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>cobertura-maven-plugin</artifactId>
+            <!--<version>2.7</version>-->
+            <configuration>
+              <aggregate>true</aggregate>
+              <quiet>false</quiet>
+              <check>
+                <haltOnFailure>false</haltOnFailure>
+                <branchRate>85</branchRate>
+                <lineRate>85</lineRate>
+                <totalBranchRate>85</totalBranchRate>
+                <totalLineRate>85</totalLineRate>
+                <packageLineRate>85</packageLineRate>
+                <packageBranchRate>85</packageBranchRate>
+                <regexes>
+                  <regex>
+                    <pattern>com.example.reallyimportant.*</pattern>
+                    <branchRate>90</branchRate>
+                    <lineRate>80</lineRate>
+                  </regex>
+                  <regex>
+                    <pattern>com.example.boringcode.*</pattern>
+                    <branchRate>40</branchRate>
+                    <lineRate>30</lineRate>
+                  </regex>
+                </regexes>
+              </check>
+
+              <instrumentation>
+                <ignores>
+                  <ignore>com.example.boringcode.*</ignore>
+                </ignores>
+                <excludes>
+                  <exclude>org/openjdk/jmh/infra/generated/**/*.class</exclude>
+                  <exclude>com/example/dullcode/**/*.class</exclude>
+                  <!--<exclude>junit/**/*Test.class</exclude>-->
+                  <exclude>junit/**/*.class</exclude>
+                </excludes>
+              </instrumentation>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>clean</goal>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+        </plugins>
+      </build>
+      <reporting>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-project-info-reports-plugin</artifactId>
+            <version>2.8.1</version>
+            <configuration>
+              <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>cobertura-maven-plugin</artifactId>
+            <configuration>
+              <check>
+              </check>
+              <formats>
+                <format>html</format>
+                <format>xml</format>
+              </formats>
+              <maxmem>256m</maxmem>
+              <aggregate>true</aggregate>
+            </configuration>
+          </plugin>
+        </plugins>
+      </reporting>
+    </profile>
     <profile>
       <id>sys-nexus-deploy</id>
       <activation>
@@ -987,7 +1094,6 @@
         </snapshotRepository>
       </distributionManagement>
     </profile>
-
     <profile>
       <id>sys-nexus-deploy-reply</id>
       <activation>
@@ -1006,8 +1112,6 @@
         </snapshotRepository>
       </distributionManagement>
     </profile>
-
-
     <profile>
       <id>sys-nexus-deploy-gpg</id>
       <activation>
@@ -1056,8 +1160,64 @@
           </plugin>
         </plugins>
       </build>
+      <reporting>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-report-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </reporting>
     </profile>
-
+    <profile>
+      <id>qm-qs-clover</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <properties>
+        <maven-clover2-plugin.licenseLocation>/Users/svenruppert/Desktop/workspace/_rapidpm/clover.license</maven-clover2-plugin.licenseLocation>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.atlassian.maven.plugins</groupId>
+            <artifactId>maven-clover2-plugin</artifactId>
+            <version>4.0.6</version>
+            <configuration>
+              <licenseLocation>${maven-clover2-plugin.licenseLocation}</licenseLocation>
+              <includesTestSourceRoots>false</includesTestSourceRoots>
+              <jdk>1.8</jdk>
+              <includesAllSourceRoots>true</includesAllSourceRoots>
+              <includesTestSourceRoots>true</includesTestSourceRoots>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>generate-sources</phase>
+                <goals>
+                  <goal>instrument</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>main</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>instrument</goal>
+                  <goal>aggregate</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>site</id>
+                <phase>pre-site</phase>
+                <goals>
+                  <goal>instrument</goal>
+                  <goal>aggregate</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
     <profile>
       <id>qm-qs-checkstyle</id>
       <activation>
