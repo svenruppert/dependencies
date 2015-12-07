@@ -141,6 +141,13 @@
       </dependency>
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>rapidpm-microservice-modules-core</artifactId>
+        <version>${rapidpm.version}</version>
+        <type>test-jar</type>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-optionals-cli</artifactId>
         <version>${rapidpm.version}</version>
       </dependency>
