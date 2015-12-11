@@ -1319,6 +1319,39 @@
         </plugins>
       </build>
     </profile>
+
+    <profile>
+      <id>repo-allow-snapshots</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>snapshots-repo</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+    <profile>
+      <id>repo-allow-vaadin</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>vaadin-repo</id>
+          <url>http://maven.vaadin.com/vaadin-addons</url>
+          <!--<url>http://maven.vaadin.com/</url>-->
+        </repository>
+      </repositories>
+    </profile>
   </profiles>
 
 
