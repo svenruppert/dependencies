@@ -53,8 +53,8 @@
     </developer>
   </developers>
   <issueManagement>
-    <system>Github</system>
-    <url>https://github.com/RapidPM/rapidpm-dependencies/issues</url>
+    <system>Youtrack</system>
+    <url>http://rapidpm.myjetbrains.com/youtrack/issues</url>
   </issueManagement>
   <!--<ciManagement>-->
   <!--<system>TravisCI</system>-->
@@ -290,6 +290,23 @@
         <artifactId>commons-cli</artifactId>
         <version>1.3.1</version>
       </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-compress</artifactId>
+        <version>1.10</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.4</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>commons-fileupload</groupId>
+        <artifactId>commons-fileupload</artifactId>
+        <version>1.3.1</version>
+      </dependency>
 
       <dependency>
         <groupId>org.apache.commons</groupId>
@@ -344,8 +361,19 @@
         <version>2.4.1</version>
       </dependency>
 
+      <dependency>
+        <groupId>com.lmax</groupId>
+        <artifactId>disruptor</artifactId>
+        <version>3.3.2</version>
+      </dependency>
 
       <!--persistence-->
+      <!--orientdb-->
+      <dependency>
+        <groupId>com.orientechnologies</groupId>
+        <artifactId>orientdb-parent</artifactId>
+        <version>${orientdb.version}</version>
+      </dependency>
       <dependency>
         <groupId>com.orientechnologies</groupId>
         <artifactId>orientdb-core</artifactId>
@@ -353,7 +381,12 @@
       </dependency>
       <dependency>
         <groupId>com.orientechnologies</groupId>
-        <artifactId>orientdb-graphdb</artifactId>
+        <artifactId>orientdb-client</artifactId>
+        <version>${orientdb.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.orientechnologies</groupId>
+        <artifactId>orientdb-server</artifactId>
         <version>${orientdb.version}</version>
       </dependency>
       <dependency>
@@ -361,12 +394,12 @@
         <artifactId>orientdb-object</artifactId>
         <version>${orientdb.version}</version>
       </dependency>
-      <dependency>
-        <groupId>com.tinkerpop.blueprints</groupId>
-        <artifactId>blueprints-core</artifactId>
-        <version>2.6.0</version>
-      </dependency>
 
+      <dependency>
+        <groupId>com.orientechnologies</groupId>
+        <artifactId>orientdb-enterprise</artifactId>
+        <version>${orientdb.version}</version>
+      </dependency>
 
       <dependency>
         <groupId>com.zaxxer</groupId>
@@ -374,6 +407,14 @@
         <version>2.4.3</version>
         <scope>compile</scope>
       </dependency>
+
+
+      <dependency>
+        <groupId>org.mapdb</groupId>
+        <artifactId>mapdb</artifactId>
+        <version>2.0.0-SNAPSHOT</version>
+      </dependency>
+
 
       <!--tdd-->
 
@@ -440,6 +481,15 @@
         <scope>test</scope>
       </dependency>
 
+      <!--benchmarking gatlin-->
+      <dependency>
+        <groupId>io.gatling.highcharts</groupId>
+        <artifactId>gatling-charts-highcharts</artifactId>
+        <version>2.1.7</version>
+        <scope>test</scope>
+      </dependency>
+
+
       <dependency>
         <groupId>org.zeroturnaround</groupId>
         <artifactId>zt-exec</artifactId>
@@ -504,6 +554,12 @@
         <scope>test</scope>
       </dependency>
 
+
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>3.1.0</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -680,9 +736,14 @@
           <version>1.1.7</version>
         </plugin>
         <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>sonar-maven-plugin</artifactId>
-          <version>2.7.1</version>
+          <groupId>net.alchim31.maven</groupId>
+          <artifactId>scala-maven-plugin</artifactId>
+          <version>3.2.2</version>
+        </plugin>
+        <plugin>
+          <groupId>io.gatling</groupId>
+          <artifactId>gatling-maven-plugin</artifactId>
+          <version>2.1.7</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -806,6 +867,13 @@
         </executions>
       </plugin>
 
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -832,6 +900,7 @@
             <configuration>
               <sources>
                 <source>${project.build.directory}/generated-sources/annotations</source>
+                <!--<source>src/main/scala</source>-->
               </sources>
             </configuration>
           </execution>
@@ -845,6 +914,7 @@
               <sources>
                 <source>${project.build.directory}/generated-sources/annotations</source>
                 <source>${project.build.directory}/generated-test-sources/test-annotations</source>
+                <!--<source>src/test/scala</source>-->
               </sources>
             </configuration>
           </execution>
@@ -853,6 +923,39 @@
     </plugins>
   </build>
 
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <configuration>
+          <!--
+              Enables analysis which takes more memory but finds more bugs.
+              If you run out of memory, changes the value of the effort element
+              to 'low'.
+          -->
+          <effort>Max</effort>
+          <!-- Reports all bugs (other values are medium and max) -->
+          <threshold>Low</threshold>
+          <!-- Produces XML report -->
+          <xmlOutput>true</xmlOutput>
+          <!-- Configures the directory in which the XML report is created -->
+          <findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
 
   <profiles>
 
@@ -917,7 +1020,7 @@
       </activation>
       <build>
         <plugins>
-           <!--Enable mutation testing-->
+          <!--Enable mutation testing-->
           <plugin>
             <groupId>org.pitest</groupId>
             <artifactId>pitest-maven</artifactId>
@@ -1066,6 +1169,12 @@
               <includes>
                 <include>**/junit/**</include>
               </includes>
+              <excludes>
+                <exclude>**/*ini/**</exclude>
+                <exclude>**/*txt/**</exclude>
+                <exclude>**/*.jpg</exclude>
+
+              </excludes>
               <forkMode>always</forkMode>
               <reportFormat>xml</reportFormat>
               <reportFormat>html</reportFormat>
@@ -1103,7 +1212,6 @@
         </plugins>
       </build>
     </profile>
-
 
 
     <profile>
@@ -1278,28 +1386,6 @@
     </profile>
 
     <profile>
-      <id>qm-qs-sonar-localhost</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <properties>
-        <!-- Optional URL to server. Default value is http://localhost:9000 -->
-        <sonar.host.url>http://localhost:9000</sonar.host.url>
-        <sonar.jacoco.reportMissing.force.zero>true</sonar.jacoco.reportMissing.force.zero>
-        <sonar.pitest.mode>reuseReport</sonar.pitest.mode>
-      </properties>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>sonar-maven-plugin</artifactId>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
-
-    <profile>
       <id>qm-qs-sonar-reply</id>
       <activation>
         <activeByDefault>false</activeByDefault>
@@ -1319,7 +1405,6 @@
         </plugins>
       </build>
     </profile>
-
     <profile>
       <id>repo-allow-snapshots</id>
       <activation>
