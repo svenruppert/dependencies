@@ -836,29 +836,33 @@
       <!--<plugin>-->
       <!--<groupId>org.apache.maven.plugins</groupId>-->
       <!--<artifactId>maven-compiler-plugin</artifactId>-->
-      <!--&lt;!&ndash;<version>3.3</version>&ndash;&gt;-->
       <!--<configuration>-->
       <!--<source>1.8</source>-->
       <!--<target>1.8</target>-->
       <!--<showDeprecation>true</showDeprecation>-->
-      <!--<showWarnings>true</showWarnings>-->
+      <!--<showWarnings>false</showWarnings>-->
+      <!--<optimize>true</optimize>-->
       <!--</configuration>-->
       <!--<executions>-->
       <!--<execution>-->
       <!--<id>default-compile</id>-->
-      <!--<inherited>false</inherited>-->
+      <!--<inherited>true</inherited>-->
       <!--<phase>compile</phase>-->
       <!--<goals>-->
       <!--<goal>compile</goal>-->
       <!--</goals>-->
+      <!--<configuration>-->
+      <!--</configuration>-->
       <!--</execution>-->
       <!--<execution>-->
       <!--<id>default-testCompile</id>-->
-      <!--<inherited>false</inherited>-->
+      <!--<inherited>true</inherited>-->
       <!--<phase>test-compile</phase>-->
       <!--<goals>-->
       <!--<goal>testCompile</goal>-->
       <!--</goals>-->
+      <!--<configuration>-->
+      <!--</configuration>-->
       <!--</execution>-->
       <!--</executions>-->
       <!--</plugin>-->
@@ -925,7 +929,7 @@
             </goals>
             <configuration>
               <sources>
-                <source>${project.build.directory}/generated-sources/annotations</source>
+                <!--<source>${project.build.directory}/generated-sources/annotations</source>-->
                 <source>${project.build.directory}/generated-test-sources/test-annotations</source>
                 <!--<source>src/test/scala</source>-->
               </sources>
@@ -1158,6 +1162,7 @@
               <forkMode>always</forkMode>
               <reportFormat>xml</reportFormat>
               <reportFormat>html</reportFormat>
+              <!--<testSourceDirectory>${project.build.directory}/generated-test-sources/test-annotations</testSourceDirectory>-->
               <!--<classesDirectory>target/generated-classes/emma/classes</classesDirectory>-->
             </configuration>
           </plugin>
@@ -1250,25 +1255,45 @@
               <source>1.8</source>
               <target>1.8</target>
               <showDeprecation>true</showDeprecation>
-              <showWarnings>true</showWarnings>
+              <showWarnings>false</showWarnings>
+              <optimize>true</optimize>
+
             </configuration>
             <executions>
               <execution>
-                <id>default-compile</id>
-                <inherited>false</inherited>
                 <phase>compile</phase>
+                <id>compile-001</id>
                 <goals>
                   <goal>compile</goal>
                 </goals>
+                <!--BUG JDK-8062800-->
+                <configuration>
+                  <useIncrementalCompilation>false</useIncrementalCompilation>
+                </configuration>
+                <!--BUG JDK-8062800-->
               </execution>
               <execution>
-                <id>default-testCompile</id>
-                <inherited>false</inherited>
                 <phase>test-compile</phase>
+                <id>test-compile-001</id>
                 <goals>
                   <goal>testCompile</goal>
                 </goals>
+                <!--BUG JDK-8062800-->
+                <configuration>
+                  <useIncrementalCompilation>false</useIncrementalCompilation>
+                </configuration>
+                <!--BUG JDK-8062800-->
               </execution>
+              <!--<execution>-->
+              <!--<phase>test-compile</phase>-->
+              <!--<id>test-compile-002</id>-->
+              <!--<goals><goal>testCompile</goal></goals>-->
+              <!--&lt;!&ndash;BUG JDK-8062800&ndash;&gt;-->
+              <!--<configuration>-->
+              <!--<useIncrementalCompilation>false</useIncrementalCompilation>-->
+              <!--</configuration>-->
+              <!--&lt;!&ndash;BUG JDK-8062800&ndash;&gt;-->
+              <!--</execution>-->
             </executions>
           </plugin>
         </plugins>
@@ -1289,25 +1314,44 @@
               <target>1.9</target>
               <showDeprecation>true</showDeprecation>
               <showWarnings>true</showWarnings>
+              <testCompilerArgument>-Xlint</testCompilerArgument>
+              <generatedSourcesDirectory>${project.build.directory}/generatedsources/annotations</generatedSourcesDirectory>
+              <generatedTestSourcesDirectory>${project.build.directory}/generated-test-sources/test-annotations</generatedTestSourcesDirectory>
             </configuration>
             <executions>
               <execution>
-                <id>default-compile</id>
-                <inherited>false</inherited>
-                <phase>compile</phase>
+                <phase>test-compile</phase>
+                <id>test-compile-001</id>
                 <goals>
-                  <goal>compile</goal>
+                  <goal>testCompile</goal>
                 </goals>
               </execution>
               <execution>
-                <id>default-testCompile</id>
-                <inherited>false</inherited>
                 <phase>test-compile</phase>
+                <id>test-compile-002</id>
                 <goals>
                   <goal>testCompile</goal>
                 </goals>
               </execution>
             </executions>
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>default-compile</id>-->
+            <!--<inherited>false</inherited>-->
+            <!--<phase>compile</phase>-->
+            <!--<goals>-->
+            <!--<goal>compile</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--<execution>-->
+            <!--<id>default-testCompile</id>-->
+            <!--<inherited>false</inherited>-->
+            <!--<phase>test-compile</phase>-->
+            <!--<goals>-->
+            <!--<goal>testCompile</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
           </plugin>
         </plugins>
       </build>
