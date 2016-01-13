@@ -24,7 +24,7 @@
   <groupId>org.rapidpm</groupId>
   <artifactId>rapidpm-dependencies</artifactId>
   <packaging>pom</packaging>
-  <version>3.0.3-SNAPSHOT</version>
+  <version>3.0.3</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -81,6 +81,7 @@
     <vaadin-testbench-api.version>4.1.0.alpha1</vaadin-testbench-api.version>
     <orientdb.version>2.1.8</orientdb.version>
     <rapidpm.version>0.0.5-SNAPSHOT</rapidpm.version>
+    <!--<rapidpm.version>0.0.5-SNAPSHOT</rapidpm.version>-->
 
   </properties>
 
@@ -96,7 +97,7 @@
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-dependencies-core</artifactId>
-        <version>3.0.3-SNAPSHOT</version>
+        <version>3.0.3</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm.proxybuilder</groupId>
