@@ -24,7 +24,7 @@
   <groupId>org.rapidpm</groupId>
   <artifactId>rapidpm-dependencies</artifactId>
   <packaging>pom</packaging>
-  <version>3.0.4</version>
+  <version>3.0.5-SNAPSHOT</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -83,9 +83,8 @@
     <!--<rapidpm.version>0.0.6-SNAPSHOT</rapidpm.version>-->
 
 
-    <!--<rapidpm.version>0.0.7-SNAPSHOT</rapidpm.version>-->
-    <rapidpm.version>0.0.6</rapidpm.version>
-    <rapidpm.depdendencies.version>3.0.4</rapidpm.depdendencies.version>
+    <rapidpm.version>0.0.7-SNAPSHOT</rapidpm.version>
+    <rapidpm.depdendencies.version>3.0.5-SNAPSHOT</rapidpm.depdendencies.version>
 
   </properties>
 
