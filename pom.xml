@@ -1168,7 +1168,10 @@
                 <exclude>**/*.jpg</exclude>
 
               </excludes>
-              <forkMode>always</forkMode>
+              <argLine>-Xmx286m -Dsonar.pitest.mode=reuseReport</argLine>
+              <forkCount>2.5C</forkCount>
+              <reuseForks>false</reuseForks>
+
               <reportFormat>xml</reportFormat>
               <reportFormat>html</reportFormat>
               <!--<testSourceDirectory>${project.build.directory}/generated-test-sources/test-annotations</testSourceDirectory>-->
