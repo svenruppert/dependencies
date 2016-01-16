@@ -1,7 +1,7 @@
 package org.rapidpm.dependencies.core.basepattern.builder;
 
 /**
- * Created by svenruppert on 13.07.15.
+ * Created by Sven Ruppert on 13.07.15.
  */
 
 import java.lang.reflect.InvocationTargetException;
