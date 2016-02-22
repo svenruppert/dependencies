@@ -1513,6 +1513,19 @@
         </repository>
       </repositories>
     </profile>
+    <profile>
+      <id>repo-allow-jboss</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>jboss-repo</id>
+          <url>https://repository.jboss.org/nexus/content/groups/public</url>
+          <!--<url>http://maven.vaadin.com/</url>-->
+        </repository>
+      </repositories>
+    </profile>
   </profiles>
 
 
