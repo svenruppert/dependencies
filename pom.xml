@@ -85,7 +85,7 @@
 
 
     <rapidpm.version>0.0.7</rapidpm.version>
-    <rapidpm.depdendencies.version>3.0.5-SNAPSHOT</rapidpm.depdendencies.version>
+    <rapidpm.depdendencies.version>3.0.5</rapidpm.depdendencies.version>
 
 
     <!--<jacoco.version>0.7.6.201602180812</jacoco.version>-->
