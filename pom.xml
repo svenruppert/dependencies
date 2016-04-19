@@ -896,6 +896,12 @@
             <goals>
               <goal>compile</goal>
             </goals>
+            <configuration>
+              <sourceDirs>
+                <source>target/generated-sources/annotations</source>
+                <source>src/main/java</source>
+              </sourceDirs>
+            </configuration>
           </execution>
 
           <execution>
@@ -904,6 +910,12 @@
             <goals>
               <goal>test-compile</goal>
             </goals>
+            <configuration>
+              <sourceDirs>
+                <source>target/generated-test-sources/test-annotations</source>
+                <source>src/test/java</source>
+              </sourceDirs>
+            </configuration>
           </execution>
         </executions>
       </plugin>
