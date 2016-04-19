@@ -234,6 +234,18 @@
       </dependency>
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>rapidpm-microservice-modules-persistence-jdbc</artifactId>
+        <version>${rapidpm.version}</version>
+        <type>test-jar</type>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>rapidpm-microservice-modules-persistence-jdbc-dao</artifactId>
+        <version>${rapidpm.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-persistence-local-hashmap</artifactId>
         <version>${rapidpm.version}</version>
       </dependency>
