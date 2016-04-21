@@ -195,6 +195,7 @@
         <artifactId>rapidpm-microservice-modules-core-testutils</artifactId>
         <version>${rapidpm.version}</version>
       </dependency>
+
       <!--TDD-->
 
       <dependency>
