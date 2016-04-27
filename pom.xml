@@ -88,7 +88,7 @@
 
 
     <rapidpm.version>0.1.0-SNAPSHOT</rapidpm.version>
-    <rapidpm.depdendencies.version>3.0.5</rapidpm.depdendencies.version>
+    <rapidpm.depdendencies.version>3.0.6-SNAPSHOT</rapidpm.depdendencies.version>
 
 
     <!--<jacoco.version>0.7.6.201602180812</jacoco.version>-->
@@ -218,6 +218,27 @@
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-optionals-metrics-jvm</artifactId>
+        <version>${rapidpm.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>rapidpm-microservice-modules-optionals-filesystem-base</artifactId>
+        <version>${rapidpm.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>rapidpm-microservice-modules-optionals-filesystem-hazelcast</artifactId>
+        <version>${rapidpm.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>rapidpm-microservice-modules-optionals-filesystem-memory</artifactId>
+        <version>${rapidpm.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>rapidpm-microservice-modules-optionals-filesystem-os</artifactId>
         <version>${rapidpm.version}</version>
       </dependency>
 
