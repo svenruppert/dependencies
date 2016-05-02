@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package org.rapidpm.dependencies.core;
+package org.rapidpm.dependencies.core.fs;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -27,6 +27,16 @@ public class DirectoryUtils {
 
   public boolean deleteIndexDirectory(final String directoryName) {
     final Path indexDirectory = Paths.get(directoryName);
+    return delete(indexDirectory);
+  }
+
+  public boolean deleteIndexDirectory(final Path directoryPath) {
+    return delete(directoryPath);
+  }
+
+
+
+  private boolean delete(final Path indexDirectory) {
     if (Files.exists(indexDirectory)) {
       try {
         Files.walkFileTree(indexDirectory, new SimpleFileVisitor<Path>() {
@@ -50,4 +60,6 @@ public class DirectoryUtils {
     }
     return false;
   }
+
+
 }
