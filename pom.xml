@@ -88,6 +88,7 @@
     <rapidpm.depdendencies.version>3.0.6-SNAPSHOT</rapidpm.depdendencies.version>
     <!--<jacoco.version>0.7.6.201602180812</jacoco.version>-->
     <jacoco.version>0.7.5.201505241946</jacoco.version>
+    <slf4j.version>1.7.21</slf4j.version>
   </properties>
 
   <modules>
@@ -632,7 +633,12 @@
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <version>1.7.21</version>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+        <version>${slf4j.version}</version>
       </dependency>
 
       <!--Vaadin Based stuff-->
