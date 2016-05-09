@@ -97,7 +97,7 @@
   </modules>
 
   <prerequisites>
-    <maven>3.3.9</maven>
+    <maven>3.3.0</maven>
   </prerequisites>
 
   <dependencyManagement>
@@ -627,6 +627,12 @@
         <groupId>com.squareup</groupId>
         <artifactId>javapoet</artifactId>
         <version>1.7.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.21</version>
       </dependency>
 
       <!--Vaadin Based stuff-->
