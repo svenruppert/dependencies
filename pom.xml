@@ -89,6 +89,7 @@
     <!--<jacoco.version>0.7.6.201602180812</jacoco.version>-->
     <jacoco.version>0.7.5.201505241946</jacoco.version>
     <slf4j.version>1.7.21</slf4j.version>
+    <hazelcast.version>3.6.1</hazelcast.version>
   </properties>
 
   <modules>
@@ -640,14 +641,6 @@
         <artifactId>slf4j-simple</artifactId>
         <version>${slf4j.version}</version>
       </dependency>
-
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-simple</artifactId>
-        <version>1.7.21</version>
-      </dependency>
-
-
       <!--Vaadin Based stuff-->
       <dependency>
         <groupId>org.vaadin</groupId>
@@ -685,6 +678,22 @@
         <artifactId>vaadin-testbench</artifactId>
         <version>${vaadin-testbench-api.version}</version>
         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.hazelcast</groupId>
+        <artifactId>hazelcast-all</artifactId>
+        <version>${hazelcast.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.hazelcast</groupId>
+        <artifactId>hazelcast-client</artifactId>
+        <version>${hazelcast.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.hazelcast</groupId>
+        <artifactId>hazelcast-root</artifactId>
+        <version>${hazelcast.version}</version>
       </dependency>
 
 
