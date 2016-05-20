@@ -27,7 +27,7 @@
   <groupId>org.rapidpm</groupId>
   <artifactId>rapidpm-dependencies</artifactId>
   <packaging>pom</packaging>
-  <version>3.0.6-SNAPSHOT</version>
+  <version>3.0.6</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -74,6 +74,11 @@
 
 
   <properties>
+
+    <rapidpm.depdendencies.version>3.0.6</rapidpm.depdendencies.version>
+    <rapidpm.version>0.1.0</rapidpm.version>
+
+
     <jmh.version>1.12</jmh.version>
     <kotlin.version>1.0.2</kotlin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -82,8 +87,6 @@
     <vwscdn.version>0.0.2</vwscdn.version>
     <vaadin.version>7.6.6</vaadin.version>
     <vaadin-testbench-api.version>4.1.0.alpha2</vaadin-testbench-api.version>
-    <rapidpm.version>0.1.0-SNAPSHOT</rapidpm.version>
-    <rapidpm.depdendencies.version>3.0.6-SNAPSHOT</rapidpm.depdendencies.version>
     <jacoco.version>0.7.5.201505241946</jacoco.version>
     <!--<jacoco.version>0.7.6.201602180812</jacoco.version>-->
     <slf4j.version>1.7.21</slf4j.version>
