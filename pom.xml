@@ -88,8 +88,8 @@
     <vwscdn.version>0.0.2</vwscdn.version>
     <vaadin.version>7.6.6</vaadin.version>
     <vaadin-testbench-api.version>4.1.0.alpha2</vaadin-testbench-api.version>
-    <jacoco.version>0.7.5.201505241946</jacoco.version>
-    <!--<jacoco.version>0.7.6.201602180812</jacoco.version>-->
+    <!--<jacoco.version>0.7.5.201505241946</jacoco.version>-->
+    <jacoco.version>0.7.6.201602180812</jacoco.version>
     <slf4j.version>1.7.21</slf4j.version>
     <hazelcast.version>3.6.3</hazelcast.version>
     <lucene.version>6.0.1</lucene.version>
@@ -497,7 +497,7 @@
       <dependency>
         <groupId>org.mapdb</groupId>
         <artifactId>mapdb</artifactId>
-        <version>3.0.0-RC2</version>
+        <version>3.0.0</version>
       </dependency>
 
 
@@ -780,6 +780,10 @@
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-1.2-api</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
@@ -838,7 +842,8 @@
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.7.5.201505241946</version>
+          <!--<version>0.7.5.201505241946</version>-->
+          <version>${jacoco.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
