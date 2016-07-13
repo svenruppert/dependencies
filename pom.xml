@@ -1096,6 +1096,9 @@
                 </goals>
               </execution>
             </executions>
+            <configuration>
+              <destDir>target/doc/apidoc/</destDir>
+            </configuration>
           </plugin>
         </plugins>
       </build>
