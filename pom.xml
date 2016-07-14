@@ -208,6 +208,13 @@
         <type>test-jar</type>
         <scope>test</scope>
       </dependency>
+
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>rapidpm-microservice-modules-optionals-admin</artifactId>
+        <version>${rapidpm.version}</version>
+      </dependency>
+
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-optionals-cli</artifactId>
