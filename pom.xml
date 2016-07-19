@@ -1834,7 +1834,7 @@
                   use this setting, otherwise we'll perform a search trying to
                   figure out the right directory. It's better to add it explicitly IMHO.
               -->
-              <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+              <!-- dotGitDirectory>${project.basedir}/.git</dotGitDirectory -->
 
               <!-- that's the default value, you don't have to set it -->
               <prefix>git</prefix>
