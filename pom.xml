@@ -267,6 +267,11 @@
         <version>${rapidpm.version}</version>
       </dependency>
 
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>jumpstart-vaadin-modules-optionals-microservice</artifactId>
+        <version>${rapidpm.version}</version>
+      </dependency>
 
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
