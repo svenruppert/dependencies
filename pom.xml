@@ -61,7 +61,7 @@
   </issueManagement>
   <ciManagement>
     <system>TeamCity</system>
-    <url>http://78.47.22.54/project.html?projectId=RapidPM_RapidPMDependencies</url>
+    <url>https://build.rapidpm.org/project.html?projectId=RapidPM_RapidPMDependencies</url>
   </ciManagement>
   <licenses>
     <license>
@@ -1734,7 +1734,7 @@
                   <rules>
 
                     <requireActiveProfile>
-                      <profiles>qm-qs-jacoco,qm-qs-jacoco-junit,qm-qs-checkstyle,gen-javadoc,java-jdk-8,sys-nexus-deploy-gpg</profiles>
+                      <profiles>qm-qs-jacoco,qm-qs-jacoco-junit,qm-qs-checkstyle,gen-javadoc,java-jdk-8,sys-nexus-deploy-gpg,qm-qs-add-git-commit-properties</profiles>
                     </requireActiveProfile>
                     <requireJavaVersion>
                       <version>1.8.0</version>
@@ -1809,7 +1809,7 @@
       </repositories>
     </profile>
     <profile>
-      <id>add-git-commit-properties</id>
+      <id>qm-qs-add-git-commit-properties</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
