@@ -1277,7 +1277,39 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>qm-qs-surefire-fork</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
 
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <inherited>true</inherited>
+            <configuration>
+              <includes>
+                <include>**/junit/**</include>
+              </includes>
+              <excludes>
+                <exclude>**/*ini/**</exclude>
+                <exclude>**/*txt/**</exclude>
+                <exclude>**/*.jpg</exclude>
+
+              </excludes>
+              <argLine>-Xmx286m -Dsonar.pitest.mode=reuseReport</argLine>
+              <forkCount>2.5C</forkCount>
+              <reuseForks>false</reuseForks>
+
+              <reportFormat>xml</reportFormat>
+              <reportFormat>html</reportFormat>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
     <profile>
       <id>qm-qs-jacoco-junit</id>
       <activation>
