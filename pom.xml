@@ -1173,8 +1173,7 @@
                 <param>org.rapidpm.*</param>
               </targetClasses>
               <targetTests>
-                <param>org.rapidpm.*</param>
-                <param>junit.org.rapidpm.*</param>
+                <param>*.org.rapidpm.*</param>
               </targetTests>
             </configuration>
           </plugin>
