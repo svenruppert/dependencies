@@ -1662,14 +1662,14 @@
     </profile>
 
     <profile>
-      <id>qm-qs-sonar-reply</id>
+      <id>qm-qs-sonar-rapidpm</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
         <!-- Optional URL to server. Default value is http://localhost:9000 -->
         <!--<sonar.host.url>http://10.64.54.70:9000/</sonar.host.url>-->
-        <sonar.host.url>http://78.47.240.2:8080/</sonar.host.url>
+        <sonar.host.url>http://78.47.194.32:9000/</sonar.host.url>
         <sonar.jacoco.reportMissing.force.zero>true</sonar.jacoco.reportMissing.force.zero>
         <sonar.pitest.mode>reuseReport</sonar.pitest.mode>
       </properties>
