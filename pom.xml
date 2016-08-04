@@ -1057,7 +1057,6 @@
           </execution>
 
 
-
           <execution>
             <id>add generated sources</id>
             <phase>generate-sources</phase>
@@ -1737,22 +1736,22 @@
                 <goals>
                   <goal>enforce</goal>
                 </goals>
-                <configuration>
-                  <rules>
-                    <requireMavenVersion>
-                      <version>[3.3.3,)</version>
-                    </requireMavenVersion>
-                    <requireJavaVersion>
-                      <version>[1.8.0,)</version>
-                    </requireJavaVersion>
-                    <requireUpperBoundDeps>
-                      <!-- 'uniqueVersions' (default:false) can be set to true if you want to compare the timestamped SNAPSHOTs  -->
-                      <!-- <uniqueVersions>true</uniqueVersions> -->
-                    </requireUpperBoundDeps>
-                  </rules>
-                </configuration>
               </execution>
             </executions>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>[3.3.3,)</version>
+                </requireMavenVersion>
+                <requireJavaVersion>
+                  <version>[1.8.0,)</version>
+                </requireJavaVersion>
+                <requireUpperBoundDeps>
+                  <!-- 'uniqueVersions' (default:false) can be set to true if you want to compare the timestamped SNAPSHOTs  -->
+                  <!-- <uniqueVersions>true</uniqueVersions> -->
+                </requireUpperBoundDeps>
+              </rules>
+            </configuration>
           </plugin>
         </plugins>
       </build>
@@ -1773,33 +1772,35 @@
                 <goals>
                   <goal>enforce</goal>
                 </goals>
-                <configuration>
-                  <rules>
-
-                    <requireActiveProfile>
-                      <profiles>qm-qs-jacoco,qm-qs-jacoco-junit,qm-qs-checkstyle,gen-javadoc,java-jdk-8,sys-nexus-deploy-gpg,qm-qs-add-git-commit-properties</profiles>
-                    </requireActiveProfile>
-                    <requireJavaVersion>
-                      <version>1.8.0</version>
-                    </requireJavaVersion>
-                    <requireMavenVersion>
-                      <version>[3.3.3,)</version>
-                    </requireMavenVersion>
-                    <requireReleaseDeps>
-                      <message>No Snapshots Allowed!</message>
-                    </requireReleaseDeps>
-                    <requireReleaseVersion>
-                      <message>No Snapshots Allowed!</message>
-                    </requireReleaseVersion>
-                    <requireUpperBoundDeps>
-                      <!-- 'uniqueVersions' (default:false) can be set to true if you want to compare the timestamped SNAPSHOTs  -->
-                      <!-- <uniqueVersions>true</uniqueVersions> -->
-                    </requireUpperBoundDeps>
-                  </rules>
-                  <fail>true</fail>
-                </configuration>
               </execution>
+
             </executions>
+            <configuration>
+              <rules>
+                <requireActiveProfile>
+                  <profiles>
+                    qm-qs-jacoco,qm-qs-jacoco-junit,qm-qs-checkstyle,gen-javadoc,java-jdk-8,sys-nexus-deploy-gpg,qm-qs-add-git-commit-properties
+                  </profiles>
+                </requireActiveProfile>
+                <requireJavaVersion>
+                  <version>1.8.0</version>
+                </requireJavaVersion>
+                <requireMavenVersion>
+                  <version>[3.3.3,)</version>
+                </requireMavenVersion>
+                <requireReleaseDeps>
+                  <message>No Snapshots Allowed!</message>
+                </requireReleaseDeps>
+                <requireReleaseVersion>
+                  <message>No Snapshots Allowed!</message>
+                </requireReleaseVersion>
+                <requireUpperBoundDeps>
+                  <!-- 'uniqueVersions' (default:false) can be set to true if you want to compare the timestamped SNAPSHOTs  -->
+                  <!-- <uniqueVersions>true</uniqueVersions> -->
+                </requireUpperBoundDeps>
+              </rules>
+              <fail>true</fail>
+            </configuration>
           </plugin>
         </plugins>
       </build>
