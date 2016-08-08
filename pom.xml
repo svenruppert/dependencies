@@ -787,18 +787,18 @@
       <artifactId>jsr305</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-1.2-api</artifactId>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.apache.logging.log4j</groupId>-->
+      <!--<artifactId>log4j-api</artifactId>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.logging.log4j</groupId>-->
+      <!--<artifactId>log4j-core</artifactId>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.logging.log4j</groupId>-->
+      <!--<artifactId>log4j-1.2-api</artifactId>-->
+    <!--</dependency>-->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
@@ -1668,7 +1668,7 @@
       <properties>
         <!-- Optional URL to server. Default value is http://localhost:9000 -->
         <!--<sonar.host.url>http://10.64.54.70:9000/</sonar.host.url>-->
-        <sonar.host.url>http://78.47.194.32:9000/</sonar.host.url>
+        <sonar.host.url>https://sonar.rapidpm.org/</sonar.host.url>
         <sonar.jacoco.reportMissing.force.zero>true</sonar.jacoco.reportMissing.force.zero>
         <sonar.pitest.mode>reuseReport</sonar.pitest.mode>
       </properties>
@@ -1736,22 +1736,28 @@
                 <goals>
                   <goal>enforce</goal>
                 </goals>
+                <configuration>
+                  <rules>
+                    <requireActiveProfile>
+                      <profiles>gen-javadoc,java-jdk-8,qm-qs-checkstyle,qm-qs-findbugs,qm-qs-jacoco,qm-qs-jacoco-junit,qm-qs-jdeps,qm-qs-pitest</profiles>
+                    </requireActiveProfile>
+                    <dependencyConvergence/>
+                    <!--<reactorModuleConvergence>-->
+                    <requireMavenVersion>
+                      <version>[3.3.3,)</version>
+                    </requireMavenVersion>
+                    <requireJavaVersion>
+                      <version>[1.8.0,)</version>
+                    </requireJavaVersion>
+                    <requireUpperBoundDeps>
+                      <!-- 'uniqueVersions' (default:false) can be set to true if you want to compare the timestamped SNAPSHOTs  -->
+                       <uniqueVersions>true</uniqueVersions>
+                    </requireUpperBoundDeps>
+
+                  </rules>
+                </configuration>
               </execution>
             </executions>
-            <configuration>
-              <rules>
-                <requireMavenVersion>
-                  <version>[3.3.3,)</version>
-                </requireMavenVersion>
-                <requireJavaVersion>
-                  <version>[1.8.0,)</version>
-                </requireJavaVersion>
-                <requireUpperBoundDeps>
-                  <!-- 'uniqueVersions' (default:false) can be set to true if you want to compare the timestamped SNAPSHOTs  -->
-                  <!-- <uniqueVersions>true</uniqueVersions> -->
-                </requireUpperBoundDeps>
-              </rules>
-            </configuration>
           </plugin>
         </plugins>
       </build>
