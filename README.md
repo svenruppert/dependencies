@@ -1,9 +1,7 @@
 #This is the bes definition of the versions used by my projects.
 
+[![](https://build.rapidpm.org/app/rest/builds/buildType:id:RapidPM_Develop_Dependencies_Snapshot/statusIcon)](https://build.rapidpm.org/viewType.html?buildTypeId=RapidPM_Develop_Dependencies_Snapshot&guest=1)
 
-[![Build Status - travis  master ](https://travis-ci.org/RapidPM/rapidpm-dependencies.svg?branch=master)](https://travis-ci.org/RapidPM/rapidpm-dependencies)
-[![Build Status - travis  develop](https://travis-ci.org/RapidPM/rapidpm-dependencies.svg?branch=develop)](https://travis-ci.org/RapidPM/rapidpm-dependencies)
-[![Build Status - drone.io       ](https://drone.io/github.com/RapidPM/rapidpm-dependencies/status.png)](https://drone.io/github.com/RapidPM/rapidpm-dependencies/latest)
 
 branch:
 

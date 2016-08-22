@@ -32,28 +32,21 @@ public interface QueryOneValue<T> extends BasicOperation {
 
   default Optional<T> execute(JDBCConnectionPool connectionPool) {
     final HikariDataSource dataSource = connectionPool.getDataSource();
-    try {
-      final Connection connection = dataSource.getConnection();
-      try (final Statement statement = connection.createStatement()) {
-        final String sql = createSQL();
-        final ResultSet resultSet = statement.executeQuery(sql);
-        final boolean next = resultSet.next();
-        if (next) {
-          final T value = getFirstElement(resultSet);
-
-          final boolean error = resultSet.next();
-
-          statement.close();
-          dataSource.evictConnection(connection);
-
-          if (error) throw new RuntimeException("too many values are selected with query");
-          return Optional.of(value);
+    try (final Connection connection = dataSource.getConnection();
+         final Statement statement = connection.createStatement();
+         final ResultSet resultSet = statement.executeQuery(createSQL())) {
+      final boolean next = resultSet.next();
+      if (next) {
+        final T value = getFirstElement(resultSet);
+        if (resultSet.next()) {
+          throw new RuntimeException("too many values are selected with query");
         } else {
-          statement.close();
-          dataSource.evictConnection(connection);
-          return Optional.empty();
+          return Optional.of(value);
         }
+      } else {
+        return Optional.empty();
       }
+
     } catch (final SQLException e) {
       e.printStackTrace();
     }

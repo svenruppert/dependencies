@@ -42,4 +42,15 @@ public class PortUtils {
     throw new RuntimeException("no free port found");
   }
 
+  public boolean isPortAvailable(int port) {
+    try {
+      new ServerSocket(port).close();
+    } catch (IOException e) {
+      // port is used
+      return false;
+    }
+    // port is unused
+    return true;
+  }
+
 }

@@ -27,7 +27,7 @@
   <groupId>org.rapidpm</groupId>
   <artifactId>rapidpm-dependencies</artifactId>
   <packaging>pom</packaging>
-  <version>3.0.6</version>
+  <version>3.1.0</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -61,7 +61,7 @@
   </issueManagement>
   <ciManagement>
     <system>TeamCity</system>
-    <url>http://78.47.22.54/project.html?projectId=RapidPM_RapidPMDependencies</url>
+    <url>https://build.rapidpm.org/project.html?projectId=RapidPM_RapidPMDependencies</url>
   </ciManagement>
   <licenses>
     <license>
@@ -75,23 +75,24 @@
 
   <properties>
 
-    <rapidpm.depdendencies.version>3.0.6</rapidpm.depdendencies.version>
-    <rapidpm.version>0.1.0</rapidpm.version>
+    <rapidpm.depdendencies.version>3.1.0</rapidpm.depdendencies.version>
+    <rapidpm.version>0.5.0</rapidpm.version>
 
 
     <jmh.version>1.12</jmh.version>
-    <kotlin.version>1.0.2</kotlin.version>
+    <kotlin.version>1.0.3</kotlin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <undertow.version>1.3.22.Final</undertow.version>
-    <resteasy-undertow.version>3.0.16.Final</resteasy-undertow.version>
+    <!--<undertow.version>1.3.22.Final</undertow.version>-->
+    <undertow.version>2.0.0.Alpha1</undertow.version>
+    <resteasy-undertow.version>3.0.18.Final</resteasy-undertow.version>
     <vwscdn.version>0.0.2</vwscdn.version>
-    <vaadin.version>7.6.6</vaadin.version>
-    <vaadin-testbench-api.version>4.1.0.alpha2</vaadin-testbench-api.version>
-    <jacoco.version>0.7.5.201505241946</jacoco.version>
-    <!--<jacoco.version>0.7.6.201602180812</jacoco.version>-->
+    <vaadin.version>7.6.7</vaadin.version>
+    <vaadin-testbench-api.version>4.1.0.beta2</vaadin-testbench-api.version>
+    <!--<jacoco.version>0.7.5.201505241946</jacoco.version>-->
+    <jacoco.version>0.7.6.201602180812</jacoco.version>
     <slf4j.version>1.7.21</slf4j.version>
-    <hazelcast.version>3.6.2</hazelcast.version>
-    <lucene.version>6.0.0</lucene.version>
+    <hazelcast.version>3.6.3</hazelcast.version>
+    <lucene.version>6.1.0</lucene.version>
 
     <!--<orientdb.version>2.1.16</orientdb.version>-->
   </properties>
@@ -207,11 +208,25 @@
         <type>test-jar</type>
         <scope>test</scope>
       </dependency>
+
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>rapidpm-microservice-modules-optionals-admin</artifactId>
+        <version>${rapidpm.version}</version>
+      </dependency>
+
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
         <artifactId>rapidpm-microservice-modules-optionals-cli</artifactId>
         <version>${rapidpm.version}</version>
       </dependency>
+
+      <dependency>
+        <groupId>org.rapidpm.microservice</groupId>
+        <artifactId>rapidpm-microservice-modules-optionals-service</artifactId>
+        <version>${rapidpm.version}</version>
+      </dependency>
+
 
       <!--TDD-->
       <dependency>
@@ -266,10 +281,9 @@
         <version>${rapidpm.version}</version>
       </dependency>
 
-
       <dependency>
         <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>rapidpm-microservice-modules-optionals-vaadin</artifactId>
+        <artifactId>jumpstart-vaadin-modules-optionals-microservice</artifactId>
         <version>${rapidpm.version}</version>
       </dependency>
 
@@ -340,7 +354,7 @@
       <dependency>
         <groupId>com.google.code.gson</groupId>
         <artifactId>gson</artifactId>
-        <version>2.6.2</version>
+        <version>2.7</version>
         <optional>true</optional>
         <!-- case: when no json de/serialization -->
       </dependency>
@@ -374,7 +388,7 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-compress</artifactId>
-        <version>1.11</version>
+        <version>1.12</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
@@ -386,13 +400,13 @@
       <dependency>
         <groupId>commons-fileupload</groupId>
         <artifactId>commons-fileupload</artifactId>
-        <version>1.3.1</version>
+        <version>1.3.2</version>
       </dependency>
 
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-vfs2</artifactId>
-        <version>2.0</version>
+        <version>2.1</version>
         <scope>provided</scope>
         <optional>true</optional>
         <!-- case: -->
@@ -429,22 +443,26 @@
         <artifactId>kotlin-runtime</artifactId>
         <version>${kotlin.version}</version>
       </dependency>
-
+      <dependency>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-reflect</artifactId>
+        <version>${kotlin.version}</version>
+      </dependency>
       <!--Logging-->
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-api</artifactId>
-        <version>2.5</version>
+        <version>2.6.2</version>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
-        <version>2.5</version>
+        <version>2.6.2</version>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-1.2-api</artifactId>
-        <version>2.5</version>
+        <version>2.6.2</version>
       </dependency>
 
       <dependency>
@@ -490,7 +508,7 @@
       <dependency>
         <groupId>com.zaxxer</groupId>
         <artifactId>HikariCP</artifactId>
-        <version>2.4.6</version>
+        <version>2.4.7</version>
         <scope>compile</scope>
       </dependency>
 
@@ -498,7 +516,7 @@
       <dependency>
         <groupId>org.mapdb</groupId>
         <artifactId>mapdb</artifactId>
-        <version>3.0.0-M6</version>
+        <version>3.0.0</version>
       </dependency>
 
 
@@ -549,7 +567,7 @@
       <dependency>
         <groupId>org.hsqldb</groupId>
         <artifactId>hsqldb</artifactId>
-        <version>2.3.3</version>
+        <version>2.3.4</version>
         <scope>test</scope>
       </dependency>
       <dependency>
@@ -567,7 +585,7 @@
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
-        <version>3.4.1</version>
+        <version>3.5.1</version>
         <scope>test</scope>
       </dependency>
       <!--Microbenchmarking-->
@@ -600,7 +618,7 @@
       <dependency>
         <groupId>io.gatling.highcharts</groupId>
         <artifactId>gatling-charts-highcharts</artifactId>
-        <version>2.2.0</version>
+        <version>2.2.2</version>
         <scope>test</scope>
       </dependency>
 
@@ -616,7 +634,7 @@
       <dependency>
         <groupId>org.stagemonitor</groupId>
         <artifactId>stagemonitor-web</artifactId>
-        <version>0.22.0</version>
+        <version>0.27.1</version>
       </dependency>
 
       <!--tdd-->
@@ -647,9 +665,9 @@
       </dependency>
       <!--Vaadin Based stuff-->
       <dependency>
-        <groupId>org.vaadin</groupId>
-        <artifactId>viritin</artifactId>
-        <version>1.50</version>
+        <groupId>com.vaadin.wscdn</groupId>
+        <artifactId>wscdn-client</artifactId>
+        <version>0.0.2</version>
       </dependency>
       <!--<dependency>-->
       <!--<groupId>in.virit.vwscdn</groupId>-->
@@ -704,7 +722,7 @@
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
-        <version>3.1.0</version>
+        <version>4.0.0-b01</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -719,6 +737,10 @@
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-runtime</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-reflect</artifactId>
     </dependency>
 
 
@@ -765,17 +787,21 @@
       <artifactId>jsr305</artifactId>
     </dependency>
 
+    <!--<dependency>-->
+      <!--<groupId>org.apache.logging.log4j</groupId>-->
+      <!--<artifactId>log4j-api</artifactId>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.logging.log4j</groupId>-->
+      <!--<artifactId>log4j-core</artifactId>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.logging.log4j</groupId>-->
+      <!--<artifactId>log4j-1.2-api</artifactId>-->
+    <!--</dependency>-->
     <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-1.2-api</artifactId>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
     </dependency>
   </dependencies>
 
@@ -797,7 +823,15 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>2.6</version>
+          <version>3.0.2</version>
+          <!--<version>2.6</version>-->
+          <!--<dependencies>-->
+            <!--<dependency>-->
+              <!--<groupId>org.codehaus.plexus</groupId>-->
+              <!--<artifactId>plexus-archiver</artifactId>-->
+              <!--<version>2.4.4</version>-->
+            <!--</dependency>-->
+          <!--</dependencies>-->
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -812,7 +846,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
-          <version>2.7</version>
+          <version>3.0.1</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -827,7 +861,8 @@
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.7.5.201505241946</version>
+          <!--<version>0.7.5.201505241946</version>-->
+          <version>${jacoco.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -847,7 +882,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>2.10.3</version>
+          <version>2.10.4</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -951,12 +986,6 @@
             <goals>
               <goal>compile</goal>
             </goals>
-            <configuration>
-              <sourceDirs>
-                <source>target/generated-sources/annotations</source>
-                <source>src/main/java</source>
-              </sourceDirs>
-            </configuration>
           </execution>
 
           <execution>
@@ -965,12 +994,6 @@
             <goals>
               <goal>test-compile</goal>
             </goals>
-            <configuration>
-              <sourceDirs>
-                <source>target/generated-test-sources/test-annotations</source>
-                <source>src/test/java</source>
-              </sourceDirs>
-            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -979,8 +1002,9 @@
         <artifactId>maven-jar-plugin</artifactId>
         <executions>
           <execution>
+            <phase>package</phase>
             <goals>
-              <goal>jar</goal>
+              <!--<goal>jar</goal> do not define it here again !!-->
               <goal>test-jar</goal>
             </goals>
           </execution>
@@ -1017,6 +1041,23 @@
         <artifactId>build-helper-maven-plugin</artifactId>
         <executions>
           <execution>
+            <id>add sources</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.build.directory}/generated-sources/annotations</source>
+                <source>src/main/scala</source>
+                <source>src/main/java</source>
+                <source>src/main/kotlin</source>
+              </sources>
+            </configuration>
+          </execution>
+
+
+          <execution>
             <id>add generated sources</id>
             <phase>generate-sources</phase>
             <goals>
@@ -1025,7 +1066,9 @@
             <configuration>
               <sources>
                 <source>${project.build.directory}/generated-sources/annotations</source>
-                <!--<source>src/main/scala</source>-->
+                <source>src/main/scala</source>
+                <source>src/main/java</source>
+                <source>src/main/kotlin</source>
               </sources>
             </configuration>
           </execution>
@@ -1037,9 +1080,10 @@
             </goals>
             <configuration>
               <sources>
-                <!--<source>${project.build.directory}/generated-sources/annotations</source>-->
                 <source>${project.build.directory}/generated-test-sources/test-annotations</source>
-                <!--<source>src/test/scala</source>-->
+                <source>src/test/scala</source>
+                <source>src/test/java</source>
+                <source>src/test/kotlin</source>
               </sources>
             </configuration>
           </execution>
@@ -1070,6 +1114,9 @@
                 </goals>
               </execution>
             </executions>
+            <configuration>
+              <destDir>target/doc/apidoc/</destDir>
+            </configuration>
           </plugin>
         </plugins>
       </build>
@@ -1108,7 +1155,7 @@
     <profile>
       <id>qm-qs-pitest</id>
       <activation>
-        <activeByDefault>false</activeByDefault>
+        <activeByDefault>true</activeByDefault>
       </activation>
       <build>
         <plugins>
@@ -1125,8 +1172,7 @@
                 <param>org.rapidpm.*</param>
               </targetClasses>
               <targetTests>
-                <param>org.rapidpm.*</param>
-                <param>junit.org.rapidpm.*</param>
+                <param>*.org.rapidpm.*</param>
               </targetTests>
             </configuration>
           </plugin>
@@ -1241,7 +1287,39 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>qm-qs-surefire-fork</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
 
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <inherited>true</inherited>
+            <configuration>
+              <includes>
+                <include>**/junit/**</include>
+              </includes>
+              <excludes>
+                <exclude>**/*ini/**</exclude>
+                <exclude>**/*txt/**</exclude>
+                <exclude>**/*.jpg</exclude>
+
+              </excludes>
+              <argLine>-Xmx286m -Dsonar.pitest.mode=reuseReport</argLine>
+              <forkCount>2.5C</forkCount>
+              <reuseForks>false</reuseForks>
+
+              <reportFormat>xml</reportFormat>
+              <reportFormat>html</reportFormat>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
     <profile>
       <id>qm-qs-jacoco-junit</id>
       <activation>
@@ -1370,6 +1448,7 @@
               <optimize>true</optimize>
 
             </configuration>
+
             <executions>
               <execution>
                 <phase>compile</phase>
@@ -1582,14 +1661,14 @@
     </profile>
 
     <profile>
-      <id>qm-qs-sonar-reply</id>
+      <id>qm-qs-sonar-rapidpm</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
         <!-- Optional URL to server. Default value is http://localhost:9000 -->
         <!--<sonar.host.url>http://10.64.54.70:9000/</sonar.host.url>-->
-        <sonar.host.url>http://78.47.240.2:8080/</sonar.host.url>
+        <sonar.host.url>https://sonar.rapidpm.org/</sonar.host.url>
         <sonar.jacoco.reportMissing.force.zero>true</sonar.jacoco.reportMissing.force.zero>
         <sonar.pitest.mode>reuseReport</sonar.pitest.mode>
       </properties>
@@ -1659,6 +1738,11 @@
                 </goals>
                 <configuration>
                   <rules>
+                    <requireActiveProfile>
+                      <profiles>gen-javadoc,java-jdk-8,qm-qs-checkstyle,qm-qs-findbugs,qm-qs-jacoco,qm-qs-jacoco-junit,qm-qs-jdeps,qm-qs-pitest</profiles>
+                    </requireActiveProfile>
+                    <dependencyConvergence/>
+                    <!--<reactorModuleConvergence>-->
                     <requireMavenVersion>
                       <version>[3.3.3,)</version>
                     </requireMavenVersion>
@@ -1667,8 +1751,9 @@
                     </requireJavaVersion>
                     <requireUpperBoundDeps>
                       <!-- 'uniqueVersions' (default:false) can be set to true if you want to compare the timestamped SNAPSHOTs  -->
-                      <!-- <uniqueVersions>true</uniqueVersions> -->
+                       <uniqueVersions>true</uniqueVersions>
                     </requireUpperBoundDeps>
+
                   </rules>
                 </configuration>
               </execution>
@@ -1693,33 +1778,35 @@
                 <goals>
                   <goal>enforce</goal>
                 </goals>
-                <configuration>
-                  <rules>
-
-                    <requireActiveProfile>
-                      <profiles>qm-qs-jacoco,qm-qs-jacoco-junit,qm-qs-checkstyle,gen-javadoc,java-jdk-8,sys-nexus-deploy-gpg</profiles>
-                    </requireActiveProfile>
-                    <requireJavaVersion>
-                      <version>1.8.0</version>
-                    </requireJavaVersion>
-                    <requireMavenVersion>
-                      <version>[3.3.3,)</version>
-                    </requireMavenVersion>
-                    <requireReleaseDeps>
-                      <message>No Snapshots Allowed!</message>
-                    </requireReleaseDeps>
-                    <requireReleaseVersion>
-                      <message>No Snapshots Allowed!</message>
-                    </requireReleaseVersion>
-                    <requireUpperBoundDeps>
-                      <!-- 'uniqueVersions' (default:false) can be set to true if you want to compare the timestamped SNAPSHOTs  -->
-                      <!-- <uniqueVersions>true</uniqueVersions> -->
-                    </requireUpperBoundDeps>
-                  </rules>
-                  <fail>true</fail>
-                </configuration>
               </execution>
+
             </executions>
+            <configuration>
+              <rules>
+                <requireActiveProfile>
+                  <profiles>
+                    qm-qs-jacoco,qm-qs-jacoco-junit,qm-qs-checkstyle,gen-javadoc,java-jdk-8,sys-nexus-deploy-gpg,qm-qs-add-git-commit-properties
+                  </profiles>
+                </requireActiveProfile>
+                <requireJavaVersion>
+                  <version>1.8.0</version>
+                </requireJavaVersion>
+                <requireMavenVersion>
+                  <version>[3.3.3,)</version>
+                </requireMavenVersion>
+                <requireReleaseDeps>
+                  <message>No Snapshots Allowed!</message>
+                </requireReleaseDeps>
+                <requireReleaseVersion>
+                  <message>No Snapshots Allowed!</message>
+                </requireReleaseVersion>
+                <requireUpperBoundDeps>
+                  <!-- 'uniqueVersions' (default:false) can be set to true if you want to compare the timestamped SNAPSHOTs  -->
+                  <!-- <uniqueVersions>true</uniqueVersions> -->
+                </requireUpperBoundDeps>
+              </rules>
+              <fail>true</fail>
+            </configuration>
           </plugin>
         </plugins>
       </build>
@@ -1770,6 +1857,236 @@
           <!--<url>http://maven.vaadin.com/</url>-->
         </repository>
       </repositories>
+    </profile>
+    <profile>
+      <id>qm-qs-add-git-commit-properties</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>pl.project13.maven</groupId>
+            <artifactId>git-commit-id-plugin</artifactId>
+            <version>2.2.1</version>
+            <executions>
+              <execution>
+                <id>get-the-git-infos</id>
+                <goals>
+                  <goal>revision</goal>
+                </goals>
+              </execution>
+            </executions>
+
+            <configuration>
+              <!--
+                  If you'd like to tell the plugin where your .git directory is,
+                  use this setting, otherwise we'll perform a search trying to
+                  figure out the right directory. It's better to add it explicitly IMHO.
+              -->
+              <!-- dotGitDirectory>${project.basedir}/.git</dotGitDirectory -->
+
+              <!-- that's the default value, you don't have to set it -->
+              <prefix>git</prefix>
+
+              <!-- that's the default value -->
+              <dateFormat>dd.MM.yyyy '@' HH:mm:ss z</dateFormat>
+
+              <!-- @since 2.2.0 -->
+              <!--
+                   If you want to set the timezone of the dateformat to anything in particular you can do this by using this option.
+                   As a general warning try to avoid three-letter time zone IDs because the same abbreviation are often used for multiple time zones.
+                   The default value we'll use the timezone use the timezone that's shipped with java (java.util.TimeZone.getDefault().getID()).
+                   *Note*: If you plan to set the java's timezone by using `MAVEN_OPTS=-Duser.timezone=UTC mvn clean package`, `mvn clean package -Duser.timezone=UTC` or any other configuration keep in mind that this option will override those settings and will not take other configurations into account!
+              -->
+              <dateFormatTimeZone>${user.timezone}</dateFormatTimeZone>
+
+              <!-- false is default here, it prints some more information during the build -->
+              <verbose>false</verbose>
+
+              <!-- ALTERNATE SETUP - GENERATE FILE -->
+              <!--
+                  If you want to keep git information, even in your WAR file etc,
+                  use this mode, which will generate a properties file (with filled out values)
+                  which you can then normally read using new Properties().load(/**/)
+              -->
+
+              <!-- this is false by default, forces the plugin to generate the git.properties file -->
+              <generateGitPropertiesFile>true</generateGitPropertiesFile>
+
+              <!--
+                  The path for the to be generated properties file, it's relative to ${project.basedir}
+                  The default value is ${project.build.outputDirectory}/git.properties
+
+                  *Note*: If you plan to set the generateGitPropertiesFilename-Path to a location where usally the source-files
+                          comes from (e.g. src/main/resources) and experience that your IDE (e.g. eclipse)
+                          invokes "Maven Project Builder" once every second, the chances that you are using
+                          an IDE where the src-folder is a watched folder for files that are *only* edited by humans is pretty high.
+                          For further information refer to the manual for your specifc IDE and check the worflow of "incremental project builders".
+                          In order to fix this problem we recommend to set the generateGitPropertiesFilename-Path
+                          to a target folder (e.g. ${project.build.outputDirectory}) since this is
+                          the place where all derived/generated resources should go.
+              -->
+              <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties
+              </generateGitPropertiesFilename>
+
+              <!-- Denotes the format to save properties in. Valid options are "properties" (default) and "json". Properties will be saved to the generateGitPropertiesFilename if generateGitPropertiesFile is set to `true`. -->
+              <format>properties</format>
+
+              <!--
+                  this is true by default; You may want to set this to false, if the plugin should run inside a
+                  <packaging>pom</packaging> project. Most projects won't need to override this property.
+
+                  For an use-case for this kind of behaviour see: https://github.com/ktoso/maven-git-commit-id-plugin/issues/21
+              -->
+              <skipPoms>false</skipPoms>
+
+              <!-- @since 2.1.4 -->
+              <!--
+                  Tell maven-git-commit-id to inject the git properties into all reactor projects not just the current one.
+                  For details about why you might want to skip this, read this issue: https://github.com/ktoso/maven-git-commit-id-plugin/pull/65
+                  The property is set to ``false`` by default to prevent the overriding of properties that may be unrelated to the project.
+              -->
+              <injectAllReactorProjects>false</injectAllReactorProjects>
+
+              <!-- @since 2.0.4 -->
+              <!-- true by default, controls whether the plugin will fail when no .git directory is found, when set to false the plugin will just skip execution -->
+              <failOnNoGitDirectory>true</failOnNoGitDirectory>
+
+              <!-- @since 2.1.5 -->
+              <!-- true by default, controls whether the plugin will fail if it was unable to obtain enough data for a complete run, if you don't care about this, you may want to set this value to false. -->
+              <failOnUnableToExtractRepoInfo>true</failOnUnableToExtractRepoInfo>
+
+              <!-- @since 2.1.8 -->
+              <!--
+                  skip the plugin execution completely. This is useful for e.g. profile activated plugin invocations or
+                  to use properties to enable / disable pom features. Default value is 'false'.
+              -->
+              <skip>false</skip>
+
+              <!-- @since 2.1.12 -->
+              <!--
+                 Use with caution!
+
+                 In a multi-module build, only run once. This means that the plugins effects will only execute once, for the parent project.
+                 This probably won't "do the right thing" if your project has more than one git repository.
+
+                 Important: If you're using `generateGitPropertiesFile`, setting `runOnlyOnce` will make the plugin
+                 only generate the file in the directory where you started your build (!).
+
+                 The `git.*` maven properties are available in all modules.
+                 Default value is `false`.
+              -->
+              <runOnlyOnce>false</runOnlyOnce>
+
+              <!-- @since 2.1.9 -->
+              <!--
+                  Can be used to exclude certain properties from being emitted into the resulting file.
+                  May be useful when you want to hide {@code git.remote.origin.url} (maybe because it contains your repo password?),
+                  or the email of the committer etc.
+
+                  Each value may be globbing, that is, you can write {@code git.commit.user.*} to exclude both, the {@code name},
+                  as well as {@code email} properties from being emitted into the resulting files.
+
+                  Please note that the strings here are Java regexes ({@code .*} is globbing, not plain {@code *}).
+              -->
+              <excludeProperties>
+                <!-- <excludeProperty>git.user.*</excludeProperty> -->
+              </excludeProperties>
+
+              <!-- @since 2.1.14 -->
+              <!--
+                  Can be used to include only certain properties into the resulting file.
+                  Will be overruled by the exclude properties.
+
+                  Each value may be globbing, that is, you can write {@code git.commit.user.*} to include both, the {@code name},
+                  as well as {@code email} properties into the resulting files.
+
+                  Please note that the strings here are Java regexes ({@code .*} is globbing, not plain {@code *}).
+              -->
+              <includeOnlyProperties>
+                <!-- <includeOnlyProperty>^git.commit.id.full$</includeOnlyProperty> -->
+              </includeOnlyProperties>
+
+              <!-- @since 2.1.10 -->
+              <!--
+                false is default here, if set to true it uses native `git` executable for extracting all data.
+                This usually has better performance than the default (jgit) implementation, but requires you to
+                have git available as executable for the build as well as *might break unexpectedly* when you
+                upgrade your system-wide git installation.
+
+                As rule of thumb - stay on `jgit` (keep this `false`) until you notice performance problems.
+              -->
+              <useNativeGit>false</useNativeGit>
+
+              <!-- @since v2.0.4 -->
+              <!--
+                   Controls the length of the abbreviated git commit it (git.commit.id.abbrev)
+
+                   Defaults to `7`.
+                   `0` carries the special meaning.
+                   Maximum value is `40`, because of max SHA-1 length.
+               -->
+              <abbrevLength>7</abbrevLength>
+
+
+              <!-- @since v2.2.0 -->
+              <!--
+                   The option can be used to tell the plugin how it should generate the 'git.commit.id' property. Due to some naming issues when exporting the properties as an json-object (https://github.com/ktoso/maven-git-commit-id-plugin/issues/122) we needed to make it possible to export all properties as a valid json-object.
+                   Due to the fact that this is one of the major properties the plugin is exporting we just don't want to change the exporting mechanism and somehow throw the backwards compatibility away.
+                   We rather provide a convenient switch where you can choose if you would like the properties as they always had been, or if you rather need to support full json-object compatibility.
+                   In the case you need to fully support json-object we unfortunately need to change the 'git.commit.id' property from 'git.commit.id' to 'git.commit.id.full' in the exporting mechanism to allow the generation of a fully valid json object.
+
+                   Currently the switch allows two different options:
+                   1. By default this property is set to 'flat' and will generate the formerly known property 'git.commit.id' as it was in the previous versions of the plugin. Keeping it to 'flat' by default preserve backwards compatibility and does not require further adjustments by the end user.
+                   2. If you set this switch to 'full' the plugin will export the formerly known property 'git.commit.id' as 'git.commit.id.full' and therefore will generate a fully valid json object in the exporting mechanism.
+
+                   *Note*: Depending on your plugin configuration you obviously can choose the 'prefix' of your properties by setting it accordingly in the plugin's configuration. As a result this is therefore only an illustration what the switch means when the 'prefix' is set to it's default value.
+                   *Note*: If you set the value to something that's not equal to 'flat' or 'full' (ignoring the case) the plugin will output a warning and will fallback to the default 'flat' mode.
+              -->
+              <commitIdGenerationMode>flat</commitIdGenerationMode>
+
+              <!-- @since 2.1.0 -->
+              <!--
+                  read up about git-describe on the in man, or it's homepage - it's a really powerful versioning helper
+                  and the recommended way to use git-commit-id-plugin. The configuration bellow is optional,
+                  by default describe will run "just like git-describe on the command line", even though it's a JGit reimplementation.
+              -->
+              <gitDescribe>
+
+                <!-- don't generate the describe property -->
+                <skip>false</skip>
+
+                <!--
+                    if no tag was found "near" this commit, just print the commit's id instead,
+                    helpful when you always expect this field to be not-empty
+                -->
+                <always>false</always>
+                <!--
+                     how many chars should be displayed as the commit object id?
+                     7 is git's default,
+                     0 has a special meaning (see end of this README.md),
+                     and 40 is the maximum value here
+                -->
+                <abbrev>7</abbrev>
+
+                <!-- when the build is triggered while the repo is in "dirty state", append this suffix -->
+                <dirty>-dirty</dirty>
+
+                <!-- Only consider tags matching the given pattern. This can be used to avoid leaking private tags from the repository. -->
+                <match>*</match>
+
+                <!--
+                     always print using the "tag-commits_from_tag-g_commit_id-maybe_dirty" format, even if "on" a tag.
+                     The distance will always be 0 if you're "on" the tag.
+                -->
+                <forceLongFormat>false</forceLongFormat>
+              </gitDescribe>
+            </configuration>
+
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 
