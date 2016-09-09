@@ -74,15 +74,4 @@ public class JDBCConnectionPools {
     return Optional.ofNullable(poolMap.get(poolname));
 
   }
-
-//  @Produces(JDBCConnectionPools.class)
-//  public static class JDBCConnectionPoolsProducer implements Producer<JDBCConnectionPools> {
-//
-//    @Override
-//    public JDBCConnectionPools create() {
-//      return instance();
-//    }
-//  }
-
-
 }
