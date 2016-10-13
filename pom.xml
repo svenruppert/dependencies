@@ -79,13 +79,13 @@
     <rapidpm.version>0.6.0-SNAPSHOT</rapidpm.version>
 
 
-    <jmh.version>1.14.1</jmh.version>
+    <jmh.version>1.15</jmh.version>
     <kotlin.version>1.0.4</kotlin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!--<undertow.version>1.3.22.Final</undertow.version>-->
     <undertow.version>2.0.0.Alpha1</undertow.version>
     <!--<resteasy-undertow.version>3.0.18.Final</resteasy-undertow.version>-->
-    <resteasy-undertow.version>3.1.0.Beta2</resteasy-undertow.version>
+    <resteasy-undertow.version>3.1.0.CR1</resteasy-undertow.version>
     <vwscdn.version>0.0.2</vwscdn.version>
     <vaadin.version>7.7.3</vaadin.version>
     <vaadin-testbench-api.version>4.1.0</vaadin-testbench-api.version>
@@ -113,6 +113,14 @@
 
     <!--project versions-->
     <dependencies>
+      <!--<dependency>-->
+        <!--<groupId>org.rapidpm</groupId>-->
+        <!--<artifactId>reflections</artifactId>-->
+        <!--<version>1.0.0-SNAPSHOT</version>-->
+      <!--</dependency>-->
+
+
+
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-dependencies-core</artifactId>
@@ -332,6 +340,11 @@
       </dependency>
       <dependency>
         <groupId>org.jboss.resteasy</groupId>
+        <artifactId>resteasy-client</artifactId>
+        <version>${resteasy-undertow.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.resteasy</groupId>
         <artifactId>jaxrs-api</artifactId>
         <version>3.0.12.Final</version>
       </dependency>
@@ -346,11 +359,11 @@
       </dependency>
 
       <!--Google stuff-->
-      <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>guava</artifactId>
-        <version>19.0</version>
-      </dependency>
+      <!--<dependency>-->
+        <!--<groupId>com.google.guava</groupId>-->
+        <!--<artifactId>guava</artifactId>-->
+        <!--<version>19.0</version>-->
+      <!--</dependency>-->
 
       <dependency>
         <groupId>com.google.code.gson</groupId>
@@ -377,7 +390,7 @@
       <dependency>
         <groupId>org.javassist</groupId>
         <artifactId>javassist</artifactId>
-        <version>3.20.0-GA</version>
+        <version>3.21.0-GA</version>
       </dependency>
 
       <!--Apache Commons-->
@@ -1306,8 +1319,8 @@
 
               </excludes>
               <argLine>-Xmx286m -Dsonar.pitest.mode=reuseReport</argLine>
-              <forkCount>2.5C</forkCount>
-              <reuseForks>false</reuseForks>
+              <threadCount>4</threadCount>
+              <forkMode>always</forkMode>
 
               <reportFormat>xml</reportFormat>
               <reportFormat>html</reportFormat>
