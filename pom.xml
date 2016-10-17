@@ -1579,7 +1579,7 @@
                   <!--<excludes>**/generated/**/*</excludes>-->
                   <excludes>**/generated-sources/vwscdn/*</excludes>
                   <excludes>**/generated-sources/wscdn/*</excludes>
-                  <excludes>com/vaadin/wscdn/*,in/virit/*,com/acme/**/*</excludes>
+                  <excludes>com/vaadin/*,in/virit/*,com/acme/**/*</excludes>
                   <checkstyleRules>
                     <module name="Checker">
                       <!--<module name="JavadocPackage"/>-->
