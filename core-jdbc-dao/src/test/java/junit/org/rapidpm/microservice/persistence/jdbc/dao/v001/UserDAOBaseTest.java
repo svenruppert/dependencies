@@ -24,10 +24,17 @@ import junit.org.rapidpm.microservice.persistence.jdbc.HsqlBaseTest;
 import junit.org.rapidpm.microservice.persistence.jdbc.InMemoryHsqldbBuilder;
 import org.junit.After;
 import org.junit.Before;
+import org.rapidpm.microservice.persistence.jdbc.JDBCConnectionPools;
 
 
 public class UserDAOBaseTest extends HsqlBaseTest {
 
+  final JDBCConnectionPools pools = new JDBCConnectionPools();
+
+  @Override
+  public JDBCConnectionPools pools() {
+    return pools;
+  }
 
   @Override
   public String[] createSQLInitScriptArray() {
@@ -56,7 +63,7 @@ public class UserDAOBaseTest extends HsqlBaseTest {
 
   @After
   public void tearDown() throws Exception {
-    pools.shutdownPool(poolname());
+    pools().shutdownPool(poolname());
 
   }
 
