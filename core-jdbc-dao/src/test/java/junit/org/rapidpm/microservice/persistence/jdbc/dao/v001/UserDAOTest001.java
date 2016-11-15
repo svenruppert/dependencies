@@ -32,7 +32,7 @@ public class UserDAOTest001 extends UserDAOBaseTest {
 
   @Test
   public void test001() throws Exception {
-    final Optional<JDBCConnectionPool> connectionPoolOptional = pools.getPool(poolname());
+    final Optional<JDBCConnectionPool> connectionPoolOptional = pools().getPool(poolname());
     final JDBCConnectionPool connectionPool = connectionPoolOptional.get();
     final UserDAO userDAO = new UserDAO().workOnPool(connectionPool);
 

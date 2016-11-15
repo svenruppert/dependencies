@@ -20,7 +20,10 @@
 package junit.org.rapidpm.microservice.persistence.jdbc;
 
 import com.zaxxer.hikari.HikariDataSource;
+import org.rapidpm.dependencies.core.reflections.NewInstances;
 import org.rapidpm.microservice.persistence.jdbc.JDBCConnectionPools;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -34,12 +37,11 @@ import java.util.stream.Collectors;
 
 public abstract class HsqlBaseTest {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(HsqlBaseTest.class);
+
   private final String[] scripts = createSQLInitScriptArray();
-  // add here other *basic* scripts that should be executed
-//  private final String[] scripts = {
-//      "CLEAR_SCHEMA.sql", "CREATE_TABLE_EXAMPLE.sql"
-//  };
-  protected JDBCConnectionPools pools = new JDBCConnectionPools();
+
+  public abstract JDBCConnectionPools pools();
 
   public abstract String[] createSQLInitScriptArray();
 
@@ -58,7 +60,7 @@ public abstract class HsqlBaseTest {
       System.out.println(aClass.getName());
 
       final URL resource = aClass.getResource(script);
-      System.out.println("resource.toExternalForm() = " + resource.toExternalForm());
+      LOGGER.debug("resource.toExternalForm() = " + resource.toExternalForm());
       executeSqlScript(poolname, resource.getPath());
     }
 
@@ -67,14 +69,17 @@ public abstract class HsqlBaseTest {
       final String testSqlPath = testSqlResource.getPath();
       executeSqlScript(poolname, testSqlPath);
     } else {
-      System.out.println("No SQL for " + getClass().getSimpleName());
+      LOGGER.debug("No SQL for " + getClass().getSimpleName());
     }
   }
 
   public abstract Class baseTestClass();
 
   private void executeSqlScript(final String poolname, final String filePath) {
-    final HikariDataSource dataSource = pools.getDataSource(poolname);
+    LOGGER.debug("executeSqlScript-poolname = " + poolname);
+    LOGGER.debug("executeSqlScript-filePath = " + filePath);
+
+    final HikariDataSource dataSource = pools().getDataSource(poolname);
     try (
         final BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(filePath)));
         final Connection connection = dataSource.getConnection();
@@ -95,7 +100,7 @@ public abstract class HsqlBaseTest {
   }
 
   protected void startPoolsAndConnect(final String poolname, final String url, final String username, final String passwd) {
-    pools
+    pools()
         .addJDBCConnectionPool(poolname)
         .withJdbcURL(url)
         .withUsername(username)
@@ -103,7 +108,7 @@ public abstract class HsqlBaseTest {
         .withTimeout(2000)
         .withAutoCommit(true)
         .done();
-    pools.connectPool(poolname);
+    pools().connectPool(poolname);
   }
 
   public String username() {
