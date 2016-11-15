@@ -16,13 +16,13 @@ import java.util.Objects;
  *
  * Created by RapidPM - Team on 15.11.16.
  */
-public class Tripel<T1, T2, T3> {
+public class Triple<T1, T2, T3> {
 
   private T1 first;
   private T2 second;
   private T3 third;
 
-  public Tripel(final T1 first, final T2 second, final T3 third) {
+  public Triple(final T1 first, final T2 second, final T3 third) {
     this.first = first;
     this.second = second;
     this.third = third;
@@ -43,11 +43,11 @@ public class Tripel<T1, T2, T3> {
   @Override
   public boolean equals(final Object o) {
     if (this == o) return true;
-    if (!(o instanceof Tripel)) return false;
-    final Tripel<?, ?, ?> tripel = (Tripel<?, ?, ?>) o;
-    return Objects.equals(first, tripel.first) &&
-        Objects.equals(second, tripel.second) &&
-        Objects.equals(third, tripel.third);
+    if (!(o instanceof Triple)) return false;
+    final Triple<?, ?, ?> triple = (Triple<?, ?, ?>) o;
+    return Objects.equals(first, triple.first) &&
+        Objects.equals(second, triple.second) &&
+        Objects.equals(third, triple.third);
   }
 
   @Override
