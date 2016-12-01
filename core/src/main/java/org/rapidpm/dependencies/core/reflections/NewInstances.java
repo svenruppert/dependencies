@@ -3,6 +3,7 @@ package org.rapidpm.dependencies.core.reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -37,9 +38,12 @@ public class NewInstances {
         .stream()
         .map(c -> {
           try {
-            return Optional.of(c.newInstance());
+//            return Optional.of(c.newInstance());
+            return Optional.of(c.getDeclaredConstructor().newInstance());
           } catch (InstantiationException | IllegalAccessException e) {
             LOGGER.error("failed to create new instance ", e);
+          } catch (NoSuchMethodException | InvocationTargetException e) {
+            e.printStackTrace();
           }
           return Optional.<T>empty();
         })
@@ -53,9 +57,11 @@ public class NewInstances {
     if (clazz == null) return Optional.empty();
 
     try {
-      return Optional.of(clazz.newInstance());
+      return Optional.of(clazz.getDeclaredConstructor().newInstance());
     } catch (InstantiationException | IllegalAccessException e) {
       LOGGER.error("failed to create new instance ", e);
+    } catch (NoSuchMethodException | InvocationTargetException e) {
+      e.printStackTrace();
     }
     return Optional.empty();
   }
