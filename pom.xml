@@ -79,19 +79,19 @@
     <rapidpm.version>0.7.0-SNAPSHOT</rapidpm.version>
 
 
-    <jmh.version>1.17.1</jmh.version>
+    <jmh.version>1.17.3</jmh.version>
     <!--<kotlin.version>1.0.5</kotlin.version>-->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!--<undertow.version>1.3.22.Final</undertow.version>-->
     <undertow.version>2.0.0.Alpha1</undertow.version>
     <!--<resteasy-undertow.version>3.0.18.Final</resteasy-undertow.version>-->
-    <resteasy-undertow.version>3.1.0.CR3</resteasy-undertow.version>
-    <vaadin.version>7.7.5</vaadin.version>
-    <vaadin-testbench-api.version>5.0.0.alpha1</vaadin-testbench-api.version>
+    <resteasy-undertow.version>3.1.0.Final</resteasy-undertow.version>
+    <vaadin.version>7.7.6</vaadin.version>
+    <vaadin-testbench-api.version>5.0.0.alpha2</vaadin-testbench-api.version>
     <!--<jacoco.version>0.7.5.201505241946</jacoco.version>-->
-    <jacoco.version>0.7.7.201606060606</jacoco.version>
-    <slf4j.version>1.7.21</slf4j.version>
-    <hazelcast.version>3.7.3</hazelcast.version>
+    <jacoco.version>0.7.8</jacoco.version>
+    <slf4j.version>1.7.22</slf4j.version>
+    <hazelcast.version>3.8-EA</hazelcast.version>
     <lucene.version>6.3.0</lucene.version>
 
     <!--<orientdb.version>2.1.16</orientdb.version>-->
@@ -558,7 +558,7 @@
       <dependency>
         <groupId>org.pitest</groupId>
         <artifactId>pitest</artifactId>
-        <version>1.1.10</version>
+        <version>1.1.11</version>
         <scope>test</scope>
       </dependency>
       <dependency>
