@@ -57,7 +57,7 @@
   </developers>
   <issueManagement>
     <system>Youtrack</system>
-    <url>http://rapidpm.myjetbrains.com/youtrack/issues</url>
+    <url>https://issues.rapidpm.org/issues</url>
   </issueManagement>
   <ciManagement>
     <system>TeamCity</system>
