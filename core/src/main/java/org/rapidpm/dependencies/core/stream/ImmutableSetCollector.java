@@ -21,6 +21,9 @@ import java.util.stream.Collector;
  * Created by RapidPM - Team on 29.12.16.
  */
 public class ImmutableSetCollector {
+  private ImmutableSetCollector() {
+  }
+
   public static <T, A extends Set<T>> Collector<T, A, Set<T>> toImmutableSet(Supplier<A> collectionFactory) {
     return Collector.of(collectionFactory, Set::add, (left, right) -> {
       left.addAll(right);

@@ -7,6 +7,8 @@ import java.util.function.Supplier;
 import java.util.stream.Collector;
 
 public class ImmutableListCollector {
+  private ImmutableListCollector() {
+  }
 
   public static <T, A extends List<T>> Collector<T, A, List<T>> toImmutableList(Supplier<A> collectionFactory) {
     return Collector.of(collectionFactory, List::add, (left, right) -> {
