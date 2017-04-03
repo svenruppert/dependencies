@@ -25,6 +25,14 @@ import java.util.Random;
 
 public class PortUtils {
 
+  public int defaultRestPort() {
+    return 7081;
+  }
+
+  public int defaultServletPort() {
+    return 7080;
+  }
+
   //TODO static ??
   public int nextFreePortForTest() {
     int counter = 0;

@@ -19,11 +19,8 @@
 
 package org.rapidpm.microservice.persistence.jdbc.dao;
 
-import org.jetbrains.annotations.NotNull;
+
 
 public interface BasicOperation {
-
-  @NotNull
   String createSQL();
-
 }
