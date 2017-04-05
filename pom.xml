@@ -27,7 +27,7 @@
   <groupId>org.rapidpm</groupId>
   <artifactId>rapidpm-dependencies</artifactId>
   <packaging>pom</packaging>
-  <version>3.3.0</version>
+  <version>3.3.2</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -75,8 +75,8 @@
 
   <properties>
 
-    <rapidpm.depdendencies.version>3.3.0-SNAPSHOT</rapidpm.depdendencies.version>
-    <rapidpm.version>0.7.0-SNAPSHOT</rapidpm.version>
+    <rapidpm-dependencies.version>3.3.2-SNAPSHOT</rapidpm-dependencies.version>
+
 
     <jmh.version>1.18</jmh.version>
     <!--<kotlin.version>1.0.5</kotlin.version>-->
@@ -107,192 +107,28 @@
 
     <!--project versions-->
     <dependencies>
-      <!--<dependency>-->
-      <!--<groupId>org.rapidpm</groupId>-->
-      <!--<artifactId>reflections</artifactId>-->
-      <!--<version>1.0.0-SNAPSHOT</version>-->
-      <!--</dependency>-->
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-dependencies-core</artifactId>
-        <version>${rapidpm.depdendencies.version}</version>
+        <version>${rapidpm-dependencies.version}</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-dependencies-core-jdbc</artifactId>
-        <version>${rapidpm.depdendencies.version}</version>
+        <version>${rapidpm-dependencies.version}</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-dependencies-core-jdbc</artifactId>
-        <version>${rapidpm.depdendencies.version}</version>
+        <version>${rapidpm-dependencies.version}</version>
         <type>test-jar</type>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-dependencies-core-jdbc-dao</artifactId>
-        <version>${rapidpm.depdendencies.version}</version>
+        <version>${rapidpm-dependencies.version}</version>
       </dependency>
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-core</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-core-annotationprocessor</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-builder</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-dynamic</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-static-generated</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-static-generated-annotations</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-static-generated-processors</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-static-runtime</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-
-
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-objectadapter-generator-annotations</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-objectadapter-generator-processors</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-
-
-      <dependency>
-        <groupId>org.rapidpm.dynamic-cdi</groupId>
-        <artifactId>rapidpm-dynamic-cdi</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-
-
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>rapidpm-microservice-modules-core</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>rapidpm-microservice-modules-core</artifactId>
-        <version>${rapidpm.version}</version>
-        <type>test-jar</type>
-        <scope>test</scope>
-      </dependency>
-
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>rapidpm-microservice-modules-optionals-admin</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>rapidpm-microservice-modules-optionals-cli</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>rapidpm-microservice-modules-optionals-service</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-
-
-      <!--TDD-->
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>rapidpm-microservice-modules-core-testutils</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-
-      <!--TDD-->
-
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>rapidpm-microservice-modules-optionals-metrics-performance</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>rapidpm-microservice-modules-optionals-metrics-activeressources</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>rapidpm-microservice-modules-optionals-metrics-health</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>rapidpm-microservice-modules-optionals-metrics-jvm</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>rapidpm-microservice-modules-optionals-filesystem-base</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>rapidpm-microservice-modules-optionals-filesystem-hazelcast</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>rapidpm-microservice-modules-optionals-filesystem-memory</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>rapidpm-microservice-modules-optionals-filesystem-os</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>jumpstart-vaadin-modules-optionals-microservice</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.rapidpm.microservice</groupId>
-        <artifactId>rapidpm-microservice-modules-persistence-local-hashmap</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-
 
       <!--project versions-->
       <!--Undertow-->
@@ -346,7 +182,7 @@
       <dependency>
         <groupId>io.dropwizard.metrics</groupId>
         <artifactId>metrics-core</artifactId>
-        <version>3.2.1</version>
+        <version>3.2.2</version>
       </dependency>
 
       <!--Google stuff-->
@@ -757,6 +593,10 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
@@ -767,7 +607,6 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
           <version>2.5.3</version>
-          <!--<version>3.0-r1585899</version>-->
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -849,6 +688,11 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-shade-plugin</artifactId>
           <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>3.3.0</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -1081,7 +925,7 @@
     <profile>
       <id>qm-qs-findbugs</id>
       <activation>
-        <activeByDefault>false</activeByDefault>
+        <activeByDefault>true</activeByDefault>
       </activation>
       <reporting>
         <plugins>
