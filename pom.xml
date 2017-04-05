@@ -27,7 +27,7 @@
   <groupId>org.rapidpm</groupId>
   <artifactId>rapidpm-dependencies</artifactId>
   <packaging>pom</packaging>
-  <version>3.3.0-SNAPSHOT</version>
+  <version>3.3.2-SNAPSHOT</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -74,10 +74,6 @@
 
 
   <properties>
-
-    <rapidpm.depdendencies.version>3.3.0-SNAPSHOT</rapidpm.depdendencies.version>
-    <rapidpm.version>0.7.0-SNAPSHOT</rapidpm.version>
-
     <jmh.version>1.18</jmh.version>
     <!--<kotlin.version>1.0.5</kotlin.version>-->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -115,77 +111,24 @@
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-dependencies-core</artifactId>
-        <version>${rapidpm.depdendencies.version}</version>
+        <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-dependencies-core-jdbc</artifactId>
-        <version>${rapidpm.depdendencies.version}</version>
+        <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-dependencies-core-jdbc</artifactId>
-        <version>${rapidpm.depdendencies.version}</version>
+        <version>${project.version}</version>
         <type>test-jar</type>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-dependencies-core-jdbc-dao</artifactId>
-        <version>${rapidpm.depdendencies.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-core</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-core-annotationprocessor</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-builder</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-dynamic</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-static-generated</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-static-generated-annotations</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-static-generated-processors</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-static-runtime</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-
-
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-objectadapter-generator-annotations</artifactId>
-        <version>${rapidpm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm.proxybuilder</groupId>
-        <artifactId>rapidpm-proxybuilder-modules-objectadapter-generator-processors</artifactId>
-        <version>${rapidpm.version}</version>
+        <version>${project.version}</version>
       </dependency>
 
 
@@ -1081,7 +1024,7 @@
     <profile>
       <id>qm-qs-findbugs</id>
       <activation>
-        <activeByDefault>false</activeByDefault>
+        <activeByDefault>true</activeByDefault>
       </activation>
       <reporting>
         <plugins>
