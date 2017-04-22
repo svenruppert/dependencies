@@ -1103,7 +1103,45 @@
               <showDeprecation>true</showDeprecation>
               <showWarnings>false</showWarnings>
               <optimize>true</optimize>
+
             </configuration>
+
+            <executions>
+              <execution>
+                <phase>compile</phase>
+                <id>compile-001</id>
+                <goals>
+                  <goal>compile</goal>
+                </goals>
+                <!--BUG JDK-8062800-->
+                <configuration>
+                  <useIncrementalCompilation>false</useIncrementalCompilation>
+                </configuration>
+                <!--BUG JDK-8062800-->
+              </execution>
+              <execution>
+                <phase>test-compile</phase>
+                <id>test-compile-001</id>
+                <goals>
+                  <goal>testCompile</goal>
+                </goals>
+                <!--BUG JDK-8062800-->
+                <configuration>
+                  <useIncrementalCompilation>false</useIncrementalCompilation>
+                </configuration>
+                <!--BUG JDK-8062800-->
+              </execution>
+              <!--&lt;!&ndash;<execution>&ndash;&gt;-->
+              <!--<phase>test-compile</phase>-->
+              <!--<id>test-compile-002</id>-->
+              <!--<goals><goal>testCompile</goal></goals>-->
+              <!--&lt;!&ndash;BUG JDK-8062800&ndash;&gt;-->
+              <!--<configuration>-->
+              <!--<useIncrementalCompilation>false</useIncrementalCompilation>-->
+              <!--</configuration>-->
+              <!--&lt;!&ndash;BUG JDK-8062800&ndash;&gt;-->
+              <!--</execution>-->
+            </executions>
           </plugin>
         </plugins>
       </build>
@@ -1146,6 +1184,24 @@
                 </goals>
               </execution>
             </executions>
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>default-compile</id>-->
+            <!--<inherited>false</inherited>-->
+            <!--<phase>compile</phase>-->
+            <!--<goals>-->
+            <!--<goal>compile</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--<execution>-->
+            <!--<id>default-testCompile</id>-->
+            <!--<inherited>false</inherited>-->
+            <!--<phase>test-compile</phase>-->
+            <!--<goals>-->
+            <!--<goal>testCompile</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
           </plugin>
         </plugins>
       </build>
