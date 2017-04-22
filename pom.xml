@@ -101,7 +101,7 @@
     <!--project versions-->
     <dependencies>
       <dependency>
-        <groupId>${groupId}</groupId>
+        <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-dependencies-core</artifactId>
         <version>${rapidpm-dependencies.version}</version>
       </dependency>
