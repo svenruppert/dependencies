@@ -1303,7 +1303,7 @@
     <profile>
       <id>qm-qs-cve-check</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
       <build>
         <plugins>
