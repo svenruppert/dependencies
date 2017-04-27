@@ -1,7 +1,5 @@
 package junit.org.reflections;
 
-import repacked.com.google.common.base.Predicates;
-import repacked.com.google.common.collect.Iterables;
 import javassist.bytecode.ClassFile;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -11,6 +9,8 @@ import org.reflections.vfs.JarInputDir;
 import org.reflections.vfs.SystemDir;
 import org.reflections.vfs.Vfs;
 import org.reflections.vfs.ZipDir;
+import repacked.com.google.common.base.Predicates;
+import repacked.com.google.common.collect.Iterables;
 
 import java.io.DataInputStream;
 import java.io.File;
@@ -183,7 +183,7 @@ public class VfsTest {
     try {
       Vfs.Dir dir = Vfs.fromURL(new URL(format("file:{0}", dirWithJarInName)));
 
-      assertEquals(dirWithJarInName, dir.getPath());
+      assertEquals(dirWithJarInName.replace("\\", "/"), dir.getPath().replace("\\", "/"));
       assertEquals(SystemDir.class, dir.getClass());
     } finally {
       newDir.delete();
@@ -204,7 +204,10 @@ public class VfsTest {
     Vfs.Dir dir = Vfs.fromURL(new URL(directoryInJarPath));
 
     assertEquals(ZipDir.class, dir.getClass());
-    assertEquals(expectedJarFile, dir.getPath());
+    if(System.getProperty("os.name").contains("indow")){
+      expectedJarFile = expectedJarFile.substring(1).replace("%20", " ");
+    }
+    assertEquals(expectedJarFile.replace("\\", "/"), dir.getPath().replace("\\", "/"));
   }
 
   @Test
