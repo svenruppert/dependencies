@@ -129,6 +129,13 @@
       </dependency>
 
 
+      <!--FRP-->
+      <dependency>
+        <groupId>org.rapidpm</groupId>
+        <artifactId>rapidpm-functional-reactive</artifactId>
+        <version>0.0.2</version>
+      </dependency>
+
       <!--Reflection Utils-->
       <dependency>
         <groupId>org.javassist</groupId>
@@ -267,7 +274,7 @@
       <dependency>
         <groupId>org.mapdb</groupId>
         <artifactId>mapdb</artifactId>
-        <version>3.0.3</version>
+        <version>3.0.4</version>
       </dependency>
 
 
@@ -593,6 +600,12 @@
           <version>3.0.4</version>
         </plugin>
 
+        <!--Docker-->
+        <plugin>
+          <groupId>io.fabric8</groupId>
+          <artifactId>docker-maven-plugin</artifactId>
+          <version>0.20.1</version>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -713,6 +726,7 @@
         <enabled>true</enabled>
         <updatePolicy>always</updatePolicy>
       </snapshots>
+
     </repository>
   </repositories>
 
@@ -1434,6 +1448,51 @@
         </plugins>
       </build>
     </profile>
+
+
+    <!--Testbench stuff-->
+    <profile>
+      <id>repo-allow-jitpack</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>jitpack.io</id>
+          <url>https://jitpack.io</url>
+        </repository>
+      </repositories>
+    </profile>
+
+    <profile>
+      <id>repo-allow-vaadin</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>vaadin-repo</id>
+          <url>http://maven.vaadin.com/vaadin-addons</url>
+          <!--<url>http://maven.vaadin.com/</url>-->
+        </repository>
+        <repository>
+          <id>vaadin-prereleases</id>
+          <name>Vaadin Pre-releases</name>
+          <url>https://maven.vaadin.com/vaadin-prereleases</url>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>vaadin-prereleases</id>
+          <name>Vaadin Pre-releases</name>
+          <url>https://maven.vaadin.com/vaadin-prereleases</url>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+
+
+
+
   </profiles>
 
 
