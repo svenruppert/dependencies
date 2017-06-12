@@ -70,6 +70,7 @@ public class JDBCConnectionPool {
       if (sqlInit != null) dataSource.setConnectionInitSql(sqlInit);
       if (sqlTest != null) dataSource.setConnectionTestQuery(sqlTest);
       if (timeout != null) dataSource.setConnectionTimeout(timeout);
+      if (timeout != null)
       if (jdbcDriverClassName != null) dataSource.setDriverClassName(jdbcDriverClassName);
     }
   }
