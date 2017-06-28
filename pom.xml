@@ -1048,7 +1048,7 @@
     <profile>
       <id>sys-nexus-deploy-gpg</id>
       <activation>
-        <activeByDefault>false</activeByDefault>
+        <activeByDefault>true</activeByDefault>
       </activation>
       <build>
         <plugins>
@@ -1073,7 +1073,7 @@
     <profile>
       <id>qm-qs-no-snapshots</id>
       <activation>
-        <activeByDefault>false</activeByDefault>
+        <activeByDefault>true</activeByDefault>
       </activation>
       <build>
         <plugins>
