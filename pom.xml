@@ -145,7 +145,7 @@
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
-        <version>4.0.0-b07</version>
+        <version>4.0.0-b02</version>
       </dependency>
 
       <!--project versions-->
