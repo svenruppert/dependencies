@@ -77,11 +77,17 @@
 
   <properties>
     <rapidpm-dependencies.version>3.5.1-SNAPSHOT</rapidpm-dependencies.version>
-    <jmh.version>1.19</jmh.version>
+
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jacoco.version>0.7.9</jacoco.version>
+
     <slf4j.version>1.7.25</slf4j.version>
     <log4j-api.version>2.8.2</log4j-api.version>
+
+    <jacoco.version>0.7.9</jacoco.version>
+    <pitest.version>1.2.2</pitest.version>
+    <jmh.version>1.19</jmh.version>
   </properties>
 
   <modules>
@@ -133,7 +139,7 @@
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-functional-reactive</artifactId>
-        <version>0.0.4</version>
+        <version>0.0.5</version>
       </dependency>
 
       <!--Reflection Utils-->
@@ -313,7 +319,7 @@
       <dependency>
         <groupId>org.pitest</groupId>
         <artifactId>pitest</artifactId>
-        <version>1.2.0</version>
+        <version>${pitest.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
@@ -566,7 +572,7 @@
         <plugin>
           <groupId>org.pitest</groupId>
           <artifactId>pitest-maven</artifactId>
-          <version>1.2.1</version>
+          <version>${pitest.version}</version>
         </plugin>
         <plugin>
           <groupId>net.alchim31.maven</groupId>
