@@ -83,7 +83,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <slf4j.version>1.7.25</slf4j.version>
-    <log4j-api.version>2.8.2</log4j-api.version>
+    <log4j-api.version>2.9.0</log4j-api.version>
 
     <jacoco.version>0.7.9</jacoco.version>
     <pitest.version>1.2.2</pitest.version>
