@@ -29,7 +29,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the propertie with rapidpm version too !!! -->
-  <version>3.5.1-SNAPSHOT</version>
+  <version>3.5.1</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -76,7 +76,7 @@
 
 
   <properties>
-    <rapidpm-dependencies.version>3.5.1-SNAPSHOT</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>3.5.1</rapidpm-dependencies.version>
 
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -86,7 +86,7 @@
     <log4j-api.version>2.9.0</log4j-api.version>
 
     <jacoco.version>0.7.9</jacoco.version>
-    <pitest.version>1.2.2</pitest.version>
+    <pitest.version>1.2.3</pitest.version>
     <jmh.version>1.19</jmh.version>
   </properties>
 
@@ -151,7 +151,7 @@
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
-        <version>4.0.0-b02</version>
+        <version>4.0.0</version>
       </dependency>
 
       <!--project versions-->
@@ -272,7 +272,7 @@
       <dependency>
         <groupId>com.zaxxer</groupId>
         <artifactId>HikariCP</artifactId>
-        <version>2.7.0</version>
+        <version>2.7.1</version>
         <scope>compile</scope>
       </dependency>
 
@@ -359,7 +359,7 @@
       <dependency>
         <groupId>io.gatling.highcharts</groupId>
         <artifactId>gatling-charts-highcharts</artifactId>
-        <version>2.2.5</version>
+        <version>2.3.0</version>
         <scope>test</scope>
       </dependency>
 
