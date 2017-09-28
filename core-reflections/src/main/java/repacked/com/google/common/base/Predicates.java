@@ -57,10 +57,7 @@ public class Predicates {
   }
 
   public static <T> boolean isEmpty(final Predicate<? super T>[] predicates) {
-    if (predicates == null || predicates.length == 0) {
-      return true;
-    }
-    return false;
+    return predicates == null || predicates.length == 0;
   }
 
   public static <T> Predicate<T> and(final Predicate<? super T>[] predicates) {

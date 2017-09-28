@@ -64,7 +64,7 @@ public class JavassistAdapter implements MetadataAdapter<ClassFile, FieldInfo, M
   }
 
   public List<String> getParameterAnnotationNames(final MethodInfo method, final int parameterIndex) {
-    List<String> result = new ArrayList();
+    List<String> result = new ArrayList<>();
 
 
     List<ParameterAnnotationsAttribute> parameterAnnotationsAttributes =
@@ -73,7 +73,6 @@ public class JavassistAdapter implements MetadataAdapter<ClassFile, FieldInfo, M
             (ParameterAnnotationsAttribute) method.getAttribute(ParameterAnnotationsAttribute.invisibleTag)
         );
 
-    if (parameterAnnotationsAttributes != null) {
       for (ParameterAnnotationsAttribute parameterAnnotationsAttribute : parameterAnnotationsAttributes) {
         if (parameterAnnotationsAttribute != null) {
           Annotation[][] annotations = parameterAnnotationsAttribute.getAnnotations();
@@ -83,7 +82,6 @@ public class JavassistAdapter implements MetadataAdapter<ClassFile, FieldInfo, M
           }
         }
       }
-    }
 
     return result;
   }
