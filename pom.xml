@@ -97,13 +97,7 @@
     <module>core-reflections</module>
   </modules>
 
-  <prerequisites>
-    <maven>3.1</maven>
-  </prerequisites>
-
   <dependencyManagement>
-
-
     <!--project versions-->
     <dependencies>
       <dependency>
