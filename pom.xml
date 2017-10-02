@@ -810,6 +810,7 @@
               </outputFormats>
               <targetClasses>
                 <param>org.rapidpm.*</param>
+                <param>org.reflections.*</param>
               </targetClasses>
               <targetTests>
                 <param>junit.org.rapidpm.*</param>
