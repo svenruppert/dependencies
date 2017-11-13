@@ -89,7 +89,7 @@ public class Sets {
      * Object#equals(Object)}.
      */
     public Set<E> immutableCopy() {
-      throw new RuntimeException("not yet impl - immutableCopy"); //Todo impl
+      throw new RuntimeException("not yet factory - immutableCopy"); //Todo factory
       //return null;
 //      return ImmutableSet.copyOf(this);
     }
