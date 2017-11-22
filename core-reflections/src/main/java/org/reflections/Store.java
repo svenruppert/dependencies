@@ -1,10 +1,18 @@
 package org.reflections;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import repacked.com.google.common.collect.Iterables;
 import repacked.com.google.common.collect.Multimap;
 import repacked.com.google.common.collect.Multimaps;
-
-import java.util.*;
 
 /**
  * stores metadata information in multimaps

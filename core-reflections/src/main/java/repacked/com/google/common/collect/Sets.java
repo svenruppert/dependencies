@@ -1,11 +1,11 @@
 package repacked.com.google.common.collect;
 
-import repacked.com.google.common.base.Predicate;
-import repacked.com.google.common.base.Predicates;
-
 import java.util.AbstractSet;
 import java.util.Iterator;
 import java.util.Set;
+
+import repacked.com.google.common.base.Predicate;
+import repacked.com.google.common.base.Predicates;
 
 /**
  * Copyright (C) 2010 RapidPM

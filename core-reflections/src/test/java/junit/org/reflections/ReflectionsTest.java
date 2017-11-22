@@ -1,7 +1,43 @@
 package junit.org.reflections;
 
-import repacked.com.google.common.base.Predicate;
-import repacked.com.google.common.collect.Iterables;
+import static java.util.Arrays.asList;
+import static junit.org.reflections.TestModel.AC1;
+import static junit.org.reflections.TestModel.AC1n;
+import static junit.org.reflections.TestModel.AC2;
+import static junit.org.reflections.TestModel.AC3;
+import static junit.org.reflections.TestModel.AF1;
+import static junit.org.reflections.TestModel.AI1;
+import static junit.org.reflections.TestModel.AI2;
+import static junit.org.reflections.TestModel.AM1;
+import static junit.org.reflections.TestModel.C1;
+import static junit.org.reflections.TestModel.C2;
+import static junit.org.reflections.TestModel.C3;
+import static junit.org.reflections.TestModel.C4;
+import static junit.org.reflections.TestModel.C5;
+import static junit.org.reflections.TestModel.C6;
+import static junit.org.reflections.TestModel.C7;
+import static junit.org.reflections.TestModel.I1;
+import static junit.org.reflections.TestModel.I2;
+import static junit.org.reflections.TestModel.I3;
+import static junit.org.reflections.TestModel.MAI1;
+import static junit.org.reflections.TestModel.Usage;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
+
+import java.io.File;
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -10,21 +46,19 @@ import org.junit.Test;
 import org.reflections.ReflectionUtils;
 import org.reflections.Reflections;
 import org.reflections.ReflectionsException;
-import org.reflections.scanners.*;
+import org.reflections.scanners.FieldAnnotationsScanner;
+import org.reflections.scanners.MemberUsageScanner;
+import org.reflections.scanners.MethodAnnotationsScanner;
+import org.reflections.scanners.MethodParameterNamesScanner;
+import org.reflections.scanners.MethodParameterScanner;
+import org.reflections.scanners.ResourcesScanner;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.scanners.TypeAnnotationsScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
-
-import java.io.File;
-import java.lang.annotation.Annotation;
-import java.util.*;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static java.util.Arrays.asList;
-import static junit.org.reflections.TestModel.*;
-import static org.junit.Assert.*;
+import repacked.com.google.common.base.Predicate;
+import repacked.com.google.common.collect.Iterables;
 
 /**
  *

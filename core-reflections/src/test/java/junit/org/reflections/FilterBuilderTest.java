@@ -1,11 +1,11 @@
 package junit.org.reflections;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 import org.reflections.Reflections;
 import org.reflections.util.FilterBuilder;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Test filtering

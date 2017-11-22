@@ -1,14 +1,15 @@
 package org.reflections;
 
-import repacked.com.google.common.base.Predicate;
-import org.reflections.adapters.MetadataAdapter;
-import org.reflections.scanners.Scanner;
-import org.reflections.serializers.Serializer;
-
-import javax.annotation.Nullable;
 import java.net.URL;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
+
+import javax.annotation.Nullable;
+
+import org.reflections.adapters.MetadataAdapter;
+import org.reflections.scanners.Scanner;
+import org.reflections.serializers.Serializer;
+import repacked.com.google.common.base.Predicate;
 
 /**
  * Configuration is used to create a configured instance of {@link Reflections}

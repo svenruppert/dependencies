@@ -1,8 +1,21 @@
 package org.reflections.util;
 
-import repacked.com.google.common.base.Predicate;
-import repacked.com.google.common.collect.ObjectArrays;
-import repacked.com.google.common.util.concurrent.ThreadFactoryBuilder;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import org.rapidpm.dependencies.core.logger.Logger;
+import org.rapidpm.dependencies.core.logger.LoggingService;
 import org.reflections.Configuration;
 import org.reflections.Reflections;
 import org.reflections.ReflectionsException;
@@ -14,14 +27,9 @@ import org.reflections.scanners.SubTypesScanner;
 import org.reflections.scanners.TypeAnnotationsScanner;
 import org.reflections.serializers.Serializer;
 import org.reflections.serializers.XmlSerializer;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.net.URL;
-import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
+import repacked.com.google.common.base.Predicate;
+import repacked.com.google.common.collect.ObjectArrays;
+import repacked.com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 /**
  * a fluent builder for {@link org.reflections.Configuration}, to be used for constructing a {@link org.reflections.Reflections} instance
@@ -113,7 +121,7 @@ public class ConfigurationBuilder implements Configuration {
         filter.add((Predicate<String>) param);
       } else if (param instanceof ExecutorService) {
         builder.setExecutorService((ExecutorService) param);
-      } else if (Reflections.log != null) {
+      } else {
         throw new ReflectionsException("could not use param " + param);
       }
     }
@@ -223,8 +231,9 @@ public class ConfigurationBuilder implements Configuration {
       try {
         return (metadataAdapter = new JavassistAdapter());
       } catch (Throwable e) {
-        if (Reflections.log != null)
-          Reflections.log.warn("could not create JavassistAdapter, using JavaReflectionAdapter", e);
+        final LoggingService log = Logger.getLogger(Reflections.class);
+        if (log != null)
+          log.warning("could not create JavassistAdapter, using JavaReflectionAdapter", e);
         return (metadataAdapter = new JavaReflectionAdapter());
       }
     }

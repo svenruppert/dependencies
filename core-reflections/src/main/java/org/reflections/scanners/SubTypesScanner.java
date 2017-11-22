@@ -1,8 +1,8 @@
 package org.reflections.scanners;
 
-import org.reflections.util.FilterBuilder;
-
 import java.util.List;
+
+import org.reflections.util.FilterBuilder;
 
 /**
  * scans for superclass and interfaces of a class, allowing a reverse lookup for subtypes

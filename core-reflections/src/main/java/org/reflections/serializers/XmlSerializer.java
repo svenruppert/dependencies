@@ -1,5 +1,12 @@
 package org.reflections.serializers;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
+import java.lang.reflect.Constructor;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentFactory;
@@ -12,9 +19,6 @@ import org.reflections.ReflectionsException;
 import org.reflections.Store;
 import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.Utils;
-
-import java.io.*;
-import java.lang.reflect.Constructor;
 
 /**
  * serialization of Reflections to xml

@@ -1,8 +1,8 @@
 package org.reflections.scanners;
 
-import org.reflections.adapters.MetadataAdapter;
-
 import java.util.List;
+
+import org.reflections.adapters.MetadataAdapter;
 
 /**
  * scans methods/constructors and indexes parameters, return type and parameter annotations

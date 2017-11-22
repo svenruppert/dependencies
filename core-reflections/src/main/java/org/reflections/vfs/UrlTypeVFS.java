@@ -1,11 +1,5 @@
 package org.reflections.vfs;
 
-import repacked.com.google.common.base.Predicate;
-import org.reflections.Reflections;
-import org.reflections.ReflectionsException;
-import org.reflections.vfs.Vfs.Dir;
-import org.reflections.vfs.Vfs.UrlType;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -13,6 +7,14 @@ import java.net.URL;
 import java.util.jar.JarFile;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.rapidpm.dependencies.core.logger.Logger;
+import org.rapidpm.dependencies.core.logger.LoggingService;
+import org.reflections.Reflections;
+import org.reflections.ReflectionsException;
+import org.reflections.vfs.Vfs.Dir;
+import org.reflections.vfs.Vfs.UrlType;
+import repacked.com.google.common.base.Predicate;
 
 /**
  * UrlType to be used by Reflections library.
@@ -42,9 +44,10 @@ public class UrlTypeVFS implements UrlType {
       try {
         return new ZipDir(new JarFile(url.getFile()));
       } catch (IOException e1) {
-        if (Reflections.log != null) {
-          Reflections.log.warn("Could not get URL", e);
-          Reflections.log.warn("Could not get URL", e1);
+        final LoggingService log = Logger.getLogger(Reflections.class);
+        if (log != null) {
+          log.warning("Could not get URL", e);
+          log.warning("Could not get URL", e1);
         }
       }
     }

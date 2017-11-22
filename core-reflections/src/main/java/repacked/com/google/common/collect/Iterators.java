@@ -1,12 +1,12 @@
 package repacked.com.google.common.collect;
 
-import repacked.com.google.common.base.Function;
-import repacked.com.google.common.base.Predicate;
-import repacked.com.google.common.base.Predicates;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
+import repacked.com.google.common.base.Function;
+import repacked.com.google.common.base.Predicate;
+import repacked.com.google.common.base.Predicates;
 
 /**
  * Copyright (C) 2010 RapidPM

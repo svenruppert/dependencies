@@ -1,12 +1,5 @@
 package org.reflections.serializers;
 
-import repacked.com.google.common.collect.Multimap;
-import repacked.com.google.common.collect.Multimaps;
-import repacked.com.google.common.io.Files;
-import com.google.gson.*;
-import org.reflections.Reflections;
-import org.reflections.util.Utils;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +9,18 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+
+import org.reflections.Reflections;
+import org.reflections.util.Utils;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import repacked.com.google.common.collect.Multimap;
+import repacked.com.google.common.collect.Multimaps;
+import repacked.com.google.common.io.Files;
 
 /**
  * serialization of Reflections to json

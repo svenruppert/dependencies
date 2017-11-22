@@ -1,14 +1,18 @@
 package org.reflections.util;
 
-import repacked.com.google.common.base.Joiner;
-import repacked.com.google.common.base.Predicate;
-import org.reflections.ReflectionsException;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
+
+import org.reflections.ReflectionsException;
+import repacked.com.google.common.base.Joiner;
+import repacked.com.google.common.base.Predicate;
 
 /**
  * Builds include/exclude filters for Reflections.

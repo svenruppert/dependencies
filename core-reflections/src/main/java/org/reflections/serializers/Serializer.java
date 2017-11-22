@@ -1,9 +1,9 @@
 package org.reflections.serializers;
 
-import org.reflections.Reflections;
-
 import java.io.File;
 import java.io.InputStream;
+
+import org.reflections.Reflections;
 
 /**
  * Serilizer of a {@link org.reflections.Reflections} instance

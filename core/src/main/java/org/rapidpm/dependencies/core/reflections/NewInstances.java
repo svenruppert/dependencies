@@ -1,8 +1,5 @@
 package org.rapidpm.dependencies.core.reflections;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.List;
@@ -21,14 +18,13 @@ import java.util.stream.Collectors;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ * <p>
  * Created by RapidPM - Team on 08.09.16.
  */
 public class NewInstances {
 
   private NewInstances() { }
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(NewInstances.class);
 
   public static <T> List<T> createInstances(final Set<Class<? extends T>> classes) {
 
@@ -40,9 +36,10 @@ public class NewInstances {
           try {
 //            return Optional.of(c.newInstance());
             return Optional.of(c.getDeclaredConstructor().newInstance());
-          } catch (InstantiationException | IllegalAccessException e) {
-            LOGGER.error("failed to create new instance ", e);
-          } catch (NoSuchMethodException | InvocationTargetException e) {
+          } catch (InstantiationException
+              | IllegalAccessException
+              | NoSuchMethodException
+              | InvocationTargetException e) {
             e.printStackTrace();
           }
           return Optional.<T>empty();
@@ -58,9 +55,10 @@ public class NewInstances {
 
     try {
       return Optional.of(clazz.getDeclaredConstructor().newInstance());
-    } catch (InstantiationException | IllegalAccessException e) {
-      LOGGER.error("failed to create new instance ", e);
-    } catch (NoSuchMethodException | InvocationTargetException e) {
+    } catch (InstantiationException
+        | IllegalAccessException
+        | NoSuchMethodException
+        | InvocationTargetException e) {
       e.printStackTrace();
     }
     return Optional.empty();

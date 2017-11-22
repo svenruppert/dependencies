@@ -1,30 +1,42 @@
 package org.reflections;
 
-import repacked.com.google.common.base.Predicate;
-import repacked.com.google.common.base.Predicates;
-import org.reflections.util.ClasspathHelper;
-
 import java.lang.annotation.Annotation;
-import java.lang.reflect.*;
-import java.util.*;
+import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Member;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import org.rapidpm.dependencies.core.logger.Logger;
+import org.rapidpm.dependencies.core.logger.LoggingService;
+import org.reflections.util.ClasspathHelper;
+import repacked.com.google.common.base.Predicate;
+import repacked.com.google.common.base.Predicates;
+
 /**
  * convenient java reflection helper methods
  * <p>
- * 1. some helper methods to get type by name: {@link #forName(String, ClassLoader...)} and {@link #forNames(Iterable, ClassLoader...)}
+ * 1. some helper methods to get type by name: {@link #forName(String , ClassLoader...)} and {@link #forNames(Iterable , ClassLoader...)}
  * <p>
  * 2. some helper methods to get all types/methods/fields/constructors/properties matching some predicates, generally:
  * <pre> Set&#60?> result = getAllXXX(type/s, withYYY) </pre>
  * <p>where get methods are:
  * <ul>
- * <li>{@link #getAllSuperTypes(Class, Predicate <T>...)}
- * <li>{@link #getAllFields(Class, Predicate <T>...)}
- * <li>{@link #getAllMethods(Class, Predicate <T>...)}
- * <li>{@link #getAllConstructors(Class, Predicate <T>...)}
+ * <li>{@link #getAllSuperTypes(Class , Predicate <T>...)}
+ * <li>{@link #getAllFields(Class , Predicate <T>...)}
+ * <li>{@link #getAllMethods(Class , Predicate <T>...)}
+ * <li>{@link #getAllConstructors(Class , Predicate <T>...)}
  * </ul>
  * <p>and predicates included here all starts with "with", such as
  * <ul>
@@ -66,15 +78,15 @@ public abstract class ReflectionUtils {
    * get all super types of given {@code type}, including, optionally filtered by {@code predicates}
    * <p> include {@code Object.class} if {@link #includeObject} is true
    */
-  public static Set<Class<?>> getAllSuperTypes(final Class<?> type, Predicate<? super Class<?>>... predicates) {
+  public static Set<Class<?>> getAllSuperTypes(final Class<?> type , Predicate<? super Class<?>>... predicates) {
     Set<Class<?>> result = new LinkedHashSet();
-    if (type != null && (includeObject || !type.equals(Object.class))) {
+    if (type != null && (includeObject || ! type.equals(Object.class))) {
       result.add(type);
       for (Class<?> supertype : getSuperTypes(type)) {
         result.addAll(getAllSuperTypes(supertype));
       }
     }
-    return filter(result, predicates);
+    return filter(result , predicates);
   }
 
   /**
@@ -87,7 +99,7 @@ public abstract class ReflectionUtils {
     else {
       Class<?> superclass = type.getSuperclass();
       Class<?>[] interfaces = type.getInterfaces();
-      if (superclass != null && (includeObject || !superclass.equals(Object.class))) result.add(superclass);
+      if (superclass != null && (includeObject || ! superclass.equals(Object.class))) result.add(superclass);
       if (interfaces != null && interfaces.length > 0) result.addAll(Arrays.asList(interfaces));
       return result;
     }
@@ -96,10 +108,10 @@ public abstract class ReflectionUtils {
   /**
    * get all methods of given {@code type}, up the super class hierarchy, optionally filtered by {@code predicates}
    */
-  public static Set<Method> getAllMethods(final Class<?> type, Predicate<? super Method>... predicates) {
+  public static Set<Method> getAllMethods(final Class<?> type , Predicate<? super Method>... predicates) {
     Set<Method> result = new HashSet();
     for (Class<?> t : getAllSuperTypes(type)) {
-      result.addAll(getMethods(t, predicates));
+      result.addAll(getMethods(t , predicates));
     }
     return result;
   }
@@ -107,17 +119,17 @@ public abstract class ReflectionUtils {
   /**
    * get methods of given {@code type}, optionally filtered by {@code predicates}
    */
-  public static Set<Method> getMethods(Class<?> t, Predicate<? super Method>... predicates) {
-    return filter(t.isInterface() ? t.getMethods() : t.getDeclaredMethods(), predicates);
+  public static Set<Method> getMethods(Class<?> t , Predicate<? super Method>... predicates) {
+    return filter(t.isInterface() ? t.getMethods() : t.getDeclaredMethods() , predicates);
   }
 
   /**
    * get all constructors of given {@code type}, up the super class hierarchy, optionally filtered by {@code predicates}
    */
-  public static Set<Constructor> getAllConstructors(final Class<?> type, Predicate<? super Constructor>... predicates) {
+  public static Set<Constructor> getAllConstructors(final Class<?> type , Predicate<? super Constructor>... predicates) {
     Set<Constructor> result = new HashSet();
     for (Class<?> t : getAllSuperTypes(type)) {
-      result.addAll(getConstructors(t, predicates));
+      result.addAll(getConstructors(t , predicates));
     }
     return result;
   }
@@ -125,24 +137,24 @@ public abstract class ReflectionUtils {
   /**
    * get constructors of given {@code type}, optionally filtered by {@code predicates}
    */
-  public static Set<Constructor> getConstructors(Class<?> t, Predicate<? super Constructor>... predicates) {
-    return ReflectionUtils.filter(t.getDeclaredConstructors(), predicates); //explicit needed only for jdk1.5
+  public static Set<Constructor> getConstructors(Class<?> t , Predicate<? super Constructor>... predicates) {
+    return ReflectionUtils.filter(t.getDeclaredConstructors() , predicates); //explicit needed only for jdk1.5
   }
 
   /**
    * get all fields of given {@code type}, up the super class hierarchy, optionally filtered by {@code predicates}
    */
-  public static Set<Field> getAllFields(final Class<?> type, Predicate<? super Field>... predicates) {
+  public static Set<Field> getAllFields(final Class<?> type , Predicate<? super Field>... predicates) {
     Set<Field> result = new HashSet();
-    for (Class<?> t : getAllSuperTypes(type)) result.addAll(getFields(t, predicates));
+    for (Class<?> t : getAllSuperTypes(type)) result.addAll(getFields(t , predicates));
     return result;
   }
 
   /**
    * get fields of given {@code type}, optionally filtered by {@code predicates}
    */
-  public static Set<Field> getFields(Class<?> type, Predicate<? super Field>... predicates) {
-    return filter(type.getDeclaredFields(), predicates);
+  public static Set<Field> getFields(Class<?> type , Predicate<? super Field>... predicates) {
+    return filter(type.getDeclaredFields() , predicates);
   }
 
   //predicates
@@ -150,14 +162,14 @@ public abstract class ReflectionUtils {
   /**
    * get all annotations of given {@code type}, up the super class hierarchy, optionally filtered by {@code predicates}
    */
-  public static <T extends AnnotatedElement> Set<Annotation> getAllAnnotations(T type, Predicate<Annotation>... predicates) {
+  public static <T extends AnnotatedElement> Set<Annotation> getAllAnnotations(T type , Predicate<Annotation>... predicates) {
     Set<Annotation> result = new HashSet();
     if (type instanceof Class) {
       for (Class<?> t : getAllSuperTypes((Class<?>) type)) {
-        result.addAll(getAnnotations(t, predicates));
+        result.addAll(getAnnotations(t , predicates));
       }
     } else {
-      result.addAll(getAnnotations(type, predicates));
+      result.addAll(getAnnotations(type , predicates));
     }
     return result;
   }
@@ -165,19 +177,19 @@ public abstract class ReflectionUtils {
   /**
    * get annotations of given {@code type}, optionally honorInherited, optionally filtered by {@code predicates}
    */
-  public static <T extends AnnotatedElement> Set<Annotation> getAnnotations(T type, Predicate<Annotation>... predicates) {
-    return filter(type.getDeclaredAnnotations(), predicates);
+  public static <T extends AnnotatedElement> Set<Annotation> getAnnotations(T type , Predicate<Annotation>... predicates) {
+    return filter(type.getDeclaredAnnotations() , predicates);
   }
 
   /**
    * filter all given {@code elements} with {@code predicates}, if given
    */
-  public static <T extends AnnotatedElement> Set<T> getAll(final Set<T> elements, Predicate<? super T>... predicates) {
+  public static <T extends AnnotatedElement> Set<T> getAll(final Set<T> elements , Predicate<? super T>... predicates) {
     final Predicate<T> and = Predicates.and(predicates);
     final Iterable<T> filter = elements.stream().filter(and::apply).collect(Collectors.toList());
     return Predicates.isEmpty(predicates) ?
-        elements :
-        StreamSupport.stream(filter.spliterator(), false).collect(Collectors.toSet());
+           elements :
+           StreamSupport.stream(filter.spliterator() , false).collect(Collectors.toSet());
   }
 
 
@@ -203,7 +215,7 @@ public abstract class ReflectionUtils {
    * </pre>
    */
   public static <T extends AnnotatedElement> Predicate<T> withPattern(final String regex) {
-    return input -> Pattern.matches(regex, input.toString());
+    return input -> Pattern.matches(regex , input.toString());
   }
 
   /**
@@ -217,7 +229,7 @@ public abstract class ReflectionUtils {
    * where element is annotated with given {@code annotations}
    */
   public static <T extends AnnotatedElement> Predicate<T> withAnnotations(final Class<? extends Annotation>... annotations) {
-    return input -> input != null && Arrays.equals(annotations, annotationTypes(input.getAnnotations()));
+    return input -> input != null && Arrays.equals(annotations , annotationTypes(input.getAnnotations()));
   }
 
   private static Class<? extends Annotation>[] annotationTypes(Annotation[] annotations) {
@@ -231,16 +243,16 @@ public abstract class ReflectionUtils {
    */
   public static <T extends AnnotatedElement> Predicate<T> withAnnotation(final Annotation annotation) {
     return input -> input != null && input.isAnnotationPresent(annotation.annotationType()) &&
-        areAnnotationMembersMatching(input.getAnnotation(annotation.annotationType()), annotation);
+                    areAnnotationMembersMatching(input.getAnnotation(annotation.annotationType()) , annotation);
   }
 
-  private static boolean areAnnotationMembersMatching(Annotation annotation1, Annotation annotation2) {
+  private static boolean areAnnotationMembersMatching(Annotation annotation1 , Annotation annotation2) {
     if (annotation2 != null && annotation1.annotationType() == annotation2.annotationType()) {
       for (Method method : annotation1.annotationType().getDeclaredMethods()) {
         try {
-          if (!method.invoke(annotation1).equals(method.invoke(annotation2))) return false;
+          if (! method.invoke(annotation1).equals(method.invoke(annotation2))) return false;
         } catch (Exception e) {
-          throw new ReflectionsException(String.format("could not invoke method %s on annotation %s", method.getName(), annotation1.annotationType()), e);
+          throw new ReflectionsException(String.format("could not invoke method %s on annotation %s" , method.getName() , annotation1.annotationType()) , e);
         }
       }
       return true;
@@ -257,7 +269,7 @@ public abstract class ReflectionUtils {
         Annotation[] inputAnnotations = input.getAnnotations();
         if (inputAnnotations.length == annotations.length) {
           for (int i = 0; i < inputAnnotations.length; i++) {
-            if (!areAnnotationMembersMatching(inputAnnotations[i], annotations[i])) return false;
+            if (! areAnnotationMembersMatching(inputAnnotations[i] , annotations[i])) return false;
           }
         }
       }
@@ -269,13 +281,13 @@ public abstract class ReflectionUtils {
    * when method/constructor parameter types equals given {@code types}
    */
   public static Predicate<Member> withParameters(final Class<?>... types) {
-    return input -> Arrays.equals(parameterTypes(input), types);
+    return input -> Arrays.equals(parameterTypes(input) , types);
   }
 
   private static Class[] parameterTypes(Member member) {
     return member != null ?
-        member.getClass() == Method.class ? ((Method) member).getParameterTypes() :
-            member.getClass() == Constructor.class ? ((Constructor) member).getParameterTypes() : null : null;
+           member.getClass() == Method.class ? ((Method) member).getParameterTypes() :
+           member.getClass() == Constructor.class ? ((Constructor) member).getParameterTypes() : null : null;
   }
 
   /**
@@ -287,7 +299,7 @@ public abstract class ReflectionUtils {
         Class<?>[] parameterTypes = parameterTypes(input);
         if (parameterTypes.length == types.length) {
           for (int i = 0; i < parameterTypes.length; i++) {
-            if (!parameterTypes[i].isAssignableFrom(types[i]) ||
+            if (! parameterTypes[i].isAssignableFrom(types[i]) ||
                 (parameterTypes[i] == Object.class && types[i] != Object.class)) {
               return false;
             }
@@ -325,8 +337,8 @@ public abstract class ReflectionUtils {
     Set<Annotation> result = new HashSet();
     Annotation[][] annotations =
         member instanceof Method ? ((Method) member).getParameterAnnotations() :
-            member instanceof Constructor ? ((Constructor) member).getParameterAnnotations() : null;
-    for (Annotation[] annotation : annotations) Collections.addAll(result, annotation);
+        member instanceof Constructor ? ((Constructor) member).getParameterAnnotations() : null;
+    for (Annotation[] annotation : annotations) Collections.addAll(result , annotation);
     return result;
   }
 
@@ -335,7 +347,7 @@ public abstract class ReflectionUtils {
    */
   public static Predicate<Member> withAnyParameterAnnotation(final Annotation annotation) {
     return input -> input != null &&
-        parameterAnnotations(input).stream().anyMatch(input1 -> areAnnotationMembersMatching(annotation, input1));
+                    parameterAnnotations(input).stream().anyMatch(input1 -> areAnnotationMembersMatching(annotation , input1));
   }
 
   /**
@@ -391,10 +403,10 @@ public abstract class ReflectionUtils {
   /**
    * try to resolve all given string representation of types to a list of java types
    */
-  public static <T> List<Class<? extends T>> forNames(final Iterable<String> classes, ClassLoader... classLoaders) {
+  public static <T> List<Class<? extends T>> forNames(final Iterable<String> classes , ClassLoader... classLoaders) {
     List<Class<? extends T>> result = new ArrayList<>();
     for (String className : classes) {
-      Class<?> type = forName(className, classLoaders);
+      Class<?> type = forName(className , classLoaders);
       if (type != null) {
         result.add((Class<? extends T>) type);
       }
@@ -406,15 +418,15 @@ public abstract class ReflectionUtils {
    * tries to resolve a java type name to a Class
    * <p>if optional {@link ClassLoader}s are not specified, then both {@link org.reflections.util.ClasspathHelper#contextClassLoader()} and {@link org.reflections.util.ClasspathHelper#staticClassLoader()} are used
    */
-  public static Class<?> forName(String typeName, ClassLoader... classLoaders) {
+  public static Class<?> forName(String typeName , ClassLoader... classLoaders) {
     if (getPrimitiveNames().contains(typeName)) {
       return getPrimitiveTypes().get(getPrimitiveNames().indexOf(typeName));
     } else {
       String type;
       if (typeName.contains("[")) {
         int i = typeName.indexOf("[");
-        type = typeName.substring(0, i);
-        String array = typeName.substring(i).replace("]", "");
+        type = typeName.substring(0 , i);
+        String array = typeName.substring(i).replace("]" , "");
 
         if (getPrimitiveNames().contains(type)) {
           type = getPrimitiveDescriptors().get(getPrimitiveNames().indexOf(type));
@@ -432,22 +444,23 @@ public abstract class ReflectionUtils {
       for (ClassLoader classLoader : ClasspathHelper.classLoaders(classLoaders)) {
         if (type.contains("[")) {
           try {
-            return Class.forName(type, false, classLoader);
+            return Class.forName(type , false , classLoader);
           } catch (Throwable e) {
-            reflectionsExceptions.add(new ReflectionsException("could not get type for name " + typeName, e));
+            reflectionsExceptions.add(new ReflectionsException("could not get type for name " + typeName , e));
           }
         }
         try {
           return classLoader.loadClass(type);
         } catch (Throwable e) {
-          reflectionsExceptions.add(new ReflectionsException("could not get type for name " + typeName, e));
+          reflectionsExceptions.add(new ReflectionsException("could not get type for name " + typeName , e));
         }
       }
 
-      if (Reflections.log != null) {
+      final LoggingService log = Logger.getLogger(Reflections.class);
+      if (log != null) {
         for (ReflectionsException reflectionsException : reflectionsExceptions) {
-          Reflections.log.warn("could not get type for name " + typeName + " from any class loader",
-              reflectionsException);
+          log.warning("could not get type for name " + typeName + " from any class loader" ,
+                      reflectionsException);
         }
       }
 
@@ -472,33 +485,33 @@ public abstract class ReflectionUtils {
 
   private static void initPrimitives() {
     if (primitiveNames == null) {
-      primitiveNames = Arrays.asList("boolean", "char", "byte", "short", "int", "long", "float", "double", "void");
-      primitiveTypes = Arrays.asList(boolean.class, char.class, byte.class, short.class, int.class, long.class, float.class, double.class, void.class);
-      primitiveDescriptors = Arrays.asList("Z", "C", "B", "S", "I", "J", "F", "D", "V");
+      primitiveNames = Arrays.asList("boolean" , "char" , "byte" , "short" , "int" , "long" , "float" , "double" , "void");
+      primitiveTypes = Arrays.asList(boolean.class , char.class , byte.class , short.class , int.class , long.class , float.class , double.class , void.class);
+      primitiveDescriptors = Arrays.asList("Z" , "C" , "B" , "S" , "I" , "J" , "F" , "D" , "V");
     }
   }
 
   //
-  static <T> Set<T> filter(final T[] elements, Predicate<? super T>... predicates) {
+  static <T> Set<T> filter(final T[] elements , Predicate<? super T>... predicates) {
     return Predicates.isEmpty(predicates) ?
-        Stream.of(elements).collect(Collectors.toSet())
-        :
-        StreamSupport
-            .stream(Arrays.stream(elements)
-                .filter(Predicates.and(predicates)::apply)
-                .collect(Collectors.toList())
-                .spliterator(), false)
-            .collect(Collectors.toSet());
+           Stream.of(elements).collect(Collectors.toSet())
+                                          :
+           StreamSupport
+               .stream(Arrays.stream(elements)
+                             .filter(Predicates.and(predicates)::apply)
+                             .collect(Collectors.toList())
+                             .spliterator() , false)
+               .collect(Collectors.toSet());
   }
 
-  static <T> Set<T> filter(final Iterable<T> elements, Predicate<? super T>... predicates) {
+  static <T> Set<T> filter(final Iterable<T> elements , Predicate<? super T>... predicates) {
     return Predicates.isEmpty(predicates) ?
-        StreamSupport
-            .stream(elements.spliterator(), false).collect(Collectors.toSet()) :
-        StreamSupport
-            .stream(StreamSupport.stream(elements.spliterator(), false)
-                .filter(Predicates.and(predicates)::apply)
-                .collect(Collectors.toList()).spliterator(), false)
-            .collect(Collectors.toSet());
+           StreamSupport
+               .stream(elements.spliterator() , false).collect(Collectors.toSet()) :
+           StreamSupport
+               .stream(StreamSupport.stream(elements.spliterator() , false)
+                                    .filter(Predicates.and(predicates)::apply)
+                                    .collect(Collectors.toList()).spliterator() , false)
+               .collect(Collectors.toSet());
   }
 }

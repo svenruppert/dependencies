@@ -1,13 +1,13 @@
 package org.reflections.scanners;
 
-import repacked.com.google.common.base.Joiner;
-import javassist.bytecode.LocalVariableAttribute;
-import javassist.bytecode.MethodInfo;
-import org.reflections.adapters.MetadataAdapter;
-
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.reflections.adapters.MetadataAdapter;
+import javassist.bytecode.LocalVariableAttribute;
+import javassist.bytecode.MethodInfo;
+import repacked.com.google.common.base.Joiner;
 
 /**
  * scans methods/constructors and indexes parameter names

@@ -1,16 +1,10 @@
 package junit.org.reflections;
 
-import javassist.bytecode.ClassFile;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.reflections.adapters.JavassistAdapter;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.vfs.JarInputDir;
-import org.reflections.vfs.SystemDir;
-import org.reflections.vfs.Vfs;
-import org.reflections.vfs.ZipDir;
-import repacked.com.google.common.base.Predicates;
-import repacked.com.google.common.collect.Iterables;
+import static java.text.MessageFormat.format;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.DataInputStream;
 import java.io.File;
@@ -22,8 +16,17 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.jar.JarFile;
 
-import static java.text.MessageFormat.format;
-import static org.junit.Assert.*;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.reflections.adapters.JavassistAdapter;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.vfs.JarInputDir;
+import org.reflections.vfs.SystemDir;
+import org.reflections.vfs.Vfs;
+import org.reflections.vfs.ZipDir;
+import javassist.bytecode.ClassFile;
+import repacked.com.google.common.base.Predicates;
+import repacked.com.google.common.collect.Iterables;
 
 /** */
 public class VfsTest {

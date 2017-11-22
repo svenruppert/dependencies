@@ -1,13 +1,13 @@
 package org.reflections.vfs;
 
-import repacked.com.google.common.collect.AbstractIterator;
-import org.reflections.ReflectionsException;
-import org.reflections.util.Utils;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.jar.JarInputStream;
 import java.util.zip.ZipEntry;
+
+import org.reflections.ReflectionsException;
+import org.reflections.util.Utils;
+import repacked.com.google.common.collect.AbstractIterator;
 
 /**
  *

@@ -1,13 +1,14 @@
 package repacked.com.google.common.base;
 
-import javax.annotation.Nullable;
+import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
+import javax.annotation.Nullable;
 
 /**
  * Copyright (C) 2010 RapidPM

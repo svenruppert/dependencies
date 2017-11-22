@@ -1,9 +1,9 @@
 package repacked.com.google.common.base;
 
+import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
+
 import java.io.IOException;
 import java.util.Iterator;
-
-import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 
 /**
  * Copyright (C) 2010 RapidPM

@@ -1,11 +1,11 @@
 package org.reflections.scanners;
 
-import repacked.com.google.common.base.Predicate;
-import repacked.com.google.common.collect.Multimap;
+import javax.annotation.Nullable;
+
 import org.reflections.Configuration;
 import org.reflections.vfs.Vfs;
-
-import javax.annotation.Nullable;
+import repacked.com.google.common.base.Predicate;
+import repacked.com.google.common.collect.Multimap;
 
 /**
  *

@@ -1,11 +1,12 @@
 package repacked.com.google.common.collect;
 
-import repacked.com.google.common.base.Function;
-
-import javax.annotation.Nullable;
 import java.util.AbstractCollection;
 import java.util.Collection;
 import java.util.Iterator;
+
+import javax.annotation.Nullable;
+
+import repacked.com.google.common.base.Function;
 
 
 /**

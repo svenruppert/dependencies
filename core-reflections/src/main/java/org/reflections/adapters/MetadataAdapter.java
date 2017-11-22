@@ -1,8 +1,8 @@
 package org.reflections.adapters;
 
-import org.reflections.vfs.Vfs;
-
 import java.util.List;
+
+import org.reflections.vfs.Vfs;
 
 /**
  *

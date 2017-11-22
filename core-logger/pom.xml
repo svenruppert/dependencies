@@ -13,9 +13,6 @@
 
 
   <dependencies>
-
-
-
     <!--LOG4J-->
     <dependency>
       <groupId>log4j</groupId>

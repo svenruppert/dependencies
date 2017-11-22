@@ -1,24 +1,48 @@
 package junit.org.reflections;
 
-import repacked.com.google.common.base.Function;
-import org.hamcrest.BaseMatcher;
-import org.hamcrest.Description;
-import org.junit.Test;
-import org.reflections.ReflectionUtils;
-import org.reflections.Reflections;
-import org.reflections.scanners.FieldAnnotationsScanner;
+import static junit.org.reflections.ReflectionsTest.are;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.reflections.ReflectionUtils.getAllAnnotations;
+import static org.reflections.ReflectionUtils.getAllConstructors;
+import static org.reflections.ReflectionUtils.getAllFields;
+import static org.reflections.ReflectionUtils.getAllMethods;
+import static org.reflections.ReflectionUtils.getAllSuperTypes;
+import static org.reflections.ReflectionUtils.getAnnotations;
+import static org.reflections.ReflectionUtils.getMethods;
+import static org.reflections.ReflectionUtils.withAnnotation;
+import static org.reflections.ReflectionUtils.withAnyParameterAnnotation;
+import static org.reflections.ReflectionUtils.withModifier;
+import static org.reflections.ReflectionUtils.withName;
+import static org.reflections.ReflectionUtils.withParameters;
+import static org.reflections.ReflectionUtils.withParametersAssignableTo;
+import static org.reflections.ReflectionUtils.withParametersCount;
+import static org.reflections.ReflectionUtils.withPattern;
+import static org.reflections.ReflectionUtils.withReturnType;
+import static org.reflections.ReflectionUtils.withReturnTypeAssignableTo;
+import static org.reflections.ReflectionUtils.withTypeAssignableTo;
+import static repacked.com.google.common.collect.Collections2.transform;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
-import static repacked.com.google.common.collect.Collections2.transform;
-import static junit.org.reflections.ReflectionsTest.are;
-import static org.junit.Assert.*;
-import static org.reflections.ReflectionUtils.*;
+import org.hamcrest.BaseMatcher;
+import org.hamcrest.Description;
+import org.junit.Test;
+import org.reflections.ReflectionUtils;
+import org.reflections.Reflections;
+import org.reflections.scanners.FieldAnnotationsScanner;
+import repacked.com.google.common.base.Function;
 
 /**
  * @author mamo

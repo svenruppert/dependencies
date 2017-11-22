@@ -1,17 +1,22 @@
 package org.reflections.adapters;
 
-import repacked.com.google.common.base.Joiner;
-import org.reflections.util.Utils;
-import org.reflections.vfs.Vfs;
+import static org.reflections.ReflectionUtils.forName;
 
-import javax.annotation.Nullable;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Member;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.reflections.ReflectionUtils.forName;
+import javax.annotation.Nullable;
+
+import org.reflections.util.Utils;
+import org.reflections.vfs.Vfs;
+import repacked.com.google.common.base.Joiner;
 
 /** */
 public class JavaReflectionAdapter implements MetadataAdapter<Class, Field, Member> {

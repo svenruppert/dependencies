@@ -1,11 +1,7 @@
 package org.reflections.adapters;
 
-import repacked.com.google.common.base.Joiner;
-import javassist.bytecode.*;
-import javassist.bytecode.annotation.Annotation;
-import org.reflections.ReflectionsException;
-import org.reflections.util.Utils;
-import org.reflections.vfs.Vfs;
+import static javassist.bytecode.AccessFlag.isPrivate;
+import static javassist.bytecode.AccessFlag.isProtected;
 
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
@@ -15,8 +11,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static javassist.bytecode.AccessFlag.isPrivate;
-import static javassist.bytecode.AccessFlag.isProtected;
+import org.reflections.ReflectionsException;
+import org.reflections.util.Utils;
+import org.reflections.vfs.Vfs;
+import javassist.bytecode.AccessFlag;
+import javassist.bytecode.AnnotationsAttribute;
+import javassist.bytecode.ClassFile;
+import javassist.bytecode.Descriptor;
+import javassist.bytecode.FieldInfo;
+import javassist.bytecode.MethodInfo;
+import javassist.bytecode.ParameterAnnotationsAttribute;
+import javassist.bytecode.annotation.Annotation;
+import repacked.com.google.common.base.Joiner;
 
 /**
  *

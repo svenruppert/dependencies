@@ -1,8 +1,5 @@
 package org.reflections.util;
 
-import org.reflections.Reflections;
-
-import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -10,10 +7,23 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.net.URLDecoder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Enumeration;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
+
+import javax.servlet.ServletContext;
+
+import org.rapidpm.dependencies.core.logger.Logger;
+import org.rapidpm.dependencies.core.logger.LoggingService;
+import org.reflections.Reflections;
 
 /**
  * Helper methods for working with the classpath.
@@ -34,8 +44,8 @@ public abstract class ClasspathHelper {
    *
    * @return the collection of URLs, not null
    */
-  public static Collection<URL> forPackage(String name, ClassLoader... classLoaders) {
-    return forResource(resourceName(name), classLoaders);
+  public static Collection<URL> forPackage(String name , ClassLoader... classLoaders) {
+    return forResource(resourceName(name) , classLoaders);
   }
 
   /**
@@ -52,7 +62,7 @@ public abstract class ClasspathHelper {
    *
    * @return the collection of URLs, not null
    */
-  public static Collection<URL> forResource(String resourceName, ClassLoader... classLoaders) {
+  public static Collection<URL> forResource(String resourceName , ClassLoader... classLoaders) {
     final List<URL> result = new ArrayList<>();
     final ClassLoader[] loaders = classLoaders(classLoaders);
     for (ClassLoader classLoader : loaders) {
@@ -61,16 +71,17 @@ public abstract class ClasspathHelper {
         while (urls.hasMoreElements()) {
           final URL url = urls.nextElement();
           int index = url.toExternalForm().lastIndexOf(resourceName);
-          if (index != -1) {
+          if (index != - 1) {
             // Add old url as contextUrl to support exotic url handlers
-            result.add(new URL(url, url.toExternalForm().substring(0, index)));
+            result.add(new URL(url , url.toExternalForm().substring(0 , index)));
           } else {
             result.add(url);
           }
         }
       } catch (IOException e) {
-        if (Reflections.log != null) {
-          Reflections.log.error("error getting resources for " + resourceName, e);
+        final LoggingService log = Logger.getLogger(Reflections.class);
+        if (log != null) {
+          log.warning("error getting resources for " + resourceName , e);
         }
       }
     }
@@ -79,8 +90,8 @@ public abstract class ClasspathHelper {
 
   private static String resourceName(String name) {
     if (name != null) {
-      String resourceName = name.replace(".", "/");
-      resourceName = resourceName.replace("\\", "/");
+      String resourceName = name.replace("." , "/");
+      resourceName = resourceName.replace("\\" , "/");
       if (resourceName.startsWith("/")) {
         resourceName = resourceName.substring(1);
       }
@@ -102,10 +113,10 @@ public abstract class ClasspathHelper {
     } else {
       ClassLoader contextClassLoader = contextClassLoader(), staticClassLoader = staticClassLoader();
       return contextClassLoader != null ?
-          staticClassLoader != null && contextClassLoader != staticClassLoader ?
-              new ClassLoader[]{contextClassLoader, staticClassLoader} :
-              new ClassLoader[]{contextClassLoader} :
-          new ClassLoader[]{};
+             staticClassLoader != null && contextClassLoader != staticClassLoader ?
+             new ClassLoader[]{contextClassLoader , staticClassLoader} :
+             new ClassLoader[]{contextClassLoader} :
+             new ClassLoader[]{};
 
     }
   }
@@ -114,7 +125,7 @@ public abstract class ClasspathHelper {
   private static Collection<URL> distinctUrls(Collection<URL> urls) {
     Map<String, URL> distinct = new LinkedHashMap<>(urls.size());
     for (URL url : urls) {
-      distinct.put(url.toExternalForm(), url);
+      distinct.put(url.toExternalForm() , url);
     }
     return distinct.values();
   }
@@ -149,19 +160,20 @@ public abstract class ClasspathHelper {
    *
    * @return the URL containing the class, null if not found
    */
-  public static URL forClass(Class<?> aClass, ClassLoader... classLoaders) {
+  public static URL forClass(Class<?> aClass , ClassLoader... classLoaders) {
     final ClassLoader[] loaders = classLoaders(classLoaders);
-    final String resourceName = aClass.getName().replace(".", "/") + ".class";
+    final String resourceName = aClass.getName().replace("." , "/") + ".class";
     for (ClassLoader classLoader : loaders) {
       try {
         final URL url = classLoader.getResource(resourceName);
         if (url != null) {
-          final String normalizedUrl = url.toExternalForm().substring(0, url.toExternalForm().lastIndexOf(aClass.getPackage().getName().replace(".", "/")));
+          final String normalizedUrl = url.toExternalForm().substring(0 , url.toExternalForm().lastIndexOf(aClass.getPackage().getName().replace("." , "/")));
           return new URL(normalizedUrl);
         }
       } catch (MalformedURLException e) {
-        if (Reflections.log != null) {
-          Reflections.log.warn("Could not get URL", e);
+        final LoggingService log = Logger.getLogger(Reflections.class);
+        if (log != null) {
+          log.warning("Could not get URL" , e);
         }
       }
     }
@@ -229,8 +241,9 @@ public abstract class ClasspathHelper {
         try {
           urls.add(new File(path).toURI().toURL());
         } catch (Exception e) {
-          if (Reflections.log != null) {
-            Reflections.log.warn("Could not get URL", e);
+          final LoggingService log = Logger.getLogger(Reflections.class);
+          if (log != null) {
+            log.warning("Could not get URL" , e);
           }
         }
       }
@@ -313,7 +326,7 @@ public abstract class ClasspathHelper {
       final String part = cleanPath(url);
       File jarFile = new File(part);
       JarFile myJar = new JarFile(part);
-      URL validUrl = tryToGetValidUrl(jarFile.getPath(), new File(part).getParent(), part);
+      URL validUrl = tryToGetValidUrl(jarFile.getPath() , new File(part).getParent() , part);
       if (validUrl != null) {
         result.add(validUrl);
       }
@@ -322,7 +335,7 @@ public abstract class ClasspathHelper {
         final String classPath = manifest.getMainAttributes().getValue(new Attributes.Name("Class-Path"));
         if (classPath != null) {
           for (String jar : classPath.split(" ")) {
-            validUrl = tryToGetValidUrl(jarFile.getPath(), new File(part).getParent(), jar);
+            validUrl = tryToGetValidUrl(jarFile.getPath() , new File(part).getParent() , jar);
             if (validUrl != null) {
               result.add(validUrl);
             }
@@ -357,7 +370,7 @@ public abstract class ClasspathHelper {
   }
 
   //a little bit cryptic...
-  static URL tryToGetValidUrl(String workingDir, String path, String filename) {
+  static URL tryToGetValidUrl(String workingDir , String path , String filename) {
     try {
       if (new File(filename).exists())
         return new File(filename).toURI().toURL();
@@ -377,13 +390,12 @@ public abstract class ClasspathHelper {
    * Cleans the URL.
    *
    * @param url the URL to clean, not null
-   *
    * @return the path, not null
    */
   public static String cleanPath(final URL url) {
     String path = url.getPath();
     try {
-      path = URLDecoder.decode(path, "UTF-8");
+      path = URLDecoder.decode(path , "UTF-8");
     } catch (UnsupportedEncodingException e) { /**/ }
     if (path.startsWith("jar:")) {
       path = path.substring("jar:".length());
@@ -392,7 +404,7 @@ public abstract class ClasspathHelper {
       path = path.substring("file:".length());
     }
     if (path.endsWith("!/")) {
-      path = path.substring(0, path.lastIndexOf("!/")) + "/";
+      path = path.substring(0 , path.lastIndexOf("!/")) + "/";
     }
     return path;
   }

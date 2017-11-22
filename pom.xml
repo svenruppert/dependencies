@@ -73,8 +73,6 @@
       <comments>A business-friendly OSS license</comments>
     </license>
   </licenses>
-
-
   <properties>
     <rapidpm-dependencies.version>3.5.3-SNAPSHOT</rapidpm-dependencies.version>
 
@@ -88,19 +86,24 @@
     <jacoco.version>0.7.9</jacoco.version>
     <pitest.version>1.2.4</pitest.version>
     <jmh.version>1.19</jmh.version>
-  </properties>
 
-  <modules>
-    <module>core</module>
-    <module>core-jdbc</module>
-    <module>core-jdbc-dao</module>
-    <module>core-reflections</module>
-    <module>core-logger</module>
-  </modules>
+    <!--TDD jUnit5-->
+    <junit.version>4.12</junit.version>
+    <junit.jupiter.version>5.1.0-M1</junit.jupiter.version>
+    <junit.vintage.version>${junit.version}.0</junit.vintage.version>
+    <junit.platform.version>1.0.0</junit.platform.version>
+
+  </properties>
 
   <dependencyManagement>
     <!--project versions-->
     <dependencies>
+      <dependency>
+        <groupId>org.rapidpm</groupId>
+        <artifactId>rapidpm-dependencies-core-logger</artifactId>
+        <version>${rapidpm-dependencies.version}</version>
+      </dependency>
+
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-dependencies-core</artifactId>
@@ -127,14 +130,6 @@
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-dependencies-core-reflections</artifactId>
         <version>${rapidpm-dependencies.version}</version>
-      </dependency>
-
-
-      <!--FRP-->
-      <dependency>
-        <groupId>org.rapidpm</groupId>
-        <artifactId>rapidpm-functional-reactive</artifactId>
-        <version>0.0.6</version>
       </dependency>
 
       <!--Reflection Utils-->
@@ -292,6 +287,7 @@
         <groupId>org.jacoco</groupId>
         <artifactId>org.jacoco.ant</artifactId>
         <version>${jacoco.version}</version>
+        <!--<scope>test</scope>-->
       </dependency>
       <dependency>
         <groupId>com.google.code.findbugs</groupId>
@@ -305,11 +301,32 @@
         <version>2.4.0</version>
         <scope>test</scope>
       </dependency>
+
+      <!--TDD-->
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
-        <version>4.12</version>
+        <version>${junit.version}</version>
         <scope>test</scope>
+      </dependency>
+
+      <!--jUnit5-->
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>${junit.jupiter.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-params</artifactId>
+        <version>${junit.jupiter.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-all</artifactId>
+        <version>1.3</version>
       </dependency>
       <dependency>
         <groupId>org.pitest</groupId>
@@ -403,19 +420,46 @@
     </dependencies>
   </dependencyManagement>
 
+  <modules>
+    <!--used in other packages-->
+    <module>core-logger</module>
+    <!--used in other packages-->
 
+    <module>core</module>
+    <module>core-jdbc</module>
+    <module>core-jdbc-dao</module>
+    <module>core-reflections</module>
+  </modules>
   <dependencies>
+
+    <!--TDD-->
     <dependency>
-      <!--TDD-->
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
+
+    <!--jUnit5-->
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit.jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <version>${junit.jupiter.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
       <scope>test</scope>
     </dependency>
+
     <!--Microbenchmarking-->
     <dependency>
       <groupId>org.openjdk.jmh</groupId>
@@ -451,10 +495,12 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
@@ -844,12 +890,16 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <dependencies>
-        <!--tdd-->
         <dependency>
           <!--  must be on the classpath  -->
           <groupId>org.jacoco</groupId>
           <artifactId>org.jacoco.agent</artifactId>
           <classifier>runtime</classifier>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.jacoco</groupId>
+          <artifactId>org.jacoco.ant</artifactId>
           <scope>test</scope>
         </dependency>
       </dependencies>
@@ -1476,15 +1526,32 @@
       </activation>
       <repositories>
         <repository>
-          <id>vaadin-repo</id>
+          <id>vaadin-addons</id>
           <url>http://maven.vaadin.com/vaadin-addons</url>
           <!--<url>http://maven.vaadin.com/</url>-->
         </repository>
+      </repositories>
+      <pluginRepositories>
+
+      </pluginRepositories>
+    </profile>
+
+    <profile>
+      <id>repo-allow-vaadin-snapshots</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <repositories>
         <repository>
           <id>vaadin-prereleases</id>
-          <name>Vaadin Pre-releases</name>
-          <url>https://maven.vaadin.com/vaadin-prereleases</url>
+          <url>http://maven.vaadin.com/vaadin-prereleases</url>
         </repository>
+        <repository>
+          <id>vaadin-snapshots</id>
+          <name>Vaadin snapshot repository</name>
+          <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+        </repository>
+
       </repositories>
       <pluginRepositories>
         <pluginRepository>
@@ -1495,9 +1562,25 @@
       </pluginRepositories>
     </profile>
 
-
-
-
+    <profile>
+      <id>repo-allow-maven-snapshots</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>snapshots-repo</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
   </profiles>
 
 

@@ -1,20 +1,26 @@
 package junit.org.reflections;
 
-import repacked.com.google.common.base.Predicate;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.reflections.Reflections;
-import org.reflections.scanners.*;
-import org.reflections.serializers.JsonSerializer;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
-import org.reflections.util.FilterBuilder;
+import static java.util.Arrays.asList;
+import static org.junit.Assert.assertThat;
 
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import static java.util.Arrays.asList;
-import static org.junit.Assert.assertThat;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.reflections.Reflections;
+import org.reflections.scanners.MemberUsageScanner;
+import org.reflections.scanners.MethodAnnotationsScanner;
+import org.reflections.scanners.MethodParameterNamesScanner;
+import org.reflections.scanners.MethodParameterScanner;
+import org.reflections.scanners.ResourcesScanner;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.scanners.TypeAnnotationsScanner;
+import org.reflections.serializers.JsonSerializer;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
+import org.reflections.util.FilterBuilder;
+import repacked.com.google.common.base.Predicate;
 
 /** */
 public class ReflectionsCollectTest extends ReflectionsTest {
