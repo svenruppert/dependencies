@@ -782,6 +782,28 @@
 
   <profiles>
 
+    <profiele>
+      <id>ci</id>
+        <distributionManagement>
+          <snapshotRepository>
+            <id>nexusinterim</id>
+            <name>The repo for this pipeline</name>
+            <url>https://nexus.craftwater.de/repository/gitlab-ci-${pipeline}/</url>
+          </snapshotRepository>
+        </distributionManagement>
+
+        <repositories>
+          <repository>
+            <id>nexusinterim</id>
+            <name>The repo for this pipeline</name>
+            <url>https://nexus.craftwater.de/repository/gitlab-ci-${pipeline}/</url>
+            <snapshots>
+              <enabled>true</enabled>
+            </snapshots>
+          </repository>
+        </repositories>
+    </profile>
+
     <profile>
       <id>gen-javadoc</id>
       <activation>
