@@ -23,7 +23,7 @@ build:
     - mvn $MAVEN_CLI_OPTS deploy -Dpipeline=$SOURCE_PIPELINE_ID
 
 mutation-testing:
-  stage: depoly
+  stage: deploy
   script:
     - mvn $MAVEN_CLI_OPTS org.pitest:pitest-maven:mutationCoverage -Dpipeline=$SOURCE_PIPELINE_ID       
 
