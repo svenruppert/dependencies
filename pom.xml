@@ -782,7 +782,7 @@
 
   <profiles>
 
-    <profiele>
+    <profile>
       <id>ci</id>
         <distributionManagement>
           <snapshotRepository>
