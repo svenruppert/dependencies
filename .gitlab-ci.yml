@@ -17,7 +17,7 @@ before_script:
 build:
   script:
     - curl --request POST "http://cimonitor.craftwater.de/api/v1/jobs/start/$SOURCE_PIPELINE_ID/$CI_PROJECT_ID/$CI_PIPELINE_ID/$CI_JOB_ID"
-    - find .m2/repository -name \*SNAPSHOT -type d -print0 | xargs -0 rm -rf 
+    - if [ -d .m2/repository ] ; then find .m2/repository -name \*SNAPSHOT -type d -print0 | xargs -0 rm -rf ; fi;
     - echo $SOURCE_PIPELINE_ID
     - if [ "$CI_PIPELINE_SOURCE" != "pipeline" ] ; then curl -X POST -u $MAVEN_REPO_USER:$MAVEN_REPO_PASS --header "Content-Type:$TEXT_PLAIN" "https://nexus.craftwater.de/service/siesta/rest/v1/script/maven2/run" -d $SOURCE_PIPELINE_ID ; fi;   
     - mvn $MAVEN_CLI_OPTS deploy -Dpipeline=$SOURCE_PIPELINE_ID
