@@ -21,7 +21,12 @@ build:
     - echo $SOURCE_PIPELINE_ID
     - if [ "$CI_PIPELINE_SOURCE" != "pipeline" ] ; then curl -X POST -u $MAVEN_REPO_USER:$MAVEN_REPO_PASS --header "Content-Type:$TEXT_PLAIN" "https://nexus.craftwater.de/service/siesta/rest/v1/script/maven2/run" -d $SOURCE_PIPELINE_ID ; fi;   
     - mvn $MAVEN_CLI_OPTS deploy -Dpipeline=$SOURCE_PIPELINE_ID
-      
+
+mutation-testing:
+  stage: depoly
+  script:
+    - mvn $MAVEN_CLI_OPTS org.pitest:pitest-maven:mutationCoverage -Dpipeline=$SOURCE_PIPELINE_ID       
+
 trigger-ddi:
   stage: deploy
   script:
