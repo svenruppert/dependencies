@@ -207,7 +207,7 @@
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>fluent-hc</artifactId>
-        <version>4.5.3</version>
+        <version>4.5.4</version>
       </dependency>
 
 
@@ -544,7 +544,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.19</version>
+          <version>2.19.1</version>
         </plugin>
         <plugin>
           <groupId>org.jacoco</groupId>
@@ -590,7 +590,7 @@
         <plugin>
           <groupId>org.owasp</groupId>
           <artifactId>dependency-check-maven</artifactId>
-          <version>2.1.1</version>
+          <version>3.0.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -625,7 +625,7 @@
         <plugin>
           <groupId>io.gatling</groupId>
           <artifactId>gatling-maven-plugin</artifactId>
-          <version>3.0.0-M1</version>
+          <version>3.0.0-M2</version>
         </plugin>
         <!--<plugin>-->
         <!--<groupId>org.sonarsource.scanner.maven</groupId>-->
@@ -653,7 +653,7 @@
         <plugin>
           <groupId>io.fabric8</groupId>
           <artifactId>docker-maven-plugin</artifactId>
-          <version>0.21.1</version>
+          <version>0.23.0</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -784,9 +784,12 @@
 
     <profile>
       <id>ci</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
         <distributionManagement>
           <snapshotRepository>
-            <id>nexusinterim</id>
+            <id>sys-nexus-ci</id>
             <name>The repo for this pipeline</name>
             <url>https://nexus.craftwater.de/repository/gitlab-ci-${pipeline}/</url>
           </snapshotRepository>
