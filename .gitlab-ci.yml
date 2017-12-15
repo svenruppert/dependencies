@@ -24,14 +24,14 @@ build:
 
 mutation-testing:
   stage: deploy
+  artifacts:
+    paths:
+      - "*/target/pit-reports/*/*"
   script:
     - mvn $MAVEN_CLI_OPTS test org.pitest:pitest-maven:mutationCoverage -Dpipeline=$SOURCE_PIPELINE_ID       
 
 trigger-ddi:
   stage: deploy
-  artifacts:
-    paths:
-      - "*/target/pit-reports/*/*"
   script:
     - export SOURCE_PROJ_VER=`mvn help:evaluate -Dexpression=project.version | grep -Ev '(^\[|Download\w+:)'`
     - export SOURCE_PROJ=`mvn help:evaluate -Dexpression=project.artifactId | grep -Ev '(^\[|Download\w+:)'`
