@@ -783,7 +783,7 @@
   <profiles>
 
     <profile>
-      <id>ci</id>
+      <id>sys-nexus-ci</id>
       <activation>
         <activeByDefault>false</activeByDefault>
       </activation>
