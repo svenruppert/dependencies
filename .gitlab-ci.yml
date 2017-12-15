@@ -29,6 +29,9 @@ mutation-testing:
 
 trigger-ddi:
   stage: deploy
+  artifacts:
+    paths:
+      - "*/target/pit-reports/*/*"
   script:
     - export SOURCE_PROJ_VER=`mvn help:evaluate -Dexpression=project.version | grep -Ev '(^\[|Download\w+:)'`
     - export SOURCE_PROJ=`mvn help:evaluate -Dexpression=project.artifactId | grep -Ev '(^\[|Download\w+:)'`
