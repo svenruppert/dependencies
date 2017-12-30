@@ -455,11 +455,11 @@
       <version>${junit.jupiter.version}</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <scope>test</scope>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.assertj</groupId>-->
+      <!--<artifactId>assertj-core</artifactId>-->
+      <!--<scope>test</scope>-->
+    <!--</dependency>-->
 
     <!--Microbenchmarking-->
     <dependency>
@@ -1079,36 +1079,6 @@
         </plugins>
       </build>
     </profile>
-    <!--<profile>-->
-    <!--<id>qm-qs-jacoco-junit-testbench</id>-->
-    <!--<activation>-->
-    <!--<activeByDefault>false</activeByDefault>-->
-    <!--</activation>-->
-    <!--<build>-->
-    <!--<plugins>-->
-    <!--<plugin>-->
-    <!--<groupId>org.apache.maven.plugins</groupId>-->
-    <!--<artifactId>maven-surefire-plugin</artifactId>-->
-    <!--<inherited>true</inherited>-->
-    <!--<configuration>-->
-    <!--<systemPropertyVariables>-->
-    <!--<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>-->
-    <!--</systemPropertyVariables>-->
-    <!--<includes>-->
-    <!--<include>**/junit/**</include>-->
-    <!--<include>**/testbench/**</include>-->
-    <!--</includes>-->
-    <!--<forkMode>always</forkMode>-->
-    <!--<reportFormat>xml</reportFormat>-->
-    <!--<reportFormat>html</reportFormat>-->
-    <!--&lt;!&ndash;<classesDirectory>target/generated-classes/emma/classes</classesDirectory>&ndash;&gt;-->
-    <!--</configuration>-->
-    <!--</plugin>-->
-    <!--</plugins>-->
-    <!--</build>-->
-    <!--</profile>-->
-
-
     <profile>
       <id>sys-nexus-deploy</id>
       <activation>
@@ -1320,6 +1290,7 @@
                   <goal>check</goal>
                 </goals>
                 <configuration>
+
                   <!--<excludes>**/generated/**/*</excludes>-->
                   <excludes>**/generated-sources/vwscdn/**/*</excludes>
                   <excludes>**/generated-sources/wscdn/**/*</excludes>
@@ -1339,6 +1310,7 @@
 
                       <module name="TreeWalker">
 
+                        <module name="FileContentsHolder"/>
                         <!-- Checkstyle has a bug that disallows @return in annotation methods, enable only on demand -->
                         <!--<module name="JavadocMethod"/>-->
 
@@ -1396,7 +1368,9 @@
                         <module name="ArrayTypeStyle"/>
                         <module name="UpperEll"/>
                       </module>
+                      <module name="SuppressionCommentFilter"/>
                     </module>
+
 
                   </checkstyleRules>
                   <consoleOutput>true</consoleOutput>
