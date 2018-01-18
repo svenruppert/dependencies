@@ -451,6 +451,7 @@
     <module>core-jdbc</module>
     <module>core-jdbc-dao</module>
     <module>core-reflections</module>
+    <module>core-properties</module>
   </modules>
   <dependencies>
 
