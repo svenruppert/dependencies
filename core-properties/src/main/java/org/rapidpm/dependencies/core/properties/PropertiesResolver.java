@@ -39,12 +39,12 @@ public class PropertiesResolver implements HasLogger {
     Properties propertiesFromResource = loadFromResource(name);
     Properties propertiesFromWorkingDir = loadFromWorkingDir(name);
     Properties propertiesFromHomeDir = loadFromHomeDir(name);
-    Properties propertiesFromEnviromentSource = loadFromEnviromentSrouce(name);
+    Properties propertiesFromEnviromentSource = loadFromEnviromentSource(name);
     return merge(propertiesFromResource, propertiesFromWorkingDir, propertiesFromHomeDir,
         propertiesFromEnviromentSource);
   }
 
-  private Properties loadFromEnviromentSrouce(String name) {
+  private Properties loadFromEnviromentSource(String name) {
     String configSource = System.getProperty(CONFIG_LOCATION_PROPERTY);
     Properties properties;
     if (configSource != null) {
