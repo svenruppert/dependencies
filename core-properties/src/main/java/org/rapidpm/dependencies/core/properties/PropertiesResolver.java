@@ -8,6 +8,9 @@ import java.io.InputStream;
 import java.util.Properties;
 import org.rapidpm.dependencies.core.logger.HasLogger;
 
+/**
+ * Creates a {@link Properties} object merged from different sources.
+ */
 public class PropertiesResolver implements HasLogger {
   public static final String CONFIG_LOCATION_PROPERTY = "rapidpm.configlocation";
   private static final String PROPERIES_EXTENSION = ".properties";
@@ -16,6 +19,22 @@ public class PropertiesResolver implements HasLogger {
     return name + PROPERIES_EXTENSION;
   }
 
+  /**
+   * Creates a {@link Properties} object from different sources. The sources are:
+   * 
+   * <ol>
+   * <li>the root of the classpath</li>
+   * <li>the current working directory</li>
+   * <li>the home directory of the current user</li>
+   * <li>a directory specified by the system property <code>rapidm.configlocation</code></li>
+   * <ol>
+   * <br>
+   * Properties defined in the higher sources override the ones defined in lower sources.
+   * 
+   * @param name the name of the properties file - without the <code>.properties</code> file
+   *        extension
+   * @return the merged {@link Properties} object
+   */
   public Properties get(String name) {
     Properties propertiesFromResource = loadFromResource(name);
     Properties propertiesFromWorkingDir = loadFromWorkingDir(name);
