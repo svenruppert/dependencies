@@ -1,0 +1,52 @@
+image: maven:3.3.9-jdk-8
+
+variables:
+  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode -P sys-nexus-ci"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+  TEXT_PLAIN: " text/plain" # welcome to escaping hell
+
+# Cache downloaded dependencies and plugins between builds.
+# To keep cache across branches add 'key: "$CI_JOB_REF_NAME"'
+cache:
+  paths:
+    - .m2/repository
+
+before_script:
+  - if [ -z "$SOURCE_PIPELINE_ID" ]; then export SOURCE_PIPELINE_ID=$CI_PIPELINE_ID ; fi;
+  
+build:
+  script:
+    - curl --request POST "http://cimonitor.craftwater.de/api/v1/jobs/start/$SOURCE_PIPELINE_ID/$CI_PROJECT_ID/$CI_PIPELINE_ID/$CI_JOB_ID"
+    - if [ -d .m2/repository ] ; then find .m2/repository -name \*SNAPSHOT -type d -print0 | xargs -0 rm -rf ; fi;
+    - echo $SOURCE_PIPELINE_ID
+    - if [ "$CI_PIPELINE_SOURCE" != "pipeline" ] ; then curl -X POST -u $MAVEN_REPO_USER:$MAVEN_REPO_PASS --header "Content-Type:$TEXT_PLAIN" "https://nexus.craftwater.de/service/siesta/rest/v1/script/maven2/run" -d $SOURCE_PIPELINE_ID ; fi;   
+    - mvn $MAVEN_CLI_OPTS deploy -Dpipeline=$SOURCE_PIPELINE_ID
+
+mutation-testing:
+  stage: deploy
+  artifacts:
+    paths:
+      - "*/target/pit-reports/*/*"
+  script:
+    - mvn $MAVEN_CLI_OPTS test org.pitest:pitest-maven:mutationCoverage -Dpipeline=$SOURCE_PIPELINE_ID       
+
+trigger-ddi:
+  stage: deploy
+  script:
+    - export SOURCE_PROJ_VER=`mvn help:evaluate -Dexpression=project.version | grep -Ev '(^\[|Download\w+:)'`
+    - export SOURCE_PROJ=`mvn help:evaluate -Dexpression=project.artifactId | grep -Ev '(^\[|Download\w+:)'`
+    - curl --request POST --form "variables[SOURCE_PROJ_VER]=$SOURCE_PROJ_VER" --form "variables[SOURCE_PROJ]=$SOURCE_PROJ" --form "variables[SOURCE_PIPELINE_ID]=$SOURCE_PIPELINE_ID" --form "token=$CI_JOB_TOKEN" --form ref=develop https://gitlab.com/api/v4/projects/1164671/trigger/pipeline
+
+trigger-functional-reactive:
+  stage: deploy
+  script:
+    - export SOURCE_PROJ_VER=`mvn help:evaluate -Dexpression=project.version | grep -Ev '(^\[|Download\w+:)'`
+    - export SOURCE_PROJ=`mvn help:evaluate -Dexpression=project.artifactId | grep -Ev '(^\[|Download\w+:)'`
+    - curl --request POST --form "variables[SOURCE_PROJ_VER]=$SOURCE_PROJ_VER" --form "variables[SOURCE_PROJ]=$SOURCE_PROJ" --form "variables[SOURCE_PIPELINE_ID]=$SOURCE_PIPELINE_ID" --form "token=$CI_JOB_TOKEN" --form ref=develop https://gitlab.com/api/v4/projects/3401754/trigger/pipeline
+
+trigger-vpiwiktracker:
+  stage: deploy
+  script:
+    - export SOURCE_PROJ_VER=`mvn help:evaluate -Dexpression=project.version | grep -Ev '(^\[|Download\w+:)'`
+    - export SOURCE_PROJ=`mvn help:evaluate -Dexpression=project.artifactId | grep -Ev '(^\[|Download\w+:)'`
+    - curl --request POST --form "variables[SOURCE_PROJ_VER]=$SOURCE_PROJ_VER" --form "variables[SOURCE_PROJ]=$SOURCE_PROJ" --form "variables[SOURCE_PIPELINE_ID]=$SOURCE_PIPELINE_ID" --form "token=$CI_JOB_TOKEN" --form ref=develop https://gitlab.com/api/v4/projects/4948319/trigger/pipeline
