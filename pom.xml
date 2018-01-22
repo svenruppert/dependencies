@@ -1457,7 +1457,7 @@
     <profile>
       <id>qm-qs-jdeps</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
       <build>
         <plugins>
