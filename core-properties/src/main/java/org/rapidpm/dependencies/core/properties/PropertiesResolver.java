@@ -39,9 +39,9 @@ public class PropertiesResolver implements HasLogger {
     Properties propertiesFromResource = loadFromResource(name);
     Properties propertiesFromWorkingDir = loadFromWorkingDir(name);
     Properties propertiesFromHomeDir = loadFromHomeDir(name);
-    Properties propertiesFromEnviromentSource = loadFromEnviromentSource(name);
+    Properties propertiesFromEnvironmentSource = loadFromEnviromentSource(name);
     return merge(propertiesFromResource, propertiesFromWorkingDir, propertiesFromHomeDir,
-        propertiesFromEnviromentSource);
+        propertiesFromEnvironmentSource);
   }
 
   private Properties loadFromEnviromentSource(String name) {
