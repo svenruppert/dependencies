@@ -82,7 +82,7 @@ public class PropertiesResolverTest implements HasLogger {
     assertEquals("Hello", properties.getProperty("a.b"));
   }
 
-  private void createPropertiesFile(File file) throws IOException, FileNotFoundException {
+  private void createPropertiesFile(File file) throws IOException {
     logger().info("Create properties file: " + file);
     try (InputStream is = getClass().getResourceAsStream("/test001.properties");
         OutputStream os = new FileOutputStream(file)) {
