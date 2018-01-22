@@ -1081,9 +1081,9 @@
 
               </excludes>
               <argLine>-Xmx286m -Dsonar.pitest.mode=reuseReport</argLine>
-              <threadCount>4</threadCount>
+              <!--<threadCount>4</threadCount>-->
               <!--<forkMode>always</forkMode>-->
-              <!--<forkCount></forkCount>-->
+              <!--<forkCount>4</forkCount>-->
               <reuseForks>false</reuseForks>
               <forkCount>4</forkCount>
               <reportFormat>xml</reportFormat>
@@ -1120,7 +1120,9 @@
               </excludes>
               <argLine>-Xmx286m -Dsonar.pitest.mode=reuseReport</argLine>
 
-              <forkMode>always</forkMode>
+              <forkCount>4</forkCount>
+              <reuseForks>false</reuseForks>
+              <!--<forkMode>always</forkMode>-->
 
               <threadCount>4</threadCount>
               <reportFormat>xml</reportFormat>
