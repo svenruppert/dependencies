@@ -446,12 +446,12 @@
     <!--used in other packages-->
     <module>core-logger</module>
     <!--used in other packages-->
-
     <module>core</module>
-    <module>core-jdbc</module>
-    <module>core-jdbc-dao</module>
     <module>core-reflections</module>
     <module>core-properties</module>
+
+    <module>core-jdbc</module>
+    <module>core-jdbc-dao</module>
   </modules>
   <dependencies>
 
@@ -1556,7 +1556,6 @@
         </plugins>
       </build>
     </profile>
-
 
     <!--Testbench stuff-->
     <profile>
