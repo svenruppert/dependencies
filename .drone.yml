@@ -12,6 +12,7 @@ pipeline:
       - cp /drone/src/rapidpm-dependencies/_data/nexus/settings.xml /root/.m2/settings.xml
       - mvn clean
       - mvn install
+      - mvn deploy
 
 matrix:
   JDK_VERSION:

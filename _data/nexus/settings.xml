@@ -2,6 +2,20 @@
 <settings xmlns="http://maven.apache.org/SETTINGS/1.1.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
+
+  <servers>
+    <server>
+      <id>sonatype-nexus</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+    <server>
+      <id>sonatype-nexus-snapshots</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+  </servers>
+
   <mirrors>
     <mirror>
       <id>central</id>
@@ -10,4 +24,26 @@
       <mirrorOf>*</mirrorOf>
     </mirror>
   </mirrors>
+
+
+  <profiles>
+    <profile>
+      <id>sys-nexus-deploy</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <distributionManagement>
+        <repository>
+          <id>sonatype-nexus</id>
+          <url>https://nexus-server/service/local/staging/deploy/maven2/</url>
+        </repository>
+        <snapshotRepository>
+          <id>sonatype-nexus-snapshots</id>
+          <url>https://nexus-erver/content/repositories/snapshots</url>
+        </snapshotRepository>
+      </distributionManagement>
+    </profile>
+  </profiles>
+
+
 </settings>
