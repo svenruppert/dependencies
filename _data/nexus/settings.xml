@@ -20,11 +20,11 @@
     <mirror>
       <id>central</id>
       <name>central</name>
-      <url>http://nexus-server:8081/repository/maven-public/</url>
+      <!--<url>http://nexus-server:8081/repository/maven-public/</url>-->
+      <url>${mirror-url}</url>
       <mirrorOf>*</mirrorOf>
     </mirror>
   </mirrors>
-
 
   <profiles>
     <profile>
@@ -32,16 +32,11 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <distributionManagement>
-        <repository>
-          <id>sonatype-nexus</id>
-          <url>http://nexus-server:8081/repository/maven-releases/</url>
-        </repository>
-        <snapshotRepository>
-          <id>sonatype-nexus-snapshots</id>
-          <url>http://nexus-server:8081/repository/maven-snapshots/</url>
-        </snapshotRepository>
-      </distributionManagement>
+      <properties>
+        <mirror-url>http://nexus-server:8081/repository/maven-public/</mirror-url>
+        <sonatype-nexus-url>http://nexus-server:8081/repository/maven-releases/</sonatype-nexus-url>
+        <sonatype-nexus-snapshots-url>http://nexus-server:8081/repository/maven-snapshots/</sonatype-nexus-snapshots-url>
+      </properties>
     </profile>
   </profiles>
 
