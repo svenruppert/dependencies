@@ -35,11 +35,11 @@
       <distributionManagement>
         <repository>
           <id>sonatype-nexus</id>
-          <url>https://nexus-server/service/local/staging/deploy/maven2/</url>
+          <url>http://nexus-server:8081/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
           <id>sonatype-nexus-snapshots</id>
-          <url>https://nexus-erver/content/repositories/snapshots</url>
+          <url>http://nexus-server:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
       </distributionManagement>
     </profile>
