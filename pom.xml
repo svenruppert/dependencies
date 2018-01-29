@@ -1134,22 +1134,22 @@
         </plugins>
       </build>
     </profile>
-    <profile>
-      <id>sys-nexus-deploy</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <distributionManagement>
-        <repository>
-          <id>sonatype-nexus</id>
-          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-        <snapshotRepository>
-          <id>sonatype-nexus-snapshots</id>
-          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-      </distributionManagement>
-    </profile>
+    <!--<profile>-->
+      <!--<id>sys-nexus-deploy</id>-->
+      <!--<activation>-->
+        <!--<activeByDefault>true</activeByDefault>-->
+      <!--</activation>-->
+      <!--<distributionManagement>-->
+        <!--<repository>-->
+          <!--<id>sonatype-nexus</id>-->
+          <!--<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
+        <!--</repository>-->
+        <!--<snapshotRepository>-->
+          <!--<id>sonatype-nexus-snapshots</id>-->
+          <!--<url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
+        <!--</snapshotRepository>-->
+      <!--</distributionManagement>-->
+    <!--</profile>-->
 
     <profile>
       <id>sys-nexus-deploy-gpg</id>
