@@ -13,7 +13,7 @@ public class JarInputFile implements Vfs.File {
   private final long fromIndex;
   private final long endIndex;
 
-  public JarInputFile(ZipEntry entry, JarInputDir jarInputDir, long cursor, long nextCursor) {
+  public JarInputFile(ZipEntry entry , JarInputDir jarInputDir , long cursor , long nextCursor) {
     this.entry = entry;
     this.jarInputDir = jarInputDir;
     fromIndex = cursor;
@@ -38,7 +38,7 @@ public class JarInputFile implements Vfs.File {
           jarInputDir.cursor++;
           return read;
         } else {
-          return -1;
+          return - 1;
         }
       }
     };

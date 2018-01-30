@@ -25,71 +25,31 @@ import org.reflections.util.Utils;
 import repacked.com.google.common.base.Predicate;
 import repacked.com.google.common.collect.Iterables;
 
-/**
- * a simple virtual file system bridge
- * <p>use the {@link org.reflections.vfs.Vfs#fromURL(java.net.URL)} to get a {@link org.reflections.vfs.Vfs.Dir},
- * then use {@link org.reflections.vfs.Vfs.Dir#getFiles()} to iterate over the {@link org.reflections.vfs.Vfs.File}
- * <p>for example:
- * <pre>
- *      Vfs.Dir dir = Vfs.fromURL(url);
- *      Iterable<Vfs.File> files = dir.getFiles();
- *      for (Vfs.File file : files) {
- *          InputStream is = file.openInputStream();
- *      }
- * </pre>
- * <p>{@link org.reflections.vfs.Vfs#fromURL(java.net.URL)} uses static {@link org.reflections.vfs.Vfs.DefaultUrlTypes} to resolve URLs.
- * It contains VfsTypes for handling for common resources such as local jar file, local directory, jar url, jar input stream and more.
- * <p>It can be plugged in with other {@link org.reflections.vfs.Vfs.UrlType} using {@link org.reflections.vfs.Vfs#addDefaultURLTypes(org.reflections.vfs.Vfs.UrlType)} or {@link org.reflections.vfs.Vfs#setDefaultURLTypes(java.util.List)}.
- * <p>for example:
- * <pre>
- *      Vfs.addDefaultURLTypes(new Vfs.UrlType() {
- *          public boolean matches(URL url)         {
- *              return url.getProtocol().equals("http");
- *          }
- *          public Vfs.Dir createDir(final URL url) {
- *              return new HttpDir(url); //implement this type... (check out a naive implementation on VfsTest)
- *          }
- *      });
- *
- *      Vfs.Dir dir = Vfs.fromURL(new URL("http://mirrors.ibiblio.org/pub/mirrors/maven2/org/slf4j/slf4j-api/1.5.6/slf4j-api-1.5.6.jar"));
- * </pre>
- * <p>use {@link org.reflections.vfs.Vfs#findFiles(java.util.Collection , Predicate <T>)} to get an
- * iteration of files matching given name predicate over given list of urls
- */
+
 public abstract class Vfs {
   private static List<UrlType> defaultUrlTypes = new ArrayList<>(Arrays.asList(DefaultUrlTypes.values()));
 
-  /**
-   * the default url types that will be used when issuing {@link org.reflections.vfs.Vfs#fromURL(java.net.URL)}
-   */
+
   public static List<UrlType> getDefaultUrlTypes() {
     return defaultUrlTypes;
   }
 
-  /**
-   * sets the static default url types. can be used to statically plug in urlTypes
-   */
+
   public static void setDefaultURLTypes(final List<UrlType> urlTypes) {
     defaultUrlTypes = urlTypes;
   }
 
-  /**
-   * add a static default url types to the beginning of the default url types list. can be used to statically plug in urlTypes
-   */
+
   public static void addDefaultURLTypes(UrlType urlType) {
     defaultUrlTypes.add(0 , urlType);
   }
 
-  /**
-   * tries to create a Dir from the given url, using the given urlTypes
-   */
+
   public static Dir fromURL(final URL url , final UrlType... urlTypes) {
     return fromURL(url , Arrays.asList(urlTypes));
   }
 
-  /**
-   * tries to create a Dir from the given url, using the given urlTypes
-   */
+
   public static Dir fromURL(final URL url , final List<UrlType> urlTypes) {
     for (UrlType type : urlTypes) {
       try {
@@ -111,9 +71,7 @@ public abstract class Vfs {
                                    "with your specialized UrlType.");
   }
 
-  /**
-   * return an iterable of all {@link org.reflections.vfs.Vfs.File} in given urls, starting with given packagePrefix and matching nameFilter
-   */
+
   public static Iterable<File> findFiles(final Collection<URL> inUrls , final String packagePrefix , final Predicate<String> nameFilter) {
     Predicate<File> fileNamePredicate = file -> {
       String path = file.getRelativePath();
@@ -128,9 +86,7 @@ public abstract class Vfs {
     return findFiles(inUrls , fileNamePredicate);
   }
 
-  /**
-   * return an iterable of all {@link org.reflections.vfs.Vfs.File} in given urls, matching filePredicate
-   */
+
   public static Iterable<File> findFiles(final Collection<URL> inUrls , final Predicate<File> filePredicate) {
     Iterable<File> result = new ArrayList<>();
 
@@ -151,16 +107,12 @@ public abstract class Vfs {
     return result;
   }
 
-  /**
-   * tries to create a Dir from the given url, using the defaultUrlTypes
-   */
+
   public static Dir fromURL(final URL url) {
     return fromURL(url , defaultUrlTypes);
   }
 
-  /**
-   * try to get {@link java.io.File} from url
-   */
+
   @Nullable
   public static java.io.File getFile(URL url) {
     java.io.File file;
@@ -201,17 +153,7 @@ public abstract class Vfs {
     return url.toExternalForm().matches(".*\\.jar(\\!.*|$)");
   }
 
-  /**
-   * default url types used by {@link org.reflections.vfs.Vfs#fromURL(java.net.URL)}
-   * <p>
-   * <p>jarFile - creates a {@link org.reflections.vfs.ZipDir} over jar file
-   * <p>jarUrl - creates a {@link org.reflections.vfs.ZipDir} over a jar url (contains ".jar!/" in it's name), using Java's {@link JarURLConnection}
-   * <p>directory - creates a {@link org.reflections.vfs.SystemDir} over a file system directory
-   * <p>jboss vfs - for protocols vfs, using jboss vfs (should be provided in classpath)
-   * <p>jboss vfsfile - creates a {@link UrlTypeVFS} for protocols vfszip and vfsfile.
-   * <p>bundle - for bundle protocol, using eclipse FileLocator (should be provided in classpath)
-   * <p>jarInputStream - creates a {@link JarInputDir} over jar files, using Java's JarInputStream
-   */
+
   public enum DefaultUrlTypes implements UrlType {
     jarFile {
       public boolean matches(URL url) {
@@ -302,9 +244,7 @@ public abstract class Vfs {
     }
   }
 
-  /**
-   * an abstract vfs dir
-   */
+
   public interface Dir {
     String getPath();
 
@@ -313,9 +253,7 @@ public abstract class Vfs {
     void close();
   }
 
-  /**
-   * an abstract vfs file
-   */
+
   public interface File {
     String getName();
 
@@ -324,9 +262,6 @@ public abstract class Vfs {
     InputStream openInputStream() throws IOException;
   }
 
-  /**
-   * a matcher and factory for a url
-   */
   public interface UrlType {
     boolean matches(URL url) throws Exception;
 

@@ -20,7 +20,7 @@ public class MethodParameterNamesScanner extends AbstractScanner {
     final MetadataAdapter md = getMetadataAdapter();
 
     for (Object method : md.getMethods(cls)) {
-      String key = md.getMethodFullKey(cls, method);
+      String key = md.getMethodFullKey(cls , method);
       if (acceptResult(key)) {
         LocalVariableAttribute table = (LocalVariableAttribute) ((MethodInfo) method).getCodeAttribute().getAttribute(LocalVariableAttribute.tag);
         int length = table.tableLength();
@@ -28,7 +28,7 @@ public class MethodParameterNamesScanner extends AbstractScanner {
         if (i < length) {
           List<String> names = new ArrayList<>(length - i);
           while (i < length) names.add(((MethodInfo) method).getConstPool().getUtf8Info(table.nameIndex(i++)));
-          getStore().put(key, Joiner.on(", ").join(names));
+          getStore().put(key , Joiner.on(", ").join(names));
         }
       }
     }

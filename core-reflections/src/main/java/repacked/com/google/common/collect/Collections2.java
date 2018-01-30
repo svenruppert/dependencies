@@ -20,7 +20,7 @@ import repacked.com.google.common.base.Function;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ * <p>
  * Created by RapidPM - Team on 19.09.16.
  */
 public class Collections2 {
@@ -29,15 +29,23 @@ public class Collections2 {
   }
 
   public static <F, T> Collection<T> transform(
-      Collection<F> fromCollection, Function<? super F, T> function) {
-    return new TransformedCollection<>(fromCollection, function);
+      Collection<F> fromCollection , Function<? super F, T> function) {
+    return new TransformedCollection<>(fromCollection , function);
+  }
+
+  static boolean safeContains(Collection<?> collection , @Nullable Object object) {
+    try {
+      return collection.contains(object);
+    } catch (ClassCastException | NullPointerException e) {
+      return false;
+    }
   }
 
   static class TransformedCollection<F, T> extends AbstractCollection<T> {
     final Collection<F> fromCollection;
     final Function<? super F, ? extends T> function;
 
-    TransformedCollection(Collection<F> fromCollection, Function<? super F, ? extends T> function) {
+    TransformedCollection(Collection<F> fromCollection , Function<? super F, ? extends T> function) {
       this.fromCollection = fromCollection;
       this.function = function;
     }
@@ -54,26 +62,12 @@ public class Collections2 {
 
     @Override
     public Iterator<T> iterator() {
-      return Iterators.transform(fromCollection.iterator(), function);
+      return Iterators.transform(fromCollection.iterator() , function);
     }
 
     @Override
     public int size() {
       return fromCollection.size();
-    }
-  }
-
-
-  /**
-   * Delegates to {@link Collection#contains}. Returns {@code false} if the
-   * {@code contains} method throws a {@code ClassCastException} or
-   * {@code NullPointerException}.
-   */
-  static boolean safeContains(Collection<?> collection, @Nullable Object object) {
-    try {
-      return collection.contains(object);
-    } catch (ClassCastException | NullPointerException e) {
-      return false;
     }
   }
 

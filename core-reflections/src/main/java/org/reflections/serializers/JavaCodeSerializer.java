@@ -117,11 +117,7 @@ public class JavaCodeSerializer implements Serializer {
     throw new UnsupportedOperationException("read is not implemented on JavaCodeSerializer");
   }
 
-  /**
-   * name should be in the pattern: path/path/path/package.package.classname,
-   * for example <pre>/data/projects/my/src/main/java/org.my.project.MyStore</pre>
-   * would create class MyStore in package org.my.project in the path /data/projects/my/src/main/java
-   */
+
   public File save(Reflections reflections , String name) {
     if (name.endsWith("/")) {
       name = name.substring(0 , name.length() - 1); //trim / at the end

@@ -11,7 +11,7 @@ import repacked.com.google.common.collect.Multimap;
 /**
  *
  */
-@SuppressWarnings({"RawUseOfParameterizedType", "unchecked"})
+@SuppressWarnings({"RawUseOfParameterizedType" , "unchecked"})
 public abstract class AbstractScanner implements Scanner {
 
   private Configuration configuration;
@@ -44,12 +44,12 @@ public abstract class AbstractScanner implements Scanner {
     return getMetadataAdapter().acceptsInput(file);
   }
 
-  public Object scan(Vfs.File file, Object classObject) {
+  public Object scan(Vfs.File file , Object classObject) {
     if (classObject == null) {
       try {
         classObject = configuration.getMetadataAdapter().getOfCreateClassObject(file);
       } catch (Exception e) {
-        throw new ReflectionsException("could not create class object from file " + file.getRelativePath(), e);
+        throw new ReflectionsException("could not create class object from file " + file.getRelativePath() , e);
       }
     }
     scan(classObject);

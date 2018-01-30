@@ -91,9 +91,7 @@ public abstract class Utils {
     throw new ReflectionsException("Can't resolve member named " + memberName + " for class " + className);
   }
 
-  /**
-   * isEmpty compatible with Java 5
-   */
+
   public static boolean isEmpty(String s) {
     return s == null || s.length() == 0;
   }

@@ -32,9 +32,9 @@ public class MultimapImpl<KEY, VALUES> implements Multimap<KEY, VALUES> {
   private final Map<KEY, Collection<VALUES>> multimap;
 
   private int totalSize;
+  private Supplier<Collection<VALUES>> valuesSupplier = HashSet::new;
 
-
-  public MultimapImpl(Map<KEY, Collection<VALUES>> map, Supplier<Collection<VALUES>> supplier) {
+  public MultimapImpl(Map<KEY, Collection<VALUES>> map , Supplier<Collection<VALUES>> supplier) {
     this.multimap = map;
     this.valuesSupplier = supplier;
   }
@@ -44,13 +44,13 @@ public class MultimapImpl<KEY, VALUES> implements Multimap<KEY, VALUES> {
   }
 
   @Override
-  public boolean put(@Nullable KEY key, @Nullable VALUES value) {
+  public boolean put(@Nullable KEY key , @Nullable VALUES value) {
     Collection<VALUES> collection = multimap.get(key);
     if (collection == null) {
       collection = createCollection(key);
       if (collection.add(value)) {
         totalSize++;
-        multimap.put(key, collection);
+        multimap.put(key , collection);
         return true;
       } else {
         throw new AssertionError("New Collection violated the Collection spec");
@@ -63,10 +63,8 @@ public class MultimapImpl<KEY, VALUES> implements Multimap<KEY, VALUES> {
     }
   }
 
-  private Supplier<Collection<VALUES>> valuesSupplier = HashSet::new;
-
   private Collection<VALUES> createCollection(final KEY key) {
-    multimap.put(key, valuesSupplier.get());
+    multimap.put(key , valuesSupplier.get());
     return multimap.get(key);
   }
 
@@ -84,18 +82,18 @@ public class MultimapImpl<KEY, VALUES> implements Multimap<KEY, VALUES> {
   @Override
   public Iterable<? extends Map.Entry<KEY, VALUES>> entries() {
     return multimap.keySet().stream()
-            .flatMap(key -> multimap.get(key)
-                    .stream()
-                    .map(value ->
-                            (Map.Entry<KEY, VALUES>) new MultiMapEntry(key, value)
-                    )
-            )
-            .collect(Collectors.toList());
+                   .flatMap(key -> multimap.get(key)
+                                           .stream()
+                                           .map(value ->
+                                                    (Map.Entry<KEY, VALUES>) new MultiMapEntry(key , value)
+                                           )
+                   )
+                   .collect(Collectors.toList());
   }
 
   @Override
   public Collection<VALUES> get(final KEY key) {
-    return multimap.getOrDefault(key, Collections.EMPTY_LIST);
+    return multimap.getOrDefault(key , Collections.EMPTY_LIST);
     //return multimap.get(key) != null ? multimap.get(key) : createCollection(key);
 
   }
@@ -108,10 +106,10 @@ public class MultimapImpl<KEY, VALUES> implements Multimap<KEY, VALUES> {
   @Override
   public Collection<VALUES> values() {
     return multimap
-            .values()
-            .stream()
-            .flatMap(Collection::stream)
-            .collect(Collectors.toList());
+        .values()
+        .stream()
+        .flatMap(Collection::stream)
+        .collect(Collectors.toList());
   }
 
   @Override
@@ -119,22 +117,22 @@ public class MultimapImpl<KEY, VALUES> implements Multimap<KEY, VALUES> {
     boolean changed = false;
     Iterable<? extends Map.Entry<KEY, VALUES>> entries = multimap.entries();
     for (Map.Entry<KEY, VALUES> entry : entries) {
-      changed |= put(entry.getKey(), entry.getValue());
+      changed |= put(entry.getKey() , entry.getValue());
     }
     return changed;
   }
 
 
   @Override
-  public boolean putAll(@Nullable KEY key, Iterable<? extends VALUES> values) {
+  public boolean putAll(@Nullable KEY key , Iterable<? extends VALUES> values) {
     // make sure we only call values.iterator() once
     // and we only call get(key) if values is nonempty
     if (values instanceof Collection) {
       final Collection<? extends VALUES> valueCollection = (Collection<? extends VALUES>) values;
-      return !valueCollection.isEmpty() && get(key).addAll(valueCollection);
+      return ! valueCollection.isEmpty() && get(key).addAll(valueCollection);
     } else {
       Iterator<? extends VALUES> valueItr = values.iterator();
-      return valueItr.hasNext() && Iterators.addAll(get(key), valueItr);
+      return valueItr.hasNext() && Iterators.addAll(get(key) , valueItr);
     }
   }
 

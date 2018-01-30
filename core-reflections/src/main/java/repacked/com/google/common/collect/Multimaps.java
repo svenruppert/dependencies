@@ -24,8 +24,8 @@ public class Multimaps {
   private Multimaps() {
   }
 
-  public static <KEY, VALUES> Multimap<KEY, VALUES> newSetMultimap(final Map<KEY, Collection<VALUES>> map,                                                                   final Supplier<Collection<VALUES>> supplier) {
-    return new MultimapImpl<KEY, VALUES>(map, supplier) {
+  public static <KEY, VALUES> Multimap<KEY, VALUES> newSetMultimap(final Map<KEY, Collection<VALUES>> map , final Supplier<Collection<VALUES>> supplier) {
+    return new MultimapImpl<KEY, VALUES>(map , supplier) {
     };
   }
 

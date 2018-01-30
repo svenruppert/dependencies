@@ -2,9 +2,7 @@ package org.reflections.scanners;
 
 import repacked.com.google.common.base.Joiner;
 
-/**
- * scans fields and methods and stores fqn as key and elements as values
- */
+
 @SuppressWarnings({"unchecked"})
 public class TypeElementsScanner extends AbstractScanner {
   private boolean includeFields = true;
@@ -14,30 +12,30 @@ public class TypeElementsScanner extends AbstractScanner {
 
   public void scan(Object cls) {
     String className = getMetadataAdapter().getClassName(cls);
-    if (!acceptResult(className)) return;
+    if (! acceptResult(className)) return;
 
-    getStore().put(className, "");
+    getStore().put(className , "");
 
     if (includeFields) {
       for (Object field : getMetadataAdapter().getFields(cls)) {
         String fieldName = getMetadataAdapter().getFieldName(field);
-        getStore().put(className, fieldName);
+        getStore().put(className , fieldName);
       }
     }
 
     if (includeMethods) {
       for (Object method : getMetadataAdapter().getMethods(cls)) {
-        if (!publicOnly || getMetadataAdapter().isPublic(method)) {
+        if (! publicOnly || getMetadataAdapter().isPublic(method)) {
           String methodKey = getMetadataAdapter().getMethodName(method) + "(" +
-              Joiner.on(", ").join(getMetadataAdapter().getParameterNames(method)) + ")";
-          getStore().put(className, methodKey);
+                             Joiner.on(", ").join(getMetadataAdapter().getParameterNames(method)) + ")";
+          getStore().put(className , methodKey);
         }
       }
     }
 
     if (includeAnnotations) {
       for (Object annotation : getMetadataAdapter().getClassAnnotationNames(cls)) {
-        getStore().put(className, "@" + annotation);
+        getStore().put(className , "@" + annotation);
       }
     }
   }

@@ -34,25 +34,11 @@ public class Predicates {
   }
 
 
-  /**
-   * Returns a predicate that evaluates to {@code true} if the given predicate evaluates to
-   * {@code false}.
-   */
   public static <T> Predicate<T> not(Predicate<T> predicate) {
     return new NotPredicate<>(predicate);
   }
 
-  /**
-   * Returns a predicate that evaluates to {@code true} if the object reference being tested is a
-   * member of the given collection. It does not defensively copy the collection passed in, so
-   * future changes to it will alter the behavior of the predicate.
-   * <p>
-   * <p>This method can technically accept any {@code Collection<?>}, but using a typed collection
-   * helps prevent bugs. This approach doesn't block any potential users since it is always possible
-   * to use {@code Predicates.<Object>in()}.
-   *
-   * @param target the collection that may contain the function input
-   */
+
   public static <T> Predicate<T> in(Collection<? extends T> target) {
     return new InPredicate<>(target);
   }
@@ -78,172 +64,14 @@ public class Predicates {
     return list;
   }
 
-  /**
-   * Returns a predicate that evaluates to {@code true} if the object reference being tested is
-   * null.
-   */
+
   public static <T> Predicate<T> isNull() {
     return ObjectPredicate.IS_NULL.withNarrowedType();
   }
 
-  /**
-   * Returns a predicate that evaluates to {@code true} if the object being tested {@code equals()}
-   * the given target or both are null.
-   */
+
   public static <T> Predicate<T> equalTo(@Nullable T target) {
     return (target == null) ? Predicates.<T>isNull() : new IsEqualToPredicate<T>(target);
-  }
-
-
-  private static class InPredicate<T> implements Predicate<T>, Serializable {
-    private static final long serialVersionUID = 0;
-    private final Collection<?> target;
-
-    private InPredicate(Collection<?> target) {
-      this.target = checkNotNull(target);
-    }
-
-    @Override
-    public boolean apply(T t) {
-      try {
-        return target.contains(t);
-      } catch (NullPointerException | ClassCastException e) {
-        return false;
-      }
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-      if (obj instanceof InPredicate) {
-        InPredicate<?> that = (InPredicate<?>) obj;
-        return target.equals(that.target);
-      }
-      return false;
-    }
-
-    @Override
-    public int hashCode() {
-      return target.hashCode();
-    }
-
-    @Override
-    public String toString() {
-      return "Predicates.in(" + target + ")";
-    }
-
-
-  }
-
-  private static class NotPredicate<T> implements Predicate<T>, Serializable {
-    private static final long serialVersionUID = 0;
-    final Predicate<T> predicate;
-
-    NotPredicate(Predicate<T> predicate) {
-      this.predicate = checkNotNull(predicate);
-    }
-
-    @Override
-    public boolean apply(T t) {
-      return !predicate.apply(t);
-    }
-
-    @Override
-    public int hashCode() {
-      return ~predicate.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-      if (obj instanceof NotPredicate) {
-        NotPredicate<?> that = (NotPredicate<?>) obj;
-        return predicate.equals(that.predicate);
-      }
-      return false;
-    }
-
-    @Override
-    public String toString() {
-      return "Predicates.not(" + predicate + ")";
-    }
-
-
-  }
-
-  private static class AndPredicate<T> implements Predicate<T>, Serializable {
-    private static final long serialVersionUID = 0;
-    private final List<? extends Predicate<? super T>> components;
-
-    private AndPredicate(List<? extends Predicate<? super T>> components) {
-      this.components = components;
-    }
-
-    @Override
-    public boolean apply(T t) {
-      // Avoid using the Iterator to avoid generating garbage (issue 820).
-      for (Predicate<? super T> component : components) {
-        if (!component.apply(t)) {
-          return false;
-        }
-      }
-      return true;
-    }
-
-    @Override
-    public int hashCode() {
-      // add a random number to avoid collisions with OrPredicate
-      return components.hashCode() + 0x12472c2c;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-      if (obj instanceof AndPredicate) {
-        AndPredicate<?> that = (AndPredicate<?>) obj;
-        return components.equals(that.components);
-      }
-      return false;
-    }
-
-    @Override
-    public String toString() {
-      return "Predicates.and(" + Joiner.on(',').join(components) + ")";
-    }
-
-
-  }
-
-
-  private static class IsEqualToPredicate<T> implements Predicate<T>, Serializable {
-    private final T target;
-
-    private IsEqualToPredicate(T target) {
-      this.target = target;
-    }
-
-    @Override
-    public boolean apply(T t) {
-      return target.equals(t);
-    }
-
-    @Override
-    public int hashCode() {
-      return target.hashCode();
-    }
-
-    @Override
-    public boolean equals(@Nullable Object obj) {
-      if (obj instanceof IsEqualToPredicate) {
-        IsEqualToPredicate<?> that = (IsEqualToPredicate<?>) obj;
-        return target.equals(that.target);
-      }
-      return false;
-    }
-
-    @Override
-    public String toString() {
-      return "Predicates.equalTo(" + target + ")";
-    }
-
-    private static final long serialVersionUID = 0;
   }
 
 
@@ -297,6 +125,155 @@ public class Predicates {
       // safe contravariant cast
     <T> Predicate<T> withNarrowedType() {
       return (Predicate<T>) this;
+    }
+  }
+
+  private static class InPredicate<T> implements Predicate<T>, Serializable {
+    private static final long serialVersionUID = 0;
+    private final Collection<?> target;
+
+    private InPredicate(Collection<?> target) {
+      this.target = checkNotNull(target);
+    }
+
+    @Override
+    public boolean apply(T t) {
+      try {
+        return target.contains(t);
+      } catch (NullPointerException | ClassCastException e) {
+        return false;
+      }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (obj instanceof InPredicate) {
+        InPredicate<?> that = (InPredicate<?>) obj;
+        return target.equals(that.target);
+      }
+      return false;
+    }
+
+    @Override
+    public int hashCode() {
+      return target.hashCode();
+    }
+
+    @Override
+    public String toString() {
+      return "Predicates.in(" + target + ")";
+    }
+
+
+  }
+
+  private static class NotPredicate<T> implements Predicate<T>, Serializable {
+    private static final long serialVersionUID = 0;
+    final Predicate<T> predicate;
+
+    NotPredicate(Predicate<T> predicate) {
+      this.predicate = checkNotNull(predicate);
+    }
+
+    @Override
+    public boolean apply(T t) {
+      return ! predicate.apply(t);
+    }
+
+    @Override
+    public int hashCode() {
+      return ~ predicate.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (obj instanceof NotPredicate) {
+        NotPredicate<?> that = (NotPredicate<?>) obj;
+        return predicate.equals(that.predicate);
+      }
+      return false;
+    }
+
+    @Override
+    public String toString() {
+      return "Predicates.not(" + predicate + ")";
+    }
+
+
+  }
+
+  private static class AndPredicate<T> implements Predicate<T>, Serializable {
+    private static final long serialVersionUID = 0;
+    private final List<? extends Predicate<? super T>> components;
+
+    private AndPredicate(List<? extends Predicate<? super T>> components) {
+      this.components = components;
+    }
+
+    @Override
+    public boolean apply(T t) {
+      // Avoid using the Iterator to avoid generating garbage (issue 820).
+      for (Predicate<? super T> component : components) {
+        if (! component.apply(t)) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      // add a random number to avoid collisions with OrPredicate
+      return components.hashCode() + 0x12472c2c;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (obj instanceof AndPredicate) {
+        AndPredicate<?> that = (AndPredicate<?>) obj;
+        return components.equals(that.components);
+      }
+      return false;
+    }
+
+    @Override
+    public String toString() {
+      return "Predicates.and(" + Joiner.on(',').join(components) + ")";
+    }
+
+
+  }
+
+  private static class IsEqualToPredicate<T> implements Predicate<T>, Serializable {
+    private static final long serialVersionUID = 0;
+    private final T target;
+
+    private IsEqualToPredicate(T target) {
+      this.target = target;
+    }
+
+    @Override
+    public boolean apply(T t) {
+      return target.equals(t);
+    }
+
+    @Override
+    public int hashCode() {
+      return target.hashCode();
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+      if (obj instanceof IsEqualToPredicate) {
+        IsEqualToPredicate<?> that = (IsEqualToPredicate<?>) obj;
+        return target.equals(that.target);
+      }
+      return false;
+    }
+
+    @Override
+    public String toString() {
+      return "Predicates.equalTo(" + target + ")";
     }
   }
 }

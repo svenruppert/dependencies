@@ -20,23 +20,7 @@ import org.reflections.Store;
 import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.Utils;
 
-/**
- * serialization of Reflections to xml
- *
- * <p>an example of produced xml:
- * <pre>
- * &#60?xml version="1.0" encoding="UTF-8"?>
- *
- * &#60Reflections>
- *  &#60SubTypesScanner>
- *      &#60entry>
- *          &#60key>com.google.inject.Module&#60/key>
- *          &#60values>
- *              &#60value>fully.qualified.name.1&#60/value>
- *              &#60value>fully.qualified.name.2&#60/value>
- * ...
- * </pre>
- */
+
 public class XmlSerializer implements Serializer {
 
   public Reflections read(InputStream inputStream) {
@@ -59,32 +43,32 @@ public class XmlSerializer implements Serializer {
           Element values = entry.element("values");
           for (Object o3 : values.elements()) {
             Element value = (Element) o3;
-            reflections.getStore().getOrCreate(index.getName()).put(key.getText(), value.getText());
+            reflections.getStore().getOrCreate(index.getName()).put(key.getText() , value.getText());
           }
         }
       }
     } catch (DocumentException e) {
-      throw new ReflectionsException("could not read.", e);
+      throw new ReflectionsException("could not read." , e);
     } catch (Throwable e) {
-      throw new RuntimeException("Could not read. Make sure relevant dependencies exist on classpath.", e);
+      throw new RuntimeException("Could not read. Make sure relevant dependencies exist on classpath." , e);
     }
 
     return reflections;
   }
 
-  public File save(final Reflections reflections, final String filename) {
+  public File save(final Reflections reflections , final String filename) {
     File file = Utils.prepareFile(filename);
 
 
     try {
       Document document = createDocument(reflections);
-      XMLWriter xmlWriter = new XMLWriter(new FileOutputStream(file), OutputFormat.createPrettyPrint());
+      XMLWriter xmlWriter = new XMLWriter(new FileOutputStream(file) , OutputFormat.createPrettyPrint());
       xmlWriter.write(document);
       xmlWriter.close();
     } catch (IOException e) {
-      throw new ReflectionsException("could not save to file " + filename, e);
+      throw new ReflectionsException("could not save to file " + filename , e);
     } catch (Throwable e) {
-      throw new RuntimeException("Could not save to file " + filename + ". Make sure relevant dependencies exist on classpath.", e);
+      throw new RuntimeException("Could not save to file " + filename + ". Make sure relevant dependencies exist on classpath." , e);
     }
 
     return file;
@@ -95,7 +79,7 @@ public class XmlSerializer implements Serializer {
 
     try {
       StringWriter writer = new StringWriter();
-      XMLWriter xmlWriter = new XMLWriter(writer, OutputFormat.createPrettyPrint());
+      XMLWriter xmlWriter = new XMLWriter(writer , OutputFormat.createPrettyPrint());
       xmlWriter.write(document);
       xmlWriter.close();
       return writer.toString();

@@ -31,7 +31,7 @@ public interface MetadataAdapter<C, F, M> {
 
   List<String> getMethodAnnotationNames(final M method);
 
-  List<String> getParameterAnnotationNames(final M method, final int parameterIndex);
+  List<String> getParameterAnnotationNames(final M method , final int parameterIndex);
 
   String getReturnTypeName(final M method);
 
@@ -41,9 +41,9 @@ public interface MetadataAdapter<C, F, M> {
 
   String getMethodModifier(M method);
 
-  String getMethodKey(C cls, M method);
+  String getMethodKey(C cls , M method);
 
-  String getMethodFullKey(C cls, M method);
+  String getMethodFullKey(C cls , M method);
 
   boolean isPublic(Object o);
 

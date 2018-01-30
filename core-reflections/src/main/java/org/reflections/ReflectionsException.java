@@ -11,8 +11,8 @@ public class ReflectionsException extends RuntimeException {
     super(message);
   }
 
-  public ReflectionsException(String message, Throwable cause) {
-    super(message, cause);
+  public ReflectionsException(String message , Throwable cause) {
+    super(message , cause);
   }
 
   public ReflectionsException(Throwable cause) {

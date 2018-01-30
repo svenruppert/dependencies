@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
  * Created by benjamin-bosch on 07.11.16.
  */
 public interface Multimap<KEY, VALUES> {
-  boolean put(@Nullable KEY key, @Nullable VALUES value);
+  boolean put(@Nullable KEY key , @Nullable VALUES value);
 
   boolean isEmpty();
 
@@ -26,7 +26,7 @@ public interface Multimap<KEY, VALUES> {
 
   boolean putAll(Multimap<KEY, VALUES> multimap);
 
-  boolean putAll(@Nullable KEY key, Iterable<? extends VALUES> values);
+  boolean putAll(@Nullable KEY key , Iterable<? extends VALUES> values);
 
   Map<KEY, Collection<VALUES>> asMap();
 }

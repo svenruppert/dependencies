@@ -11,7 +11,7 @@ package repacked.com.google.common.base;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ * <p>
  * Created by RapidPM - Team on 18.09.16.
  */
 public interface Predicate<T> {

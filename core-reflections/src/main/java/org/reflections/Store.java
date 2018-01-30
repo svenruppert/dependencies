@@ -37,30 +37,24 @@ public class Store {
     concurrent = configuration.getExecutorService() != null;
   }
 
-  /**
-   * return all indices
-   */
+
   public Set<String> keySet() {
     return storeMap.keySet();
   }
 
-  /**
-   * get or create the multimap object for the given {@code index}
-   */
+
   public Multimap<String, String> getOrCreate(String index) {
     Multimap<String, String> mmap = storeMap.get(index);
     if (mmap == null) {
       Multimap<String, String> multimap =
-          Multimaps.newSetMultimap(new HashMap<String, Collection<String>>(), HashSet::new);
+          Multimaps.newSetMultimap(new HashMap<String, Collection<String>>() , HashSet::new);
       mmap = concurrent ? Multimaps.synchronizedSetMultimap(multimap) : multimap;
-      storeMap.put(index, mmap);
+      storeMap.put(index , mmap);
     }
     return mmap;
   }
 
-  /**
-   * get the multimap object for the given {@code index}, otherwise throws a {@link org.reflections.ReflectionsException}
-   */
+
   public Multimap<String, String> get(String index) {
     Multimap<String, String> mmap = storeMap.get(index);
     if (mmap == null) {
@@ -69,17 +63,13 @@ public class Store {
     return mmap;
   }
 
-  /**
-   * get the values stored for the given {@code index} and {@code keys}
-   */
-  public Iterable<String> get(String index, String... keys) {
-    return get(index, Arrays.asList(keys));
+
+  public Iterable<String> get(String index , String... keys) {
+    return get(index , Arrays.asList(keys));
   }
 
-  /**
-   * get the values stored for the given {@code index} and {@code keys}
-   */
-  public Iterable<String> get(String index, Iterable<String> keys) {
+
+  public Iterable<String> get(String index , Iterable<String> keys) {
     Multimap<String, String> mmap = get(index);
     IterableChain<String> result = new IterableChain<>();
     for (String key : keys) {
@@ -88,32 +78,26 @@ public class Store {
     return result;
   }
 
-  /**
-   * recursively get the values stored for the given {@code index} and {@code keys}, including keys
-   */
-  private Iterable<String> getAllIncluding(String index, Iterable<String> keys, IterableChain<String> result) {
+
+  private Iterable<String> getAllIncluding(String index , Iterable<String> keys , IterableChain<String> result) {
     result.addAll(keys);
     for (String key : keys) {
-      Iterable<String> values = get(index, key);
+      Iterable<String> values = get(index , key);
       if (values.iterator().hasNext()) {
-        getAllIncluding(index, values, result);
+        getAllIncluding(index , values , result);
       }
     }
     return result;
   }
 
-  /**
-   * recursively get the values stored for the given {@code index} and {@code keys}, not including keys
-   */
-  public Iterable<String> getAll(String index, String key) {
-    return getAllIncluding(index, get(index, key), new IterableChain<>());
+
+  public Iterable<String> getAll(String index , String key) {
+    return getAllIncluding(index , get(index , key) , new IterableChain<>());
   }
 
-  /**
-   * recursively get the values stored for the given {@code index} and {@code keys}, not including keys
-   */
-  public Iterable<String> getAll(String index, Iterable<String> keys) {
-    return getAllIncluding(index, get(index, keys), new IterableChain<>());
+
+  public Iterable<String> getAll(String index , Iterable<String> keys) {
+    return getAllIncluding(index , get(index , keys) , new IterableChain<>());
   }
 
   private static class IterableChain<T> implements Iterable<T> {

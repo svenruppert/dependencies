@@ -22,7 +22,7 @@ public interface Scanner {
 
   boolean acceptsInput(String file);
 
-  Object scan(Vfs.File file, @Nullable Object classObject);
+  Object scan(Vfs.File file , @Nullable Object classObject);
 
   boolean acceptResult(String fqn);
 }

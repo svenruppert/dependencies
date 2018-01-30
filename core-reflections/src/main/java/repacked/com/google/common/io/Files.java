@@ -23,16 +23,8 @@ public class Files {
   private Files() {
   }
 
-  /**
-   * Writes a character sequence (such as a string) to a file using the given character set.
-   *
-   * @param from    the character sequence to write
-   * @param to      the destination file
-   * @param charset the charset used to encode the output stream; see { StandardCharsets} for
-   *                helpful predefined constants
-   * @throws IOException if an I/O error occurs
-   */
-  public static void write(CharSequence from, File to, Charset charset) throws IOException {
+
+  public static void write(CharSequence from , File to , Charset charset) throws IOException {
     try (FileOutputStream fileOutputStream = new FileOutputStream(to)) {
       final String string = from.toString();
       fileOutputStream.write(string.getBytes(charset));

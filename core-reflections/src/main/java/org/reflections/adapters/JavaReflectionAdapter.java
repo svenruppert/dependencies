@@ -21,6 +21,23 @@ import repacked.com.google.common.base.Joiner;
 /** */
 public class JavaReflectionAdapter implements MetadataAdapter<Class, Field, Member> {
 
+  public static String getName(Class type) {
+    if (type.isArray()) {
+      try {
+        Class cl = type;
+        int dim = 0;
+        while (cl.isArray()) {
+          dim++;
+          cl = cl.getComponentType();
+        }
+        return cl.getName() + Utils.repeat("[]" , dim);
+      } catch (Throwable e) {
+        //
+      }
+    }
+    return type.getName();
+  }
+
   public List<Field> getFields(Class cls) {
     return Arrays.asList(cls.getDeclaredFields());
   }
@@ -34,14 +51,14 @@ public class JavaReflectionAdapter implements MetadataAdapter<Class, Field, Memb
 
   public String getMethodName(Member method) {
     return method instanceof Method ? method.getName() :
-        method instanceof Constructor ? "<init>" : null;
+           method instanceof Constructor ? "<init>" : null;
   }
 
   public List<String> getParameterNames(final Member member) {
     List<String> result = new ArrayList();
 
     Class<?>[] parameterTypes = member instanceof Method ? ((Method) member).getParameterTypes() :
-        member instanceof Constructor ? ((Constructor) member).getParameterTypes() : null;
+                                member instanceof Constructor ? ((Constructor) member).getParameterTypes() : null;
 
     if (parameterTypes != null) {
       for (Class<?> paramType : parameterTypes) {
@@ -64,14 +81,14 @@ public class JavaReflectionAdapter implements MetadataAdapter<Class, Field, Memb
   public List<String> getMethodAnnotationNames(Member method) {
     Annotation[] annotations =
         method instanceof Method ? ((Method) method).getDeclaredAnnotations() :
-            method instanceof Constructor ? ((Constructor) method).getDeclaredAnnotations() : null;
+        method instanceof Constructor ? ((Constructor) method).getDeclaredAnnotations() : null;
     return getAnnotationNames(annotations);
   }
 
-  public List<String> getParameterAnnotationNames(Member method, int parameterIndex) {
+  public List<String> getParameterAnnotationNames(Member method , int parameterIndex) {
     Annotation[][] annotations =
         method instanceof Method ? ((Method) method).getParameterAnnotations() :
-            method instanceof Constructor ? ((Constructor) method).getParameterAnnotations() : null;
+        method instanceof Constructor ? ((Constructor) method).getParameterAnnotations() : null;
 
     return getAnnotationNames(annotations != null ? annotations[parameterIndex] : null);
   }
@@ -85,30 +102,30 @@ public class JavaReflectionAdapter implements MetadataAdapter<Class, Field, Memb
   }
 
   public Class getOfCreateClassObject(Vfs.File file) throws Exception {
-    return getOfCreateClassObject(file, null);
+    return getOfCreateClassObject(file , null);
   }
 
-  public Class getOfCreateClassObject(Vfs.File file, @Nullable ClassLoader... loaders) throws Exception {
-    String name = file.getRelativePath().replace("/", ".").replace(".class", "");
-    return forName(name, loaders);
+  public Class getOfCreateClassObject(Vfs.File file , @Nullable ClassLoader... loaders) throws Exception {
+    String name = file.getRelativePath().replace("/" , ".").replace(".class" , "");
+    return forName(name , loaders);
   }
 
   public String getMethodModifier(Member method) {
     return Modifier.toString(method.getModifiers());
   }
 
-  public String getMethodKey(Class cls, Member method) {
+  public String getMethodKey(Class cls , Member method) {
     return getMethodName(method) + "(" + Joiner.on(", ").join(getParameterNames(method)) + ")";
   }
 
-  public String getMethodFullKey(Class cls, Member method) {
-    return getClassName(cls) + "." + getMethodKey(cls, method);
+  public String getMethodFullKey(Class cls , Member method) {
+    return getClassName(cls) + "." + getMethodKey(cls , method);
   }
 
   public boolean isPublic(Object o) {
     Integer mod =
         o instanceof Class ? ((Class) o).getModifiers() :
-            o instanceof Member ? ((Member) o).getModifiers() : null;
+        o instanceof Member ? ((Member) o).getModifiers() : null;
 
     return mod != null && Modifier.isPublic(mod);
   }
@@ -140,22 +157,5 @@ public class JavaReflectionAdapter implements MetadataAdapter<Class, Field, Memb
       names.add(annotation.annotationType().getName());
     }
     return names;
-  }
-
-  public static String getName(Class type) {
-    if (type.isArray()) {
-      try {
-        Class cl = type;
-        int dim = 0;
-        while (cl.isArray()) {
-          dim++;
-          cl = cl.getComponentType();
-        }
-        return cl.getName() + Utils.repeat("[]", dim);
-      } catch (Throwable e) {
-        //
-      }
-    }
-    return type.getName();
   }
 }

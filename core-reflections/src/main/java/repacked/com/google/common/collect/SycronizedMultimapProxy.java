@@ -20,9 +20,9 @@ public class SycronizedMultimapProxy<KEY, VALUES> implements Multimap<KEY, VALUE
 
 
   @Override
-  public boolean put(@Nullable KEY key, @Nullable VALUES value) {
+  public boolean put(@Nullable KEY key , @Nullable VALUES value) {
     synchronized (mutex) {
-      return delegate.put(key, value);
+      return delegate.put(key , value);
     }
   }
 
@@ -76,9 +76,9 @@ public class SycronizedMultimapProxy<KEY, VALUES> implements Multimap<KEY, VALUE
   }
 
   @Override
-  public boolean putAll(@Nullable KEY key, Iterable<? extends VALUES> values) {
+  public boolean putAll(@Nullable KEY key , Iterable<? extends VALUES> values) {
     synchronized (mutex) {
-      return delegate.putAll(key, values);
+      return delegate.putAll(key , values);
     }
   }
 

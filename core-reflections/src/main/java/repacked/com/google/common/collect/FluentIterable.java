@@ -22,49 +22,23 @@ import java.util.stream.StreamSupport;
 public abstract class FluentIterable<E> implements Iterable<E> {
 
 
-  /**
-   * Returns a fluent iterable that combines two iterables. The returned iterable has an iterator
-   * that traverses the elements in {@code a}, followed by the elements in {@code b}. The source
-   * iterators are not polled until necessary.
-   * <p>
-   * <p>The returned iterable's iterator supports {@code remove()} when the corresponding input
-   * iterator supports it.
-   * <p>
-   * <p><b>{@code Stream} equivalent:</b> { Stream#concat}.
-   *
-   * @since 20.0
-   */
-  public static <T> Iterable<T> concat(Iterable<? extends T> a, Iterable<? extends T> b) {
+  public static <T> Iterable<T> concat(Iterable<? extends T> a , Iterable<? extends T> b) {
     return Stream
-            .concat(
-                    StreamSupport.stream(a.spliterator(), false),
-                    StreamSupport.stream(b.spliterator(), false))
-            .collect(Collectors.toList());
+        .concat(
+            StreamSupport.stream(a.spliterator() , false) ,
+            StreamSupport.stream(b.spliterator() , false))
+        .collect(Collectors.toList());
 //    return concat(ImmutableList.of(a, b));
   }
 
 
-  /**
-   * Returns a fluent iterable that combines several iterables. The returned iterable has an
-   * iterator that traverses the elements of each iterable in {@code inputs}. The input iterators
-   * are not polled until necessary.
-   * <p>
-   * <p>The returned iterable's iterator supports {@code remove()} when the corresponding input
-   * iterator supports it. The methods of the returned iterable may throw {@code
-   * NullPointerException} if any of the input iterators is {@code null}.
-   * <p>
-   * <p><b>{@code Stream} equivalent:</b> {@code streamOfStreams.flatMap(s -> s)} or {@code
-   * streamOfIterables.flatMap(Streams::stream)}. (See { Streams#stream}.)
-   *
-   * @since 20.0
-   */
   public static <T> Iterable<T> concat(final Iterable<Iterable<T>> inputs) {
 
 
     return StreamSupport
-            .stream(inputs.spliterator(), false)
-            .filter(Objects::nonNull)
-            .flatMap(itreable -> StreamSupport.stream(itreable.spliterator(), false))
-            .collect(Collectors.toList());
+        .stream(inputs.spliterator() , false)
+        .filter(Objects::nonNull)
+        .flatMap(itreable -> StreamSupport.stream(itreable.spliterator() , false))
+        .collect(Collectors.toList());
   }
 }

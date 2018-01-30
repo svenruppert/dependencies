@@ -36,7 +36,7 @@ public class MemberUsageScanner extends AbstractScanner {
       }
       ctClass.detach();
     } catch (Exception e) {
-      throw new ReflectionsException("Could not scan method usage for " + getMetadataAdapter().getClassName(cls), e);
+      throw new ReflectionsException("Could not scan method usage for " + getMetadataAdapter().getClassName(cls) , e);
     }
   }
 
@@ -59,15 +59,15 @@ public class MemberUsageScanner extends AbstractScanner {
   void scanMember(CtBehavior member) throws CannotCompileException {
     //key contains this$/val$ means local field/parameter closure
     final String key = member.getDeclaringClass().getName() + "." + member.getMethodInfo().getName() +
-        "(" + parameterNames(member.getMethodInfo()) + ")"; //+ " #" + member.getMethodInfo().getLineNumber(0)
+                       "(" + parameterNames(member.getMethodInfo()) + ")"; //+ " #" + member.getMethodInfo().getLineNumber(0)
     member.instrument(new ExprEditor() {
       @Override
       public void edit(NewExpr e) throws CannotCompileException {
         try {
           put(e.getConstructor().getDeclaringClass().getName() + "." + "<init>" +
-              "(" + parameterNames(e.getConstructor().getMethodInfo()) + ")", e.getLineNumber(), key);
+              "(" + parameterNames(e.getConstructor().getMethodInfo()) + ")" , e.getLineNumber() , key);
         } catch (NotFoundException e1) {
-          throw new ReflectionsException("Could not find new instance usage in " + key, e1);
+          throw new ReflectionsException("Could not find new instance usage in " + key , e1);
         }
       }
 
@@ -75,9 +75,9 @@ public class MemberUsageScanner extends AbstractScanner {
       public void edit(MethodCall m) throws CannotCompileException {
         try {
           put(m.getMethod().getDeclaringClass().getName() + "." + m.getMethodName() +
-              "(" + parameterNames(m.getMethod().getMethodInfo()) + ")", m.getLineNumber(), key);
+              "(" + parameterNames(m.getMethod().getMethodInfo()) + ")" , m.getLineNumber() , key);
         } catch (NotFoundException e) {
-          throw new ReflectionsException("Could not find member " + m.getClassName() + " in " + key, e);
+          throw new ReflectionsException("Could not find member " + m.getClassName() + " in " + key , e);
         }
       }
 
@@ -85,18 +85,18 @@ public class MemberUsageScanner extends AbstractScanner {
       public void edit(ConstructorCall c) throws CannotCompileException {
         try {
           put(c.getConstructor().getDeclaringClass().getName() + "." + "<init>" +
-              "(" + parameterNames(c.getConstructor().getMethodInfo()) + ")", c.getLineNumber(), key);
+              "(" + parameterNames(c.getConstructor().getMethodInfo()) + ")" , c.getLineNumber() , key);
         } catch (NotFoundException e) {
-          throw new ReflectionsException("Could not find member " + c.getClassName() + " in " + key, e);
+          throw new ReflectionsException("Could not find member " + c.getClassName() + " in " + key , e);
         }
       }
 
       @Override
       public void edit(FieldAccess f) throws CannotCompileException {
         try {
-          put(f.getField().getDeclaringClass().getName() + "." + f.getFieldName(), f.getLineNumber(), key);
+          put(f.getField().getDeclaringClass().getName() + "." + f.getFieldName() , f.getLineNumber() , key);
         } catch (NotFoundException e) {
-          throw new ReflectionsException("Could not find member " + f.getFieldName() + " in " + key, e);
+          throw new ReflectionsException("Could not find member " + f.getFieldName() + " in " + key , e);
         }
       }
     });
@@ -106,9 +106,9 @@ public class MemberUsageScanner extends AbstractScanner {
     return Joiner.on(", ").join(getMetadataAdapter().getParameterNames(info));
   }
 
-  private void put(String key, int lineNumber, String value) {
+  private void put(String key , int lineNumber , String value) {
     if (acceptResult(key)) {
-      getStore().put(key, value + " #" + lineNumber);
+      getStore().put(key , value + " #" + lineNumber);
     }
   }
 }

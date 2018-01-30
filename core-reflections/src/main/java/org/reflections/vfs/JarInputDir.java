@@ -33,7 +33,7 @@ public class JarInputDir implements Vfs.Dir {
         try {
           jarInputStream = new JarInputStream(url.openConnection().getInputStream());
         } catch (Exception e) {
-          throw new ReflectionsException("Could not open url connection", e);
+          throw new ReflectionsException("Could not open url connection" , e);
         }
       }
 
@@ -48,11 +48,11 @@ public class JarInputDir implements Vfs.Dir {
             long size = entry.getSize();
             if (size < 0) size = 0xffffffffL + size; //JDK-6916399
             nextCursor += size;
-            if (!entry.isDirectory()) {
-              return new JarInputFile(entry, JarInputDir.this, cursor, nextCursor);
+            if (! entry.isDirectory()) {
+              return new JarInputFile(entry , JarInputDir.this , cursor , nextCursor);
             }
           } catch (IOException e) {
-            throw new ReflectionsException("could not get next zip entry", e);
+            throw new ReflectionsException("could not get next zip entry" , e);
           }
         }
       }

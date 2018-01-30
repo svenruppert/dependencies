@@ -10,7 +10,7 @@ public class MultiMapEntry<KEY, VALUE> implements Map.Entry<KEY, VALUE> {
   private KEY key;
   private VALUE value;
 
-  public MultiMapEntry(KEY key, VALUE value) {
+  public MultiMapEntry(KEY key , VALUE value) {
     this.key = key;
     this.value = value;
   }
@@ -33,7 +33,7 @@ public class MultiMapEntry<KEY, VALUE> implements Map.Entry<KEY, VALUE> {
 
     MultiMapEntry<?, ?> that = (MultiMapEntry<?, ?>) o;
 
-    if (key != null ? !key.equals(that.key) : that.key != null) return false;
+    if (key != null ? ! key.equals(that.key) : that.key != null) return false;
     return value != null ? value.equals(that.value) : that.value == null;
 
   }
