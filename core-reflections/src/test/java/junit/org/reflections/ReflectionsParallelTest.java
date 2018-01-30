@@ -1,8 +1,8 @@
 package junit.org.reflections;
 
-import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.MemberUsageScanner;
@@ -17,19 +17,19 @@ import org.reflections.util.ConfigurationBuilder;
 /** */
 public class ReflectionsParallelTest extends ReflectionsTest {
 
-  @BeforeClass
+  @BeforeAll
   public static void init() {
     reflections = new Reflections(new ConfigurationBuilder()
-        .setUrls(asList(ClasspathHelper.forClass(TestModel.class)))
-        .filterInputsBy(TestModelFilter)
-        .setScanners(
-            new SubTypesScanner(false),
-            new TypeAnnotationsScanner(),
-            new FieldAnnotationsScanner(),
-            new MethodAnnotationsScanner(),
-            new MethodParameterScanner(),
-            new MethodParameterNamesScanner(),
-            new MemberUsageScanner())
-        .useParallelExecutor());
+                                      .setUrls(singletonList(ClasspathHelper.forClass(TestModel.class)))
+                                      .filterInputsBy(TestModelFilter)
+                                      .setScanners(
+                                          new SubTypesScanner(false) ,
+                                          new TypeAnnotationsScanner() ,
+                                          new FieldAnnotationsScanner() ,
+                                          new MethodAnnotationsScanner() ,
+                                          new MethodParameterScanner() ,
+                                          new MethodParameterNamesScanner() ,
+                                          new MemberUsageScanner())
+                                      .useParallelExecutor());
   }
 }

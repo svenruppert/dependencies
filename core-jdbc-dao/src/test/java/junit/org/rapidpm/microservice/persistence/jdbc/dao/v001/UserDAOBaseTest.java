@@ -20,11 +20,11 @@
 package junit.org.rapidpm.microservice.persistence.jdbc.dao.v001;
 
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.rapidpm.microservice.persistence.jdbc.JDBCConnectionPools;
 import junit.org.rapidpm.microservice.persistence.jdbc.HsqlBaseTest;
 import junit.org.rapidpm.microservice.persistence.jdbc.InMemoryHsqldbBuilder;
-import org.junit.After;
-import org.junit.Before;
-import org.rapidpm.microservice.persistence.jdbc.JDBCConnectionPools;
 
 
 public class UserDAOBaseTest extends HsqlBaseTest {
@@ -39,29 +39,28 @@ public class UserDAOBaseTest extends HsqlBaseTest {
   @Override
   public String[] createSQLInitScriptArray() {
     return new String[]{
-        "CLEAR_SCHEMA.sql", "CREATE_TABLE_EXAMPLE.sql"
+        "CLEAR_SCHEMA.sql" , "CREATE_TABLE_EXAMPLE.sql"
     };
 
   }
 
   private InMemoryHsqldbBuilder.ServerResult serverResult;
 
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     System.out.println("poolname = " + poolname());
 
     serverResult = InMemoryHsqldbBuilder.newBuilder()
-        .withDbName("testDB")
-        .withRandomPort()
-        .build();
+                                        .withDbName("testDB")
+                                        .withRandomPort()
+                                        .build();
 
 
-
-    startPoolsAndConnect(poolname(), serverResult.getUrl());
+    startPoolsAndConnect(poolname() , serverResult.getUrl());
     initSchema(poolname());
   }
 
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     pools().shutdownPool(poolname());
 

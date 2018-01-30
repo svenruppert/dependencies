@@ -19,12 +19,15 @@
 
 package junit.org.rapidpm.microservice.persistence.jdbc.dao.v001;
 
-import junit.org.rapidpm.microservice.persistence.jdbc.dao.v001.UserDAO.User;
-import org.junit.Assert;
-import org.junit.Test;
-import org.rapidpm.microservice.persistence.jdbc.JDBCConnectionPool;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+import org.rapidpm.microservice.persistence.jdbc.JDBCConnectionPool;
+import junit.org.rapidpm.microservice.persistence.jdbc.dao.v001.UserDAO.User;
 
 public class UserDAOTest002 extends UserDAOBaseTest {
 
@@ -38,8 +41,8 @@ public class UserDAOTest002 extends UserDAOBaseTest {
 
     final Optional<User> user = userDAO.readUser(1001);
 
-    Assert.assertNotNull(user);
-    Assert.assertTrue(user.isPresent());
-    Assert.assertEquals("Marge", user.get().getFirstname());
+    assertNotNull(user);
+    assertTrue(user.isPresent());
+    assertEquals("Marge" , user.get().getFirstname());
   }
 }

@@ -1,10 +1,10 @@
 package junit.org.reflections;
 
 import static java.text.MessageFormat.format;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.DataInputStream;
 import java.io.File;
@@ -16,8 +16,8 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.jar.JarFile;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.reflections.adapters.JavassistAdapter;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.vfs.JarInputDir;
@@ -105,7 +105,7 @@ public class VfsTest {
     }
     {
       // create a file, then delete it so we can treat as a non-existing directory
-      File tempFile = File.createTempFile("nosuch", "dir");
+      File tempFile = File.createTempFile("nosuch" , "dir");
       tempFile.delete();
       assertFalse(tempFile.exists());
       Vfs.Dir dir = Vfs.DefaultUrlTypes.directory.createDir(tempFile.toURL());
@@ -122,7 +122,7 @@ public class VfsTest {
   private URL getSomeJar() {
     Collection<URL> urls = ClasspathHelper.forClassLoader();
     for (URL url : urls) {
-      if (!url.toExternalForm().contains("surefire") && url.toExternalForm().endsWith(".jar")) return url; //damn
+      if (! url.toExternalForm().contains("surefire") && url.toExternalForm().endsWith(".jar")) return url; //damn
     }
     throw new RuntimeException();
   }
@@ -184,10 +184,10 @@ public class VfsTest {
     newDir.mkdir();
 
     try {
-      Vfs.Dir dir = Vfs.fromURL(new URL(format("file:{0}", dirWithJarInName)));
+      Vfs.Dir dir = Vfs.fromURL(new URL(format("file:{0}" , dirWithJarInName)));
 
-      assertEquals(dirWithJarInName.replace("\\", "/"), dir.getPath().replace("\\", "/"));
-      assertEquals(SystemDir.class, dir.getClass());
+      assertEquals(dirWithJarInName.replace("\\" , "/") , dir.getPath().replace("\\" , "/"));
+      assertEquals(SystemDir.class , dir.getClass());
     } finally {
       newDir.delete();
     }
@@ -199,18 +199,18 @@ public class VfsTest {
     assertTrue(directoryInJarUrl.toString().startsWith("jar:file:"));
     assertTrue(directoryInJarUrl.toString().contains(".jar!"));
 
-    String directoryInJarPath = directoryInJarUrl.toExternalForm().replaceFirst("jar:", "");
+    String directoryInJarPath = directoryInJarUrl.toExternalForm().replaceFirst("jar:" , "");
     int start = directoryInJarPath.indexOf(":") + 1;
     int end = directoryInJarPath.indexOf(".jar!") + 4;
-    String expectedJarFile = directoryInJarPath.substring(start, end);
+    String expectedJarFile = directoryInJarPath.substring(start , end);
 
     Vfs.Dir dir = Vfs.fromURL(new URL(directoryInJarPath));
 
-    assertEquals(ZipDir.class, dir.getClass());
-    if(System.getProperty("os.name").contains("indow")){
-      expectedJarFile = expectedJarFile.substring(1).replace("%20", " ");
+    assertEquals(ZipDir.class , dir.getClass());
+    if (System.getProperty("os.name").contains("indow")) {
+      expectedJarFile = expectedJarFile.substring(1).replace("%20" , " ");
     }
-    assertEquals(expectedJarFile.replace("\\", "/"), dir.getPath().replace("\\", "/"));
+    assertEquals(expectedJarFile.replace("\\" , "/") , dir.getPath().replace("\\" , "/"));
   }
 
   @Test
@@ -221,13 +221,13 @@ public class VfsTest {
   @Test
   public void findFilesFromEmptyMatch() throws MalformedURLException {
     final URL jar = getSomeJar();
-    final Iterable<Vfs.File> files = Vfs.findFiles(java.util.Arrays.asList(jar), Predicates.alwaysTrue());
+    final Iterable<Vfs.File> files = Vfs.findFiles(java.util.Arrays.asList(jar) , Predicates.alwaysTrue());
     assertNotNull(files);
     assertTrue(files.iterator().hasNext());
   }
 
   @Test
-  @Ignore
+  @Disabled
   public void vfsFromHttpUrl() throws MalformedURLException {
     Vfs.addDefaultURLTypes(new Vfs.UrlType() {
       public boolean matches(URL url) {
@@ -253,7 +253,7 @@ public class VfsTest {
 
     for (URL jar : ClasspathHelper.forClassLoader()) {
       try {
-        for (Vfs.File file : Iterables.limit(new JarInputDir(jar).getFiles(), 5)) {
+        for (Vfs.File file : Iterables.limit(new JarInputDir(jar).getFiles() , 5)) {
           if (file.getName().endsWith(".class")) {
             String className = javassistAdapter.getClassName(javassistAdapter.getOfCreateClassObject(file));
           }
@@ -287,14 +287,14 @@ public class VfsTest {
     private static java.io.File downloadTempLocally(URL url) throws IOException {
       HttpURLConnection connection = (HttpURLConnection) url.openConnection();
       if (connection.getResponseCode() == 200) {
-        java.io.File temp = java.io.File.createTempFile("urlToVfs", "tmp");
+        java.io.File temp = java.io.File.createTempFile("urlToVfs" , "tmp");
         FileOutputStream out = new FileOutputStream(temp);
         DataInputStream in = new DataInputStream(connection.getInputStream());
 
         int len;
         byte ch[] = new byte[1024];
-        while ((len = in.read(ch)) != -1) {
-          out.write(ch, 0, len);
+        while ((len = in.read(ch)) != - 1) {
+          out.write(ch , 0 , len);
         }
 
         connection.disconnect();

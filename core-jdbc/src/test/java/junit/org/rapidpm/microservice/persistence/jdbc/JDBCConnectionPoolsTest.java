@@ -1,17 +1,18 @@
 package junit.org.rapidpm.microservice.persistence.jdbc;
 
-import com.zaxxer.hikari.HikariDataSource;
-import org.hsqldb.server.Server;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.rapidpm.dependencies.core.net.PortUtils;
-import org.rapidpm.microservice.persistence.jdbc.JDBCConnectionPools;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.hsqldb.server.Server;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.rapidpm.dependencies.core.net.PortUtils;
+import org.rapidpm.microservice.persistence.jdbc.JDBCConnectionPools;
+import com.zaxxer.hikari.HikariDataSource;
 
 /**
  * JDBCConnectionPool Tester.
@@ -27,21 +28,21 @@ public class JDBCConnectionPoolsTest {
   private Server hsqlServer = null;
   private JDBCConnectionPools connectionPools = null;
 
-  @Before
+  @BeforeEach
   public void before() throws Exception {
     hsqlServer = new Server();
     hsqlServer.setLogWriter(null);
     hsqlServer.setSilent(true);
     hsqlServer.setPort(new PortUtils().nextFreePortForTest());
     hsqlServer.setAddress("127.0.0.1");
-    hsqlServer.setDatabaseName(0, "iva");
-    hsqlServer.setDatabasePath(0, "mem:target/ivadb");
+    hsqlServer.setDatabaseName(0 , "iva");
+    hsqlServer.setDatabasePath(0 , "mem:target/ivadb");
     hsqlServer.start();
 
     connectionPools = new JDBCConnectionPools();
   }
 
-  @After
+  @AfterEach
   public void after() throws Exception {
     hsqlServer.stop();
   }
@@ -73,7 +74,7 @@ public class JDBCConnectionPoolsTest {
       // query from the db
       ResultSet rs = connection.prepareStatement("select id, barcode  from barcodes;").executeQuery();
       rs.next();
-      System.out.println(String.format("ID: %1d, Name: %1s", rs.getInt(1), rs.getString(2)));
+      System.out.println(String.format("ID: %1d, Name: %1s" , rs.getInt(1) , rs.getString(2)));
 
     } catch (SQLException e2) {
       e2.printStackTrace();
@@ -87,7 +88,7 @@ public class JDBCConnectionPoolsTest {
   @Test
   public void testGetNoneExistent() {
     HikariDataSource nope = ((this.connectionPools == null) ? new JDBCConnectionPools() : this.connectionPools).getDataSource("Nope");
-    Assert.assertEquals(null, nope);
+    assertEquals(null , nope);
   }
 
 } 

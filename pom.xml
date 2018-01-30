@@ -18,8 +18,8 @@
   ~ under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
@@ -58,12 +58,12 @@
     </developer>
   </developers>
   <!--<issueManagement>-->
-    <!--<system>Youtrack</system>-->
-    <!--<url>https://issues.rapidpm.org/issues</url>-->
+  <!--<system>Youtrack</system>-->
+  <!--<url>https://issues.rapidpm.org/issues</url>-->
   <!--</issueManagement>-->
   <!--<ciManagement>-->
-    <!--<system>TeamCity</system>-->
-    <!--<url>https://build.rapidpm.org/project.html?projectId=RapidPM_RapidPMDependencies</url>-->
+  <!--<system>TeamCity</system>-->
+  <!--<url>https://build.rapidpm.org/project.html?projectId=RapidPM_RapidPMDependencies</url>-->
   <!--</ciManagement>-->
   <licenses>
     <license>
@@ -230,9 +230,9 @@
       </dependency>
 
       <!--<dependency>-->
-        <!--<groupId>com.lmax</groupId>-->
-        <!--<artifactId>disruptor</artifactId>-->
-        <!--<version>3.3.7</version>-->
+      <!--<groupId>com.lmax</groupId>-->
+      <!--<artifactId>disruptor</artifactId>-->
+      <!--<version>3.3.7</version>-->
       <!--</dependency>-->
 
       <dependency>
@@ -299,27 +299,27 @@
         <version>${junit.jupiter.version}</version>
       </dependency>
 
-		<dependency>
-			<groupId>org.junit.platform</groupId>
-			<artifactId>junit-platform-launcher</artifactId>
-			<scope>test</scope>
-			<version>${junit.platform.version}</version>
-		</dependency>
-		<!-- Only required to run tests in an IDE that bundles an older version -->
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-			<scope>test</scope>
-			<version>${junit.jupiter.version}</version>
-		</dependency>
-		<!-- Only required to run tests in an IDE that bundles an older version -->
-		<dependency>
-			<groupId>org.junit.vintage</groupId>
-			<artifactId>junit-vintage-engine</artifactId>
-			<scope>test</scope>
-			<version>${junit.vintage.version}</version>
-	    </dependency>
-		
+      <dependency>
+        <groupId>org.junit.platform</groupId>
+        <artifactId>junit-platform-launcher</artifactId>
+        <scope>test</scope>
+        <version>${junit.platform.version}</version>
+      </dependency>
+      <!-- Only required to run tests in an IDE that bundles an older version -->
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <scope>test</scope>
+        <version>${junit.jupiter.version}</version>
+      </dependency>
+      <!-- Only required to run tests in an IDE that bundles an older version -->
+      <dependency>
+        <groupId>org.junit.vintage</groupId>
+        <artifactId>junit-vintage-engine</artifactId>
+        <scope>test</scope>
+        <version>${junit.vintage.version}</version>
+      </dependency>
+
       <dependency>
         <groupId>org.hamcrest</groupId>
         <artifactId>hamcrest-all</artifactId>
@@ -391,9 +391,9 @@
       </dependency>
 
       <!--<dependency>-->
-        <!--<groupId>com.squareup</groupId>-->
-        <!--<artifactId>javapoet</artifactId>-->
-        <!--<version>1.9.0</version>-->
+      <!--<groupId>com.squareup</groupId>-->
+      <!--<artifactId>javapoet</artifactId>-->
+      <!--<version>1.9.0</version>-->
       <!--</dependency>-->
 
       <dependency>
@@ -427,9 +427,9 @@
 
     <!--TDD-->
     <!--<dependency>-->
-      <!--<groupId>junit</groupId>-->
-      <!--<artifactId>junit</artifactId>-->
-      <!--<scope>test</scope>-->
+    <!--<groupId>junit</groupId>-->
+    <!--<artifactId>junit</artifactId>-->
+    <!--<scope>test</scope>-->
     <!--</dependency>-->
 
     <!--jUnit5-->
@@ -444,23 +444,23 @@
       <artifactId>junit-jupiter-params</artifactId>
     </dependency>
 
-	<dependency>
-			<groupId>org.junit.platform</groupId>
-			<artifactId>junit-platform-launcher</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<!-- Only required to run tests in an IDE that bundles an older version -->
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<!-- Only required to run tests in an IDE that bundles an older version -->
-		<!--<dependency>-->
-			<!--<groupId>org.junit.vintage</groupId>-->
-			<!--<artifactId>junit-vintage-engine</artifactId>-->
-			<!--<scope>test</scope>-->
-		<!--</dependency>-->
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-launcher</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!-- Only required to run tests in an IDE that bundles an older version -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!-- Only required to run tests in an IDE that bundles an older version -->
+    <!--<dependency>-->
+    <!--<groupId>org.junit.vintage</groupId>-->
+    <!--<artifactId>junit-vintage-engine</artifactId>-->
+    <!--<scope>test</scope>-->
+    <!--</dependency>-->
 
 
     <!--Microbenchmarking-->
@@ -549,17 +549,17 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.19.1</version>
           <dependencies>
-          	<dependency>
-            	<groupId>org.junit.platform</groupId>
-            	<artifactId>junit-platform-surefire-provider</artifactId>
-            	<version>${junit.platform.version}</version>
-          	</dependency>
-          	<dependency>
-            	<groupId>org.junit.jupiter</groupId>
-            	<artifactId>junit-jupiter-engine</artifactId>
-            	<version>${junit.jupiter.version}</version>
-          	</dependency>
-        </dependencies>
+            <dependency>
+              <groupId>org.junit.platform</groupId>
+              <artifactId>junit-platform-surefire-provider</artifactId>
+              <version>${junit.platform.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>org.junit.jupiter</groupId>
+              <artifactId>junit-jupiter-engine</artifactId>
+              <version>${junit.jupiter.version}</version>
+            </dependency>
+          </dependencies>
         </plugin>
         <plugin>
           <groupId>org.jacoco</groupId>
@@ -627,14 +627,14 @@
           <version>${pitest.version}</version>
         </plugin>
         <!--<plugin>-->
-          <!--<groupId>net.alchim31.maven</groupId>-->
-          <!--<artifactId>scala-maven-plugin</artifactId>-->
-          <!--<version>3.3.1</version>-->
+        <!--<groupId>net.alchim31.maven</groupId>-->
+        <!--<artifactId>scala-maven-plugin</artifactId>-->
+        <!--<version>3.3.1</version>-->
         <!--</plugin>-->
         <!--<plugin>-->
-          <!--<groupId>io.gatling</groupId>-->
-          <!--<artifactId>gatling-maven-plugin</artifactId>-->
-          <!--<version>3.0.0-M2</version>-->
+        <!--<groupId>io.gatling</groupId>-->
+        <!--<artifactId>gatling-maven-plugin</artifactId>-->
+        <!--<version>3.0.0-M2</version>-->
         <!--</plugin>-->
         <!--<plugin>-->
         <!--<groupId>org.sonarsource.scanner.maven</groupId>-->
@@ -771,24 +771,24 @@
       <activation>
         <activeByDefault>false</activeByDefault>
       </activation>
-        <distributionManagement>
-          <snapshotRepository>
-            <id>sys-nexus-ci</id>
-            <name>The repo for this pipeline</name>
-            <url>https://nexus.craftwater.de/repository/gitlab-ci-${pipeline}/</url>
-          </snapshotRepository>
-        </distributionManagement>
+      <distributionManagement>
+        <snapshotRepository>
+          <id>sys-nexus-ci</id>
+          <name>The repo for this pipeline</name>
+          <url>https://nexus.craftwater.de/repository/gitlab-ci-${pipeline}/</url>
+        </snapshotRepository>
+      </distributionManagement>
 
-        <repositories>
-          <repository>
-            <id>nexusinterim</id>
-            <name>The repo for this pipeline</name>
-            <url>https://nexus.craftwater.de/repository/gitlab-ci-${pipeline}/</url>
-            <snapshots>
-              <enabled>true</enabled>
-            </snapshots>
-          </repository>
-        </repositories>
+      <repositories>
+        <repository>
+          <id>nexusinterim</id>
+          <name>The repo for this pipeline</name>
+          <url>https://nexus.craftwater.de/repository/gitlab-ci-${pipeline}/</url>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
     </profile>
 
     <profile>

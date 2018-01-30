@@ -1,11 +1,11 @@
 package junit.org.reflections;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reflections.Reflections;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
@@ -24,8 +24,8 @@ public class ReflectionsExpandSupertypesTest {
         filterInputsBy(inputsFilter));
     assertTrue(refExpand.getConfiguration().shouldExpandSuperTypes());
     Set<Class<? extends TestModel.A>> subTypesOf = refExpand.getSubTypesOf(TestModel.A.class);
-    assertTrue("expanded", subTypesOf.contains(TestModel.B.class));
-    assertTrue("transitivity", subTypesOf.containsAll(refExpand.getSubTypesOf(TestModel.B.class)));
+    assertTrue(subTypesOf.contains(TestModel.B.class));
+    assertTrue(subTypesOf.containsAll(refExpand.getSubTypesOf(TestModel.B.class)));
   }
 
   @Test

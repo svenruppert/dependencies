@@ -1,13 +1,13 @@
 package junit.org.reflections;
 
 import static java.util.Arrays.asList;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.reflections.Reflections;
 import org.reflections.scanners.MemberUsageScanner;
 import org.reflections.scanners.MethodAnnotationsScanner;
@@ -25,7 +25,7 @@ import repacked.com.google.common.base.Predicate;
 /** */
 public class ReflectionsCollectTest extends ReflectionsTest {
 
-  @BeforeClass
+  @BeforeAll
   public static void init() {
     Reflections ref = new Reflections(new ConfigurationBuilder()
             .addUrls(ClasspathHelper.forClass(TestModel.class))

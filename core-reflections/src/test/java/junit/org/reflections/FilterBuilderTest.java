@@ -1,9 +1,9 @@
 package junit.org.reflections;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reflections.Reflections;
 import org.reflections.util.FilterBuilder;
 
@@ -30,7 +30,7 @@ public class FilterBuilderTest {
 
   @Test
   public void test_includePackageMultiple() {
-    FilterBuilder filter = new FilterBuilder().includePackage("org.reflections", "org.foo");
+    FilterBuilder filter = new FilterBuilder().includePackage("org.reflections" , "org.foo");
     assertTrue(filter.apply("org.reflections.Reflections"));
     assertTrue(filter.apply("org.reflections.foo.Reflections"));
     assertTrue(filter.apply("org.foo.Reflections"));

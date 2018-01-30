@@ -20,12 +20,15 @@
 package junit.org.rapidpm.microservice.persistence.jdbc.dao.v001;
 
 
-import junit.org.rapidpm.microservice.persistence.jdbc.dao.v001.UserDAO.User;
-import org.junit.Assert;
-import org.junit.Test;
-import org.rapidpm.microservice.persistence.jdbc.JDBCConnectionPool;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+import org.rapidpm.microservice.persistence.jdbc.JDBCConnectionPool;
+import junit.org.rapidpm.microservice.persistence.jdbc.dao.v001.UserDAO.User;
 
 public class UserDAOTest001 extends UserDAOBaseTest {
 
@@ -36,22 +39,22 @@ public class UserDAOTest001 extends UserDAOBaseTest {
     final JDBCConnectionPool connectionPool = connectionPoolOptional.get();
     final UserDAO userDAO = new UserDAO().workOnPool(connectionPool);
 
-    final User user = new User(001, "jon", "doe", "jon.d@yahooo.com");
+    final User user = new User(001 , "jon" , "doe" , "jon.d@yahooo.com");
     userDAO.writeUser(user);
 
     final Optional<User> resultUser = userDAO.readUser(001);
-    Assert.assertNotNull(resultUser);
-    Assert.assertTrue(resultUser.isPresent());
-    Assert.assertEquals(user.getCustomerID(), resultUser.get().getCustomerID());
-    Assert.assertEquals(user.getFirstname(), resultUser.get().getFirstname());
+    assertNotNull(resultUser);
+    assertTrue(resultUser.isPresent());
+    assertEquals(user.getCustomerID() , resultUser.get().getCustomerID());
+    assertEquals(user.getFirstname() , resultUser.get().getFirstname());
 
-    final User user02 = new User(002, "jane", "doe", "jane.d@yahooo.com");
+    final User user02 = new User(002 , "jane" , "doe" , "jane.d@yahooo.com");
     userDAO.writeUser(user02);
 
     final Optional<String> resultMail = userDAO.readMailAddress(002);
-    Assert.assertNotNull(resultMail);
-    Assert.assertTrue(resultMail.isPresent());
-    Assert.assertEquals("jane.d@yahooo.com", resultMail.get());
+    assertNotNull(resultMail);
+    assertTrue(resultMail.isPresent());
+    assertEquals("jane.d@yahooo.com" , resultMail.get());
   }
 
 

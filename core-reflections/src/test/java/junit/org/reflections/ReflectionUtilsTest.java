@@ -1,10 +1,10 @@
 package junit.org.reflections;
 
 import static junit.org.reflections.ReflectionsTest.are;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.reflections.ReflectionUtils.getAllAnnotations;
 import static org.reflections.ReflectionUtils.getAllConstructors;
 import static org.reflections.ReflectionUtils.getAllFields;
@@ -38,7 +38,7 @@ import java.util.Set;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reflections.ReflectionUtils;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
@@ -52,7 +52,10 @@ public class ReflectionUtilsTest {
 
   @Test
   public void getAllTest() {
-    assertThat(getAllSuperTypes(TestModel.C3.class, withAnnotation(TestModel.AI1.class)), are(TestModel.I1.class));
+
+    assertThat(getAllSuperTypes(TestModel.C3.class,
+                                              withAnnotation(TestModel.AI1.class)),
+                             are(TestModel.I1.class));
 
     Set<Method> allMethods = getAllMethods(TestModel.C4.class, withModifier(Modifier.PUBLIC), withReturnType(void.class));
     Set<Method> allMethods1 = getAllMethods(TestModel.C4.class, withPattern("public.*.void .*"));

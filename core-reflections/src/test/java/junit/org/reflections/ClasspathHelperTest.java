@@ -1,5 +1,9 @@
 package junit.org.reflections;
 
+
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -8,8 +12,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reflections.util.ClasspathHelper;
 
 /**
@@ -29,7 +32,7 @@ public final class ClasspathHelperTest {
     final Collection<URL> resultUrls1 = ClasspathHelper.forClassLoader(urlClassLoader1);
     final Collection<URL> resultUrls2 = ClasspathHelper.forClassLoader(urlClassLoader2);
 
-    Assert.assertArrayEquals("URLs returned from forClassLoader should be in the same order as source URLs", urls1, resultUrls1.toArray());
-    Assert.assertArrayEquals("URLs returned from forClassLoader should be in the same order as source URLs", urls2, resultUrls2.toArray());
+    assertArrayEquals(urls1,resultUrls1.toArray());
+    assertArrayEquals( urls2, resultUrls2.toArray());
   }
 }
