@@ -131,7 +131,8 @@ public abstract class ClasspathHelper {
 
 
   public static Collection<URL> forClassLoader() {
-    return forClassLoader(classLoaders());
+//    return forClassLoader(classLoaders(), ClasspathHelper.class.getClassLoader());
+    return forClassLoader(ClasspathHelper.class.getClassLoader());
   }
 
 

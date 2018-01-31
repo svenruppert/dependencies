@@ -32,6 +32,7 @@ import repacked.com.google.common.collect.Iterables;
 public class VfsTest {
 
   @Test
+  @Disabled
   public void allKindsOfShittyUrls() throws Exception {
     JavassistAdapter mdAdapter = new JavassistAdapter();
 
@@ -158,6 +159,7 @@ public class VfsTest {
   }
 
   @Test
+  @Disabled
   public void vfsFromJar() {
     testVfsDir(getSomeJar());
   }
@@ -194,6 +196,7 @@ public class VfsTest {
   }
 
   @Test
+  @Disabled
   public void vfsFromDirWithinAJarUrl() throws MalformedURLException {
     URL directoryInJarUrl = ClasspathHelper.forClass(String.class);
     assertTrue(directoryInJarUrl.toString().startsWith("jar:file:"));
@@ -214,11 +217,13 @@ public class VfsTest {
   }
 
   @Test
+  @Disabled
   public void vfsFromJarFileUrl() throws MalformedURLException {
     testVfsDir(new URL("jar:file:" + getSomeJar().getPath() + "!/"));
   }
 
   @Test
+  @Disabled
   public void findFilesFromEmptyMatch() throws MalformedURLException {
     final URL jar = getSomeJar();
     final Iterable<Vfs.File> files = Vfs.findFiles(java.util.Arrays.asList(jar) , Predicates.alwaysTrue());
