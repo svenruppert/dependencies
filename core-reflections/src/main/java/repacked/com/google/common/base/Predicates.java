@@ -47,7 +47,7 @@ public class Predicates {
     return predicates == null || predicates.length == 0;
   }
 
-  public static <T> Predicate<T> and(final Predicate<? super T>[] predicates) {
+  public static <T> Predicate<T> and(final Predicate<T>[] predicates) {
     return new AndPredicate<>(defensiveCopy(predicates));
   }
 

@@ -414,7 +414,9 @@ public class Reflections {
 
 
   public Set<Method> getMethodsWithAnyParamAnnotated(Annotation annotation) {
-    return filter(getMethodsWithAnyParamAnnotated(annotation.annotationType()) , withAnyParameterAnnotation(annotation));
+    final Set<Method> methodsWithAnyParamAnnotated = getMethodsWithAnyParamAnnotated(annotation.annotationType());
+    final Predicate<Member> memberPredicate = withAnyParameterAnnotation(annotation);
+    return filter(methodsWithAnyParamAnnotated , (Predicate<Method>) memberPredicate::apply);
   }
 
 
@@ -441,7 +443,9 @@ public class Reflections {
 
 
   public Set<Constructor> getConstructorsWithAnyParamAnnotated(Annotation annotation) {
-    return filter(getConstructorsWithAnyParamAnnotated(annotation.annotationType()) , withAnyParameterAnnotation(annotation));
+    final Predicate<Member> memberPredicate = withAnyParameterAnnotation(annotation);
+    final Set<Constructor> constructors = getConstructorsWithAnyParamAnnotated(annotation.annotationType());
+    return filter(constructors , (Predicate<Constructor>) memberPredicate::apply);
   }
 
 
@@ -456,7 +460,7 @@ public class Reflections {
 
 
   public Set<Field> getFieldsAnnotatedWith(final Class<? extends Annotation> annotation) {
-    final Set<Field> result = new HashSet();
+    final Set<Field> result = new HashSet<>();
     for (String annotated : store.get(index(FieldAnnotationsScanner.class) , annotation.getName())) {
       result.add(getFieldFromString(annotated , loaders()));
     }

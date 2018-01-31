@@ -26,6 +26,7 @@ import static org.reflections.ReflectionUtils.withTypeAssignableTo;
 import static repacked.com.google.common.collect.Collections2.transform;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
@@ -43,6 +44,7 @@ import org.reflections.ReflectionUtils;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 import repacked.com.google.common.base.Function;
+import repacked.com.google.common.base.Predicate;
 
 /**
  * @author mamo
@@ -63,7 +65,10 @@ public class ReflectionUtilsTest {
     assertTrue(allMethods.containsAll(allMethods1) && allMethods1.containsAll(allMethods));
     assertThat(allMethods1, names("m1"));
 
-    assertThat(getAllMethods(TestModel.C4.class, withAnyParameterAnnotation(TestModel.AM1.class)), names("m4"));
+    final Class<TestModel.C4> c4Class = TestModel.C4.class;
+    final Predicate<Member> memberPredicate = withAnyParameterAnnotation(TestModel.AM1.class);
+    assertThat(getAllMethods(c4Class , (Predicate<Method>) memberPredicate::apply), names("m4"));
+//    assertThat(getAllMethods(c4Class , memberPredicate), names("m4"));
 
     assertThat(getAllFields(TestModel.C4.class, withAnnotation(TestModel.AF1.class)), names("f1", "f2"));
 
@@ -80,7 +85,8 @@ public class ReflectionUtilsTest {
 
     assertThat(getAllFields(TestModel.C4.class, withTypeAssignableTo(String.class)), names("f1", "f2", "f3"));
 
-    assertThat(getAllConstructors(TestModel.C4.class, withParametersCount(0)), names(TestModel.C4.class.getName()));
+    final Predicate<Member> memberPredicate1 = withParametersCount(0);
+    assertThat(getAllConstructors(TestModel.C4.class , (Predicate<Constructor>) memberPredicate1::apply), names(TestModel.C4.class.getName()));
 
     assertEquals(getAllAnnotations(TestModel.C3.class).size(), 5);
 
@@ -114,10 +120,14 @@ public class ReflectionUtilsTest {
 
     Set<Method> allMethods = new HashSet();
     for (Class<?> type : getAllSuperTypes(arg1.getClass())) {
-      allMethods.addAll(getAllMethods(target, withModifier(Modifier.STATIC), withParameters(type)));
+      final Predicate<Member> memberPredicate = withParameters(type);
+      final Predicate<Method> methodPredicate = withModifier(Modifier.STATIC);
+      allMethods.addAll(getAllMethods(target , methodPredicate::apply , memberPredicate::apply));
     }
 
-    Set<Method> allMethods1 = getAllMethods(target, withModifier(Modifier.STATIC), withParametersAssignableTo(arg1.getClass()));
+    final Predicate<Method> tPredicate = withModifier(Modifier.STATIC);
+    final Predicate<Member> memberPredicate = withParametersAssignableTo(arg1.getClass());
+    Set<Method> allMethods1 = getAllMethods(target , tPredicate , memberPredicate::apply);
 
     assertEquals(allMethods, allMethods1);
 

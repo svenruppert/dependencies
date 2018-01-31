@@ -36,7 +36,7 @@ public abstract class ReflectionUtils {
   private static List<String> primitiveDescriptors;
 
 
-  public static Set<Class<?>> getAllSuperTypes(final Class<?> type , Predicate<? super Class<?>>... predicates) {
+  public static Set<Class<?>> getAllSuperTypes(final Class<?> type , Predicate<Class<?>>... predicates) {
     Set<Class<?>> result = new LinkedHashSet();
     if (type != null && (includeObject || ! type.equals(Object.class))) {
       result.add(type);
@@ -62,7 +62,7 @@ public abstract class ReflectionUtils {
   }
 
 
-  public static Set<Method> getAllMethods(final Class<?> type , Predicate<? super Method>... predicates) {
+  public static Set<Method> getAllMethods(final Class<?> type , Predicate<Method>... predicates) {
     Set<Method> result = new HashSet();
     for (Class<?> t : getAllSuperTypes(type)) {
       result.addAll(getMethods(t , predicates));
@@ -71,12 +71,12 @@ public abstract class ReflectionUtils {
   }
 
 
-  public static Set<Method> getMethods(Class<?> t , Predicate<? super Method>... predicates) {
+  public static Set<Method> getMethods(Class<?> t , Predicate<Method>... predicates) {
     return filter(t.isInterface() ? t.getMethods() : t.getDeclaredMethods() , predicates);
   }
 
 
-  public static Set<Constructor> getAllConstructors(final Class<?> type , Predicate<? super Constructor>... predicates) {
+  public static Set<Constructor> getAllConstructors(final Class<?> type , Predicate<Constructor>... predicates) {
     Set<Constructor> result = new HashSet();
     for (Class<?> t : getAllSuperTypes(type)) {
       result.addAll(getConstructors(t , predicates));
@@ -85,19 +85,19 @@ public abstract class ReflectionUtils {
   }
 
 
-  public static Set<Constructor> getConstructors(Class<?> t , Predicate<? super Constructor>... predicates) {
+  public static Set<Constructor> getConstructors(Class<?> t , Predicate<Constructor>... predicates) {
     return ReflectionUtils.filter(t.getDeclaredConstructors() , predicates); //explicit needed only for jdk1.5
   }
 
 
-  public static Set<Field> getAllFields(final Class<?> type , Predicate<? super Field>... predicates) {
+  public static Set<Field> getAllFields(final Class<?> type , Predicate<Field>... predicates) {
     Set<Field> result = new HashSet();
     for (Class<?> t : getAllSuperTypes(type)) result.addAll(getFields(t , predicates));
     return result;
   }
 
 
-  public static Set<Field> getFields(Class<?> type , Predicate<? super Field>... predicates) {
+  public static Set<Field> getFields(Class<?> type , Predicate<Field>... predicates) {
     return filter(type.getDeclaredFields() , predicates);
   }
 
@@ -122,7 +122,7 @@ public abstract class ReflectionUtils {
   }
 
 
-  public static <T extends AnnotatedElement> Set<T> getAll(final Set<T> elements , Predicate<? super T>... predicates) {
+  public static <T extends AnnotatedElement> Set<T> getAll(final Set<T> elements , Predicate<T>... predicates) {
     final Predicate<T> and = Predicates.and(predicates);
     final Iterable<T> filter = elements.stream().filter(and::apply).collect(Collectors.toList());
     return Predicates.isEmpty(predicates) ?
@@ -376,26 +376,21 @@ public abstract class ReflectionUtils {
   }
 
   //
-  static <T> Set<T> filter(final T[] elements , Predicate<? super T>... predicates) {
+  static <T> Set<T> filter(final T[] elements , Predicate<T>... predicates) {
     return Predicates.isEmpty(predicates) ?
            Stream.of(elements).collect(Collectors.toSet())
                                           :
-           StreamSupport
-               .stream(Arrays.stream(elements)
-                             .filter(Predicates.and(predicates)::apply)
-                             .collect(Collectors.toList())
-                             .spliterator() , false)
-               .collect(Collectors.toSet());
+           new HashSet<>(Arrays.stream(elements)
+                               .filter(Predicates.and(predicates)::apply)
+                               .collect(Collectors.toList()));
   }
 
-  static <T> Set<T> filter(final Iterable<T> elements , Predicate<? super T>... predicates) {
+  static <T> Set<T> filter(final Iterable<T> elements , Predicate<T>... predicates) {
     return Predicates.isEmpty(predicates) ?
            StreamSupport
                .stream(elements.spliterator() , false).collect(Collectors.toSet()) :
-           StreamSupport
-               .stream(StreamSupport.stream(elements.spliterator() , false)
-                                    .filter(Predicates.and(predicates)::apply)
-                                    .collect(Collectors.toList()).spliterator() , false)
-               .collect(Collectors.toSet());
+           new HashSet<>(StreamSupport.stream(elements.spliterator() , false)
+                                      .filter(Predicates.and(predicates)::apply)
+                                      .collect(Collectors.toList()));
   }
 }
