@@ -6,7 +6,7 @@
 
 
 ## Info
-This project isped with the Vaadin Development Environment
+This project is developed with the Vaadin Development Environment
 that you can find here [https://github.com/vaadin-developer/vaadin-dev-environment-demo-vaadin-testbench](https://github.com/vaadin-developer/vaadin-dev-environment-demo-vaadin-testbench)
 
 ## core
