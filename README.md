@@ -1,38 +1,23 @@
-#This is the bes definition of the versions used by my projects.
+#This is the base definition of the versions used by my projects.
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-dependencies/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-dependencies)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c1133e6bd62d49d39c79c5b58d31c661)](https://app.codacy.com/app/sven-ruppert/rapidpm-dependencies?utm_source=github.com&utm_medium=referral&utm_content=RapidPM/rapidpm-dependencies&utm_campaign=badger)
-[![](https://build.rapidpm.org/app/rest/builds/buildType:id:RapidPM_Develop_Dependencies_Snapshot/statusIcon)](https://build.rapidpm.org/viewType.html?buildTypeId=RapidPM_Develop_Dependencies_Snapshot&guest=1)
+[![](http://drone.rapidpm.org:8000/api/badges/RapidPM/rapidpm-dependencies/status.svg?branch=develop)](http://drone.rapidpm.org:8000/api/badges/RapidPM/rapidpm-dependencies/status.svg?branch=develop)
 
 
-branch:
+## Info
+This project isped with the Vaadin Development Environment
+that you can find here [https://github.com/vaadin-developer/vaadin-dev-environment-demo-vaadin-testbench](https://github.com/vaadin-developer/vaadin-dev-environment-demo-vaadin-testbench)
 
-master:
-[![Dependency Status](https://www.versioneye.com/user/projects/55a3a5fb323939001700053b/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55a3a5fb323939001700053b)
+## core
 
-develop:
-[![Dependency Status](https://www.versioneye.com/user/projects/55ccca799a2f09001600001e/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55ccca799a2f09001600001e)
+## core-jdbc
 
-## SNAPSHOTS
-If you are using maven you could add the following to your settings.xml to get the snapshots.
+## core-jdbc-dao
 
-```
-   <profile>
-      <id>allow-snapshots</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <repositories>
-        <repository>
-          <id>snapshots-repo</id>
-          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-          <releases>
-            <enabled>false</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>always</updatePolicy>
-          </snapshots>
-        </repository>
-      </repositories>
-    </profile>
-```
+## core-logger
+
+## core-properties
+
+## core-reflection
+
