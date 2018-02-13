@@ -1,5 +1,6 @@
 #This is the bes definition of the versions used by my projects.
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c1133e6bd62d49d39c79c5b58d31c661)](https://app.codacy.com/app/sven-ruppert/rapidpm-dependencies?utm_source=github.com&utm_medium=referral&utm_content=RapidPM/rapidpm-dependencies&utm_campaign=badger)
 [![](https://build.rapidpm.org/app/rest/builds/buildType:id:RapidPM_Develop_Dependencies_Snapshot/statusIcon)](https://build.rapidpm.org/viewType.html?buildTypeId=RapidPM_Develop_Dependencies_Snapshot&guest=1)
 
 
