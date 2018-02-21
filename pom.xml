@@ -84,7 +84,7 @@
     <log4j-api.version>2.10.0</log4j-api.version>
 
     <jacoco.version>0.8.0</jacoco.version>
-    <pitest.version>1.3.2</pitest.version>
+    <pitest.version>1.3.1</pitest.version>
     <jmh.version>1.20</jmh.version>
 
     <!--TDD jUnit5-->
@@ -842,6 +842,13 @@
           <plugin>
             <groupId>org.pitest</groupId>
             <artifactId>pitest-maven</artifactId>
+            <dependencies>
+              <dependency>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-junit5-plugin</artifactId>
+                <version>0.3</version>
+              </dependency>
+            </dependencies>
             <configuration>
               <threads>2</threads>
               <outputFormats>
