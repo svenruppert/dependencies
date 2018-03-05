@@ -240,7 +240,7 @@
       <dependency>
         <groupId>com.zaxxer</groupId>
         <artifactId>HikariCP</artifactId>
-        <version>2.7.7</version>
+        <version>2.7.8</version>
         <scope>compile</scope>
       </dependency>
 
@@ -1513,7 +1513,6 @@
 
       </pluginRepositories>
     </profile>
-
     <profile>
       <id>repo-allow-vaadin-snapshots</id>
       <activation>
@@ -1539,7 +1538,6 @@
         </pluginRepository>
       </pluginRepositories>
     </profile>
-
     <profile>
       <id>repo-allow-maven-snapshots</id>
       <activation>
