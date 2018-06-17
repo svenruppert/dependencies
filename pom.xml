@@ -78,7 +78,9 @@
 
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
+
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <slf4j.version>1.7.25</slf4j.version>
     <log4j-api.version>2.11.0</log4j-api.version>
@@ -754,8 +756,53 @@
           </execution>
         </executions>
       </plugin>
+
+      <!--Enable mutation testing-->
+      <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <dependencies>
+          <dependency>
+            <groupId>org.pitest</groupId>
+            <artifactId>pitest-junit5-plugin</artifactId>
+            <version>${pitest-junit5-plugin.version}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <threads>2</threads>
+          <outputFormats>
+            <outputFormat>XML</outputFormat>
+            <outputFormat>HTML</outputFormat>
+          </outputFormats>
+          <targetClasses>
+            <param>${pitest-prod-classes}</param>
+            <param>org.reflections.*</param>
+          </targetClasses>
+          <targetTests>
+            <param>${pitest-test-classes}</param>
+          </targetTests>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
+
+
   <profiles>
 
     <profile>
@@ -810,90 +857,7 @@
       </build>
     </profile>
     <profile>
-      <id>qm-qs-findbugs</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <reporting>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>findbugs-maven-plugin</artifactId>
-            <configuration>
-              <onlyAnalyze>org.rapidpm.*</onlyAnalyze>
-              <!--
-                  Enables analysis which takes more memory but finds more bugs.
-                  If you run out of memory, changes the value of the effort element
-                  to 'low'.
-              -->
-              <effort>Max</effort>
-              <!-- Reports all bugs (other values are medium and max) -->
-              <threshold>Low</threshold>
-              <!-- Produces XML report -->
-              <xmlOutput>true</xmlOutput>
-              <!-- Configures the directory in which the XML report is created -->
-              <findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
-              <!--<visitors>FindDeadLocalStores,UnreadFields</visitors>-->
-            </configuration>
-          </plugin>
-        </plugins>
-      </reporting>
-
-    </profile>
-    <profile>
-      <id>qm-qs-pitest</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <!--Enable mutation testing-->
-          <plugin>
-            <groupId>org.pitest</groupId>
-            <artifactId>pitest-maven</artifactId>
-            <dependencies>
-              <dependency>
-                <groupId>org.pitest</groupId>
-                <artifactId>pitest-junit5-plugin</artifactId>
-                <version>${pitest-junit5-plugin.version}</version>
-              </dependency>
-            </dependencies>
-            <configuration>
-              <threads>2</threads>
-              <outputFormats>
-                <outputFormat>XML</outputFormat>
-                <outputFormat>HTML</outputFormat>
-              </outputFormats>
-              <targetClasses>
-                <param>${pitest-prod-classes}</param>
-                <param>org.reflections.*</param>
-              </targetClasses>
-              <targetTests>
-                <param>${pitest-test-classes}</param>
-              </targetTests>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-      <reporting>
-        <plugins>
-          <plugin>
-            <groupId>org.pitest</groupId>
-            <artifactId>pitest-maven</artifactId>
-            <reportSets>
-              <reportSet>
-                <reports>
-                  <report>report</report>
-                </reports>
-              </reportSet>
-            </reportSets>
-          </plugin>
-        </plugins>
-      </reporting>
-    </profile>
-
-    <profile>
-      <id>qm-qs-jacoco</id>
+      <id>qm-qs-tdd</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
@@ -914,14 +878,36 @@
       <build>
         <plugins>
           <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <inherited>true</inherited>
+            <configuration>
+              <systemPropertyVariables>
+                <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+              </systemPropertyVariables>
+              <includes>
+                <include>**/junit/**</include>
+              </includes>
+              <excludes>
+                <exclude>**/*ini/**</exclude>
+                <exclude>**/*txt/**</exclude>
+                <exclude>**/*.jpg</exclude>
+              </excludes>
+              <argLine>-Xmx286m</argLine>
+              <forkCount>4</forkCount>
+              <reuseForks>false</reuseForks>
+              <threadCount>4</threadCount>
+              <!--<reportFormat>xml</reportFormat>-->
+              <reportFormat>html</reportFormat>
+              <!--<testSourceDirectory>${project.build.directory}/generated-test-sources/test-annotations</testSourceDirectory>-->
+              <!--<classesDirectory>target/generated-classes/emma/classes</classesDirectory>-->
+            </configuration>
+          </plugin>
+          <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
-            <configuration>
-              <includes>
-                <include>**/org/rapidpm/**/*</include>
-              </includes>
-            </configuration>
             <executions>
+
               <execution>
                 <id>default-instrument</id>
                 <goals>
@@ -955,114 +941,30 @@
                   <rules>
                     <rule>
                       <element>BUNDLE</element>
+                      <!--<element>CLASS</element>-->
+                      <!--<element>PACKAGE</element>-->
                       <limits>
                         <limit>
-                          <counter>COMPLEXITY</counter>
+                          <counter>LINE</counter>
                           <value>COVEREDRATIO</value>
                           <!--<minimum>0.60</minimum>-->
                           <minimum>0.00</minimum>
                         </limit>
                       </limits>
                     </rule>
-                    <!--<rule>-->
-                    <!--<element>CLASS</element>-->
-                    <!--<excludes>-->
-                    <!--<exclude>**/junit/**</exclude>-->
-                    <!--</excludes>-->
-                    <!--<limits>-->
-                    <!--<limit>-->
-                    <!--<counter>LINE</counter>-->
-                    <!--<value>COVEREDRATIO</value>-->
-                    <!--<minimum>0.50</minimum>-->
-                    <!--</limit>-->
-                    <!--</limits>-->
-                    <!--</rule>-->
                   </rules>
                 </configuration>
               </execution>
             </executions>
           </plugin>
-          <!-- Directory plugin to find parent root directory absolute path -->
-
         </plugins>
       </build>
+
     </profile>
-    <profile>
-      <id>qm-qs-surefire-fork</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
 
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <inherited>true</inherited>
-            <configuration>
-              <includes>
-                <include>**/junit/**</include>
-              </includes>
-              <excludes>
-                <exclude>**/*ini/**</exclude>
-                <exclude>**/*txt/**</exclude>
-                <exclude>**/*.jpg</exclude>
 
-              </excludes>
-              <argLine>-Xmx286m -Dsonar.pitest.mode=reuseReport</argLine>
-              <!--<threadCount>4</threadCount>-->
-              <!--<forkMode>always</forkMode>-->
-              <!--<forkCount>4</forkCount>-->
-              <reuseForks>false</reuseForks>
-              <forkCount>4</forkCount>
-              <reportFormat>xml</reportFormat>
-              <reportFormat>html</reportFormat>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>qm-qs-jacoco-junit</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
 
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <inherited>true</inherited>
-            <configuration>
-              <systemPropertyVariables>
-                <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-              </systemPropertyVariables>
-              <includes>
-                <include>**/junit/**</include>
-              </includes>
-              <excludes>
-                <exclude>**/*ini/**</exclude>
-                <exclude>**/*txt/**</exclude>
-                <exclude>**/*.jpg</exclude>
 
-              </excludes>
-              <argLine>-Xmx286m -Dsonar.pitest.mode=reuseReport</argLine>
-
-              <forkCount>4</forkCount>
-              <reuseForks>false</reuseForks>
-              <!--<forkMode>always</forkMode>-->
-
-              <threadCount>4</threadCount>
-              <reportFormat>xml</reportFormat>
-              <reportFormat>html</reportFormat>
-              <!--<testSourceDirectory>${project.build.directory}/generated-test-sources/test-annotations</testSourceDirectory>-->
-              <!--<classesDirectory>target/generated-classes/emma/classes</classesDirectory>-->
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
     <profile>
       <id>sys-nexus-deploy</id>
       <activation>
@@ -1136,125 +1038,6 @@
       </build>
     </profile>
 
-    <profile>
-      <id>java-jdk-8</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-              <source>1.8</source>
-              <target>1.8</target>
-              <showDeprecation>true</showDeprecation>
-              <showWarnings>false</showWarnings>
-              <optimize>true</optimize>
-
-            </configuration>
-
-            <executions>
-              <execution>
-                <phase>compile</phase>
-                <id>compile-001</id>
-                <goals>
-                  <goal>compile</goal>
-                </goals>
-                <!--BUG JDK-8062800-->
-                <configuration>
-                  <useIncrementalCompilation>false</useIncrementalCompilation>
-                </configuration>
-                <!--BUG JDK-8062800-->
-              </execution>
-              <execution>
-                <phase>test-compile</phase>
-                <id>test-compile-001</id>
-                <goals>
-                  <goal>testCompile</goal>
-                </goals>
-                <!--BUG JDK-8062800-->
-                <configuration>
-                  <useIncrementalCompilation>false</useIncrementalCompilation>
-                </configuration>
-                <!--BUG JDK-8062800-->
-              </execution>
-              <!--&lt;!&ndash;<execution>&ndash;&gt;-->
-              <!--<phase>test-compile</phase>-->
-              <!--<id>test-compile-002</id>-->
-              <!--<goals><goal>testCompile</goal></goals>-->
-              <!--&lt;!&ndash;BUG JDK-8062800&ndash;&gt;-->
-              <!--<configuration>-->
-              <!--<useIncrementalCompilation>false</useIncrementalCompilation>-->
-              <!--</configuration>-->
-              <!--&lt;!&ndash;BUG JDK-8062800&ndash;&gt;-->
-              <!--</execution>-->
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>java-jdk-9</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-              <source>1.9</source>
-              <target>1.9</target>
-              <showDeprecation>true</showDeprecation>
-              <showWarnings>true</showWarnings>
-              <testCompilerArgument>-Xlint</testCompilerArgument>
-              <generatedSourcesDirectory>${project.build.directory}/generatedsources/annotations
-              </generatedSourcesDirectory>
-              <generatedTestSourcesDirectory>
-                ${project.build.directory}/generated-test-sources/test-annotations
-              </generatedTestSourcesDirectory>
-            </configuration>
-            <executions>
-              <execution>
-                <phase>test-compile</phase>
-                <id>test-compile-001</id>
-                <goals>
-                  <goal>testCompile</goal>
-                </goals>
-              </execution>
-              <execution>
-                <phase>test-compile</phase>
-                <id>test-compile-002</id>
-                <goals>
-                  <goal>testCompile</goal>
-                </goals>
-              </execution>
-            </executions>
-            <!--<executions>-->
-            <!--<execution>-->
-            <!--<id>default-compile</id>-->
-            <!--<inherited>false</inherited>-->
-            <!--<phase>compile</phase>-->
-            <!--<goals>-->
-            <!--<goal>compile</goal>-->
-            <!--</goals>-->
-            <!--</execution>-->
-            <!--<execution>-->
-            <!--<id>default-testCompile</id>-->
-            <!--<inherited>false</inherited>-->
-            <!--<phase>test-compile</phase>-->
-            <!--<goals>-->
-            <!--<goal>testCompile</goal>-->
-            <!--</goals>-->
-            <!--</execution>-->
-            <!--</executions>-->
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
     <profile>
       <id>qm-qs-checkstyle</id>
       <activation>
@@ -1386,30 +1169,6 @@
       </build>
     </profile>
     <profile>
-      <id>qm-qs-jdeps</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-jdeps-plugin</artifactId>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>jdkinternals</goal> <!-- verify main classes -->
-                  <goal>test-jdkinternals</goal> <!-- verify test classes -->
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
       <id>qm-qs-cve-check</id>
       <activation>
         <activeByDefault>false</activeByDefault>
@@ -1486,80 +1245,6 @@
           </plugin>
         </plugins>
       </build>
-    </profile>
-
-    <!--Testbench stuff-->
-    <profile>
-      <id>repo-allow-jitpack</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <repositories>
-        <repository>
-          <id>jitpack.io</id>
-          <url>https://jitpack.io</url>
-        </repository>
-      </repositories>
-    </profile>
-    <profile>
-      <id>repo-allow-vaadin</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <repositories>
-        <repository>
-          <id>vaadin-addons</id>
-          <url>http://maven.vaadin.com/vaadin-addons</url>
-          <!--<url>http://maven.vaadin.com/</url>-->
-        </repository>
-      </repositories>
-      <pluginRepositories>
-
-      </pluginRepositories>
-    </profile>
-    <profile>
-      <id>repo-allow-vaadin-snapshots</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <repositories>
-        <repository>
-          <id>vaadin-prereleases</id>
-          <url>http://maven.vaadin.com/vaadin-prereleases</url>
-        </repository>
-        <repository>
-          <id>vaadin-snapshots</id>
-          <name>Vaadin snapshot repository</name>
-          <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
-        </repository>
-
-      </repositories>
-      <pluginRepositories>
-        <pluginRepository>
-          <id>vaadin-prereleases</id>
-          <name>Vaadin Pre-releases</name>
-          <url>https://maven.vaadin.com/vaadin-prereleases</url>
-        </pluginRepository>
-      </pluginRepositories>
-    </profile>
-    <profile>
-      <id>repo-allow-maven-snapshots</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <repositories>
-        <repository>
-          <id>snapshots-repo</id>
-          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-          <releases>
-            <enabled>false</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>always</updatePolicy>
-          </snapshots>
-        </repository>
-      </repositories>
     </profile>
   </profiles>
 
