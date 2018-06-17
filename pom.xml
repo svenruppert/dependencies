@@ -29,7 +29,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>3.6.0-SNAPSHOT</version>
+  <version>3.6.0</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -74,7 +74,7 @@
     </license>
   </licenses>
   <properties>
-    <rapidpm-dependencies.version>3.6.0-SNAPSHOT</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>3.6.0</rapidpm-dependencies.version>
 
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -434,6 +434,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
+      <scope>test</scope>
     </dependency>
 
     <dependency>
@@ -654,7 +655,6 @@
       </plugins>
     </pluginManagement>
 
-
     <plugins>
       <!-- Define release properties -->
       <plugin>
@@ -805,30 +805,30 @@
 
   <profiles>
 
-    <profile>
-      <id>sys-nexus-ci</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <distributionManagement>
-        <snapshotRepository>
-          <id>sys-nexus-ci</id>
-          <name>The repo for this pipeline</name>
-          <url>https://nexus.craftwater.de/repository/gitlab-ci-${pipeline}/</url>
-        </snapshotRepository>
-      </distributionManagement>
+    <!--<profile>-->
+      <!--<id>sys-nexus-ci</id>-->
+      <!--<activation>-->
+        <!--<activeByDefault>false</activeByDefault>-->
+      <!--</activation>-->
+      <!--<distributionManagement>-->
+        <!--<snapshotRepository>-->
+          <!--<id>sys-nexus-ci</id>-->
+          <!--<name>The repo for this pipeline</name>-->
+          <!--<url>https://nexus.craftwater.de/repository/gitlab-ci-${pipeline}/</url>-->
+        <!--</snapshotRepository>-->
+      <!--</distributionManagement>-->
 
-      <repositories>
-        <repository>
-          <id>nexusinterim</id>
-          <name>The repo for this pipeline</name>
-          <url>https://nexus.craftwater.de/repository/gitlab-ci-${pipeline}/</url>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-        </repository>
-      </repositories>
-    </profile>
+      <!--<repositories>-->
+        <!--<repository>-->
+          <!--<id>nexusinterim</id>-->
+          <!--<name>The repo for this pipeline</name>-->
+          <!--<url>https://nexus.craftwater.de/repository/gitlab-ci-${pipeline}/</url>-->
+          <!--<snapshots>-->
+            <!--<enabled>true</enabled>-->
+          <!--</snapshots>-->
+        <!--</repository>-->
+      <!--</repositories>-->
+    <!--</profile>-->
 
     <profile>
       <id>gen-javadoc</id>
@@ -961,9 +961,6 @@
       </build>
 
     </profile>
-
-
-
 
     <profile>
       <id>sys-nexus-deploy</id>
