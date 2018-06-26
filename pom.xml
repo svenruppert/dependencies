@@ -502,6 +502,11 @@
     <pluginManagement>
       <plugins>
         <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>2.5</version>
+        </plugin>
+        <plugin>
           <groupId>com.mycila</groupId>
           <artifactId>license-maven-plugin</artifactId>
           <version>3.0</version>
@@ -658,6 +663,10 @@
     </pluginManagement>
 
     <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+      </plugin>
       <!-- Define release properties -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -837,7 +846,6 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-
       <build>
         <plugins>
           <plugin>
@@ -1154,23 +1162,9 @@
       </build>
     </profile>
     <profile>
-      <id>qm-qs-version-check</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>versions-maven-plugin</artifactId>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
       <id>qm-qs-lic-header-check</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
       <build>
         <plugins>
@@ -1184,7 +1178,9 @@
                 <email>sven.ruppert@gmail.com</email>
               </properties>
               <excludes>
+                <exclude>**/*.iml</exclude>
                 <exclude>**/README*</exclude>
+                <exclude>**/jacoco.exec*</exclude>
                 <exclude>**/LICENSE.txt</exclude>
                 <exclude>src/test/resources/**</exclude>
                 <exclude>src/main/resources/**</exclude>
