@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>3.6.3-SNAPSHOT</version>
+  <version>3.6.3</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -72,7 +72,7 @@
     </license>
   </licenses>
   <properties>
-    <rapidpm-dependencies.version>3.6.3-SNAPSHOT</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>3.6.3</rapidpm-dependencies.version>
 
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
