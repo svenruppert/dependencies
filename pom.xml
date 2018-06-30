@@ -96,8 +96,10 @@
     <junit.jupiter.version>5.1.1</junit.jupiter.version>
     <junit.platform.version>1.1.1</junit.platform.version>
 
-    <!--<maven-failsafe-plugin.version>2.21.0</maven-failsafe-plugin.version>-->
     <maven-failsafe-plugin.version>2.19.1</maven-failsafe-plugin.version>
+    <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+    <!--<maven-failsafe-plugin.version>2.22.0</maven-failsafe-plugin.version>-->
+    <!--<maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>-->
   </properties>
 
   <dependencyManagement>
@@ -233,12 +235,6 @@
         <artifactId>log4j-1.2-api</artifactId>
         <version>${log4j-api.version}</version>
       </dependency>
-
-      <!--<dependency>-->
-      <!--<groupId>com.lmax</groupId>-->
-      <!--<artifactId>disruptor</artifactId>-->
-      <!--<version>3.3.7</version>-->
-      <!--</dependency>-->
 
       <dependency>
         <groupId>com.zaxxer</groupId>
@@ -379,12 +375,6 @@
         <artifactId>jcip-annotations</artifactId>
         <version>1.0</version>
       </dependency>
-
-      <!--<dependency>-->
-      <!--<groupId>com.squareup</groupId>-->
-      <!--<artifactId>javapoet</artifactId>-->
-      <!--<version>1.9.0</version>-->
-      <!--</dependency>-->
 
       <dependency>
         <groupId>org.slf4j</groupId>
@@ -548,7 +538,7 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <!--<version>2.19.1</version>-->
-          <version>${maven-failsafe-plugin.version}</version>
+          <version>${maven-surefire-plugin.version}</version>
           <dependencies>
             <dependency>
               <groupId>org.junit.platform</groupId>
