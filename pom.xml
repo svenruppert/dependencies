@@ -116,23 +116,23 @@
         <artifactId>rapidpm-dependencies-core</artifactId>
         <version>${rapidpm-dependencies.version}</version>
       </dependency>
-      <dependency>
-        <groupId>org.rapidpm</groupId>
-        <artifactId>rapidpm-dependencies-core-jdbc</artifactId>
-        <version>${rapidpm-dependencies.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm</groupId>
-        <artifactId>rapidpm-dependencies-core-jdbc</artifactId>
-        <version>${rapidpm-dependencies.version}</version>
-        <type>test-jar</type>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm</groupId>
-        <artifactId>rapidpm-dependencies-core-jdbc-dao</artifactId>
-        <version>${rapidpm-dependencies.version}</version>
-      </dependency>
+      <!--<dependency>-->
+        <!--<groupId>org.rapidpm</groupId>-->
+        <!--<artifactId>rapidpm-dependencies-core-jdbc</artifactId>-->
+        <!--<version>${rapidpm-dependencies.version}</version>-->
+      <!--</dependency>-->
+      <!--<dependency>-->
+        <!--<groupId>org.rapidpm</groupId>-->
+        <!--<artifactId>rapidpm-dependencies-core-jdbc</artifactId>-->
+        <!--<version>${rapidpm-dependencies.version}</version>-->
+        <!--<type>test-jar</type>-->
+        <!--<scope>test</scope>-->
+      <!--</dependency>-->
+      <!--<dependency>-->
+        <!--<groupId>org.rapidpm</groupId>-->
+        <!--<artifactId>rapidpm-dependencies-core-jdbc-dao</artifactId>-->
+        <!--<version>${rapidpm-dependencies.version}</version>-->
+      <!--</dependency>-->
       <!--<dependency>-->
         <!--<groupId>org.rapidpm</groupId>-->
         <!--<artifactId>rapidpm-dependencies-core-reflections</artifactId>-->
@@ -398,8 +398,8 @@
     <!--<module>core-reflections</module>-->
     <module>core-properties</module>
 
-    <module>core-jdbc</module>
-    <module>core-jdbc-dao</module>
+    <!--<module>core-jdbc</module>-->
+    <!--<module>core-jdbc-dao</module>-->
   </modules>
 
 
