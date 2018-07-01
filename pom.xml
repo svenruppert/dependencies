@@ -394,26 +394,14 @@
     <!--used in other packages-->
     <module>core-logger</module>
     <!--used in other packages-->
-    <module>core</module>
-    <!--<module>core-reflections</module>-->
-    <module>core-properties</module>
 
-    <!--<module>core-jdbc</module>-->
-    <!--<module>core-jdbc-dao</module>-->
+    <module>core</module>
+    <module>core-properties</module>
   </modules>
 
 
   <dependencies>
-
-    <!--TDD-->
-    <!--<dependency>-->
-    <!--<groupId>junit</groupId>-->
-    <!--<artifactId>junit</artifactId>-->
-    <!--<scope>test</scope>-->
-    <!--</dependency>-->
-
     <!--jUnit5-->
-
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
@@ -1204,63 +1192,63 @@
         </plugins>
       </build>
     </profile>
-    <profile>
-      <id>qm-qs-add-git-commit-properties</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>pl.project13.maven</groupId>
-            <artifactId>git-commit-id-plugin</artifactId>
-            <version>2.2.4</version>
-            <executions>
-              <execution>
-                <id>get-the-git-infos</id>
-                <goals>
-                  <goal>revision</goal>
-                </goals>
-              </execution>
-            </executions>
+    <!--<profile>-->
+      <!--<id>qm-qs-add-git-commit-properties</id>-->
+      <!--<activation>-->
+        <!--<activeByDefault>false</activeByDefault>-->
+      <!--</activation>-->
+      <!--<build>-->
+        <!--<plugins>-->
+          <!--<plugin>-->
+            <!--<groupId>pl.project13.maven</groupId>-->
+            <!--<artifactId>git-commit-id-plugin</artifactId>-->
+            <!--<version>2.2.4</version>-->
+            <!--<executions>-->
+              <!--<execution>-->
+                <!--<id>get-the-git-infos</id>-->
+                <!--<goals>-->
+                  <!--<goal>revision</goal>-->
+                <!--</goals>-->
+              <!--</execution>-->
+            <!--</executions>-->
 
-            <configuration>
-              <prefix>git</prefix>
-              <dateFormat>dd.MM.yyyy '@' HH:mm:ss z</dateFormat>
-              <dateFormatTimeZone>${user.timezone}</dateFormatTimeZone>
-              <verbose>false</verbose>
-              <generateGitPropertiesFile>true</generateGitPropertiesFile>
-              <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties
-              </generateGitPropertiesFilename>
-              <format>properties</format>
-              <skipPoms>false</skipPoms>
-              <injectAllReactorProjects>false</injectAllReactorProjects>
-              <failOnNoGitDirectory>true</failOnNoGitDirectory>
-              <failOnUnableToExtractRepoInfo>true</failOnUnableToExtractRepoInfo>
-              <skip>false</skip>
-              <runOnlyOnce>false</runOnlyOnce>
-              <excludeProperties>
-                <!-- <excludeProperty>git.user.*</excludeProperty> -->
-              </excludeProperties>
-              <includeOnlyProperties>
-                <!-- <includeOnlyProperty>^git.commit.id.full$</includeOnlyProperty> -->
-              </includeOnlyProperties>
-              <useNativeGit>false</useNativeGit>
-              <abbrevLength>7</abbrevLength>
-              <commitIdGenerationMode>flat</commitIdGenerationMode>
-              <gitDescribe>
-                <skip>false</skip>
-                <always>false</always>
-                <abbrev>7</abbrev>
-                <dirty>-dirty</dirty>
-                <match>*</match>
-                <forceLongFormat>false</forceLongFormat>
-              </gitDescribe>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
+            <!--<configuration>-->
+              <!--<prefix>git</prefix>-->
+              <!--<dateFormat>dd.MM.yyyy '@' HH:mm:ss z</dateFormat>-->
+              <!--<dateFormatTimeZone>${user.timezone}</dateFormatTimeZone>-->
+              <!--<verbose>false</verbose>-->
+              <!--<generateGitPropertiesFile>true</generateGitPropertiesFile>-->
+              <!--<generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties-->
+              <!--</generateGitPropertiesFilename>-->
+              <!--<format>properties</format>-->
+              <!--<skipPoms>false</skipPoms>-->
+              <!--<injectAllReactorProjects>false</injectAllReactorProjects>-->
+              <!--<failOnNoGitDirectory>true</failOnNoGitDirectory>-->
+              <!--<failOnUnableToExtractRepoInfo>true</failOnUnableToExtractRepoInfo>-->
+              <!--<skip>false</skip>-->
+              <!--<runOnlyOnce>false</runOnlyOnce>-->
+              <!--<excludeProperties>-->
+                <!--&lt;!&ndash; <excludeProperty>git.user.*</excludeProperty> &ndash;&gt;-->
+              <!--</excludeProperties>-->
+              <!--<includeOnlyProperties>-->
+                <!--&lt;!&ndash; <includeOnlyProperty>^git.commit.id.full$</includeOnlyProperty> &ndash;&gt;-->
+              <!--</includeOnlyProperties>-->
+              <!--<useNativeGit>false</useNativeGit>-->
+              <!--<abbrevLength>7</abbrevLength>-->
+              <!--<commitIdGenerationMode>flat</commitIdGenerationMode>-->
+              <!--<gitDescribe>-->
+                <!--<skip>false</skip>-->
+                <!--<always>false</always>-->
+                <!--<abbrev>7</abbrev>-->
+                <!--<dirty>-dirty</dirty>-->
+                <!--<match>*</match>-->
+                <!--<forceLongFormat>false</forceLongFormat>-->
+              <!--</gitDescribe>-->
+            <!--</configuration>-->
+          <!--</plugin>-->
+        <!--</plugins>-->
+      <!--</build>-->
+    <!--</profile>-->
   </profiles>
 
 
