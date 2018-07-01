@@ -38,7 +38,7 @@ pipeline:
       - mvn deploy
     when:
         matrix:
-          JDK_VERSION: svenruppert/maven-3.5-jdk-08
+          JDK_VERSION: svenruppert/maven-3.5-jdk-10
         branches:
           include: develop, release/*
           exclude: feature/*
