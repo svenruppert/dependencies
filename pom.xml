@@ -133,11 +133,11 @@
         <artifactId>rapidpm-dependencies-core-jdbc-dao</artifactId>
         <version>${rapidpm-dependencies.version}</version>
       </dependency>
-      <dependency>
-        <groupId>org.rapidpm</groupId>
-        <artifactId>rapidpm-dependencies-core-reflections</artifactId>
-        <version>${rapidpm-dependencies.version}</version>
-      </dependency>
+      <!--<dependency>-->
+        <!--<groupId>org.rapidpm</groupId>-->
+        <!--<artifactId>rapidpm-dependencies-core-reflections</artifactId>-->
+        <!--<version>${rapidpm-dependencies.version}</version>-->
+      <!--</dependency>-->
 
       <!--Reflection Utils-->
       <dependency>
@@ -395,7 +395,7 @@
     <module>core-logger</module>
     <!--used in other packages-->
     <module>core</module>
-    <module>core-reflections</module>
+    <!--<module>core-reflections</module>-->
     <module>core-properties</module>
 
     <module>core-jdbc</module>
