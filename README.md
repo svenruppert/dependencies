@@ -14,7 +14,7 @@ There a re a few modules deactivated and removed.
 * reflection : moved as module into dynamic-dependency-injection project
 * jdbc* : all deactivated and removed, code is available in the history
 
-## Version 3.7.* 
+## Version 3.* 
 This will be the version based on **Java8**
 I will create a LTD branch for this
 The  version 4.* will be based on the JDK 10/11 (as soon as 11 is released)
