@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>4.0.0-SNAPSHOT</version>
+  <version>4.0.0</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -72,10 +72,10 @@
     </license>
   </licenses>
   <properties>
-    <rapidpm-dependencies.version>4.0.0-SNAPSHOT</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>4.0.0</rapidpm-dependencies.version>
 
-    <maven.compiler.target>10</maven.compiler.target>
-    <maven.compiler.source>10</maven.compiler.source>
+    <!--<maven.compiler.target>10</maven.compiler.target>-->
+    <!--<maven.compiler.source>10</maven.compiler.source>-->
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -116,28 +116,14 @@
         <artifactId>rapidpm-dependencies-core</artifactId>
         <version>${rapidpm-dependencies.version}</version>
       </dependency>
-      <!--<dependency>-->
-        <!--<groupId>org.rapidpm</groupId>-->
-        <!--<artifactId>rapidpm-dependencies-core-jdbc</artifactId>-->
-        <!--<version>${rapidpm-dependencies.version}</version>-->
-      <!--</dependency>-->
-      <!--<dependency>-->
-        <!--<groupId>org.rapidpm</groupId>-->
-        <!--<artifactId>rapidpm-dependencies-core-jdbc</artifactId>-->
-        <!--<version>${rapidpm-dependencies.version}</version>-->
-        <!--<type>test-jar</type>-->
-        <!--<scope>test</scope>-->
-      <!--</dependency>-->
-      <!--<dependency>-->
-        <!--<groupId>org.rapidpm</groupId>-->
-        <!--<artifactId>rapidpm-dependencies-core-jdbc-dao</artifactId>-->
-        <!--<version>${rapidpm-dependencies.version}</version>-->
-      <!--</dependency>-->
-      <!--<dependency>-->
-        <!--<groupId>org.rapidpm</groupId>-->
-        <!--<artifactId>rapidpm-dependencies-core-reflections</artifactId>-->
-        <!--<version>${rapidpm-dependencies.version}</version>-->
-      <!--</dependency>-->
+
+
+      <!--API´s-->
+      <dependency>
+        <groupId>javax.annotation</groupId>
+        <artifactId>javax.annotation-api</artifactId>
+        <version>1.3.1</version>
+      </dependency>
 
       <!--Reflection Utils-->
       <dependency>
@@ -1208,64 +1194,5 @@
         </plugins>
       </build>
     </profile>
-    <!--<profile>-->
-      <!--<id>qm-qs-add-git-commit-properties</id>-->
-      <!--<activation>-->
-        <!--<activeByDefault>false</activeByDefault>-->
-      <!--</activation>-->
-      <!--<build>-->
-        <!--<plugins>-->
-          <!--<plugin>-->
-            <!--<groupId>pl.project13.maven</groupId>-->
-            <!--<artifactId>git-commit-id-plugin</artifactId>-->
-            <!--<version>2.2.4</version>-->
-            <!--<executions>-->
-              <!--<execution>-->
-                <!--<id>get-the-git-infos</id>-->
-                <!--<goals>-->
-                  <!--<goal>revision</goal>-->
-                <!--</goals>-->
-              <!--</execution>-->
-            <!--</executions>-->
-
-            <!--<configuration>-->
-              <!--<prefix>git</prefix>-->
-              <!--<dateFormat>dd.MM.yyyy '@' HH:mm:ss z</dateFormat>-->
-              <!--<dateFormatTimeZone>${user.timezone}</dateFormatTimeZone>-->
-              <!--<verbose>false</verbose>-->
-              <!--<generateGitPropertiesFile>true</generateGitPropertiesFile>-->
-              <!--<generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties-->
-              <!--</generateGitPropertiesFilename>-->
-              <!--<format>properties</format>-->
-              <!--<skipPoms>false</skipPoms>-->
-              <!--<injectAllReactorProjects>false</injectAllReactorProjects>-->
-              <!--<failOnNoGitDirectory>true</failOnNoGitDirectory>-->
-              <!--<failOnUnableToExtractRepoInfo>true</failOnUnableToExtractRepoInfo>-->
-              <!--<skip>false</skip>-->
-              <!--<runOnlyOnce>false</runOnlyOnce>-->
-              <!--<excludeProperties>-->
-                <!--&lt;!&ndash; <excludeProperty>git.user.*</excludeProperty> &ndash;&gt;-->
-              <!--</excludeProperties>-->
-              <!--<includeOnlyProperties>-->
-                <!--&lt;!&ndash; <includeOnlyProperty>^git.commit.id.full$</includeOnlyProperty> &ndash;&gt;-->
-              <!--</includeOnlyProperties>-->
-              <!--<useNativeGit>false</useNativeGit>-->
-              <!--<abbrevLength>7</abbrevLength>-->
-              <!--<commitIdGenerationMode>flat</commitIdGenerationMode>-->
-              <!--<gitDescribe>-->
-                <!--<skip>false</skip>-->
-                <!--<always>false</always>-->
-                <!--<abbrev>7</abbrev>-->
-                <!--<dirty>-dirty</dirty>-->
-                <!--<match>*</match>-->
-                <!--<forceLongFormat>false</forceLongFormat>-->
-              <!--</gitDescribe>-->
-            <!--</configuration>-->
-          <!--</plugin>-->
-        <!--</plugins>-->
-      <!--</build>-->
-    <!--</profile>-->
   </profiles>
-
-
 </project>
