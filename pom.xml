@@ -1041,6 +1041,7 @@
                 <configuration>
 
                   <!--<excludes>**/generated/**/*</excludes>-->
+                  <excludes>**/module-info.java</excludes>
                   <excludes>**/generated-sources/vwscdn/**/*</excludes>
                   <excludes>**/generated-sources/wscdn/**/*</excludes>
                   <excludes>com/vaadin/**/*,in/virit/**/*,com/acme/**/*</excludes>
