@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>4.0.1</version>
+  <version>4.0.2-SNAPSHOT</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -72,7 +72,7 @@
     </license>
   </licenses>
   <properties>
-    <rapidpm-dependencies.version>4.0.1</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>4.0.2-SNAPSHOT</rapidpm-dependencies.version>
 
     <!--<maven.compiler.target>10</maven.compiler.target>-->
     <!--<maven.compiler.source>10</maven.compiler.source>-->
@@ -134,7 +134,7 @@
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
-        <version>4.0.1</version>
+        <version>4.0.2-SNAPSHOT</version>
       </dependency>
 
       <!--project versions-->
