@@ -34,11 +34,22 @@ import java.util.stream.Collector;
  * limitations under the License.
  *
  * Created by RapidPM - Team on 29.12.16.
+ *
+ * @author svenruppert
+ * @version $Id: $Id
  */
 public class ImmutableSetCollector {
   private ImmutableSetCollector() {
   }
 
+  /**
+   * <p>toImmutableSet.</p>
+   *
+   * @param collectionFactory a {@link java.util.function.Supplier} object.
+   * @param <T> a T object.
+   * @param <A> a A object.
+   * @return a {@link java.util.stream.Collector} object.
+   */
   public static <T, A extends Set<T>> Collector<T, A, Set<T>> toImmutableSet(Supplier<A> collectionFactory) {
     return Collector.of(collectionFactory, Set::add, (left, right) -> {
       left.addAll(right);
@@ -46,6 +57,12 @@ public class ImmutableSetCollector {
     }, Collections::unmodifiableSet);
   }
 
+  /**
+   * <p>toImmutableSet.</p>
+   *
+   * @param <T> a T object.
+   * @return a {@link java.util.stream.Collector} object.
+   */
   public static <T> Collector<T, Set<T>, Set<T>> toImmutableSet() {
     return toImmutableSet(HashSet::new);
   }

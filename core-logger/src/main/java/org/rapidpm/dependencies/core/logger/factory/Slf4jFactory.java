@@ -25,10 +25,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * <p>Slf4jFactory class.</p>
  *
+ * @author svenruppert
+ * @version $Id: $Id
  */
 public class Slf4jFactory extends LoggerFactorySupport {
 
+  /** {@inheritDoc} */
   @Override
   protected LoggingService createLogger(String name) {
     Logger logger = LoggerFactory.getLogger(name);

@@ -23,11 +23,16 @@ import org.rapidpm.dependencies.core.logger.factory.NoLogFactory;
 import org.rapidpm.dependencies.core.logger.factory.StandardLoggerFactory;
 
 /**
+ * <p>Logger class.</p>
  *
+ * @author svenruppert
+ * @version $Id: $Id
  */
 public class Logger {
 
+  /** Constant <code>RAPIDPM_LOGGING_TYPE="rapidpm.logging.type"</code> */
   public static final String RAPIDPM_LOGGING_TYPE = "rapidpm.logging.type";
+  /** Constant <code>RAPIDPM_LOGGING_CLASS="rapidpm.logging.class"</code> */
   public static final String RAPIDPM_LOGGING_CLASS = "rapidpm.logging.class";
 
   private static volatile LoggerFactory loggerFactory;
@@ -36,10 +41,22 @@ public class Logger {
   private Logger() {
   }
 
+  /**
+   * <p>getLogger.</p>
+   *
+   * @param clazz a {@link java.lang.Class} object.
+   * @return a {@link org.rapidpm.dependencies.core.logger.LoggingService} object.
+   */
   public static LoggingService getLogger(Class clazz) {
     return getLogger(clazz.getName());
   }
 
+  /**
+   * <p>getLogger.</p>
+   *
+   * @param name a {@link java.lang.String} object.
+   * @return a {@link org.rapidpm.dependencies.core.logger.LoggingService} object.
+   */
   public static LoggingService getLogger(String name) {
     //noinspection DoubleCheckedLocking
     if (loggerFactory == null) {
@@ -54,6 +71,12 @@ public class Logger {
     return loggerFactory.getLogger(name);
   }
 
+  /**
+   * <p>newLoggerFactory.</p>
+   *
+   * @param loggerType a {@link java.lang.String} object.
+   * @return a {@link org.rapidpm.dependencies.core.logger.factory.LoggerFactory} object.
+   */
   public static LoggerFactory newLoggerFactory(String loggerType) {
     LoggerFactory loggerFactory = null;
     String loggerClass = System.getProperty(RAPIDPM_LOGGING_CLASS);

@@ -18,6 +18,12 @@ package org.rapidpm.dependencies.core.basepattern.builder;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * <p>Abstract NestedBuilder class.</p>
+ *
+ * @author svenruppert
+ * @version $Id: $Id
+ */
 public abstract class NestedBuilder<T, V> {
   protected T parent;
 
@@ -44,12 +50,19 @@ public abstract class NestedBuilder<T, V> {
     return parent;
   }
 
+  /**
+   * <p>build.</p>
+   *
+   * @return a V object.
+   */
   public abstract V build();
 
   /**
-   * @param parent
+   * <p>withParentBuilder.</p>
    *
-   * @return
+   * @param parent a T object.
+   * @param <P> a P object.
+   * @return a P object.
    */
   public <P extends NestedBuilder<T, V>> P withParentBuilder(T parent) {
     this.parent = parent;

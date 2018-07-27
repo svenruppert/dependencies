@@ -13,23 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.rapidpm.dependencies.core.logger.factory;
-
-import org.rapidpm.dependencies.core.logger.LoggingService;
-
-/**
- * <p>LoggerFactory interface.</p>
- *
- * @author svenruppert
- * @version $Id: $Id
- */
-public interface LoggerFactory {
-
-    /**
-     * <p>getLogger.</p>
-     *
-     * @param name a {@link java.lang.String} object.
-     * @return a {@link org.rapidpm.dependencies.core.logger.LoggingService} object.
-     */
-    LoggingService getLogger(String name);
+module rapidpm.dependencies.core.properties {
+  exports org.rapidpm.dependencies.core.properties;
+  requires rapidpm.dependencies.core.logger;
 }

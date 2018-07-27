@@ -24,9 +24,13 @@ import java.util.Properties;
 import org.rapidpm.dependencies.core.logger.HasLogger;
 
 /**
- * Creates a {@link Properties} object merged from different sources.
+ * Creates a {@link java.util.Properties} object merged from different sources.
+ *
+ * @author svenruppert
+ * @version $Id: $Id
  */
 public class PropertiesResolver implements HasLogger {
+  /** Constant <code>CONFIG_LOCATION_PROPERTY="rapidpm.configlocation"</code> */
   public static final String CONFIG_LOCATION_PROPERTY = "rapidpm.configlocation";
   private static final String PROPERIES_EXTENSION = ".properties";
 
@@ -35,7 +39,7 @@ public class PropertiesResolver implements HasLogger {
   }
 
   /**
-   * Creates a {@link Properties} object from different sources. The sources are:
+   * Creates a {@link java.util.Properties} object from different sources. The sources are:
    *
    * <ol>
    * <li>the root of the classpath</li>
@@ -48,7 +52,7 @@ public class PropertiesResolver implements HasLogger {
    *
    * @param name the name of the properties file - without the <code>.properties</code> file
    *        extension
-   * @return the merged {@link Properties} object
+   * @return the merged {@link java.util.Properties} object
    */
   public Properties get(String name) {
     Properties propertiesFromResource = loadFromResource(name);

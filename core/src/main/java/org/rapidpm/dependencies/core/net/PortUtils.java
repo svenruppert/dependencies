@@ -19,17 +19,38 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Random;
 
+/**
+ * <p>PortUtils class.</p>
+ *
+ * @author svenruppert
+ * @version $Id: $Id
+ */
 public class PortUtils {
 
+  /**
+   * <p>defaultRestPort.</p>
+   *
+   * @return a int.
+   */
   public int defaultRestPort() {
     return 7081;
   }
 
+  /**
+   * <p>defaultServletPort.</p>
+   *
+   * @return a int.
+   */
   public int defaultServletPort() {
     return 7080;
   }
 
   //TODO static ??
+  /**
+   * <p>nextFreePortForTest.</p>
+   *
+   * @return a int.
+   */
   public int nextFreePortForTest() {
     int counter = 0;
     final Random random = new Random();
@@ -46,6 +67,12 @@ public class PortUtils {
     throw new RuntimeException("no free port found");
   }
 
+  /**
+   * <p>isPortAvailable.</p>
+   *
+   * @param port a int.
+   * @return a boolean.
+   */
   public boolean isPortAvailable(int port) {
     try {
       new ServerSocket(port).close();

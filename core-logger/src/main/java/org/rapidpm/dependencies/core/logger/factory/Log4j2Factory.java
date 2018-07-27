@@ -27,11 +27,15 @@ import org.rapidpm.dependencies.core.logger.LoggingService;
 
 /**
  * Logging to Log4j 2.x.
+ *
+ * @author svenruppert
+ * @version $Id: $Id
  */
 public class Log4j2Factory extends LoggerFactorySupport {
 
   private static final String FQCN = Log4j2Logger.class.getName();
 
+  /** {@inheritDoc} */
   protected LoggingService createLogger(String name) {
     return new Log4j2Logger(LogManager.getContext().getLogger(name));
   }

@@ -19,13 +19,31 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 
+/**
+ * <p>DirectoryUtils class.</p>
+ *
+ * @author svenruppert
+ * @version $Id: $Id
+ */
 public class DirectoryUtils {
 
+  /**
+   * <p>deleteIndexDirectory.</p>
+   *
+   * @param directoryName a {@link java.lang.String} object.
+   * @return a boolean.
+   */
   public boolean deleteIndexDirectory(final String directoryName) {
     final Path indexDirectory = Paths.get(directoryName);
     return delete(indexDirectory);
   }
 
+  /**
+   * <p>deleteIndexDirectory.</p>
+   *
+   * @param directoryPath a {@link java.nio.file.Path} object.
+   * @return a boolean.
+   */
   public boolean deleteIndexDirectory(final Path directoryPath) {
     return delete(directoryPath);
   }

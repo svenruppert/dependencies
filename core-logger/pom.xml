@@ -22,7 +22,7 @@
   <parent>
     <artifactId>rapidpm-dependencies</artifactId>
     <groupId>org.rapidpm</groupId>
-    <version>4.0.2-SNAPSHOT</version>
+    <version>4.0.2</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
@@ -50,7 +50,6 @@
       <scope>provided</scope>
       <optional>true</optional>
     </dependency>
-
     <!--SLF4J-->
 
     <dependency>
@@ -61,5 +60,29 @@
     </dependency>
 
   </dependencies>
+
+  <!--https://bugs.openjdk.java.net/browse/JDK-8208269?attachmentViewMode=list-->
+  <!--https://issues.apache.org/jira/browse/MJAVADOC-449-->
+  <!-- We must generate a -javadoc JAR file to publish on Maven Central -->
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-javadoc</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <failOnError>false</failOnError>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
 
 </project>

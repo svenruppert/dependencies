@@ -20,9 +20,16 @@ import java.util.logging.Level;
 import org.rapidpm.dependencies.core.logger.LogEvent;
 import org.rapidpm.dependencies.core.logger.LoggingService;
 
+/**
+ * <p>NoLogFactory class.</p>
+ *
+ * @author svenruppert
+ * @version $Id: $Id
+ */
 public class NoLogFactory implements LoggerFactory {
   final LoggingService noLogger = new NoLogger();
 
+  /** {@inheritDoc} */
   @Override
   public LoggingService getLogger(String name) {
     return noLogger;

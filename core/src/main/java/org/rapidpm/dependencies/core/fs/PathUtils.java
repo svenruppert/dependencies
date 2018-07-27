@@ -19,11 +19,22 @@ import java.nio.file.attribute.PosixFilePermission;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * <p>PathUtils class.</p>
+ *
+ * @author svenruppert
+ * @version $Id: $Id
+ */
 public class PathUtils {
 
   private PathUtils() {
   }
 
+  /**
+   * <p>createUrwxGrwxArwx.</p>
+   *
+   * @return a {@link java.util.Set} object.
+   */
   public static Set<PosixFilePermission> createUrwxGrwxArwx() {
     final Set<PosixFilePermission> perms = new HashSet<>();
     perms.add(PosixFilePermission.OWNER_READ);
@@ -40,6 +51,11 @@ public class PathUtils {
     return perms;
   }
 
+  /**
+   * <p>createUrwxGoooAooo.</p>
+   *
+   * @return a {@link java.util.Set} object.
+   */
   public static Set<PosixFilePermission> createUrwxGoooAooo() {
     final Set<PosixFilePermission> perms = new HashSet<>();
     perms.add(PosixFilePermission.OWNER_READ);
@@ -50,6 +66,11 @@ public class PathUtils {
     return perms;
   }
 
+  /**
+   * <p>createUoooGrwxAooo.</p>
+   *
+   * @return a {@link java.util.Set} object.
+   */
   public static Set<PosixFilePermission> createUoooGrwxAooo() {
     final Set<PosixFilePermission> perms = new HashSet<>();
     //add group permissions
@@ -60,6 +81,11 @@ public class PathUtils {
     return perms;
   }
 
+  /**
+   * <p>createUoooGoooArwx.</p>
+   *
+   * @return a {@link java.util.Set} object.
+   */
   public static Set<PosixFilePermission> createUoooGoooArwx() {
     final Set<PosixFilePermission> perms = new HashSet<>();
     //add group permissions
@@ -70,6 +96,11 @@ public class PathUtils {
     return perms;
   }
 
+  /**
+   * <p>createUrwoGoooAooo.</p>
+   *
+   * @return a {@link java.util.Set} object.
+   */
   public static Set<PosixFilePermission> createUrwoGoooAooo() {
     final Set<PosixFilePermission> perms = new HashSet<>();
     perms.add(PosixFilePermission.OWNER_READ);
@@ -80,6 +111,11 @@ public class PathUtils {
   }
 
 
+  /**
+   * <p>createUrwoGrwoAooo.</p>
+   *
+   * @return a {@link java.util.Set} object.
+   */
   public static Set<PosixFilePermission> createUrwoGrwoAooo() {
     final Set<PosixFilePermission> perms = new HashSet<>();
     perms.add(PosixFilePermission.OWNER_READ);
@@ -91,6 +127,11 @@ public class PathUtils {
     return perms;
   }
 
+  /**
+   * <p>createUrwoGrwoArwo.</p>
+   *
+   * @return a {@link java.util.Set} object.
+   */
   public static Set<PosixFilePermission> createUrwoGrwoArwo() {
     final Set<PosixFilePermission> perms = new HashSet<>();
     perms.add(PosixFilePermission.OWNER_READ);
@@ -104,6 +145,11 @@ public class PathUtils {
     return perms;
   }
 
+  /**
+   * <p>createUrooGoooAooo.</p>
+   *
+   * @return a {@link java.util.Set} object.
+   */
   public static Set<PosixFilePermission> createUrooGoooAooo() {
     final Set<PosixFilePermission> perms = new HashSet<>();
     perms.add(PosixFilePermission.OWNER_READ);
@@ -113,6 +159,11 @@ public class PathUtils {
   }
 
 
+  /**
+   * <p>createUrooGrooAooo.</p>
+   *
+   * @return a {@link java.util.Set} object.
+   */
   public static Set<PosixFilePermission> createUrooGrooAooo() {
     final Set<PosixFilePermission> perms = new HashSet<>();
     perms.add(PosixFilePermission.OWNER_READ);
@@ -122,6 +173,11 @@ public class PathUtils {
     return perms;
   }
 
+  /**
+   * <p>createUrooGrooAroo.</p>
+   *
+   * @return a {@link java.util.Set} object.
+   */
   public static Set<PosixFilePermission> createUrooGrooAroo() {
     final Set<PosixFilePermission> perms = new HashSet<>();
     perms.add(PosixFilePermission.OWNER_READ);

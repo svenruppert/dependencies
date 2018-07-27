@@ -35,12 +35,22 @@ import java.util.stream.Collectors;
  * limitations under the License.
  * <p>
  * Created by RapidPM - Team on 08.09.16.
+ *
+ * @author svenruppert
+ * @version $Id: $Id
  */
 public class NewInstances {
 
   private NewInstances() { }
 
 
+  /**
+   * <p>createInstances.</p>
+   *
+   * @param classes a {@link java.util.Set} object.
+   * @param <T> a T object.
+   * @return a {@link java.util.List} object.
+   */
   public static <T> List<T> createInstances(final Set<Class<? extends T>> classes) {
 
     if (classes == null) return Collections.emptyList();
@@ -65,6 +75,13 @@ public class NewInstances {
   }
 
 
+  /**
+   * <p>createInstance.</p>
+   *
+   * @param clazz a {@link java.lang.Class} object.
+   * @param <T> a T object.
+   * @return a {@link java.util.Optional} object.
+   */
   public static <T> Optional<T> createInstance(final Class<? extends T> clazz) {
     if (clazz == null) return Optional.empty();
 

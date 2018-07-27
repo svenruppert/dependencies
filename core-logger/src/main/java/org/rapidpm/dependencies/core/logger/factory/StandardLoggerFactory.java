@@ -24,8 +24,15 @@ import org.rapidpm.dependencies.core.logger.LogEvent;
 import org.rapidpm.dependencies.core.logger.LoggerFactorySupport;
 import org.rapidpm.dependencies.core.logger.LoggingService;
 
+/**
+ * <p>StandardLoggerFactory class.</p>
+ *
+ * @author svenruppert
+ * @version $Id: $Id
+ */
 public class StandardLoggerFactory extends LoggerFactorySupport implements LoggerFactory {
 
+  /** {@inheritDoc} */
   @Override
   protected LoggingService createLogger(String name) {
     final Logger l = Logger.getLogger(name);
