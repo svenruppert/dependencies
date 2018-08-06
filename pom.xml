@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>4.0.3-SNAPSHOT</version>
+  <version>4.0.3</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -72,7 +72,7 @@
     </license>
   </licenses>
   <properties>
-    <rapidpm-dependencies.version>4.0.3-SNAPSHOT</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>${project.version}</rapidpm-dependencies.version>
 
     <maven.compiler.release>10</maven.compiler.release> <!--release makes source and target-->
     <maven.compiler.source>10</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
@@ -82,11 +82,11 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <slf4j.version>1.7.25</slf4j.version>
-    <log4j-api.version>2.11.0</log4j-api.version>
+    <log4j-api.version>2.11.1</log4j-api.version>
 
     <jacoco.version>0.8.1</jacoco.version>
     <pitest.version>1.4.0</pitest.version>
-    <pitest-junit5-plugin.version>0.5</pitest-junit5-plugin.version>
+    <pitest-junit5-plugin.version>0.6</pitest-junit5-plugin.version>
     <pitest-prod-classes>org.rapidpm.*</pitest-prod-classes>
     <pitest-test-classes>junit.org.rapidpm*</pitest-test-classes>
 
@@ -130,12 +130,12 @@
       <dependency>
         <groupId>org.javassist</groupId>
         <artifactId>javassist</artifactId>
-        <version>3.22.0-GA</version>
+        <version>3.23.1-GA</version>
       </dependency>
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
-        <version>4.0.3-SNAPSHOT</version>
+        <version>4.0.1</version>
       </dependency>
 
       <!--project versions-->
@@ -484,7 +484,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.7.0</version>
+          <version>3.8.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -569,7 +569,7 @@
         <plugin>
           <groupId>org.owasp</groupId>
           <artifactId>dependency-check-maven</artifactId>
-          <version>3.1.2</version>
+          <version>3.3.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -638,7 +638,7 @@
           <dependency>
             <groupId>org.ow2.asm</groupId>
             <artifactId>asm</artifactId>
-            <version>6.2</version> <!-- Use newer version of ASM -->
+            <version>6.2.1</version> <!-- Use newer version of ASM -->
           </dependency>
         </dependencies>
       </plugin>
