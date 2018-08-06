@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>4.0.3</version>
+  <version>4.0.4-SNAPSHOT</version>
 
 
   <inceptionYear>2013</inceptionYear>
