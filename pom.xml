@@ -85,7 +85,7 @@
     <log4j-api.version>2.11.1</log4j-api.version>
 
     <jacoco.version>0.8.1</jacoco.version>
-    <pitest.version>1.4.0</pitest.version>
+    <pitest.version>1.4.1</pitest.version>
     <pitest-junit5-plugin.version>0.6</pitest-junit5-plugin.version>
     <pitest-prod-classes>org.rapidpm.*</pitest-prod-classes>
     <pitest-test-classes>junit.org.rapidpm*</pitest-test-classes>
