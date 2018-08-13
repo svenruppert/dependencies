@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>4.0.5-SNAPSHOT</version>
+  <version>04.00.05-RPM-SNAPSHOT</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -72,7 +72,7 @@
     </license>
   </licenses>
   <properties>
-    <rapidpm-dependencies.version>4.0.5-SNAPSHOT</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.00.05-RPM-SNAPSHOT</rapidpm-dependencies.version>
 
     <maven.compiler.release>10</maven.compiler.release> <!--release makes source and target-->
     <maven.compiler.source>10</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
