@@ -9,6 +9,16 @@
 This project is developed with the Vaadin Development Environment
 that you can find here [https://github.com/vaadin-developer/vaadin-dev-environment-demo-vaadin-testbench](https://github.com/vaadin-developer/vaadin-dev-environment-demo-vaadin-testbench)
 
+
+
+## switched to new version string format
+To make search/replace easier, I started with a new version format.
+04.00.05-RPM ( -SNAPSHOT). The x.y.z is used in the same way, as before, but added RPM
+and leading zeros to make this format different from others.
+With this it is less possible to mix/change version numbers from 
+other dependencies. A **4.0.3** could be used from different 
+dependencies. ;-) 
+
 ## Changes between 3.6.x and 3.7
 There a re a few modules deactivated and removed.
 * reflection : moved as module into dynamic-dependency-injection project
