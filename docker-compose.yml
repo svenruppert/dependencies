@@ -28,7 +28,7 @@ services:
       - ~/.gnupg/:/root/.gnupg/
     working_dir: /usr/src/mymaven
     #    command: 'mvn help:active-profiles
-    command: 'mvn clean deploy
+    command: 'mvn license:format clean deploy
                     -Psys-nexus-deploy
                     -Psys-nexus-deploy-gpg
                     -Pqm-qs-lic-header-check

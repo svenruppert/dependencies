@@ -16,16 +16,15 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>rapidpm-dependencies</artifactId>
-    <groupId>org.rapidpm</groupId>
-    <version>04.00.07-RPM-SNAPSHOT</version>
-  </parent>
-  <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>rapidpm-dependencies-core</artifactId>
-
-</project>
+<Reflections>
+  <FieldAnnotationsScanner>
+    <entry>
+      <key>junit.org.reflections.TestModel$AF1</key>
+      <values>
+        <value>junit.org.reflections.TestModel$C4.f1</value>
+        <value>junit.org.reflections.TestModel$C4.f2</value>
+      </values>
+    </entry>
+  </FieldAnnotationsScanner>
+</Reflections>

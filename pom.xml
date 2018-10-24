@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.00.06-RPM</version>
+  <version>04.00.07-RPM-SNAPSHOT</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -72,7 +72,7 @@
     </license>
   </licenses>
   <properties>
-    <rapidpm-dependencies.version>04.00.06-RPM</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.00.07-RPM-SNAPSHOT</rapidpm-dependencies.version>
 
     <maven.compiler.release>10</maven.compiler.release> <!--release makes source and target-->
     <maven.compiler.source>10</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
@@ -101,6 +101,7 @@
     <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
     <!--<maven-failsafe-plugin.version>2.22.0</maven-failsafe-plugin.version>-->
     <!--<maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>-->
+    <opentracing-api.version>0.31.0</opentracing-api.version>
   </properties>
 
   <dependencyManagement>
@@ -118,6 +119,11 @@
         <version>${rapidpm-dependencies.version}</version>
       </dependency>
 
+      <dependency>
+        <groupId>org.rapidpm</groupId>
+        <artifactId>rapidpm-dependencies-core-properties</artifactId>
+        <version>${rapidpm-dependencies.version}</version>
+      </dependency>
 
       <!--API´s-->
       <dependency>
@@ -316,6 +322,42 @@
       </dependency>
       <!--tdd-->
 
+      <!--OpenTracing API-->
+      <dependency>
+        <groupId>io.opentracing</groupId>
+        <artifactId>opentracing-api</artifactId>
+        <version>${opentracing-api.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.opentracing</groupId>
+        <artifactId>opentracing-util</artifactId>
+        <version>${opentracing-api.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.opentracing.contrib</groupId>
+        <artifactId>jdbi-opentracing</artifactId>
+        <version>0.4.1</version>
+      </dependency>
+      <dependency>
+        <groupId>io.opentracing.contrib</groupId>
+        <artifactId>opentracing-cdi</artifactId>
+        <version>0.1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>io.opentracing.contrib</groupId>
+        <artifactId>opentracing-jdbc</artifactId>
+        <version>0.0.8</version>
+      </dependency>
+      <dependency>
+        <groupId>io.opentracing.contrib</groupId>
+        <artifactId>opentracing-jaxrs2</artifactId>
+        <version>0.1.7</version>
+      </dependency>
+
+
+
+
+
 
       <!--Brian Goetz Concurrency Annotations-->
       <dependency>
@@ -360,6 +402,8 @@
 
     <module>core</module>
     <module>core-properties</module>
+    <module>core-opentracing</module>
+    <module>core-reflection</module>
   </modules>
 
 
@@ -397,32 +441,32 @@
 
     <!--Microbenchmarking-->
     <!--<dependency>-->
-      <!--<groupId>org.openjdk.jmh</groupId>-->
-      <!--<artifactId>jmh-core</artifactId>-->
-      <!--<scope>test</scope>-->
+    <!--<groupId>org.openjdk.jmh</groupId>-->
+    <!--<artifactId>jmh-core</artifactId>-->
+    <!--<scope>test</scope>-->
     <!--</dependency>-->
     <!--<dependency>-->
-      <!--<groupId>org.openjdk.jmh</groupId>-->
-      <!--<artifactId>jmh-core-benchmarks</artifactId>-->
-      <!--<scope>test</scope>-->
+    <!--<groupId>org.openjdk.jmh</groupId>-->
+    <!--<artifactId>jmh-core-benchmarks</artifactId>-->
+    <!--<scope>test</scope>-->
     <!--</dependency>-->
     <!--<dependency>-->
-      <!--<groupId>org.openjdk.jmh</groupId>-->
-      <!--<artifactId>jmh-generator-annprocess</artifactId>-->
-      <!--<scope>test</scope>-->
+    <!--<groupId>org.openjdk.jmh</groupId>-->
+    <!--<artifactId>jmh-generator-annprocess</artifactId>-->
+    <!--<scope>test</scope>-->
     <!--</dependency>-->
     <!--<dependency>-->
-      <!--<groupId>org.openjdk.jmh</groupId>-->
-      <!--<artifactId>jmh-generator-reflection</artifactId>-->
-      <!--<scope>test</scope>-->
+    <!--<groupId>org.openjdk.jmh</groupId>-->
+    <!--<artifactId>jmh-generator-reflection</artifactId>-->
+    <!--<scope>test</scope>-->
     <!--</dependency>-->
     <!--<dependency>-->
-      <!--<groupId>net.jcip</groupId>-->
-      <!--<artifactId>jcip-annotations</artifactId>-->
+    <!--<groupId>net.jcip</groupId>-->
+    <!--<artifactId>jcip-annotations</artifactId>-->
     <!--</dependency>-->
     <!--<dependency>-->
-      <!--<groupId>com.google.code.findbugs</groupId>-->
-      <!--<artifactId>jsr305</artifactId>-->
+    <!--<groupId>com.google.code.findbugs</groupId>-->
+    <!--<artifactId>jsr305</artifactId>-->
     <!--</dependency>-->
 
     <dependency>
@@ -597,6 +641,12 @@
           <artifactId>findbugs-maven-plugin</artifactId>
           <version>3.0.5</version>
         </plugin>
+        <plugin>
+          <groupId>com.github.webdriverextensions</groupId>
+          <artifactId>webdriverextensions-maven-plugin</artifactId>
+          <version>3.1.3</version>
+        </plugin>
+
       </plugins>
     </pluginManagement>
 
@@ -801,20 +851,21 @@
         <plugins>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId><executions>
-            <execution>
-              <id>attach-javadocs</id>
-              <goals>
-                <goal>jar</goal>
-              </goals>
-            </execution>
-          </executions>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
             <configuration>
               <!--<sourceFileExcludes>-->
-                <!--<sourceFileExclude>**/module-info.java</sourceFileExclude>-->
+              <!--<sourceFileExclude>**/module-info.java</sourceFileExclude>-->
               <!--</sourceFileExcludes>-->
               <!--<dependencySourceExcludes>-->
-                <!--<dependencySourceExclude>**/module-info.java</dependencySourceExclude>-->
+              <!--<dependencySourceExclude>**/module-info.java</dependencySourceExclude>-->
               <!--</dependencySourceExcludes>-->
               <additionalOptions>
                 <additionalOption>-Xdoclint:none</additionalOption>
@@ -1153,8 +1204,9 @@
                 <exclude>**/README*</exclude>
                 <exclude>**/jacoco.exec*</exclude>
                 <exclude>**/LICENSE.txt</exclude>
-                <exclude>src/test/resources/**</exclude>
-                <exclude>src/main/resources/**</exclude>
+                <exclude>**/_data/webdrivers/*</exclude>
+                <!--<exclude>src/test/resources/**</exclude>-->
+                <!--<exclude>src/main/resources/**</exclude>-->
                 <exclude>target/**</exclude>
               </excludes>
             </configuration>

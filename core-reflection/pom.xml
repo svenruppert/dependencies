@@ -26,44 +26,52 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>rapidpm-dependencies-core-logger</artifactId>
-
-
+  <artifactId>rapidpm-dependencies-core-reflection</artifactId>
   <dependencies>
-    <!--LOG4J-->
     <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.17</version>
-      <scope>provided</scope>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-      <scope>provided</scope>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <scope>provided</scope>
-      <optional>true</optional>
-    </dependency>
-    <!--SLF4J-->
-
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <scope>provided</scope>
-      <optional>true</optional>
+      <groupId>org.rapidpm</groupId>
+      <artifactId>rapidpm-dependencies-core-logger</artifactId>
+      <version>04.00.07-RPM-SNAPSHOT</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.javassist</groupId>
+      <artifactId>javassist</artifactId>
+      <optional>false</optional> <!-- case: when not actually scanning with javassist or if using {@link Reflections.collect()} -->
+    </dependency>
+
+    <dependency>
+      <groupId>dom4j</groupId>
+      <artifactId>dom4j</artifactId>
+      <optional>true</optional> <!-- case: when no xml de/serialization -->
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <optional>true</optional> <!-- case: when no json de/serialization -->
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <scope>provided</scope>
+      <optional>true</optional> <!-- case: when no servlet environment -->
+    </dependency>
+
+    <!-- use any implementation you like -->
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-all</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
-  <!--https://bugs.openjdk.java.net/browse/JDK-8208269?attachmentViewMode=list-->
-  <!--https://issues.apache.org/jira/browse/MJAVADOC-449-->
-  <!-- We must generate a -javadoc JAR file to publish on Maven Central -->
   <build>
     <plugins>
       <plugin>
@@ -71,17 +79,13 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <executions>
           <execution>
-            <id>attach-javadoc</id>
+            <id>attach-javadocs</id>
             <goals>
               <goal>jar</goal>
             </goals>
           </execution>
         </executions>
-        <configuration>
-          <failOnError>false</failOnError>
-        </configuration>
       </plugin>
-
     </plugins>
   </build>
 
