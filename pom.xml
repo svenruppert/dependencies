@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.00.07-RPM-SNAPSHOT</version>
+  <version>04.00.07-RPM</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -72,7 +72,7 @@
     </license>
   </licenses>
   <properties>
-    <rapidpm-dependencies.version>04.00.07-RPM-SNAPSHOT</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.00.07-RPM</rapidpm-dependencies.version>
 
     <maven.compiler.release>10</maven.compiler.release> <!--release makes source and target-->
     <maven.compiler.source>10</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
@@ -85,8 +85,8 @@
     <log4j-api.version>2.11.1</log4j-api.version>
 
     <jacoco.version>0.8.2</jacoco.version>
-    <pitest.version>1.4.2</pitest.version>
-    <pitest-junit5-plugin.version>0.7</pitest-junit5-plugin.version>
+    <pitest.version>1.4.3</pitest.version>
+    <pitest-junit5-plugin.version>0.8</pitest-junit5-plugin.version>
     <pitest-prod-classes>org.rapidpm.*</pitest-prod-classes>
     <pitest-test-classes>junit.org.rapidpm*</pitest-test-classes>
 
@@ -317,7 +317,7 @@
       <dependency>
         <groupId>io.gatling.highcharts</groupId>
         <artifactId>gatling-charts-highcharts</artifactId>
-        <version>2.3.1</version>
+        <version>3.0.0</version>
         <scope>test</scope>
       </dependency>
       <!--tdd-->
@@ -336,7 +336,7 @@
       <dependency>
         <groupId>io.opentracing.contrib</groupId>
         <artifactId>jdbi-opentracing</artifactId>
-        <version>0.4.1</version>
+        <version>0.4.3</version>
       </dependency>
       <dependency>
         <groupId>io.opentracing.contrib</groupId>
@@ -346,12 +346,12 @@
       <dependency>
         <groupId>io.opentracing.contrib</groupId>
         <artifactId>opentracing-jdbc</artifactId>
-        <version>0.0.8</version>
+        <version>0.0.9</version>
       </dependency>
       <dependency>
         <groupId>io.opentracing.contrib</groupId>
         <artifactId>opentracing-jaxrs2</artifactId>
-        <version>0.1.7</version>
+        <version>0.2.1</version>
       </dependency>
 
 
@@ -1070,7 +1070,7 @@
               <dependency>
                 <groupId>com.puppycrawl.tools</groupId>
                 <artifactId>checkstyle</artifactId>
-                <version>8.12</version> <!-- Checkstyle version -->
+                <version>8.14</version> <!-- Checkstyle version -->
               </dependency>
             </dependencies>
             <executions>
