@@ -1081,7 +1081,9 @@
                   <goal>check</goal>
                 </goals>
                 <configuration>
-                  <sourceDirectories>${project.build.sourceDirectory}</sourceDirectories>
+                  <sourceDirectories>
+                  	<sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
+                  </sourceDirectories>
 
                   <excludes>**/generated-sources/vwscdn/**/*</excludes>
                   <excludes>**/generated-sources/wscdn/**/*</excludes>
