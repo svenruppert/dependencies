@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.00.08-RPM-SNAPSHOT</version>
+  <version>04.00.08-RPM</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -72,11 +72,11 @@
     </license>
   </licenses>
   <properties>
-    <rapidpm-dependencies.version>04.00.08-RPM-SNAPSHOT</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.00.08-RPM</rapidpm-dependencies.version>
 
-    <maven.compiler.release>10</maven.compiler.release> <!--release makes source and target-->
-    <maven.compiler.source>10</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
-    <maven.compiler.target>10</maven.compiler.target> <!--use release when importing-->
+    <maven.compiler.release>11</maven.compiler.release> <!--release makes source and target-->
+    <maven.compiler.source>11</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
+    <maven.compiler.target>11</maven.compiler.target> <!--use release when importing-->
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -84,7 +84,7 @@
     <slf4j.version>1.7.25</slf4j.version>
     <log4j-api.version>2.11.1</log4j-api.version>
 
-    <jacoco.version>0.8.2</jacoco.version>
+    <!--<jacoco.version>0.8.2</jacoco.version>-->
     <pitest.version>1.4.3</pitest.version>
     <pitest-junit5-plugin.version>0.8</pitest-junit5-plugin.version>
     <pitest-prod-classes>org.rapidpm.*</pitest-prod-classes>
@@ -244,20 +244,20 @@
       </dependency>
 
       <!--tdd-->
-      <dependency>
-        <!--  must be on the classpath  -->
-        <groupId>org.jacoco</groupId>
-        <artifactId>org.jacoco.agent</artifactId>
-        <classifier>runtime</classifier>
-        <version>${jacoco.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.jacoco</groupId>
-        <artifactId>org.jacoco.ant</artifactId>
-        <version>${jacoco.version}</version>
+      <!--<dependency>-->
+        <!--&lt;!&ndash;  must be on the classpath  &ndash;&gt;-->
+        <!--<groupId>org.jacoco</groupId>-->
+        <!--<artifactId>org.jacoco.agent</artifactId>-->
+        <!--<classifier>runtime</classifier>-->
+        <!--<version>${jacoco.version}</version>-->
         <!--<scope>test</scope>-->
-      </dependency>
+      <!--</dependency>-->
+      <!--<dependency>-->
+        <!--<groupId>org.jacoco</groupId>-->
+        <!--<artifactId>org.jacoco.ant</artifactId>-->
+        <!--<version>${jacoco.version}</version>-->
+        <!--&lt;!&ndash;<scope>test</scope>&ndash;&gt;-->
+      <!--</dependency>-->
       <dependency>
         <groupId>com.google.code.findbugs</groupId>
         <artifactId>jsr305</artifactId>
@@ -375,11 +375,6 @@
         <version>0.3.1</version>
       </dependency>
 
-
-
-
-
-
       <!--Brian Goetz Concurrency Annotations-->
       <dependency>
         <groupId>net.jcip</groupId>
@@ -452,21 +447,6 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <scope>test</scope>
     </dependency>
-
-
-
-
-
-
-
-
-    <!-- Only required to run tests in an IDE that bundles an older version -->
-    <!--<dependency>-->
-    <!--<groupId>org.junit.vintage</groupId>-->
-    <!--<artifactId>junit-vintage-engine</artifactId>-->
-    <!--<scope>test</scope>-->
-    <!--</dependency>-->
-
 
     <!--Microbenchmarking-->
     <!--<dependency>-->
@@ -583,11 +563,11 @@
             </dependency>
           </dependencies>
         </plugin>
-        <plugin>
-          <groupId>org.jacoco</groupId>
-          <artifactId>jacoco-maven-plugin</artifactId>
-          <version>${jacoco.version}</version>
-        </plugin>
+        <!--<plugin>-->
+          <!--<groupId>org.jacoco</groupId>-->
+          <!--<artifactId>jacoco-maven-plugin</artifactId>-->
+          <!--<version>${jacoco.version}</version>-->
+        <!--</plugin>-->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-repository-plugin</artifactId>
@@ -643,21 +623,6 @@
           <artifactId>pitest-maven</artifactId>
           <version>${pitest.version}</version>
         </plugin>
-        <!--<plugin>-->
-        <!--<groupId>net.alchim31.maven</groupId>-->
-        <!--<artifactId>scala-maven-plugin</artifactId>-->
-        <!--<version>3.3.1</version>-->
-        <!--</plugin>-->
-        <!--<plugin>-->
-        <!--<groupId>io.gatling</groupId>-->
-        <!--<artifactId>gatling-maven-plugin</artifactId>-->
-        <!--<version>3.0.0-M2</version>-->
-        <!--</plugin>-->
-        <!--<plugin>-->
-        <!--<groupId>org.sonarsource.scanner.maven</groupId>-->
-        <!--<artifactId>sonar-maven-plugin</artifactId>-->
-        <!--<version>3.3.0.603</version>-->
-        <!--</plugin>-->
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>exec-maven-plugin</artifactId>
@@ -667,7 +632,6 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
-          <!--<version>2.19.1</version>-->
           <version>${maven-failsafe-plugin.version}</version>
         </plugin>
         <plugin>
@@ -680,7 +644,6 @@
           <artifactId>webdriverextensions-maven-plugin</artifactId>
           <version>3.1.3</version>
         </plugin>
-
       </plugins>
     </pluginManagement>
 
@@ -699,10 +662,21 @@
       </plugin>
 
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <dependencies>
+          <dependency>
+            <groupId>org.ow2.asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>7.0</version> <!-- Use newer version of ASM -->
+          </dependency>
+        </dependencies>
+      </plugin>
+
+      <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>versions-maven-plugin</artifactId>
       </plugin>
-      <!-- Define release properties -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
@@ -741,9 +715,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
-        <configuration>
-          <encoding>UTF-8</encoding>
-        </configuration>
       </plugin>
 
       <plugin>
@@ -850,32 +821,6 @@
 
 
   <profiles>
-
-    <!--<profile>-->
-    <!--<id>sys-nexus-ci</id>-->
-    <!--<activation>-->
-    <!--<activeByDefault>false</activeByDefault>-->
-    <!--</activation>-->
-    <!--<distributionManagement>-->
-    <!--<snapshotRepository>-->
-    <!--<id>sys-nexus-ci</id>-->
-    <!--<name>The repo for this pipeline</name>-->
-    <!--<url>https://nexus.craftwater.de/repository/gitlab-ci-${pipeline}/</url>-->
-    <!--</snapshotRepository>-->
-    <!--</distributionManagement>-->
-
-    <!--<repositories>-->
-    <!--<repository>-->
-    <!--<id>nexusinterim</id>-->
-    <!--<name>The repo for this pipeline</name>-->
-    <!--<url>https://nexus.craftwater.de/repository/gitlab-ci-${pipeline}/</url>-->
-    <!--<snapshots>-->
-    <!--<enabled>true</enabled>-->
-    <!--</snapshots>-->
-    <!--</repository>-->
-    <!--</repositories>-->
-    <!--</profile>-->
-
     <profile>
       <id>gen-javadoc</id>
       <activation>
@@ -895,12 +840,6 @@
               </execution>
             </executions>
             <configuration>
-              <!--<sourceFileExcludes>-->
-              <!--<sourceFileExclude>**/module-info.java</sourceFileExclude>-->
-              <!--</sourceFileExcludes>-->
-              <!--<dependencySourceExcludes>-->
-              <!--<dependencySourceExclude>**/module-info.java</dependencySourceExclude>-->
-              <!--</dependencySourceExcludes>-->
               <additionalOptions>
                 <additionalOption>-Xdoclint:none</additionalOption>
               </additionalOptions>
@@ -915,20 +854,6 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <dependencies>
-        <dependency>
-          <!--  must be on the classpath  -->
-          <groupId>org.jacoco</groupId>
-          <artifactId>org.jacoco.agent</artifactId>
-          <classifier>runtime</classifier>
-          <scope>test</scope>
-        </dependency>
-        <dependency>
-          <groupId>org.jacoco</groupId>
-          <artifactId>org.jacoco.ant</artifactId>
-          <scope>test</scope>
-        </dependency>
-      </dependencies>
       <build>
         <plugins>
           <plugin>
@@ -936,9 +861,6 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <inherited>true</inherited>
             <configuration>
-              <systemPropertyVariables>
-                <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-              </systemPropertyVariables>
               <includes>
                 <include>**/junit/**</include>
               </includes>
@@ -956,60 +878,6 @@
               <!--<testSourceDirectory>${project.build.directory}/generated-test-sources/test-annotations</testSourceDirectory>-->
               <!--<classesDirectory>target/generated-classes/emma/classes</classesDirectory>-->
             </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <executions>
-
-              <execution>
-                <id>default-instrument</id>
-                <goals>
-                  <goal>instrument</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>default-restore-instrumented-classes</id>
-                <goals>
-                  <goal>restore-instrumented-classes</goal>
-                </goals>
-              </execution>
-              <execution>
-                <goals>
-                  <goal>prepare-agent</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>default-report</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>report</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>default-check</id>
-                <goals>
-                  <goal>check</goal>
-                </goals>
-                <configuration>
-                  <rules>
-                    <rule>
-                      <element>BUNDLE</element>
-                      <!--<element>CLASS</element>-->
-                      <!--<element>PACKAGE</element>-->
-                      <limits>
-                        <limit>
-                          <counter>LINE</counter>
-                          <value>COVEREDRATIO</value>
-                          <!--<minimum>0.60</minimum>-->
-                          <minimum>0.00</minimum>
-                        </limit>
-                      </limits>
-                    </rule>
-                  </rules>
-                </configuration>
-              </execution>
-            </executions>
           </plugin>
         </plugins>
       </build>
@@ -1199,8 +1067,6 @@
                         <module name="SuppressionCommentFilter"/>
                       </module>
                     </module>
-
-
                   </checkstyleRules>
                   <consoleOutput>true</consoleOutput>
                   <failsOnError>true</failsOnError>
@@ -1208,7 +1074,6 @@
                   <outputFileFormat>plain</outputFileFormat>
                   <outputFileFormat>xml</outputFileFormat>
                 </configuration>
-
               </execution>
             </executions>
 
