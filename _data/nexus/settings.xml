@@ -33,15 +33,6 @@
     </server>
   </servers>
 
-  <mirrors>
-    <mirror>
-      <id>central</id>
-      <name>central</name>
-      <url>http://nexus.rapidpm.org/repository/maven-public/</url>
-      <mirrorOf>*</mirrorOf>
-    </mirror>
-  </mirrors>
-
   <profiles>
     <profile>
       <id>sys-nexus-deploy</id>
