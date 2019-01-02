@@ -30,4 +30,4 @@ services:
     #    command: 'mvn help:active-profiles
     command: 'mvn license:format clean deploy
                     -P_release
-                    -Dmaven.test.skip=false '
+                    -Dmaven.test.skip=true '
