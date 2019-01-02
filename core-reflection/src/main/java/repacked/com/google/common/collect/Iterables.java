@@ -48,7 +48,7 @@ public class Iterables {
       final Predicate<? super T> retainIfTrue) {
 
     if (unfiltered == null || retainIfTrue == null) throw new NullPointerException();
-    return new FluentIterable<>() {
+    return new FluentIterable<T>() {
       @Override
       public Iterator<T> iterator() {
         return Iterators.filter(unfiltered.iterator() , retainIfTrue);
@@ -93,7 +93,7 @@ public class Iterables {
 
   public static <F, T> Iterable<T> transform(
       final Iterable<F> fromIterable , final Function<? super F, ? extends T> function) {
-    return new FluentIterable<>() {
+    return new FluentIterable<T>() {
       @Override
       public Iterator<T> iterator() {
         return Iterators.transform(fromIterable.iterator() , function);
@@ -102,7 +102,7 @@ public class Iterables {
   }
 
   public static <T> Iterable<T> limit(final Iterable<T> iterable , final int limitSize) {
-    return new FluentIterable<>() {
+    return new FluentIterable<T>() {
       @Override
       public Iterator<T> iterator() {
         return Iterators.limit(iterable.iterator() , limitSize);

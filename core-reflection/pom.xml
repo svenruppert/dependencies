@@ -22,7 +22,7 @@
   <parent>
     <artifactId>rapidpm-dependencies</artifactId>
     <groupId>org.rapidpm</groupId>
-    <version>04.00.08-RPM</version>
+    <version>04.00.09-RPM</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
@@ -30,8 +30,7 @@
   <dependencies>
     <dependency>
       <groupId>org.rapidpm</groupId>
-      <artifactId>rapidpm-dependencies-core-logger</artifactId>
-      <version>04.00.08-RPM</version>
+      <artifactId>rapidpm-logger-adapter</artifactId>
     </dependency>
 
     <dependency>
