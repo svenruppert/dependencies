@@ -76,7 +76,7 @@
     <rapidpm-functional-reactive.version>01.00.00-RPM</rapidpm-functional-reactive.version>
     <rapidpm-logger-adapter.version>01.00.00-RPM</rapidpm-logger-adapter.version>
 
-    <!--<maven.compiler.release>11</maven.compiler.release> &lt;!&ndash;release makes source and target&ndash;&gt;-->
+    <!--<maven.compiler.release>8</maven.compiler.release> &lt;!&ndash;release makes source and target&ndash;&gt;-->
     <maven.compiler.source>8</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
     <maven.compiler.target>8</maven.compiler.target> <!--use release when importing-->
 
