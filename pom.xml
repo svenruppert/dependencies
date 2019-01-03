@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.00.09-RPM</version>
+  <version>04.00.10-RPM-SNAPSHOT</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -72,7 +72,7 @@
     </license>
   </licenses>
   <properties>
-    <rapidpm-dependencies.version>04.00.09-RPM</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.00.10-RPM-SNAPSHOT</rapidpm-dependencies.version>
     <rapidpm-functional-reactive.version>01.00.00-RPM</rapidpm-functional-reactive.version>
     <rapidpm-logger-adapter.version>01.00.00-RPM</rapidpm-logger-adapter.version>
 
@@ -95,8 +95,6 @@
     <jmh.version>1.21</jmh.version>
 
     <!--TDD jUnit5-->
-    <!--<junit.jupiter.version>5.1.1</junit.jupiter.version>-->
-    <!--<junit.platform.version>1.1.1</junit.platform.version>-->
     <junit.jupiter.version>5.4.0-M1</junit.jupiter.version>
     <junit.platform.version>1.4.0-M1</junit.platform.version>
 
@@ -242,7 +240,7 @@
       <dependency>
         <groupId>com.zaxxer</groupId>
         <artifactId>HikariCP</artifactId>
-        <version>3.2.0</version>
+        <version>3.3.0</version>
         <scope>compile</scope>
       </dependency>
       <dependency>
@@ -641,17 +639,7 @@
         </dependencies>
       </plugin>
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <dependencies>
-          <dependency>
-            <groupId>org.ow2.asm</groupId>
-            <artifactId>asm</artifactId>
-            <version>7.0</version> <!-- Use newer version of ASM -->
-          </dependency>
-        </dependencies>
-      </plugin>
+
 
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -661,15 +649,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <configuration>
-          <useReleaseProfile>false</useReleaseProfile>
-          <releaseProfiles>extras</releaseProfiles>
-          <autoVersionSubmodules>true</autoVersionSubmodules>
-        </configuration>
-      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
@@ -683,18 +663,7 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <executions>
-          <execution>
-            <goals>
-              <goal>jar</goal>
-              <goal>test-jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -940,6 +909,15 @@
         <plugins>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-release-plugin</artifactId>
+            <configuration>
+              <useReleaseProfile>false</useReleaseProfile>
+              <releaseProfiles>extras</releaseProfiles>
+              <autoVersionSubmodules>true</autoVersionSubmodules>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
             <executions>
               <execution>
@@ -1002,10 +980,28 @@
               </execution>
             </executions>
           </plugin>
-
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>jar</goal>
+                  <goal>test-jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
+            <dependencies>
+              <dependency>
+                <groupId>org.ow2.asm</groupId>
+                <artifactId>asm</artifactId>
+                <version>7.0</version> <!-- Use newer version of ASM -->
+              </dependency>
+            </dependencies>
             <executions>
               <execution>
                 <id>attach-javadocs</id>
