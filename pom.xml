@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.00.12-RPM-SNAPSHOT</version>
+  <version>04.00.12-RPM</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -72,9 +72,9 @@
     </license>
   </licenses>
   <properties>
-    <rapidpm-dependencies.version>04.00.12-RPM-SNAPSHOT</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.00.12-RPM</rapidpm-dependencies.version>
     <rapidpm-functional-reactive.version>01.00.01-RPM</rapidpm-functional-reactive.version>
-    <rapidpm-logger-adapter.version>01.00.00-RPM</rapidpm-logger-adapter.version>
+    <rapidpm-logger-adapter.version>01.00.01-RPM</rapidpm-logger-adapter.version>
 
     <!--<maven.compiler.release>8</maven.compiler.release> &lt;!&ndash;release makes source and target&ndash;&gt;-->
     <maven.compiler.source>8</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
@@ -105,9 +105,9 @@
     <!--project versions-->
     <dependencies>
       <!--<dependency>-->
-        <!--<groupId>org.rapidpm</groupId>-->
-        <!--<artifactId>rapidpm-dependencies-core-logger</artifactId>-->
-        <!--<version>${rapidpm-dependencies.version}</version>-->
+      <!--<groupId>org.rapidpm</groupId>-->
+      <!--<artifactId>rapidpm-dependencies-core-logger</artifactId>-->
+      <!--<version>${rapidpm-dependencies.version}</version>-->
       <!--</dependency>-->
 
       <dependency>
@@ -363,7 +363,7 @@
       <dependency>
         <groupId>io.opentracing.contrib</groupId>
         <artifactId>opentracing-jaxrs2</artifactId>
-        <version>0.3.1</version>
+        <version>0.4.0</version>
       </dependency>
 
       <!--Brian Goetz Concurrency Annotations-->
@@ -424,7 +424,6 @@
       <groupId>org.rapidpm</groupId>
       <artifactId>rapidpm-logger-adapter</artifactId>
     </dependency>
-
 
 
     <!--jUnit5-->
@@ -638,7 +637,6 @@
           </dependency>
         </dependencies>
       </plugin>
-
 
 
       <plugin>
@@ -1013,21 +1011,22 @@
             <configuration>
               <additionalOptions>
                 <additionalOption>-Xdoclint:none</additionalOption>
+                <additionalOption>-html5</additionalOption>
               </additionalOptions>
               <destDir>target/doc/apidoc/</destDir>
             </configuration>
           </plugin>
 
           <!--<plugin>-->
-            <!--<groupId>org.owasp</groupId>-->
-            <!--<artifactId>dependency-check-maven</artifactId>-->
-            <!--<executions>-->
-              <!--<execution>-->
-                <!--<goals>-->
-                  <!--<goal>check</goal>-->
-                <!--</goals>-->
-              <!--</execution>-->
-            <!--</executions>-->
+          <!--<groupId>org.owasp</groupId>-->
+          <!--<artifactId>dependency-check-maven</artifactId>-->
+          <!--<executions>-->
+          <!--<execution>-->
+          <!--<goals>-->
+          <!--<goal>check</goal>-->
+          <!--</goals>-->
+          <!--</execution>-->
+          <!--</executions>-->
           <!--</plugin>-->
         </plugins>
       </build>
