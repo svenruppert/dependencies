@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.00.13-RPM-SNAPSHOT</version>
+  <version>04.00.13-RPM</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -72,7 +72,7 @@
     </license>
   </licenses>
   <properties>
-    <rapidpm-dependencies.version>04.00.13-RPM-SNAPSHOT</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.00.13-RPM</rapidpm-dependencies.version>
     <rapidpm-functional-reactive.version>01.00.01-RPM</rapidpm-functional-reactive.version>
     <rapidpm-logger-adapter.version>01.00.01-RPM</rapidpm-logger-adapter.version>
 
@@ -86,8 +86,8 @@
     <slf4j.version>1.7.25</slf4j.version>
     <log4j-api.version>2.11.1</log4j-api.version>
 
-    <!--<jacoco.version>0.8.2</jacoco.version>-->
-    <pitest.version>1.4.3</pitest.version>
+    <jacoco.version>0.8.3</jacoco.version>
+    <pitest.version>1.4.5</pitest.version>
     <pitest-junit5-plugin.version>0.8</pitest-junit5-plugin.version>
     <pitest-prod-classes>org.rapidpm.*</pitest-prod-classes>
     <pitest-test-classes>junit.org.rapidpm*</pitest-test-classes>
@@ -95,8 +95,9 @@
     <jmh.version>1.21</jmh.version>
 
     <!--TDD jUnit5-->
-    <junit.jupiter.version>5.4.0-M1</junit.jupiter.version>
-    <junit.platform.version>1.4.0-M1</junit.platform.version>
+    <junit.jupiter.version>5.4.0-RC2</junit.jupiter.version>
+    <junit.platform.version>1.4.0-RC2</junit.platform.version>
+    <junit-platform-maven-plugin.version>1.0.0-M5</junit-platform-maven-plugin.version>
 
     <opentracing-api.version>0.31.0</opentracing-api.version>
   </properties>
@@ -104,12 +105,6 @@
   <dependencyManagement>
     <!--project versions-->
     <dependencies>
-      <!--<dependency>-->
-      <!--<groupId>org.rapidpm</groupId>-->
-      <!--<artifactId>rapidpm-dependencies-core-logger</artifactId>-->
-      <!--<version>${rapidpm-dependencies.version}</version>-->
-      <!--</dependency>-->
-
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-dependencies-core</artifactId>
@@ -403,10 +398,6 @@
   </dependencyManagement>
 
   <modules>
-    <!--used in other packages-->
-    <!--<module>core-logger</module>-->
-    <!--used in other packages-->
-
     <module>core</module>
     <module>core-properties</module>
     <!--<module>core-reflection</module>-->
@@ -621,6 +612,11 @@
           <artifactId>webdriverextensions-maven-plugin</artifactId>
           <version>3.1.3</version>
         </plugin>
+        <plugin>
+          <groupId>de.sormuras.junit</groupId>
+          <artifactId>junit-platform-maven-plugin</artifactId>
+          <version>${junit-platform-maven-plugin.version}</version>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -760,7 +756,7 @@
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>8.16</version> <!-- Checkstyle version -->
+            <version>8.17</version> <!-- Checkstyle version -->
           </dependency>
         </dependencies>
         <executions>
@@ -863,7 +859,50 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>de.sormuras.junit</groupId>
+        <artifactId>junit-platform-maven-plugin</artifactId>
+        <version>${junit-platform-maven-plugin.version}</version>
+        <extensions>true</extensions> <!-- Necessary to execute it in 'test' phase. -->
 
+        <configuration>
+
+          <executor>JAVA</executor>
+          <javaOptions>
+            <additionalOptions>
+              <!--<protools>-Dactivate.vaadin.protools=false</protools>-->
+              <jacoco>${jacoco.java.option}</jacoco>
+            </additionalOptions>
+          </javaOptions>
+
+          <!--<tags>-->
+          <!--<tag>vaadin-protools</tag>-->
+          <!--</tags>-->
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <executions>
+          <execution>
+            <id>pre-unit-test</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+            <configuration>
+              <propertyName>jacoco.java.option</propertyName>
+            </configuration>
+          </execution>
+          <execution>
+            <id>post-unit-test</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
@@ -876,6 +915,19 @@
         <reportSets>
           <reportSet>
             <reports>
+              <report>report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <!-- select non-aggregate reports -->
               <report>report</report>
             </reports>
           </reportSet>
