@@ -21,7 +21,7 @@
 	<parent>
 		<artifactId>rapidpm-dependencies</artifactId>
 		<groupId>org.rapidpm</groupId>
-		<version>04.00.14-RPM-SNAPSHOT</version>
+		<version>04.00.14-RPM</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
