@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.00.15-RPM-SNAPSHOT</version>
+  <version>04.00.15-RPM</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -72,7 +72,7 @@
     </license>
   </licenses>
   <properties>
-    <rapidpm-dependencies.version>04.00.15-RPM-SNAPSHOT</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.00.15-RPM</rapidpm-dependencies.version>
     <rapidpm-functional-reactive.version>01.00.01-RPM</rapidpm-functional-reactive.version>
     <rapidpm-logger-adapter.version>01.00.01-RPM</rapidpm-logger-adapter.version>
 
@@ -95,8 +95,8 @@
     <jmh.version>1.21</jmh.version>
 
     <!--TDD jUnit5-->
-    <junit.jupiter.version>5.4.0-RC2</junit.jupiter.version>
-    <junit.platform.version>1.4.0-RC2</junit.platform.version>
+    <junit.jupiter.version>5.4.0</junit.jupiter.version>
+    <junit.platform.version>1.4.0</junit.platform.version>
     <junit-platform-maven-plugin.version>1.0.0-M5</junit-platform-maven-plugin.version>
 
     <opentracing-api.version>0.31.0</opentracing-api.version>
@@ -188,19 +188,19 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-vfs2</artifactId>
-        <version>2.2</version>
+        <version>2.3</version>
         <scope>provided</scope>
         <optional>true</optional>
       </dependency>
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
-        <version>4.5.6</version>
+        <version>4.5.7</version>
       </dependency>
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>fluent-hc</artifactId>
-        <version>4.5.6</version>
+        <version>4.5.7</version>
       </dependency>
 
 
@@ -235,7 +235,7 @@
       <dependency>
         <groupId>com.zaxxer</groupId>
         <artifactId>HikariCP</artifactId>
-        <version>3.3.0</version>
+        <version>3.3.1</version>
         <scope>compile</scope>
       </dependency>
       <dependency>
@@ -324,7 +324,7 @@
       <dependency>
         <groupId>io.gatling.highcharts</groupId>
         <artifactId>gatling-charts-highcharts</artifactId>
-        <version>3.0.2</version>
+        <version>3.0.3</version>
         <scope>test</scope>
       </dependency>
       <!--tdd-->
@@ -867,7 +867,9 @@
         <extensions>true</extensions> <!-- Necessary to execute it in 'test' phase. -->
 
         <configuration>
-
+          <tweaks>
+            <failIfNoTests>false</failIfNoTests>
+          </tweaks>
           <executor>JAVA</executor>
           <javaOptions>
             <additionalOptions>
@@ -1063,7 +1065,7 @@
             <configuration>
               <additionalOptions>
                 <additionalOption>-Xdoclint:none</additionalOption>
-<!--                <additionalOption>-html5</additionalOption>-->
+                <!--                <additionalOption>-html5</additionalOption>-->
               </additionalOptions>
               <destDir>target/doc/apidoc/</destDir>
             </configuration>
