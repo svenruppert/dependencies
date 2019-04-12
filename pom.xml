@@ -55,14 +55,14 @@
       <timezone>+1</timezone>
     </developer>
   </developers>
-  <!--<issueManagement>-->
-  <!--<system>Youtrack</system>-->
-  <!--<url>https://issues.rapidpm.org/issues</url>-->
-  <!--</issueManagement>-->
-  <!--<ciManagement>-->
-  <!--<system>TeamCity</system>-->
-  <!--<url>https://build.rapidpm.org/project.html?projectId=RapidPM_RapidPMDependencies</url>-->
-  <!--</ciManagement>-->
+  <issueManagement>
+  <system>GitHub</system>
+  <url>https://github.com/RapidPM/rapidpm-dependencies/issues</url>
+  </issueManagement>
+  <ciManagement>
+  <system>JitCI</system>
+  <url>https://jitci.com/gh/RapidPM/rapidpm-dependencies</url>
+  </ciManagement>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -73,7 +73,7 @@
   </licenses>
   <properties>
     <rapidpm-dependencies.version>04.00.16-RPM-SNAPSHOT</rapidpm-dependencies.version>
-    <rapidpm-functional-reactive.version>01.00.01-RPM</rapidpm-functional-reactive.version>
+    <rapidpm-functional-reactive.version>01.00.02-RPM</rapidpm-functional-reactive.version>
     <rapidpm-logger-adapter.version>01.00.01-RPM</rapidpm-logger-adapter.version>
 
     <!--<maven.compiler.release>8</maven.compiler.release> &lt;!&ndash;release makes source and target&ndash;&gt;-->
@@ -84,10 +84,10 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <slf4j.version>1.7.25</slf4j.version>
-    <log4j-api.version>2.11.1</log4j-api.version>
+    <log4j-api.version>2.11.2</log4j-api.version>
 
     <jacoco.version>0.8.3</jacoco.version>
-    <pitest.version>1.4.5</pitest.version>
+    <pitest.version>1.4.7</pitest.version>
     <pitest-junit5-plugin.version>0.8</pitest-junit5-plugin.version>
     <pitest-prod-classes>org.rapidpm.*</pitest-prod-classes>
     <pitest-test-classes>junit.org.rapidpm*</pitest-test-classes>
@@ -95,12 +95,22 @@
     <jmh.version>1.21</jmh.version>
 
     <!--TDD jUnit5-->
-    <junit.jupiter.version>5.4.0</junit.jupiter.version>
-    <junit.platform.version>1.4.0</junit.platform.version>
+    <junit.jupiter.version>5.5.0-M1</junit.jupiter.version>
+    <junit.platform.version>1.5.0-M1</junit.platform.version>
     <junit-platform-maven-plugin.version>1.0.0-M5</junit-platform-maven-plugin.version>
 
-    <opentracing-api.version>0.31.0</opentracing-api.version>
+    <opentracing-api.version>0.32.0</opentracing-api.version>
   </properties>
+
+
+  <repositories>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+  </repositories>
+
+
 
   <dependencyManagement>
     <!--project versions-->
@@ -159,7 +169,7 @@
       <dependency>
         <groupId>com.google.auto.service</groupId>
         <artifactId>auto-service</artifactId>
-        <version>1.0-rc4</version>
+        <version>1.0-rc5</version>
         <!--<optional>true</optional>-->
       </dependency>
       <!--Google stuff-->
@@ -195,12 +205,12 @@
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
-        <version>4.5.7</version>
+        <version>4.5.8</version>
       </dependency>
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>fluent-hc</artifactId>
-        <version>4.5.7</version>
+        <version>4.5.8</version>
       </dependency>
 
 
@@ -214,13 +224,13 @@
       <dependency>
         <groupId>org.cache2k</groupId>
         <artifactId>cache2k-base-bom</artifactId>
-        <version>1.2.0.Final</version>
+        <version>1.2.1.Final</version>
         <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.cache2k</groupId>
         <artifactId>cache2k-jcache</artifactId>
-        <version>1.2.0.Final</version>
+        <version>1.2.1.Final</version>
         <scope>runtime</scope>
       </dependency>
 
@@ -290,7 +300,7 @@
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
-        <version>3.11.1</version>
+        <version>3.12.2</version>
         <scope>test</scope>
       </dependency>
 
@@ -343,7 +353,7 @@
       <dependency>
         <groupId>io.opentracing.contrib</groupId>
         <artifactId>jdbi-opentracing</artifactId>
-        <version>0.5.1</version>
+        <version>0.6.0</version>
       </dependency>
       <dependency>
         <groupId>io.opentracing.contrib</groupId>
@@ -358,7 +368,7 @@
       <dependency>
         <groupId>io.opentracing.contrib</groupId>
         <artifactId>opentracing-jaxrs2</artifactId>
-        <version>0.4.0</version>
+        <version>0.4.1</version>
       </dependency>
 
       <!--Brian Goetz Concurrency Annotations-->
@@ -756,7 +766,7 @@
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>8.17</version> <!-- Checkstyle version -->
+            <version>8.19</version> <!-- Checkstyle version -->
           </dependency>
         </dependencies>
         <executions>
@@ -1051,7 +1061,7 @@
               <dependency>
                 <groupId>org.ow2.asm</groupId>
                 <artifactId>asm</artifactId>
-                <version>7.0</version> <!-- Use newer version of ASM -->
+                <version>7.1</version> <!-- Use newer version of ASM -->
               </dependency>
             </dependencies>
             <executions>
