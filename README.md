@@ -1,6 +1,8 @@
 #This is the base definition of the versions used by my projects.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-dependencies/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-dependencies)
+[![](https://jitpack.io/v/rapidpm/rapidpm-dependencies.svg)](https://jitpack.io/#rapidpm/rapidpm-dependencies)
+
 
 
 [![](https://jitci.com/gh/RapidPM/rapidpm-dependencies/svg)](https://jitci.com/gh/RapidPM/rapidpm-dependencies)
