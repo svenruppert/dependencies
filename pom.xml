@@ -76,6 +76,8 @@
     <rapidpm-functional-reactive.version>01.00.03-RPM</rapidpm-functional-reactive.version>
     <rapidpm-logger-adapter.version>01.00.02-RPM</rapidpm-logger-adapter.version>
 
+    <activateJavaOnly>true</activateJavaOnly>
+
     <!--<maven.compiler.release>8</maven.compiler.release> &lt;!&ndash;release makes source and target&ndash;&gt;-->
     <maven.compiler.source>8</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
     <maven.compiler.target>8</maven.compiler.target> <!--use release when importing-->
@@ -87,7 +89,7 @@
     <log4j-api.version>2.11.2</log4j-api.version>
 
     <jacoco.version>0.8.3</jacoco.version>
-    <pitest.version>1.4.7</pitest.version>
+    <pitest.version>1.4.8</pitest.version>
     <pitest-junit5-plugin.version>0.8</pitest-junit5-plugin.version>
     <pitest-prod-classes>org.rapidpm.*</pitest-prod-classes>
     <pitest-test-classes>junit.org.rapidpm*</pitest-test-classes>
@@ -99,8 +101,9 @@
     <junit.platform.version>1.5.0-M1</junit.platform.version>
     <junit-platform-maven-plugin.version>1.0.0-M5</junit-platform-maven-plugin.version>
 
-    <opentracing-api.version>0.32.0</opentracing-api.version>
+    <opentracing-api.version>0.33.0</opentracing-api.version>
     <asm.version>7.1</asm.version>
+    <activateJavaOnly>true</activateJavaOnly>
   </properties>
 
 
@@ -151,7 +154,7 @@
       <dependency>
         <groupId>org.javassist</groupId>
         <artifactId>javassist</artifactId>
-        <version>3.24.1-GA</version>
+        <version>3.25.0-GA</version>
       </dependency>
       <dependency>
         <groupId>javax.servlet</groupId>
@@ -189,7 +192,7 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <version>3.8.1</version>
+        <version>3.9</version>
       </dependency>
       <dependency>
         <groupId>commons-fileupload</groupId>
@@ -220,7 +223,7 @@
       <dependency>
         <groupId>javax.cache</groupId>
         <artifactId>cache-api</artifactId>
-        <version>1.1.0</version>
+        <version>1.1.1</version>
       </dependency>
       <dependency>
         <groupId>org.cache2k</groupId>
@@ -335,7 +338,7 @@
       <dependency>
         <groupId>io.gatling.highcharts</groupId>
         <artifactId>gatling-charts-highcharts</artifactId>
-        <version>3.1.0.1</version>
+        <version>3.1.2</version>
         <scope>test</scope>
       </dependency>
       <!--tdd-->
@@ -354,7 +357,7 @@
       <dependency>
         <groupId>io.opentracing.contrib</groupId>
         <artifactId>jdbi-opentracing</artifactId>
-        <version>0.6.0</version>
+        <version>0.6.1</version>
       </dependency>
       <dependency>
         <groupId>io.opentracing.contrib</groupId>
@@ -369,7 +372,7 @@
       <dependency>
         <groupId>io.opentracing.contrib</groupId>
         <artifactId>opentracing-jaxrs2</artifactId>
-        <version>0.4.1</version>
+        <version>0.5.0</version>
       </dependency>
 
       <!--Brian Goetz Concurrency Annotations-->
@@ -520,17 +523,17 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.0</version>
+          <version>3.8.1</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.1.0</version>
+          <version>3.1.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-war-plugin</artifactId>
-          <version>3.2.2</version>
+          <version>3.2.3</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -560,12 +563,12 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>3.0.1</version>
+          <version>3.1.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>3.0.0</version>
+          <version>3.1.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -580,17 +583,17 @@
         <plugin>
           <groupId>org.owasp</groupId>
           <artifactId>dependency-check-maven</artifactId>
-          <version>3.3.4</version>
+          <version>5.0.0-M3</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-shade-plugin</artifactId>
-          <version>3.2.0</version>
+          <version>3.2.1</version>
         </plugin>
         <plugin>
           <groupId>org.apache.felix</groupId>
           <artifactId>maven-bundle-plugin</artifactId>
-          <version>4.1.0</version>
+          <version>4.2.0</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -633,17 +636,7 @@
 
     <plugins>
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <dependencies>
-          <dependency>
-            <groupId>org.ow2.asm</groupId>
-            <artifactId>asm</artifactId>
-            <version>${asm.version}</version> <!-- Use newer version of ASM -->
-          </dependency>
-        </dependencies>
-      </plugin>
+
 
 
       <plugin>
@@ -680,57 +673,7 @@
         <artifactId>maven-repository-plugin</artifactId>
       </plugin>
 
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>add sources</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>add-source</goal>
-            </goals>
-            <configuration>
-              <sources>
-                <source>${project.build.directory}/generated-sources/annotations</source>
-                <!--<source>src/main/scala</source>-->
-                <source>src/main/java</source>
-                <!--<source>src/main/kotlin</source>-->
-              </sources>
-            </configuration>
-          </execution>
-          <execution>
-            <id>add generated sources</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>add-source</goal>
-            </goals>
-            <configuration>
-              <sources>
-                <source>${project.build.directory}/generated-sources/annotations</source>
-                <!--<source>src/main/scala</source>-->
-                <source>src/main/java</source>
-                <!--<source>src/main/kotlin</source>-->
-              </sources>
-            </configuration>
-          </execution>
-          <execution>
-            <id>add generated test sources</id>
-            <phase>generate-test-sources</phase>
-            <goals>
-              <goal>add-test-source</goal>
-            </goals>
-            <configuration>
-              <sources>
-                <source>${project.build.directory}/generated-test-sources/test-annotations</source>
-                <!--<source>src/test/scala</source>-->
-                <source>src/test/java</source>
-                <!--<source>src/test/kotlin</source>-->
-              </sources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+
 
       <!--Enable mutation testing-->
       <plugin>
@@ -767,7 +710,7 @@
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>8.19</version> <!-- Checkstyle version -->
+            <version>8.21</version> <!-- Checkstyle version -->
           </dependency>
         </dependencies>
         <executions>
@@ -1099,5 +1042,240 @@
         </plugins>
       </build>
     </profile>
+
+
+    <profile>
+      <id>_java</id>
+      <activation>
+        <property><name>activateJavaOnly</name></property>
+      </activation>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <dependencies>
+              <dependency>
+                <groupId>org.ow2.asm</groupId>
+                <artifactId>asm</artifactId>
+                <version>${asm.version}</version> <!-- Use newer version of ASM -->
+              </dependency>
+            </dependencies>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>add sources</id>
+                <phase>compile</phase>
+                <goals>
+                  <goal>add-source</goal>
+                </goals>
+                <configuration>
+                  <sources>
+                    <source>${project.build.directory}/generated-sources/annotations</source>
+                    <source>src/main/java</source>
+<!--                    <source>src/main/kotlin</source>-->
+                  </sources>
+                </configuration>
+              </execution>
+              <execution>
+                <id>add generated sources</id>
+                <phase>generate-sources</phase>
+                <goals>
+                  <goal>add-source</goal>
+                </goals>
+                <configuration>
+                  <sources>
+                    <source>${project.build.directory}/generated-sources/annotations</source>
+                    <source>src/main/java</source>
+<!--                    <source>src/main/kotlin</source>-->
+                  </sources>
+                </configuration>
+              </execution>
+              <execution>
+                <id>add generated test sources</id>
+                <phase>generate-test-sources</phase>
+                <goals>
+                  <goal>add-test-source</goal>
+                </goals>
+                <configuration>
+                  <sources>
+                    <source>${project.build.directory}/generated-test-sources/test-annotations</source>
+                    <source>src/test/java</source>
+<!--                    <source>src/test/kotlin</source>-->
+                  </sources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>_java-and-kotlin</id>
+      <activation>
+        <property><name>!activateJavaOnly</name></property>
+      </activation>
+
+
+      <properties>
+        <!--Kotlin-->
+        <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
+        <kotlin.version>1.3.31</kotlin.version>
+        <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
+      </properties>
+
+      <dependencies>
+        <!--Adding Kotlin stuff-->
+        <dependency>
+          <groupId>org.jetbrains.kotlin</groupId>
+          <artifactId>kotlin-stdlib-jdk8</artifactId>
+          <version>${kotlin.version}</version>
+        </dependency>
+
+        <dependency>
+          <groupId>org.jetbrains.kotlin</groupId>
+          <artifactId>kotlin-reflect</artifactId>
+          <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>org.jetbrains.kotlin</groupId>
+          <artifactId>kotlin-test-junit</artifactId>
+          <version>${kotlin.version}</version>
+        </dependency>
+
+        <dependency>
+          <groupId>org.jetbrains.kotlin</groupId>
+          <artifactId>kotlin-test</artifactId>
+          <version>${kotlin.version}</version>
+          <scope>test</scope>
+        </dependency>
+
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>kotlin-maven-plugin</artifactId>
+            <configuration>
+              <jvmTarget>1.8</jvmTarget>
+            </configuration>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <version>${kotlin.version}</version>
+            <executions>
+              <execution>
+                <id>compile</id>
+                <phase>compile</phase>
+                <goals>
+                  <goal>compile</goal>
+                </goals>
+                <configuration>
+                  <sourceDirs>
+                    <source>src/main/java</source>
+                    <source>src/main/kotlin</source>
+                  </sourceDirs>
+                </configuration>
+              </execution>
+              <execution>
+                <id>test-compile</id>
+                <phase>test-compile</phase>
+                <goals>
+                  <goal>test-compile</goal>
+                </goals>
+                <configuration>
+                  <sourceDirs>
+                    <source>src/test/java</source>
+                    <source>src/test/kotlin</source>
+                  </sourceDirs>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <executions>
+              <!-- Replacing default-compile as it is treated specially by maven -->
+              <execution>
+                <id>default-compile</id>
+                <phase>none</phase>
+              </execution>
+              <!-- Replacing default-testCompile as it is treated specially by maven -->
+              <execution>
+                <id>default-testCompile</id>
+                <phase>none</phase>
+              </execution>
+              <execution>
+                <id>java-compile</id>
+                <phase>compile</phase>
+                <goals>
+                  <goal>compile</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>java-test-compile</id>
+                <phase>test-compile</phase>
+                <goals>
+                  <goal>testCompile</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>add sources</id>
+                <phase>compile</phase>
+                <goals>
+                  <goal>add-source</goal>
+                </goals>
+                <configuration>
+                  <sources>
+                    <source>${project.build.directory}/generated-sources/annotations</source>
+                    <source>src/main/java</source>
+<!--                    <source>src/main/kotlin</source>-->
+                  </sources>
+                </configuration>
+              </execution>
+              <execution>
+                <id>add generated sources</id>
+                <phase>generate-sources</phase>
+                <goals>
+                  <goal>add-source</goal>
+                </goals>
+                <configuration>
+                  <sources>
+                    <source>${project.build.directory}/generated-sources/annotations</source>
+                    <source>src/main/java</source>
+<!--                    <source>src/main/kotlin</source>-->
+                  </sources>
+                </configuration>
+              </execution>
+              <execution>
+                <id>add generated test sources</id>
+                <phase>generate-test-sources</phase>
+                <goals>
+                  <goal>add-test-source</goal>
+                </goals>
+                <configuration>
+                  <sources>
+                    <source>${project.build.directory}/generated-test-sources/test-annotations</source>
+                    <source>src/test/java</source>
+<!--                    <source>src/test/kotlin</source>-->
+                  </sources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+
   </profiles>
 </project>
