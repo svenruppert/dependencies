@@ -101,7 +101,7 @@
 
     <!--TDD jUnit5-->
     <junit.jupiter.version>5.5.0-RC1</junit.jupiter.version>
-    <junit.platform.version>1.5.0-rc1</junit.platform.version>
+    <junit.platform.version>1.5.0-RC1</junit.platform.version>
     <junit-platform-maven-plugin.version>1.0.0-M5</junit-platform-maven-plugin.version>
 
     <opentracing-api.version>0.33.0</opentracing-api.version>

@@ -14,7 +14,7 @@
 This project is developed with the Vaadin Development Environment
 that you can find here [https://github.com/vaadin-developer/vaadin-dev-environment-demo-vaadin-testbench](https://github.com/vaadin-developer/vaadin-dev-environment-demo-vaadin-testbench)
 
-**Project is build with Oracle - JD11 but on Java level 8 !!**
+**Project is build with svenruppert/maven-3.6.1-adopt:1.8.212-04 docker image !!**
 
 
 ## switched to new version string format
