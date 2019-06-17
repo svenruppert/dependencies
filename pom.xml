@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.00.18-RPM-SNAPSHOT</version>
+  <version>04.00.18-RPM</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -56,12 +56,12 @@
     </developer>
   </developers>
   <issueManagement>
-  <system>GitHub</system>
-  <url>https://github.com/RapidPM/rapidpm-dependencies/issues</url>
+    <system>GitHub</system>
+    <url>https://github.com/RapidPM/rapidpm-dependencies/issues</url>
   </issueManagement>
   <ciManagement>
-  <system>JitCI</system>
-  <url>https://jitci.com/gh/RapidPM/rapidpm-dependencies</url>
+    <system>JitCI</system>
+    <url>https://jitci.com/gh/RapidPM/rapidpm-dependencies</url>
   </ciManagement>
   <licenses>
     <license>
@@ -71,8 +71,11 @@
       <comments>A business-friendly OSS license</comments>
     </license>
   </licenses>
+
+
+
   <properties>
-    <rapidpm-dependencies.version>04.00.18-RPM-SNAPSHOT</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.00.18-RPM</rapidpm-dependencies.version>
     <rapidpm-functional-reactive.version>01.00.03-RPM</rapidpm-functional-reactive.version>
     <rapidpm-logger-adapter.version>01.00.02-RPM</rapidpm-logger-adapter.version>
 
@@ -90,15 +93,15 @@
 
     <jacoco.version>0.8.3</jacoco.version>
     <pitest.version>1.4.8</pitest.version>
-    <pitest-junit5-plugin.version>0.8</pitest-junit5-plugin.version>
+    <pitest-junit5-plugin.version>0.9</pitest-junit5-plugin.version>
     <pitest-prod-classes>org.rapidpm.*</pitest-prod-classes>
     <pitest-test-classes>junit.org.rapidpm*</pitest-test-classes>
 
     <jmh.version>1.21</jmh.version>
 
     <!--TDD jUnit5-->
-    <junit.jupiter.version>5.5.0-M1</junit.jupiter.version>
-    <junit.platform.version>1.5.0-M1</junit.platform.version>
+    <junit.jupiter.version>5.5.0-RC1</junit.jupiter.version>
+    <junit.platform.version>1.5.0-rc1</junit.platform.version>
     <junit-platform-maven-plugin.version>1.0.0-M5</junit-platform-maven-plugin.version>
 
     <opentracing-api.version>0.33.0</opentracing-api.version>
@@ -113,7 +116,6 @@
       <url>https://jitpack.io</url>
     </repository>
   </repositories>
-
 
 
   <dependencyManagement>
@@ -209,12 +211,12 @@
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
-        <version>4.5.8</version>
+        <version>4.5.9</version>
       </dependency>
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>fluent-hc</artifactId>
-        <version>4.5.8</version>
+        <version>4.5.9</version>
       </dependency>
 
 
@@ -228,13 +230,13 @@
       <dependency>
         <groupId>org.cache2k</groupId>
         <artifactId>cache2k-base-bom</artifactId>
-        <version>1.2.1.Final</version>
+        <version>1.2.2.Final</version>
         <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.cache2k</groupId>
         <artifactId>cache2k-jcache</artifactId>
-        <version>1.2.1.Final</version>
+        <version>1.2.2.Final</version>
         <scope>runtime</scope>
       </dependency>
 
@@ -512,6 +514,21 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>3.0.0-M1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>3.0.0-M1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
           <version>2.5.3</version>
         </plugin>
@@ -534,6 +551,11 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-war-plugin</artifactId>
           <version>3.2.3</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.0.0-M3</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -614,7 +636,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
-          <version>${maven-failsafe-plugin.version}</version>
+          <version>3.0.0-M3</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -635,9 +657,27 @@
     </pluginManagement>
 
     <plugins>
-
-
-
+      <plugin>
+        <inherited>true</inherited>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>enforce-maven-3</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>3.6.1</version>
+                </requireMavenVersion>
+              </rules>
+              <fail>true</fail>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
 
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -672,7 +712,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-repository-plugin</artifactId>
       </plugin>
-
 
 
       <!--Enable mutation testing-->
@@ -1047,7 +1086,9 @@
     <profile>
       <id>_java</id>
       <activation>
-        <property><name>activateJavaOnly</name></property>
+        <property>
+          <name>activateJavaOnly</name>
+        </property>
       </activation>
 
       <build>
@@ -1077,7 +1118,7 @@
                   <sources>
                     <source>${project.build.directory}/generated-sources/annotations</source>
                     <source>src/main/java</source>
-<!--                    <source>src/main/kotlin</source>-->
+                    <!--                    <source>src/main/kotlin</source>-->
                   </sources>
                 </configuration>
               </execution>
@@ -1091,7 +1132,7 @@
                   <sources>
                     <source>${project.build.directory}/generated-sources/annotations</source>
                     <source>src/main/java</source>
-<!--                    <source>src/main/kotlin</source>-->
+                    <!--                    <source>src/main/kotlin</source>-->
                   </sources>
                 </configuration>
               </execution>
@@ -1105,7 +1146,7 @@
                   <sources>
                     <source>${project.build.directory}/generated-test-sources/test-annotations</source>
                     <source>src/test/java</source>
-<!--                    <source>src/test/kotlin</source>-->
+                    <!--                    <source>src/test/kotlin</source>-->
                   </sources>
                 </configuration>
               </execution>
@@ -1118,7 +1159,9 @@
     <profile>
       <id>_java-and-kotlin</id>
       <activation>
-        <property><name>!activateJavaOnly</name></property>
+        <property>
+          <name>!activateJavaOnly</name>
+        </property>
       </activation>
 
 
@@ -1238,7 +1281,7 @@
                   <sources>
                     <source>${project.build.directory}/generated-sources/annotations</source>
                     <source>src/main/java</source>
-<!--                    <source>src/main/kotlin</source>-->
+                    <!--                    <source>src/main/kotlin</source>-->
                   </sources>
                 </configuration>
               </execution>
@@ -1252,7 +1295,7 @@
                   <sources>
                     <source>${project.build.directory}/generated-sources/annotations</source>
                     <source>src/main/java</source>
-<!--                    <source>src/main/kotlin</source>-->
+                    <!--                    <source>src/main/kotlin</source>-->
                   </sources>
                 </configuration>
               </execution>
@@ -1266,7 +1309,7 @@
                   <sources>
                     <source>${project.build.directory}/generated-test-sources/test-annotations</source>
                     <source>src/test/java</source>
-<!--                    <source>src/test/kotlin</source>-->
+                    <!--                    <source>src/test/kotlin</source>-->
                   </sources>
                 </configuration>
               </execution>
