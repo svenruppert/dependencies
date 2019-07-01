@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Properties;
 import org.rapidpm.dependencies.core.logger.HasLogger;
 
@@ -122,11 +123,10 @@ public class PropertiesResolver implements HasLogger {
 
   private Properties merge(Properties... properties) {
     Properties result = new Properties();
-    for (Properties toAdd : properties) {
-      for (Object key : toAdd.keySet()) {
-        result.setProperty(key.toString(), toAdd.getProperty(key.toString()));
-      }
-    }
+    Arrays.stream(properties)
+          .forEach(toAdd -> toAdd.keySet()
+                                 .forEach(
+                                     key -> result.setProperty(key.toString(), toAdd.getProperty(key.toString()))));
     return result;
   }
 }

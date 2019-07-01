@@ -4,17 +4,47 @@
 [![](https://jitpack.io/v/rapidpm/rapidpm-dependencies.svg)](https://jitpack.io/#rapidpm/rapidpm-dependencies)
 
 
-
 [![](https://jitci.com/gh/RapidPM/rapidpm-dependencies/svg)](https://jitci.com/gh/RapidPM/rapidpm-dependencies)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c1133e6bd62d49d39c79c5b58d31c661)](https://app.codacy.com/app/sven-ruppert/rapidpm-dependencies?utm_source=github.com&utm_medium=referral&utm_content=RapidPM/rapidpm-dependencies&utm_campaign=badger)
 
 
 ## Info
-This project is developed with the Vaadin Development Environment
-that you can find here [https://github.com/vaadin-developer/vaadin-dev-environment-demo-vaadin-testbench](https://github.com/vaadin-developer/vaadin-dev-environment-demo-vaadin-testbench)
-
 **Project is build with svenruppert/maven-3.6.1-adopt:1.8.212-04 docker image !!**
+
+
+## Versioninfos
+###04.00.19
+* added development profile for NodeJS/NPM - for Vaadin 14 projects
+* externalizing required maven version
+
+To define your maven version you could override the property **maven-enforcer-plugin.version**.
+The default is mostly the latest maven version.
+
+
+## Properties
+* **maven-enforcer-plugin.version** - setting required maven version, default is mostly the latest available
+* **activateJavaOnly** - true = JDK only / false JDK plus Kotlin activated
+* **activateNodeJS_NPM** - true or false (default)
+    * frontend-maven-plugin.nodeVersion
+    * frontend-maven-plugin.npmVersion
+* **kotlin.compiler.jvmTarget** - default 8
+* **kotlin.version** - default mostly latest version
+* **kotlin.compiler.incremental** - default true
+
+
+## Profiles
+
+### _nodejs_npm - For NodeJS && NMP installation
+Some Webprojects need NodeJS and NPM installed. Vaadin 14 Flow is one example.
+To configure this you can use the following properties.
+
+```xml
+    <activateNodeJS_NPM>false</activateNodeJS_NPM>
+    <frontend-maven-plugin.nodeVersion>v4.6.0</frontend-maven-plugin.nodeVersion>
+    <frontend-maven-plugin.npmVersion>2.15.9</frontend-maven-plugin.npmVersion>
+```
+
 
 
 ## switched to new version string format
