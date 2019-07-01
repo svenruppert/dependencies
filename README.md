@@ -23,7 +23,7 @@ The default is mostly the latest maven version.
 
 
 ## Properties
-* **maven-enforcer-plugin.version** - setting required maven version, default is mostly the latest available
+* **minimum-maven.version** - setting required maven version, default is 3.3.9
 * **activateJavaOnly** - true = JDK only / false JDK plus Kotlin activated
 * **activateNodeJS_NPM** - true or false (default)
     * frontend-maven-plugin.nodeVersion

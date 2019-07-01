@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.01.00-RPM</version>
+  <version>04.01.01-RPM-SNAPSHOT</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -73,7 +73,7 @@
   </licenses>
 
   <properties>
-    <rapidpm-dependencies.version>04.01.00-RPM</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.01.01-RPM-SNAPSHOT</rapidpm-dependencies.version>
     <rapidpm-functional-reactive.version>01.00.03-RPM</rapidpm-functional-reactive.version>
     <rapidpm-logger-adapter.version>01.00.03-RPM</rapidpm-logger-adapter.version>
 
@@ -83,7 +83,7 @@
     <maven.compiler.source>8</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
     <maven.compiler.target>8</maven.compiler.target> <!--use release when importing-->
 
-    <maven-enforcer-plugin.version>3.6.1</maven-enforcer-plugin.version>
+    <minimum-maven.version>3.6.1</minimum-maven.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -687,7 +687,7 @@
             <configuration>
               <rules>
                 <requireMavenVersion>
-                  <version>${maven-enforcer-plugin.version}</version>
+                  <version>${minimum-maven.version}</version>
                 </requireMavenVersion>
               </rules>
               <fail>true</fail>
