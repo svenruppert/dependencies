@@ -20,6 +20,7 @@
 * externalizing version definitions
 * version updates
 * smaller BugFixings
+* reduced maven minimum version to 3.3.9 for compatibility reasons
 
 ### 04.01.00-RPM
 * added development profile for NodeJS/NPM - for Vaadin 14 projects
