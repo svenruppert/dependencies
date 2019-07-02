@@ -14,7 +14,14 @@
 
 
 ## Versioninfos
-###04.00.19
+
+### 04.01.01-RPM
+* version updates
+* externalizing version definitions
+* version updates
+* smaller BugFixings
+
+### 04.01.00-RPM
 * added development profile for NodeJS/NPM - for Vaadin 14 projects
 * externalizing required maven version
 
