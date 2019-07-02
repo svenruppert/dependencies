@@ -108,8 +108,8 @@
     <asm.version>7.1</asm.version>
 
     <activateNodeJS_NPM>false</activateNodeJS_NPM>
-    <frontend-maven-plugin.nodeVersion>v4.6.0</frontend-maven-plugin.nodeVersion>
-    <frontend-maven-plugin.npmVersion>2.15.9</frontend-maven-plugin.npmVersion>
+    <frontend-maven-plugin.nodeVersion>v10.16.0</frontend-maven-plugin.nodeVersion>
+    <frontend-maven-plugin.npmVersion>6.9.0</frontend-maven-plugin.npmVersion>
   </properties>
 
 <!--  <prerequisites>-->
@@ -1207,7 +1207,12 @@
           <artifactId>kotlin-test-junit</artifactId>
           <version>${kotlin.version}</version>
         </dependency>
-
+        <dependency>
+          <groupId>org.jetbrains.kotlin</groupId>
+          <artifactId>kotlin-test-junit5</artifactId>
+          <version>${kotlin.version}</version>
+          <scope>test</scope>
+        </dependency>
         <dependency>
           <groupId>org.jetbrains.kotlin</groupId>
           <artifactId>kotlin-test</artifactId>
