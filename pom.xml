@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.01.01-RPM-SNAPSHOT</version>
+  <version>04.01.01-RPM</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -73,7 +73,7 @@
   </licenses>
 
   <properties>
-    <rapidpm-dependencies.version>04.01.01-RPM-SNAPSHOT</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.01.01-RPM</rapidpm-dependencies.version>
     <rapidpm-functional-reactive.version>01.00.03-RPM</rapidpm-functional-reactive.version>
     <rapidpm-logger-adapter.version>01.00.03-RPM</rapidpm-logger-adapter.version>
 
@@ -112,9 +112,9 @@
     <frontend-maven-plugin.npmVersion>6.9.0</frontend-maven-plugin.npmVersion>
   </properties>
 
-<!--  <prerequisites>-->
-<!--    <maven>${maven-enforcer-plugin.version}</maven>-->
-<!--  </prerequisites>-->
+  <!--  <prerequisites>-->
+  <!--    <maven>${maven-enforcer-plugin.version}</maven>-->
+  <!--  </prerequisites>-->
 
   <repositories>
     <repository>
@@ -1206,6 +1206,7 @@
           <groupId>org.jetbrains.kotlin</groupId>
           <artifactId>kotlin-test-junit</artifactId>
           <version>${kotlin.version}</version>
+          <scope>test</scope>
         </dependency>
         <dependency>
           <groupId>org.jetbrains.kotlin</groupId>
@@ -1303,7 +1304,7 @@
                   <sources>
                     <source>${project.build.directory}/generated-sources/annotations</source>
                     <source>src/main/java</source>
-                    <!--                    <source>src/main/kotlin</source>-->
+                    <source>src/main/kotlin</source>
                   </sources>
                 </configuration>
               </execution>
@@ -1317,7 +1318,7 @@
                   <sources>
                     <source>${project.build.directory}/generated-sources/annotations</source>
                     <source>src/main/java</source>
-                    <!--                    <source>src/main/kotlin</source>-->
+                    <source>src/main/kotlin</source>
                   </sources>
                 </configuration>
               </execution>
@@ -1331,7 +1332,7 @@
                   <sources>
                     <source>${project.build.directory}/generated-test-sources/test-annotations</source>
                     <source>src/test/java</source>
-                    <!--                    <source>src/test/kotlin</source>-->
+                    <source>src/test/kotlin</source>
                   </sources>
                 </configuration>
               </execution>
@@ -1369,7 +1370,7 @@
               <!-- optional: with node version greater than 4.0.0 will use npm provided by node distribution -->
               <npmVersion>${frontend-maven-plugin.npmVersion}</npmVersion>
               <!-- optional: where to download node and npm from. Defaults to https://nodejs.org/dist/ -->
-<!--              <downloadRoot>http://myproxy.example.org/nodejs/</downloadRoot>-->
+              <!--              <downloadRoot>http://myproxy.example.org/nodejs/</downloadRoot>-->
             </configuration>
           </plugin>
 
