@@ -14,6 +14,12 @@
 
 
 ## Versioninfos
+### 04.01.02-RPM
+* replaced reflections with reflections8
+* deleted module - reflections
+* changed compile cycle for AnnotationProcessing
+* replaced dom4j to org.dom4j
+* kotlin version update
 
 ### 04.01.01-RPM
 * version updates
