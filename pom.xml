@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.01.02-RPM-SNAPSHOT</version>
+  <version>04.01.02-RPM</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -73,11 +73,11 @@
   </licenses>
 
   <properties>
-    <rapidpm-dependencies.version>04.01.02-RPM-SNAPSHOT</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.01.02-RPM</rapidpm-dependencies.version>
     <rapidpm-functional-reactive.version>01.00.03-RPM</rapidpm-functional-reactive.version>
     <rapidpm-logger-adapter.version>01.00.03-RPM</rapidpm-logger-adapter.version>
 
-    <activateJavaOnly>true</activateJavaOnly>
+    <activateJavaOnly>false</activateJavaOnly>
 
     <!--<maven.compiler.release>8</maven.compiler.release> &lt;!&ndash;release makes source and target&ndash;&gt;-->
     <maven.compiler.source>8</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
@@ -121,8 +121,24 @@
       <id>jitpack.io</id>
       <url>https://jitpack.io</url>
     </repository>
+    <repository>
+      <id>central</id>
+      <url>https://repo1.maven.org/maven2/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
   </repositories>
 
+  <pluginRepositories>
+    <pluginRepository>
+      <id>central</id>
+      <url>https://repo1.maven.org/maven2/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
 
   <dependencyManagement>
     <!--project versions-->
@@ -157,20 +173,26 @@
         <artifactId>javax.annotation-api</artifactId>
         <version>1.3.2</version>
       </dependency>
-
-      <!--Reflection Utils-->
-      <dependency>
-        <groupId>org.javassist</groupId>
-        <artifactId>javassist</artifactId>
-        <version>3.25.0-GA</version>
-      </dependency>
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
         <version>4.0.1</version>
       </dependency>
 
-      <!--project versions-->
+      <!--Reflection Utils-->
+      <dependency>
+        <groupId>net.oneandone.reflections8</groupId>
+        <artifactId>reflections8</artifactId>
+        <version>0.11.4</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.javassist</groupId>
+        <artifactId>javassist</artifactId>
+        <version>3.25.0-GA</version>
+      </dependency>
+
+
       <dependency>
         <groupId>com.google.code.gson</groupId>
         <artifactId>gson</artifactId>
@@ -248,9 +270,8 @@
 
       <dependency>
         <groupId>dom4j</groupId>
-        <artifactId>dom4j</artifactId>
-        <version>1.6.1</version>
-        <optional>true</optional>
+        <artifactId>org.dom4j</artifactId>
+        <version>2.1.1</version>
       </dependency>
 
 
@@ -566,7 +587,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-source-plugin</artifactId>
-          <version>3.0.1</version>
+          <version>3.1.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -611,7 +632,7 @@
         <plugin>
           <groupId>org.owasp</groupId>
           <artifactId>dependency-check-maven</artifactId>
-          <version>5.0.0</version>
+          <version>5.1.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -757,8 +778,6 @@
           </targetTests>
         </configuration>
       </plugin>
-
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
@@ -1180,15 +1199,12 @@
           <name>!activateJavaOnly</name>
         </property>
       </activation>
-
-
       <properties>
         <!--Kotlin-->
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
-        <kotlin.version>1.3.40</kotlin.version>
+        <kotlin.version>1.3.41</kotlin.version>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
       </properties>
-
       <dependencies>
         <!--Adding Kotlin stuff-->
         <dependency>
@@ -1227,7 +1243,7 @@
           <plugin>
             <artifactId>kotlin-maven-plugin</artifactId>
             <configuration>
-              <jvmTarget>1.8</jvmTarget>
+              <jvmTarget>${kotlin.compiler.jvmTarget}</jvmTarget>
             </configuration>
             <groupId>org.jetbrains.kotlin</groupId>
             <version>${kotlin.version}</version>
@@ -1242,6 +1258,7 @@
                   <sourceDirs>
                     <source>src/main/java</source>
                     <source>src/main/kotlin</source>
+                    <source>${project.build.directory}/generated-sources/annotations</source>
                   </sourceDirs>
                 </configuration>
               </execution>
@@ -1255,6 +1272,7 @@
                   <sourceDirs>
                     <source>src/test/java</source>
                     <source>src/test/kotlin</source>
+                    <source>${project.build.directory}/generated-test-sources/test-annotations</source>
                   </sourceDirs>
                 </configuration>
               </execution>
@@ -1263,16 +1281,30 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+              <optimize>true</optimize>
+              <useIncrementalCompilation>false</useIncrementalCompilation>
+            </configuration>
             <executions>
               <!-- Replacing default-compile as it is treated specially by maven -->
               <execution>
                 <id>default-compile</id>
-                <phase>none</phase>
+                <phase>compile</phase>
+                <!--For AnnotationProcessing Compile-->
+                <configuration>
+                  <useIncrementalCompilation>false</useIncrementalCompilation>
+                </configuration>
+                <!--For AnnotationProcessing Compile-->
               </execution>
               <!-- Replacing default-testCompile as it is treated specially by maven -->
               <execution>
                 <id>default-testCompile</id>
-                <phase>none</phase>
+                <phase>test-compile</phase>
+                <!--For AnnotationProcessing Compile-->
+                <configuration>
+                  <useIncrementalCompilation>false</useIncrementalCompilation>
+                </configuration>
+                <!--For AnnotationProcessing Compile-->
               </execution>
               <execution>
                 <id>java-compile</id>
