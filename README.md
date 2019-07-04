@@ -3,9 +3,6 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-dependencies/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-dependencies)
 [![](https://jitpack.io/v/rapidpm/rapidpm-dependencies.svg)](https://jitpack.io/#rapidpm/rapidpm-dependencies)
 
-
-[![](https://jitci.com/gh/RapidPM/rapidpm-dependencies/svg)](https://jitci.com/gh/RapidPM/rapidpm-dependencies)
-
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c1133e6bd62d49d39c79c5b58d31c661)](https://app.codacy.com/app/sven-ruppert/rapidpm-dependencies?utm_source=github.com&utm_medium=referral&utm_content=RapidPM/rapidpm-dependencies&utm_campaign=badger)
 
 
