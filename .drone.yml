@@ -24,7 +24,7 @@ pipeline:
     pull: true
     commands:
       - mkdir /root/.m2
-      - cp /drone/src/rapidpm-dependencies/_data/nexus/settings.xml /root/.m2/settings.xml
+#      - cp /drone/src/rapidpm-dependencies/_data/nexus/settings.xml /root/.m2/settings.xml
       - mvn clean
       - mvn test
 
