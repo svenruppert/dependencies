@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright © 2017 Sven Ruppert (sven.ruppert@gmail.com)
+    Copyright © 2013 Sven Ruppert (sven.ruppert@gmail.com)
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -24,12 +24,12 @@
   <parent>
     <groupId>org.rapidpm</groupId>
     <artifactId>rapidpm-dependencies</artifactId>
-    <version>04.01.04-RPM-SNAPSHOT</version>
+    <version>04.01.04-RPM</version>
   </parent>
 
   <artifactId>rapidpm-vaadin-dependencies</artifactId>
   <packaging>pom</packaging>
-  <version>04.01.04-RPM-SNAPSHOT</version>
+  <version>04.01.04-RPM</version>
 
   <modules>
     <module>vaadin-v08</module>
