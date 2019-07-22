@@ -44,10 +44,11 @@ The default is mostly the latest maven version.
 ## Properties
 * **minimum-maven.version** - setting required maven version, default is 3.3.9
 * **activateJavaOnly** - true = JDK only / false JDK plus Kotlin activated
-* **activateNodeJS_NPM** - true or false (default)
+* **vaadin-productionMode** - activated inside the vaadin-dependencies the production mode
+* **vaadin-install-nodejs** - true or false (default)
     * frontend-maven-plugin.nodeVersion
     * frontend-maven-plugin.npmVersion
-* **kotlin.compiler.jvmTarget** - default 8
+* **kotlin.compiler.jvmTarget** - default 1.8
 * **kotlin.version** - default mostly latest version
 * **kotlin.compiler.incremental** - default true
 
@@ -59,7 +60,9 @@ Some Webprojects need NodeJS and NPM installed. Vaadin 14 Flow is one example.
 To configure this you can use the following properties.
 
 ```xml
-    <activateNodeJS_NPM>false</activateNodeJS_NPM>
+    <!--Vaadin-->
+    <vaadin-productionMode>false</vaadin-productionMode>
+    <vaadin-install-nodejs>true</vaadin-install-nodejs>
     <frontend-maven-plugin.nodeVersion>v4.6.0</frontend-maven-plugin.nodeVersion>
     <frontend-maven-plugin.npmVersion>2.15.9</frontend-maven-plugin.npmVersion>
 ```
