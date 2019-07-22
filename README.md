@@ -15,6 +15,10 @@
 ### NEXT
 * TBD
 
+### 04.01.04-RPM
+* version updates
+* added rapidpm-vaadin-dependencies for V08/V10/V14/Vxx
+
 ### 04.01.02-RPM
 * replaced reflections with reflections8
 * deleted module - reflections

@@ -133,3 +133,15 @@ local.properties
 .texlipse
 
 
+/vaadin-dependencies/vaadin-v14/package-lock.json
+/vaadin-dependencies/vaadin-v14/package.json
+/vaadin-dependencies/vaadin-v14/webpack.generated.js
+/vaadin-dependencies/vaadin-v14/webpack.config.js
+/vaadin-dependencies/vaadin-v14/node/
+/vaadin-dependencies/vaadin-v14/node_modules/
+/vaadin-dependencies/vaadin-vXX/node/
+/vaadin-dependencies/vaadin-vXX/node_modules/
+/vaadin-dependencies/vaadin-vXX/package-lock.json
+/vaadin-dependencies/vaadin-vXX/package.json
+/vaadin-dependencies/vaadin-vXX/webpack.generated.js
+/vaadin-dependencies/vaadin-vXX/webpack.config.js
