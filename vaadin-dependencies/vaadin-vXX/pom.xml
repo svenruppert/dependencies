@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.rapidpm</groupId>
     <artifactId>rapidpm-vaadin-dependencies</artifactId>
-    <version>04.01.05-RPM-SNAPSHOT</version>
+    <version>04.01.05-RPM</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
@@ -33,6 +33,7 @@
     <vaadin-install-nodejs>false</vaadin-install-nodejs>
     <frontend-maven-plugin.nodeVersion>v12.6.0</frontend-maven-plugin.nodeVersion>
     <frontend-maven-plugin.npmVersion>6.9.0</frontend-maven-plugin.npmVersion>
+    <frontend-maven-plugin.installDirectory>target</frontend-maven-plugin.installDirectory>
   </properties>
 
   <dependencyManagement>
@@ -117,6 +118,7 @@
     <profile>
       <id>vaadin-install-nodejs</id>
       <activation>
+
 <!--        <activeByDefault>false</activeByDefault>-->
         <property>
           <name>vaadin-install-nodejs</name>
@@ -157,6 +159,7 @@
               <npmVersion>${frontend-maven-plugin.npmVersion}</npmVersion>
               <!-- optional: where to download node and npm from. Defaults to https://nodejs.org/dist/ -->
               <!--              <downloadRoot>http://myproxy.example.org/nodejs/</downloadRoot>-->
+              <installDirectory>${frontend-maven-plugin.installDirectory}</installDirectory>
             </configuration>
           </plugin>
         </plugins>

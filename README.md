@@ -48,6 +48,7 @@ The default is mostly the latest maven version.
 * **vaadin-install-nodejs** - true or false (default)
     * frontend-maven-plugin.nodeVersion
     * frontend-maven-plugin.npmVersion
+    * frontend-maven-plugin.installDirectory - default value - target
 * **kotlin.compiler.jvmTarget** - default 1.8
 * **kotlin.version** - default mostly latest version
 * **kotlin.compiler.incremental** - default true
@@ -65,6 +66,7 @@ To configure this you can use the following properties.
     <vaadin-install-nodejs>true</vaadin-install-nodejs>
     <frontend-maven-plugin.nodeVersion>v4.6.0</frontend-maven-plugin.nodeVersion>
     <frontend-maven-plugin.npmVersion>2.15.9</frontend-maven-plugin.npmVersion>
+    <frontend-maven-plugin.installDirectory>target</frontend-maven-plugin.installDirectory>
 ```
 
 
