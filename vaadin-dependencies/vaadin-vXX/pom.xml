@@ -117,7 +117,7 @@
     <profile>
       <id>vaadin-install-nodejs</id>
       <activation>
-        <activeByDefault>false</activeByDefault>
+<!--        <activeByDefault>false</activeByDefault>-->
         <property>
           <name>vaadin-install-nodejs</name>
         </property>
