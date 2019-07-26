@@ -826,6 +826,8 @@
               <sourceDirectories>
                 <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
               </sourceDirectories>
+              <excludes>**/node/**</excludes>
+              <excludes>**/node_modules/**</excludes>
               <excludes>**/generated/**/*</excludes>
               <excludes>**/generated-sources/vwscdn/**/*</excludes>
               <excludes>**/generated-sources/wscdn/**/*</excludes>
@@ -1077,6 +1079,8 @@
                 <email>sven.ruppert@gmail.com</email>
               </properties>
               <excludes>
+                <excludes>**/node/**</excludes>
+                <excludes>**/node_modules/**</excludes>
                 <exclude>**/*.iml</exclude>
                 <exclude>**/README*</exclude>
                 <exclude>**/jacoco.exec*</exclude>
