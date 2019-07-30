@@ -43,8 +43,8 @@
 
     <vaadin-v08.version>8.7.2</vaadin-v08.version>
     <vaadin-v10.version>10.0.16</vaadin-v10.version>
-    <vaadin-v14.version>14.0.0.rc6</vaadin-v14.version>
-    <vaadin-vXX.version>14.0.0.rc6</vaadin-vXX.version>
+    <vaadin-v14.version>14.0.0.rc7</vaadin-v14.version>
+    <vaadin-vXX.version>14.0.0.rc7</vaadin-vXX.version>
 
     <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
     <webdriverextensions.version>3.2.0</webdriverextensions.version>
