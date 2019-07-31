@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.01.06-RPM</version>
+  <version>04.01.07-RPM-SNAPSHOT</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -73,7 +73,7 @@
   </licenses>
 
   <properties>
-    <rapidpm-dependencies.version>04.01.06-RPM</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.01.07-RPM-SNAPSHOT</rapidpm-dependencies.version>
     <rapidpm-functional-reactive.version>01.00.03-RPM</rapidpm-functional-reactive.version>
     <rapidpm-logger-adapter.version>01.00.03-RPM</rapidpm-logger-adapter.version>
 
