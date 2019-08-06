@@ -32,13 +32,13 @@
 
   <inceptionYear>2013</inceptionYear>
   <organization>
-    <name>RapidPM</name>
-    <url>http://www.rapidpm.org</url>
+    <name>Sven Ruppert</name>
+    <url>http://www.sven-ruppert.de</url>
   </organization>
 
   <url>https://github.com/RapidPM/rapidpm-dependencies</url>
   <name>RapidPM Dependencies</name>
-  <description>Dependencies for the RapidPM projects</description>
+  <description>Dependencies for the Java/Kotlin projects</description>
   <scm>
     <url>https://github.com/RapidPM/rapidpm-dependencies</url>
     <connection>scm:git:https://github.com/RapidPM/rapidpm-dependencies.git</connection>
@@ -50,6 +50,7 @@
       <name>Sven Ruppert</name>
       <email>sven.ruppert@gmail.com</email>
       <roles>
+        <role>Founder</role>
         <role>Developer</role>
       </roles>
       <timezone>+1</timezone>
