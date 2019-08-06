@@ -15,6 +15,19 @@
 ### NEXT
 * TBD
 
+### 04.01.07-RPM
+* version updates
+* added Google Truth as default dependency into scope test
+* 
+
+### 04.01.06-RPM
+* version updates
+* config changes for vaadin dependencies
+
+### 04.01.05-RPM
+* version updates
+* config changes for vaadin dependencies
+
 ### 04.01.04-RPM
 * version updates
 * added rapidpm-vaadin-dependencies for V08/V10/V14/Vxx
