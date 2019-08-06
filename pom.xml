@@ -838,6 +838,10 @@
               <sourceDirectories>
                 <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
               </sourceDirectories>
+              <excludes>webpack.generated.js</excludes>
+              <excludes>webpack.config.js</excludes>
+              <excludes>package.json</excludes>
+              <excludes>package-lock.json</excludes>
               <excludes>**/node/**</excludes>
               <excludes>**/node_modules/**</excludes>
               <excludes>**/generated/**/*</excludes>
@@ -1091,6 +1095,10 @@
                 <email>sven.ruppert@gmail.com</email>
               </properties>
               <excludes>
+                <excludes>**/webpack.generated.js</excludes>
+                <excludes>**/webpack.config.js</excludes>
+                <excludes>**/package.json</excludes>
+                <excludes>**/package-lock.json</excludes>
                 <excludes>**/node/**</excludes>
                 <excludes>**/node_modules/**</excludes>
                 <exclude>**/*.iml</exclude>

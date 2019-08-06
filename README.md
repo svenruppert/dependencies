@@ -18,7 +18,7 @@
 ### 04.01.07-RPM
 * version updates
 * added Google Truth as default dependency into scope test
-* 
+* excluded generated NodeJS/ NPM things from lic check
 
 ### 04.01.06-RPM
 * version updates
