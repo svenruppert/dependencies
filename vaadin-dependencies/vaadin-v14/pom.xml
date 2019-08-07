@@ -77,6 +77,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-testbench</artifactId>
+        <version>${vaadin-v14.version}</version>
         <exclusions>
           <exclusion>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -88,6 +89,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-testbench-core</artifactId>
+        <version>${vaadin-testbench-v14.version}</version>
         <exclusions>
           <exclusion>
             <groupId>org.seleniumhq.selenium</groupId>
