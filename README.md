@@ -19,6 +19,9 @@
 ### NEXT
 * TBD
 
+### 04.01.08-RPM
+* junit-platform-maven-plugin.timeout - default 300 [s]
+
 ### 04.01.07-RPM
 * version updates
 * added Google Truth as default dependency into scope test

@@ -122,6 +122,7 @@
 
     <testcontainers.version>1.12.0</testcontainers.version>
 
+    <junit-platform-maven-plugin.timeout>300</junit-platform-maven-plugin.timeout>
   </properties>
 
   <!--  <prerequisites>-->
@@ -942,8 +943,8 @@
         <artifactId>junit-platform-maven-plugin</artifactId>
         <version>${junit-platform-maven-plugin.version}</version>
         <extensions>true</extensions> <!-- Necessary to execute it in 'test' phase. -->
-
         <configuration>
+          <timeout>${junit-platform-maven-plugin.timeout}</timeout>
           <classNamePatterns>
             <pattern>^(Test.*|.*Test*.|.+[.$]Test.*|.*Tests?)$</pattern>
             <pattern>.*TestCase</pattern>
