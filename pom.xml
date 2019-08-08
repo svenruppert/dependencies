@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.01.07-RPM</version>
+  <version>04.01.08-RPM</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -74,7 +74,7 @@
   </licenses>
 
   <properties>
-    <rapidpm-dependencies.version>04.01.07-RPM</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.01.08-RPM</rapidpm-dependencies.version>
     <rapidpm-functional-reactive.version>01.00.03-RPM</rapidpm-functional-reactive.version>
     <rapidpm-logger-adapter.version>01.00.03-RPM</rapidpm-logger-adapter.version>
 
@@ -122,6 +122,7 @@
 
     <testcontainers.version>1.12.0</testcontainers.version>
 
+    <junit-platform-maven-plugin.timeout>300</junit-platform-maven-plugin.timeout>
   </properties>
 
   <!--  <prerequisites>-->
@@ -942,8 +943,8 @@
         <artifactId>junit-platform-maven-plugin</artifactId>
         <version>${junit-platform-maven-plugin.version}</version>
         <extensions>true</extensions> <!-- Necessary to execute it in 'test' phase. -->
-
         <configuration>
+          <timeout>${junit-platform-maven-plugin.timeout}</timeout>
           <classNamePatterns>
             <pattern>^(Test.*|.*Test*.|.+[.$]Test.*|.*Tests?)$</pattern>
             <pattern>.*TestCase</pattern>
