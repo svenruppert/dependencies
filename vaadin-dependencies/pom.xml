@@ -24,12 +24,12 @@
   <parent>
     <groupId>org.rapidpm</groupId>
     <artifactId>rapidpm-dependencies</artifactId>
-    <version>04.01.09-RPM-SNAPSHOT</version>
+    <version>04.01.09-RPM</version>
   </parent>
 
   <artifactId>rapidpm-vaadin-dependencies</artifactId>
   <packaging>pom</packaging>
-  <version>04.01.09-RPM-SNAPSHOT</version>
+  <version>04.01.09-RPM</version>
 
   <modules>
     <module>vaadin-v08</module>
@@ -45,10 +45,10 @@
     <vaadin-v10.version>10.0.16</vaadin-v10.version>
     <vaadin-testbench-v10.version>6.2.0</vaadin-testbench-v10.version>
 
-    <vaadin-v14.version>14.0.0.rc9</vaadin-v14.version>
+    <vaadin-v14.version>14.0.0</vaadin-v14.version>
     <vaadin-testbench-v14.version>6.2.0</vaadin-testbench-v14.version>
 
-    <vaadin-vXX.version>14.0.0.rc9</vaadin-vXX.version>
+    <vaadin-vXX.version>14.0.0</vaadin-vXX.version>
     <vaadin-testbench-vXX.version>6.2.0</vaadin-testbench-vXX.version>
 
     <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
