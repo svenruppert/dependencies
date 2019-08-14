@@ -19,6 +19,11 @@
 ### NEXT
 * TBD
 
+### 04.01.09-RPM
+* Update to V14 Final
+* Update to stagemonitor 0.89.0
+
+
 ### 04.01.08-RPM
 * junit-platform-maven-plugin.timeout - default 300 [s]
 
