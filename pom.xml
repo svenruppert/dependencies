@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.01.09-RPM</version>
+  <version>04.01.10-RPM</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -74,7 +74,7 @@
   </licenses>
 
   <properties>
-    <rapidpm-dependencies.version>04.01.09-RPM</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.01.10-RPM</rapidpm-dependencies.version>
     <rapidpm-functional-reactive.version>01.00.03-RPM</rapidpm-functional-reactive.version>
     <rapidpm-logger-adapter.version>01.00.03-RPM</rapidpm-logger-adapter.version>
 
@@ -92,7 +92,7 @@
 
     <!--Kotlin-->
     <kotlin.compiler.jvmTarget>${jdk.version}</kotlin.compiler.jvmTarget>
-    <kotlin.version>1.3.41</kotlin.version>
+    <kotlin.version>1.3.50</kotlin.version>
     <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
 
@@ -102,7 +102,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <slf4j.version>1.7.26</slf4j.version>
-    <log4j-api.version>2.12.0</log4j-api.version>
+    <log4j-api.version>2.12.1</log4j-api.version>
 
     <jacoco.version>0.8.4</jacoco.version>
     <pitest.version>1.4.9</pitest.version>
@@ -196,7 +196,7 @@
       <dependency>
         <groupId>net.oneandone.reflections8</groupId>
         <artifactId>reflections8</artifactId>
-        <version>0.11.5</version>
+        <version>0.11.6</version>
       </dependency>
 
       <dependency>
@@ -245,7 +245,7 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-vfs2</artifactId>
-        <version>2.4</version>
+        <version>2.4.1</version>
         <scope>provided</scope>
         <optional>true</optional>
       </dependency>
@@ -271,13 +271,13 @@
       <dependency>
         <groupId>org.cache2k</groupId>
         <artifactId>cache2k-base-bom</artifactId>
-        <version>1.2.2.Final</version>
+        <version>1.2.3.Final</version>
         <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.cache2k</groupId>
         <artifactId>cache2k-jcache</artifactId>
-        <version>1.2.2.Final</version>
+        <version>1.2.3.Final</version>
         <scope>runtime</scope>
       </dependency>
 
@@ -371,6 +371,12 @@
         <scope>test</scope>
       </dependency>
 
+      <dependency>
+        <groupId>com.github.javafaker</groupId>
+        <artifactId>javafaker</artifactId>
+        <version>1.0.1</version>
+      </dependency>
+
       <!--Microbenchmarking-->
       <dependency>
         <groupId>org.openjdk.jmh</groupId>
@@ -401,7 +407,7 @@
       <dependency>
         <groupId>io.gatling.highcharts</groupId>
         <artifactId>gatling-charts-highcharts</artifactId>
-        <version>3.2.0</version>
+        <version>3.2.1</version>
         <scope>test</scope>
       </dependency>
       <!--tdd-->
@@ -525,34 +531,43 @@
       <scope>test</scope>
     </dependency>
     <!--Microbenchmarking-->
-    <!--<dependency>-->
-    <!--<groupId>org.openjdk.jmh</groupId>-->
-    <!--<artifactId>jmh-core</artifactId>-->
-    <!--<scope>test</scope>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-    <!--<groupId>org.openjdk.jmh</groupId>-->
-    <!--<artifactId>jmh-core-benchmarks</artifactId>-->
-    <!--<scope>test</scope>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-    <!--<groupId>org.openjdk.jmh</groupId>-->
-    <!--<artifactId>jmh-generator-annprocess</artifactId>-->
-    <!--<scope>test</scope>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-    <!--<groupId>org.openjdk.jmh</groupId>-->
-    <!--<artifactId>jmh-generator-reflection</artifactId>-->
-    <!--<scope>test</scope>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-    <!--<groupId>net.jcip</groupId>-->
-    <!--<artifactId>jcip-annotations</artifactId>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-    <!--<groupId>com.google.code.findbugs</groupId>-->
-    <!--<artifactId>jsr305</artifactId>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-core-benchmarks</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-generator-annprocess</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-generator-reflection</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+
+    <dependency>
+      <groupId>com.github.javafaker</groupId>
+      <artifactId>javafaker</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+
+    <dependency>
+      <groupId>net.jcip</groupId>
+      <artifactId>jcip-annotations</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>org.slf4j</groupId>
