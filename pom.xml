@@ -105,7 +105,7 @@
     <log4j-api.version>2.12.1</log4j-api.version>
 
     <jacoco.version>0.8.4</jacoco.version>
-    <pitest.version>1.4.9</pitest.version>
+    <pitest.version>1.4.10</pitest.version>
     <pitest-junit5-plugin.version>0.9</pitest-junit5-plugin.version>
     <pitest-prod-classes>org.rapidpm.*</pitest-prod-classes>
     <pitest-test-classes>junit.org.rapidpm*</pitest-test-classes>
@@ -230,7 +230,7 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-compress</artifactId>
-        <version>1.18</version>
+        <version>1.19</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
@@ -340,6 +340,12 @@
         <scope>test</scope>
         <version>${junit.platform.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.junit.platform</groupId>
+        <artifactId>junit-platform-testkit</artifactId>
+        <version>${junit.platform.version}</version>
+        <scope>test</scope>
+      </dependency>
       <!-- Only required to run tests in an IDE that bundles an older version -->
       <dependency>
         <groupId>org.junit.jupiter</groupId>
@@ -347,6 +353,7 @@
         <scope>test</scope>
         <version>${junit.jupiter.version}</version>
       </dependency>
+
       <dependency>
         <groupId>org.hamcrest</groupId>
         <artifactId>hamcrest-all</artifactId>
@@ -522,6 +529,11 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-testkit</artifactId>
       <scope>test</scope>
     </dependency>
 

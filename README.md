@@ -19,9 +19,13 @@
 ### NEXT
 * TBD
 
+### 04.01.11-RPM
+* pitest 1.4.10
+* added junit-platform-testkit to scope test
+
 ### 04.01.10-RPM
 * added java-faker to scope test
-
+* vaadin v14.0.2
 
 ### 04.01.09-RPM
 * Update to V14 Final
