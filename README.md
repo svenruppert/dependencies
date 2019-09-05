@@ -20,6 +20,8 @@
 * TBD
 
 ### 04.01.11-RPM
+* logger-adapter
+* functional-reactive-lib
 * pitest 1.4.10
 * added junit-platform-testkit to scope test
 * vaadinXX switched from V14 to V15  - 15.0.0.alpha1
