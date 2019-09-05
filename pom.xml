@@ -271,13 +271,13 @@
       <dependency>
         <groupId>org.cache2k</groupId>
         <artifactId>cache2k-base-bom</artifactId>
-        <version>1.2.3.Final</version>
+        <version>1.2.4.Final</version>
         <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.cache2k</groupId>
         <artifactId>cache2k-jcache</artifactId>
-        <version>1.2.3.Final</version>
+        <version>1.2.4.Final</version>
         <scope>runtime</scope>
       </dependency>
 
@@ -852,7 +852,7 @@
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>8.23</version> <!-- Checkstyle version -->
+            <version>8.24</version> <!-- Checkstyle version -->
           </dependency>
         </dependencies>
         <executions>

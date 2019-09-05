@@ -22,6 +22,8 @@
 ### 04.01.11-RPM
 * pitest 1.4.10
 * added junit-platform-testkit to scope test
+* vaadinXX switched from V14 to V15  - 15.0.0.alpha1
+* cache2k update to v1.2.4.Final
 
 ### 04.01.10-RPM
 * added java-faker to scope test
