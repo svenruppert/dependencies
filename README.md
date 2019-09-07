@@ -16,8 +16,22 @@
 
 ## Versioninfos
 
+### Backlog
+* replace commercial Testbench with an OpenSource Free alternative
+* add SAP WebComponents as Flow Components
+* add custom TestEngine for VaadinTests
+* add OSS Charting WebComponents
+
+
+
 ### NEXT
 * TBD
+
+### 04.01.12-RPM
+* V10/V14/Vxx - removed the dependency to vaadin - way to heavy
+  To get the dev cycle up to usable, add only the flow dependencies you need into your pom.
+  example : [Nano-Vaadin-Demos](https://github.com/orgs/Nano-Vaadin-Demos/dashboard)
+
 
 ### 04.01.11-RPM
 * logger-adapter
