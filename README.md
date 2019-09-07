@@ -31,7 +31,7 @@
 * V10/V14/Vxx - removed the dependency to vaadin - way to heavy
   To get the dev cycle up to usable, add only the flow dependencies you need into your pom.
   example : [Nano-Vaadin-Demos](https://github.com/orgs/Nano-Vaadin-Demos/dashboard)
-
+* added minimal Flow dependencies, no themes, no components
 
 ### 04.01.11-RPM
 * logger-adapter
