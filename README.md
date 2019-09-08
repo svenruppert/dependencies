@@ -28,6 +28,7 @@
 * TBD
 
 ### 04.01.12-RPM
+* vaadin v14.0.3
 * V10/V14/Vxx - removed the dependency to vaadin - way to heavy
   To get the dev cycle up to usable, add only the flow dependencies you need into your pom.
   example : [Nano-Vaadin-Demos](https://github.com/orgs/Nano-Vaadin-Demos/dashboard)
