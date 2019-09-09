@@ -28,6 +28,12 @@
 * TBD
 
 ### 04.01.12-RPM
+* junit update 1.5.2
+* switched VaadinXX to manual latest version compositions
+* VaadinXX excludes all transitive webjars
+
+
+### 04.01.12-RPM
 * vaadin v14.0.3
 * V10/V14/Vxx - removed the dependency to vaadin - way to heavy
   To get the dev cycle up to usable, add only the flow dependencies you need into your pom.

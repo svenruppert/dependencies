@@ -34,7 +34,7 @@
     <vaadin-install-nodejs>false</vaadin-install-nodejs>
     <frontend-maven-plugin.nodeVersion>v10.16.0</frontend-maven-plugin.nodeVersion>
     <frontend-maven-plugin.npmVersion>6.9.0</frontend-maven-plugin.npmVersion>
-<!--    <frontend-maven-plugin.installDirectory>target</frontend-maven-plugin.installDirectory>-->
+    <!--    <frontend-maven-plugin.installDirectory>target</frontend-maven-plugin.installDirectory>-->
   </properties>
 
   <pluginRepositories>
@@ -124,38 +124,38 @@
       <artifactId>flow-data</artifactId>
     </dependency>
     <!--Vaadin -->
-<!--    <dependency>-->
-<!--      <groupId>com.vaadin</groupId>-->
-<!--      &lt;!&ndash; Replace artifactId with vaadin-core to use only free components &ndash;&gt;-->
-<!--      <artifactId>vaadin-core</artifactId>-->
-<!--      <exclusions>-->
-<!--        &lt;!&ndash; Webjars are only needed when running in Vaadin 13 compatibility mode &ndash;&gt;-->
-<!--        <exclusion>-->
-<!--          <groupId>com.vaadin.webjar</groupId>-->
-<!--          <artifactId>*</artifactId>-->
-<!--        </exclusion>-->
-<!--        <exclusion>-->
-<!--          <groupId>org.webjars.bowergithub.insites</groupId>-->
-<!--          <artifactId>*</artifactId>-->
-<!--        </exclusion>-->
-<!--        <exclusion>-->
-<!--          <groupId>org.webjars.bowergithub.polymer</groupId>-->
-<!--          <artifactId>*</artifactId>-->
-<!--        </exclusion>-->
-<!--        <exclusion>-->
-<!--          <groupId>org.webjars.bowergithub.polymerelements</groupId>-->
-<!--          <artifactId>*</artifactId>-->
-<!--        </exclusion>-->
-<!--        <exclusion>-->
-<!--          <groupId>org.webjars.bowergithub.vaadin</groupId>-->
-<!--          <artifactId>*</artifactId>-->
-<!--        </exclusion>-->
-<!--        <exclusion>-->
-<!--          <groupId>org.webjars.bowergithub.webcomponents</groupId>-->
-<!--          <artifactId>*</artifactId>-->
-<!--        </exclusion>-->
-<!--      </exclusions>-->
-<!--    </dependency>-->
+    <!--    <dependency>-->
+    <!--      <groupId>com.vaadin</groupId>-->
+    <!--      &lt;!&ndash; Replace artifactId with vaadin-core to use only free components &ndash;&gt;-->
+    <!--      <artifactId>vaadin-core</artifactId>-->
+    <!--      <exclusions>-->
+    <!--        &lt;!&ndash; Webjars are only needed when running in Vaadin 13 compatibility mode &ndash;&gt;-->
+    <!--        <exclusion>-->
+    <!--          <groupId>com.vaadin.webjar</groupId>-->
+    <!--          <artifactId>*</artifactId>-->
+    <!--        </exclusion>-->
+    <!--        <exclusion>-->
+    <!--          <groupId>org.webjars.bowergithub.insites</groupId>-->
+    <!--          <artifactId>*</artifactId>-->
+    <!--        </exclusion>-->
+    <!--        <exclusion>-->
+    <!--          <groupId>org.webjars.bowergithub.polymer</groupId>-->
+    <!--          <artifactId>*</artifactId>-->
+    <!--        </exclusion>-->
+    <!--        <exclusion>-->
+    <!--          <groupId>org.webjars.bowergithub.polymerelements</groupId>-->
+    <!--          <artifactId>*</artifactId>-->
+    <!--        </exclusion>-->
+    <!--        <exclusion>-->
+    <!--          <groupId>org.webjars.bowergithub.vaadin</groupId>-->
+    <!--          <artifactId>*</artifactId>-->
+    <!--        </exclusion>-->
+    <!--        <exclusion>-->
+    <!--          <groupId>org.webjars.bowergithub.webcomponents</groupId>-->
+    <!--          <artifactId>*</artifactId>-->
+    <!--        </exclusion>-->
+    <!--      </exclusions>-->
+    <!--    </dependency>-->
   </dependencies>
 
   <build>
@@ -180,7 +180,7 @@
     <profile>
       <id>vaadin-install-nodejs</id>
       <activation>
-<!--        <activeByDefault>false</activeByDefault>-->
+        <!--        <activeByDefault>false</activeByDefault>-->
         <property>
           <name>vaadin-install-nodejs</name>
         </property>

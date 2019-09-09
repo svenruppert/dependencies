@@ -113,14 +113,14 @@
     <jmh.version>1.21</jmh.version>
 
     <!--TDD jUnit5-->
-    <junit.jupiter.version>5.5.1</junit.jupiter.version>
-    <junit.platform.version>1.5.1</junit.platform.version>
+    <junit.jupiter.version>5.5.2</junit.jupiter.version>
+    <junit.platform.version>1.5.2</junit.platform.version>
     <junit-platform-maven-plugin.version>1.0.0-M5</junit-platform-maven-plugin.version>
 
     <opentracing-api.version>0.33.0</opentracing-api.version>
     <asm.version>7.1</asm.version>
 
-    <testcontainers.version>1.12.0</testcontainers.version>
+    <testcontainers.version>1.12.1</testcontainers.version>
 
     <junit-platform-maven-plugin.timeout>300</junit-platform-maven-plugin.timeout>
   </properties>
