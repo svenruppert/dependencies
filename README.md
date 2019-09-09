@@ -26,6 +26,10 @@
 
 ### NEXT
 * TBD
+
+### 04.01.15-RPM
+* revert BUGFIX from 04.01.14-RPM
+
 ### 04.01.14-RPM
 * BUGFIX - combobox dependency
 

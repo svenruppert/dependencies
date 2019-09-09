@@ -395,8 +395,8 @@
       </dependency>
       <dependency>
         <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-combobox-flow</artifactId>
-        <version>4.2.0</version>
+        <artifactId>vaadin-combo-box-flow</artifactId>
+        <version>3.0.3</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
           <exclusion>
