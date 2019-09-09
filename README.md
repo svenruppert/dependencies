@@ -26,12 +26,13 @@
 
 ### NEXT
 * TBD
+### 04.01.14-RPM
+* BUGFIX - combobox dependency
 
-### 04.01.12-RPM
+### 04.01.13-RPM
 * junit update 1.5.2
 * switched VaadinXX to manual latest version compositions
 * VaadinXX excludes all transitive webjars
-
 
 ### 04.01.12-RPM
 * vaadin v14.0.3

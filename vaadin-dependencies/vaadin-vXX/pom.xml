@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.rapidpm</groupId>
     <artifactId>rapidpm-vaadin-dependencies</artifactId>
-    <version>04.01.14-RPM-SNAPSHOT</version>
+    <version>04.01.14-RPM</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
@@ -395,7 +395,7 @@
       </dependency>
       <dependency>
         <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-combo-box-flow</artifactId>
+        <artifactId>vaadin-combobox-flow</artifactId>
         <version>4.2.0</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
