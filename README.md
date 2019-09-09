@@ -27,6 +27,11 @@
 ### NEXT
 * TBD
 
+### 04.02.00-RPM
+* deactivate V08 dependencies
+* deactivate V10 dependencies
+
+
 ### 04.01.15-RPM
 * revert BUGFIX from 04.01.14-RPM
 
