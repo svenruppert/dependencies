@@ -1460,7 +1460,7 @@
         <version>${vaadin-vXX.version}</version>
         <executions>
           <execution>
-            <phase>generate-sources</phase>
+            <phase>test-compile</phase>
             <goals>
               <goal>prepare-frontend</goal>
               <goal>build-frontend</goal>
