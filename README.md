@@ -18,19 +18,19 @@
 
 ### Backlog
 * replace commercial Testbench with an OpenSource Free alternative
-* add SAP WebComponents as Flow Components
 * add custom TestEngine for VaadinTests
 * add OSS Charting WebComponents
-
-
+* deactivate V08 dependencies
+* deactivate V10 dependencies
 
 ### NEXT
 * TBD
 
 ### 04.02.00-RPM
-* deactivate V08 dependencies
-* deactivate V10 dependencies
-
+* version updates
+* removed lic checker (flow) mix from transitive deps
+* removed all indirect vaadin flow dependencies / components
+* added flow minimal needed dependencies
 
 ### 04.01.15-RPM
 * revert BUGFIX from 04.01.14-RPM
