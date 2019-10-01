@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.rapidpm</groupId>
     <artifactId>rapidpm-vaadin-dependencies</artifactId>
-    <version>04.02.00-RPM-SNAPSHOT</version>
+    <version>04.02.00-RPM</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>rapidpm-vaadin-dependencies-v10</artifactId>
@@ -52,6 +52,10 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-server</artifactId>
           </exclusion>
+          <exclusion>
+            <groupId>com.vaadin</groupId>
+            <artifactId>license-checker</artifactId>
+          </exclusion>
         </exclusions>
         <scope>test</scope>
       </dependency>
@@ -64,10 +68,21 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-server</artifactId>
           </exclusion>
+          <exclusion>
+            <groupId>com.vaadin</groupId>
+            <artifactId>license-checker</artifactId>
+          </exclusion>
         </exclusions>
         <scope>test</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.rapidpm</groupId>
+      <artifactId>rapidpm-vaadin-flow-commons</artifactId>
+    </dependency>
+  </dependencies>
 
 </project>

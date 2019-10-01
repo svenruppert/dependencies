@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.02.00-RPM-SNAPSHOT</version>
+  <version>04.02.00-RPM</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -74,7 +74,7 @@
   </licenses>
 
   <properties>
-    <rapidpm-dependencies.version>04.02.00-RPM-SNAPSHOT</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.02.00-RPM</rapidpm-dependencies.version>
     <rapidpm-functional-reactive.version>01.00.04-RPM</rapidpm-functional-reactive.version>
     <rapidpm-logger-adapter.version>01.00.04-RPM</rapidpm-logger-adapter.version>
 
@@ -101,7 +101,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <slf4j.version>1.7.26</slf4j.version>
+    <slf4j.version>1.7.28</slf4j.version>
     <log4j-api.version>2.12.1</log4j-api.version>
 
     <jacoco.version>0.8.4</jacoco.version>
@@ -120,7 +120,7 @@
     <opentracing-api.version>0.33.0</opentracing-api.version>
     <asm.version>7.1</asm.version>
 
-    <testcontainers.version>1.12.1</testcontainers.version>
+    <testcontainers.version>1.12.2</testcontainers.version>
 
     <junit-platform-maven-plugin.timeout>300</junit-platform-maven-plugin.timeout>
   </properties>
@@ -165,6 +165,12 @@
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-dependencies-core-properties</artifactId>
+        <version>${rapidpm-dependencies.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.rapidpm</groupId>
+        <artifactId>rapidpm-vaadin-flow-commons</artifactId>
         <version>${rapidpm-dependencies.version}</version>
       </dependency>
 
@@ -252,12 +258,12 @@
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
-        <version>4.5.9</version>
+        <version>4.5.10</version>
       </dependency>
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>fluent-hc</artifactId>
-        <version>4.5.9</version>
+        <version>4.5.10</version>
       </dependency>
 
 
@@ -291,7 +297,7 @@
       <dependency>
         <groupId>com.zaxxer</groupId>
         <artifactId>HikariCP</artifactId>
-        <version>3.3.1</version>
+        <version>3.4.1</version>
         <scope>compile</scope>
       </dependency>
       <dependency>
@@ -852,7 +858,7 @@
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>8.24</version> <!-- Checkstyle version -->
+            <version>8.25</version> <!-- Checkstyle version -->
           </dependency>
         </dependencies>
         <executions>
