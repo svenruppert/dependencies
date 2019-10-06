@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.rapidpm</groupId>
     <artifactId>rapidpm-vaadin-dependencies</artifactId>
-    <version>04.02.01-RPM-SNAPSHOT</version>
+    <version>04.03.00-RPM</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
@@ -75,7 +75,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>flow-server</artifactId>
-        <version>3.0.0.alpha1</version>
+        <version>3.0.0.alpha4</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
           <exclusion>
@@ -107,7 +107,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>flow-push</artifactId>
-        <version>3.0.0.alpha1</version>
+        <version>3.0.0.alpha4</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
           <exclusion>
@@ -139,7 +139,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>flow-client</artifactId>
-        <version>3.0.0.alpha1</version>
+        <version>3.0.0.alpha4</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
           <exclusion>
@@ -171,7 +171,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>flow-html-components</artifactId>
-        <version>2.0.10</version>
+        <version>3.0.0.alpha4</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
           <exclusion>
@@ -203,7 +203,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>flow-data</artifactId>
-        <version>2.0.10</version>
+        <version>3.0.0.alpha4</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
           <exclusion>
@@ -235,7 +235,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-lumo-theme</artifactId>
-        <version>2.0.10</version>
+        <version>3.0.0.alpha4</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
           <exclusion>
@@ -267,7 +267,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-material-theme</artifactId>
-        <version>2.0.10</version>
+        <version>3.0.0.alpha4</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
           <exclusion>
@@ -460,7 +460,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-date-picker-flow</artifactId>
-        <version>2.0.2</version>
+        <version>2.0.3</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
           <exclusion>
@@ -524,7 +524,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-time-picker-flow</artifactId>
-        <version>2.0.1</version>
+        <version>2.0.2</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
           <exclusion>
@@ -588,7 +588,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-dialog-flow</artifactId>
-        <version>2.0.0</version>
+        <version>2.0.1</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
           <exclusion>
@@ -652,7 +652,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-grid-flow</artifactId>
-        <version>4.0.6</version>
+        <version>4.1.0.alpha1</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
           <exclusion>
@@ -748,7 +748,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-list-box-flow</artifactId>
-        <version>2.0.0</version>
+        <version>2.1.0.beta1</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
           <exclusion>
@@ -812,7 +812,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-ordered-layout-flow</artifactId>
-        <version>2.0.0</version>
+        <version>2.1.0.alpha1</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
           <exclusion>
@@ -844,102 +844,6 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-progress-bar-flow</artifactId>
-        <version>2.0.1</version>
-        <exclusions>
-          <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
-          <exclusion>
-            <groupId>com.vaadin.webjar</groupId>
-            <artifactId>*</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.webjars.bowergithub.insites</groupId>
-            <artifactId>*</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.webjars.bowergithub.polymer</groupId>
-            <artifactId>*</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.webjars.bowergithub.polymerelements</groupId>
-            <artifactId>*</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.webjars.bowergithub.vaadin</groupId>
-            <artifactId>*</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.webjars.bowergithub.webcomponents</groupId>
-            <artifactId>*</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-radio-button-flow</artifactId>
-        <version>2.0.0</version>
-        <exclusions>
-          <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
-          <exclusion>
-            <groupId>com.vaadin.webjar</groupId>
-            <artifactId>*</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.webjars.bowergithub.insites</groupId>
-            <artifactId>*</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.webjars.bowergithub.polymer</groupId>
-            <artifactId>*</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.webjars.bowergithub.polymerelements</groupId>
-            <artifactId>*</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.webjars.bowergithub.vaadin</groupId>
-            <artifactId>*</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.webjars.bowergithub.webcomponents</groupId>
-            <artifactId>*</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-split-layout-flow</artifactId>
-        <version>2.0.1</version>
-        <exclusions>
-          <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
-          <exclusion>
-            <groupId>com.vaadin.webjar</groupId>
-            <artifactId>*</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.webjars.bowergithub.insites</groupId>
-            <artifactId>*</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.webjars.bowergithub.polymer</groupId>
-            <artifactId>*</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.webjars.bowergithub.polymerelements</groupId>
-            <artifactId>*</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.webjars.bowergithub.vaadin</groupId>
-            <artifactId>*</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.webjars.bowergithub.webcomponents</groupId>
-            <artifactId>*</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-tabs-flow</artifactId>
         <version>2.0.2</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
@@ -971,7 +875,71 @@
       </dependency>
       <dependency>
         <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-text-field-flow</artifactId>
+        <artifactId>vaadin-radio-button-flow</artifactId>
+        <version>2.0.1</version>
+        <exclusions>
+          <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
+          <exclusion>
+            <groupId>com.vaadin.webjar</groupId>
+            <artifactId>*</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.webjars.bowergithub.insites</groupId>
+            <artifactId>*</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.webjars.bowergithub.polymer</groupId>
+            <artifactId>*</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.webjars.bowergithub.polymerelements</groupId>
+            <artifactId>*</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.webjars.bowergithub.vaadin</groupId>
+            <artifactId>*</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.webjars.bowergithub.webcomponents</groupId>
+            <artifactId>*</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-split-layout-flow</artifactId>
+        <version>2.0.2</version>
+        <exclusions>
+          <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
+          <exclusion>
+            <groupId>com.vaadin.webjar</groupId>
+            <artifactId>*</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.webjars.bowergithub.insites</groupId>
+            <artifactId>*</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.webjars.bowergithub.polymer</groupId>
+            <artifactId>*</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.webjars.bowergithub.polymerelements</groupId>
+            <artifactId>*</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.webjars.bowergithub.vaadin</groupId>
+            <artifactId>*</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.webjars.bowergithub.webcomponents</groupId>
+            <artifactId>*</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-tabs-flow</artifactId>
         <version>2.0.3</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
@@ -1003,8 +971,40 @@
       </dependency>
       <dependency>
         <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-text-field-flow</artifactId>
+        <version>2.0.4</version>
+        <exclusions>
+          <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
+          <exclusion>
+            <groupId>com.vaadin.webjar</groupId>
+            <artifactId>*</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.webjars.bowergithub.insites</groupId>
+            <artifactId>*</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.webjars.bowergithub.polymer</groupId>
+            <artifactId>*</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.webjars.bowergithub.polymerelements</groupId>
+            <artifactId>*</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.webjars.bowergithub.vaadin</groupId>
+            <artifactId>*</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.webjars.bowergithub.webcomponents</groupId>
+            <artifactId>*</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
         <artifactId>vaadin-upload-flow</artifactId>
-        <version>2.0.0</version>
+        <version>2.1.0.alpha1</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
           <exclusion>
@@ -1068,7 +1068,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-app-layout-flow</artifactId>
-        <version>2.0.2</version>
+        <version>2.0.3</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
           <exclusion>
@@ -1100,7 +1100,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-context-menu-flow</artifactId>
-        <version>3.0.2</version>
+        <version>3.1.0.alpha1</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
           <exclusion>
@@ -1132,7 +1132,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-menu-bar-flow</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
         <exclusions>
           <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
           <exclusion>
@@ -1266,7 +1266,7 @@
         <dependency>
           <groupId>com.vaadin</groupId>
           <artifactId>vaadin-cookie-consent-flow</artifactId>
-          <version>2.0.0</version>
+          <version>2.0.1</version>
           <exclusions>
             <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
             <exclusion>
@@ -1338,7 +1338,7 @@
         <dependency>
           <groupId>com.vaadin</groupId>
           <artifactId>vaadin-rich-text-editor-flow</artifactId>
-          <version>2.0.0</version>
+          <version>2.1.0.beta1</version>
           <exclusions>
             <!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
             <exclusion>
@@ -1371,7 +1371,7 @@
       <dependency>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-testbench</artifactId>
-        <version>14.0.3</version>
+        <version>15.0.0.alpha1</version>
         <exclusions>
           <exclusion>
             <groupId>org.seleniumhq.selenium</groupId>

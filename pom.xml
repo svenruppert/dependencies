@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.02.01-RPM-SNAPSHOT</version>
+  <version>04.03.00-RPM</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -74,7 +74,7 @@
   </licenses>
 
   <properties>
-    <rapidpm-dependencies.version>04.02.01-RPM-SNAPSHOT</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.03.00-RPM</rapidpm-dependencies.version>
     <rapidpm-functional-reactive.version>01.00.04-RPM</rapidpm-functional-reactive.version>
     <rapidpm-logger-adapter.version>01.00.04-RPM</rapidpm-logger-adapter.version>
 
@@ -208,14 +208,14 @@
       <dependency>
         <groupId>org.javassist</groupId>
         <artifactId>javassist</artifactId>
-        <version>3.25.0-GA</version>
+        <version>3.26.0-GA</version>
       </dependency>
 
 
       <dependency>
         <groupId>com.google.code.gson</groupId>
         <artifactId>gson</artifactId>
-        <version>2.8.5</version>
+        <version>2.8.6</version>
         <optional>true</optional>
         <!-- case: when no json de/serialization -->
       </dependency>
@@ -705,7 +705,7 @@
         <plugin>
           <groupId>org.owasp</groupId>
           <artifactId>dependency-check-maven</artifactId>
-          <version>5.1.0</version>
+          <version>5.2.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -1055,23 +1055,13 @@
 
 
   <profiles>
+
+
     <profile>
-      <id>_release</id>
+      <id>_release_prepare</id>
       <activation>
         <activeByDefault>false</activeByDefault>
       </activation>
-
-      <distributionManagement>
-        <repository>
-          <id>sonatype-nexus</id>
-          <url>${sonatype-nexus-url}</url>
-        </repository>
-        <snapshotRepository>
-          <id>sonatype-nexus-snapshots</id>
-          <url>${sonatype-nexus-snapshots-url}</url>
-        </snapshotRepository>
-      </distributionManagement>
-
       <build>
         <plugins>
           <plugin>
@@ -1083,41 +1073,26 @@
               <autoVersionSubmodules>true</autoVersionSubmodules>
             </configuration>
           </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-
-
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-enforcer-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>enforce-no-snapshots</id>
-                <goals>
-                  <goal>enforce</goal>
-                </goals>
-                <configuration>
-                  <rules>
-                    <requireReleaseDeps>
-                      <message>No Snapshots Allowed!</message>
-                    </requireReleaseDeps>
-                  </rules>
-                  <fail>true</fail>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
+<!--          <plugin>-->
+<!--            <groupId>org.apache.maven.plugins</groupId>-->
+<!--            <artifactId>maven-enforcer-plugin</artifactId>-->
+<!--            <executions>-->
+<!--              <execution>-->
+<!--                <id>enforce-no-snapshots</id>-->
+<!--                <goals>-->
+<!--                  <goal>enforce</goal>-->
+<!--                </goals>-->
+<!--                <configuration>-->
+<!--                  <rules>-->
+<!--                    <requireReleaseDeps>-->
+<!--                      <message>No Snapshots Allowed!</message>-->
+<!--                    </requireReleaseDeps>-->
+<!--                  </rules>-->
+<!--                  <fail>true</fail>-->
+<!--                </configuration>-->
+<!--              </execution>-->
+<!--            </executions>-->
+<!--          </plugin>-->
 
           <plugin>
             <groupId>com.mycila</groupId>
@@ -1155,18 +1130,6 @@
           </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>jar</goal>
-                  <goal>test-jar</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
             <dependencies>
               <dependency>
@@ -1194,17 +1157,94 @@
             </configuration>
           </plugin>
 
-          <!--<plugin>-->
-          <!--<groupId>org.owasp</groupId>-->
-          <!--<artifactId>dependency-check-maven</artifactId>-->
-          <!--<executions>-->
-          <!--<execution>-->
-          <!--<goals>-->
-          <!--<goal>check</goal>-->
-          <!--</goals>-->
-          <!--</execution>-->
-          <!--</executions>-->
-          <!--</plugin>-->
+          <plugin>
+            <groupId>org.owasp</groupId>
+            <artifactId>dependency-check-maven</artifactId>
+            <configuration>
+              <failBuildOnCVSS>8</failBuildOnCVSS>
+              <skipProvidedScope>true</skipProvidedScope>
+              <skipRuntimeScope>true</skipRuntimeScope>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+
+
+
+    <profile>
+      <id>_release</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+
+      <distributionManagement>
+        <repository>
+          <id>sonatype-nexus</id>
+          <url>${sonatype-nexus-url}</url>
+        </repository>
+        <snapshotRepository>
+          <id>sonatype-nexus-snapshots</id>
+          <url>${sonatype-nexus-snapshots-url}</url>
+        </snapshotRepository>
+      </distributionManagement>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-enforcer-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>enforce-no-snapshots</id>
+                <goals>
+                  <goal>enforce</goal>
+                </goals>
+                <configuration>
+                  <rules>
+                    <requireReleaseDeps>
+                      <message>No Snapshots Allowed!</message>
+                    </requireReleaseDeps>
+                  </rules>
+                  <fail>true</fail>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>jar</goal>
+                  <goal>test-jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
         </plugins>
       </build>
     </profile>

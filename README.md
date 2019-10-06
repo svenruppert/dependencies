@@ -23,8 +23,15 @@
 * deactivate V08 dependencies
 * deactivate V10 dependencies
 
+
 ### NEXT
-* TBD
+
+
+### 04.03.00-RPM
+* splitted the **_release** profile 
+    + _release
+    + _release_prepare
+* version updates
 
 ### 04.02.00-RPM
 * version updates
