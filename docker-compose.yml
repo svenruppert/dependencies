@@ -30,5 +30,6 @@ services:
     #    command: 'mvn help:active-profiles
     command: 'mvn license:format clean deploy
                     -P_release
+                    -P_release_prepare
                     -Pvaadin-install-nodejs
                     -Dmaven.test.skip=true '
