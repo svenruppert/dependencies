@@ -20,12 +20,12 @@
 * replace commercial Testbench with an OpenSource Free alternative
 * add custom TestEngine for VaadinTests
 * add OSS Charting WebComponents
-* deactivate V08 dependencies
-* deactivate V10 dependencies
+
 
 
 ### NEXT
-
+* deactivate V08 dependencies
+* deactivate V10 dependencies
 
 ### 04.03.00-RPM
 * splitted the **_release** profile 
