@@ -1,7 +1,6 @@
 # This is the base definition of the versions used by my projects.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-dependencies/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-dependencies)
-[![](https://jitpack.io/v/rapidpm/rapidpm-dependencies.svg)](https://jitpack.io/#rapidpm/rapidpm-dependencies)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c1133e6bd62d49d39c79c5b58d31c661)](https://app.codacy.com/app/sven-ruppert/rapidpm-dependencies?utm_source=github.com&utm_medium=referral&utm_content=RapidPM/rapidpm-dependencies&utm_campaign=badger)
 ![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/RapidPM/rapidpm-dependencies?style=plastic)
@@ -26,6 +25,15 @@
 ### NEXT
 * deactivate V08 dependencies
 * deactivate V10 dependencies
+
+
+### 04.04.00-RPM
+* added jCenter to repositories
+* removed jitpack from repositories
+* vaadin update V14 - V14.0.9
+* cleared **_release** profiles
+
+### 04.03.01-RPM
 
 ### 04.03.00-RPM
 * splitted the **_release** profile 
