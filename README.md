@@ -20,11 +20,13 @@
 * add custom TestEngine for VaadinTests
 * add OSS Charting WebComponents
 
+### Next
 
-
-### NEXT
+### 04.05.00-RPM
 * deactivate V08 dependencies
 * deactivate V10 dependencies
+* version update nodeJS/NPM (12.13.0/6.12.0)
+* V14 update - V14.0.10
 
 
 ### 04.04.00-RPM
