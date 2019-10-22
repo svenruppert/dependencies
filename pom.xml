@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.04.00-RPM</version>
+  <version>04.05.00-RPM</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -79,7 +79,7 @@
 <!--    <deploy-repo-url>https://api.bintray.com/maven/rapidpm/maven/rapidpm-dependencies/;publish=1</deploy-repo-url>-->
     <deploy-repo-snapshots-url></deploy-repo-snapshots-url>
 
-    <rapidpm-dependencies.version>04.04.00-RPM</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.05.00-RPM</rapidpm-dependencies.version>
     <rapidpm-functional-reactive.version>01.00.04-RPM</rapidpm-functional-reactive.version>
     <rapidpm-logger-adapter.version>01.00.04-RPM</rapidpm-logger-adapter.version>
 
@@ -111,7 +111,7 @@
 
     <jacoco.version>0.8.4</jacoco.version>
     <pitest.version>1.4.10</pitest.version>
-    <pitest-junit5-plugin.version>0.9</pitest-junit5-plugin.version>
+    <pitest-junit5-plugin.version>0.10</pitest-junit5-plugin.version>
     <pitest-prod-classes>org.rapidpm.*</pitest-prod-classes>
     <pitest-test-classes>junit.org.rapidpm*</pitest-test-classes>
 
