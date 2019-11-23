@@ -22,7 +22,7 @@
   <parent>
     <artifactId>rapidpm-dependencies</artifactId>
     <groupId>org.rapidpm</groupId>
-    <version>04.05.01-RPM-SNAPSHOT</version>
+    <version>04.05.01-RPM</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
