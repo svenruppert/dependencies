@@ -203,6 +203,9 @@
           <name>vaadin-productionMode</name>
         </property>
       </activation>
+      <properties>
+        <vaadin.productionMode>true</vaadin.productionMode>
+      </properties>
       <dependencies>
         <dependency>
           <groupId>com.vaadin</groupId>
