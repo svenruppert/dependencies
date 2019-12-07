@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.05.02-RPM-SNAPSHOT</version>
+  <version>04.05.02-RPM</version>
 
 
   <inceptionYear>2013</inceptionYear>
@@ -79,9 +79,9 @@
 <!--    <deploy-repo-url>https://api.bintray.com/maven/rapidpm/maven/rapidpm-dependencies/;publish=1</deploy-repo-url>-->
     <deploy-repo-snapshots-url></deploy-repo-snapshots-url>
 
-    <rapidpm-dependencies.version>04.05.02-RPM-SNAPSHOT</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.05.02-RPM</rapidpm-dependencies.version>
     <rapidpm-functional-reactive.version>01.00.04-RPM</rapidpm-functional-reactive.version>
-    <rapidpm-logger-adapter.version>01.00.04-RPM</rapidpm-logger-adapter.version>
+    <rapidpm-logger-adapter.version>01.00.06-RPM</rapidpm-logger-adapter.version>
 
     <activateJavaOnly>false</activateJavaOnly>
 
@@ -97,7 +97,7 @@
 
     <!--Kotlin-->
     <kotlin.compiler.jvmTarget>${jdk.version}</kotlin.compiler.jvmTarget>
-    <kotlin.version>1.3.60</kotlin.version>
+    <kotlin.version>1.3.61</kotlin.version>
     <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
 
@@ -125,7 +125,7 @@
     <opentracing-api.version>0.33.0</opentracing-api.version>
     <asm.version>7.1</asm.version>
 
-    <testcontainers.version>1.12.3</testcontainers.version>
+    <testcontainers.version>1.12.4</testcontainers.version>
 
     <junit-platform-maven-plugin.timeout>300</junit-platform-maven-plugin.timeout>
   </properties>
@@ -152,10 +152,10 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
-    <repository>
-      <id>bintray-rapidpm</id>
-      <url>https://dl.bintray.com/rapidpm/maven</url>
-    </repository>
+<!--        <repository>-->
+<!--          <id>bintray-rapidpm</id>-->
+<!--          <url>https://dl.bintray.com/rapidpm/maven</url>-->
+<!--        </repository>-->
     <repository>
       <id>central</id>
       <url>https://repo1.maven.org/maven2/</url>
@@ -888,7 +888,7 @@
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>8.26</version> <!-- Checkstyle version -->
+            <version>8.27</version> <!-- Checkstyle version -->
           </dependency>
         </dependencies>
         <executions>
