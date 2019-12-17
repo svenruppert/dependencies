@@ -74,10 +74,11 @@
   </licenses>
 
   <properties>
+    <deploy-repo-url>http://repo.sven-ruppert.de/repository/maven-releases/</deploy-repo-url>
+    <deploy-repo-snapshots-url>http://repo.sven-ruppert.de/repository/maven-snapshots/</deploy-repo-snapshots-url>
 
-    <deploy-repo-url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</deploy-repo-url>
-<!--    <deploy-repo-url>https://api.bintray.com/maven/rapidpm/maven/rapidpm-dependencies/;publish=1</deploy-repo-url>-->
-    <deploy-repo-snapshots-url></deploy-repo-snapshots-url>
+    <!--    <deploy-repo-url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</deploy-repo-url>-->
+    <!--    <deploy-repo-url>https://api.bintray.com/maven/rapidpm/maven/rapidpm-dependencies/;publish=1</deploy-repo-url>-->
 
     <rapidpm-dependencies.version>04.05.03-RPM-SNAPSHOT</rapidpm-dependencies.version>
     <rapidpm-functional-reactive.version>01.00.04-RPM</rapidpm-functional-reactive.version>
@@ -136,11 +137,11 @@
       <name>deploy-repo-maven</name>
       <url>${deploy-repo-url}</url>
     </repository>
-    <!--        <snapshotRepository>-->
-    <!--          <id>deploy-repo-maven-snapshots</id>-->
-    <!--          <name>deploy-repo-maven-snapshots</name>-->
-    <!--          <url>${deploy-repo-snapshots-url}</url>-->
-    <!--        </snapshotRepository>-->
+    <snapshotRepository>
+      <id>deploy-repo-maven-snapshots</id>
+      <name>deploy-repo-maven-snapshots</name>
+      <url>${deploy-repo-snapshots-url}</url>
+    </snapshotRepository>
   </distributionManagement>
   <repositories>
     <!--    JCenter-->
@@ -152,10 +153,10 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
-<!--        <repository>-->
-<!--          <id>bintray-rapidpm</id>-->
-<!--          <url>https://dl.bintray.com/rapidpm/maven</url>-->
-<!--        </repository>-->
+    <!--        <repository>-->
+    <!--          <id>bintray-rapidpm</id>-->
+    <!--          <url>https://dl.bintray.com/rapidpm/maven</url>-->
+    <!--        </repository>-->
     <repository>
       <id>central</id>
       <url>https://repo1.maven.org/maven2/</url>
@@ -1226,38 +1227,38 @@
       </build>
     </profile>
 
-<!--    <profile>-->
-<!--      <id>_release</id>-->
-<!--      <activation>-->
-<!--        <activeByDefault>false</activeByDefault>-->
-<!--      </activation>-->
+    <!--    <profile>-->
+    <!--      <id>_release</id>-->
+    <!--      <activation>-->
+    <!--        <activeByDefault>false</activeByDefault>-->
+    <!--      </activation>-->
 
-<!--      <build>-->
-<!--        <plugins>-->
-<!--          <plugin>-->
-<!--            <groupId>org.apache.maven.plugins</groupId>-->
-<!--            <artifactId>maven-enforcer-plugin</artifactId>-->
-<!--            <executions>-->
-<!--              <execution>-->
-<!--                <id>enforce-no-snapshots</id>-->
-<!--                <goals>-->
-<!--                  <goal>enforce</goal>-->
-<!--                </goals>-->
-<!--                <configuration>-->
-<!--                  <rules>-->
-<!--                    <requireReleaseDeps>-->
-<!--                      <message>No Snapshots Allowed!</message>-->
-<!--                    </requireReleaseDeps>-->
-<!--                  </rules>-->
-<!--                  <fail>true</fail>-->
-<!--                </configuration>-->
-<!--              </execution>-->
-<!--            </executions>-->
-<!--          </plugin>-->
+    <!--      <build>-->
+    <!--        <plugins>-->
+    <!--          <plugin>-->
+    <!--            <groupId>org.apache.maven.plugins</groupId>-->
+    <!--            <artifactId>maven-enforcer-plugin</artifactId>-->
+    <!--            <executions>-->
+    <!--              <execution>-->
+    <!--                <id>enforce-no-snapshots</id>-->
+    <!--                <goals>-->
+    <!--                  <goal>enforce</goal>-->
+    <!--                </goals>-->
+    <!--                <configuration>-->
+    <!--                  <rules>-->
+    <!--                    <requireReleaseDeps>-->
+    <!--                      <message>No Snapshots Allowed!</message>-->
+    <!--                    </requireReleaseDeps>-->
+    <!--                  </rules>-->
+    <!--                  <fail>true</fail>-->
+    <!--                </configuration>-->
+    <!--              </execution>-->
+    <!--            </executions>-->
+    <!--          </plugin>-->
 
-<!--        </plugins>-->
-<!--      </build>-->
-<!--    </profile>-->
+    <!--        </plugins>-->
+    <!--      </build>-->
+    <!--    </profile>-->
 
     <profile>
       <id>_release_scan_dependencies</id>
