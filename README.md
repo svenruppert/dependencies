@@ -25,7 +25,9 @@
 
 ### 04.05.03-RPM
 * deploy target - via property
-
+    * deploy-repo-url
+    * deploy-repo-snapshots-url
+    
 ### 04.05.02-RPM
 * V14.1 activated
 * V15 alpha version update
