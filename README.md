@@ -21,7 +21,7 @@
 * add OSS Charting WebComponents
 
 ### Next
-* beginning with this release, Vaadin Versions are not inc every time, anymore. use the property
+* beginning with this release, Vaadin Versions are not inc every time, anymore. use the property.
 
 ### 04.05.03-RPM
 * deploy target - via property on command line
