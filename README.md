@@ -23,6 +23,8 @@
 ### Next
 * beginning with this release, Vaadin Versions are not inc every time, anymore. use the property
 
+### 04.05.03-RPM
+* deploy target - via property
 
 ### 04.05.02-RPM
 * V14.1 activated
