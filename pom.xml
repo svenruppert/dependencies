@@ -61,8 +61,8 @@
     <url>https://github.com/RapidPM/rapidpm-dependencies/issues</url>
   </issueManagement>
   <ciManagement>
-    <system>JitCI</system>
-    <url>https://jitci.com/gh/RapidPM/rapidpm-dependencies</url>
+    <system>TeamCity</system>
+    <url>http://build.sven-ruppert.de:8111/</url>
   </ciManagement>
   <licenses>
     <license>
@@ -108,7 +108,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <slf4j.version>1.7.28</slf4j.version>
-    <log4j-api.version>2.12.1</log4j-api.version>
+    <log4j-api.version>2.13.0</log4j-api.version>
 
     <jacoco.version>0.8.4</jacoco.version>
     <pitest.version>1.4.10</pitest.version>
@@ -144,6 +144,15 @@
     </snapshotRepository>
   </distributionManagement>
   <repositories>
+    <!--    sven-ruppert-->
+    <repository>
+      <id>sven-ruppert</id>
+      <name>sven-ruppert</name>
+      <url>http://repo.sven-ruppert.de/repository/maven-public/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
     <!--    JCenter-->
     <repository>
       <id>jcenter</id>
