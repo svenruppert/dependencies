@@ -76,7 +76,6 @@
   <properties>
     <deploy-repo-url>http://repo.sven-ruppert.de/repository/maven-releases/</deploy-repo-url>
     <deploy-repo-snapshots-url>http://repo.sven-ruppert.de/repository/maven-snapshots/</deploy-repo-snapshots-url>
-
     <!--    <deploy-repo-url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</deploy-repo-url>-->
     <!--    <deploy-repo-url>https://api.bintray.com/maven/rapidpm/maven/rapidpm-dependencies/;publish=1</deploy-repo-url>-->
 
