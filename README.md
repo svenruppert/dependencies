@@ -13,7 +13,7 @@
 **Project is build with svenruppert/maven-3.6.2-adopt:1.8.212-04 docker image !!**
 
 
-## Versioninfos
+## Version's
 
 ### Backlog
 * replace commercial Testbench with an OpenSource Free alternative
@@ -21,9 +21,13 @@
 * add OSS Charting WebComponents
 
 ### Next
-* beginning with this release, Vaadin Versions are not inc every time, anymore. use the property
+* beginning with this release, Vaadin Versions are not inc every time, anymore. use the property.
 
-
+### 04.05.03-RPM
+* deploy target - via property on command line
+    * deploy-repo-url
+    * deploy-repo-snapshots-url
+    
 ### 04.05.02-RPM
 * V14.1 activated
 * V15 alpha version update
