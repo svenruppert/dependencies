@@ -13,7 +13,7 @@
 **Project is build with svenruppert/maven-3.6.2-adopt:1.8.212-04 docker image !!**
 
 
-## Versioninfos
+## Version's
 
 ### Backlog
 * replace commercial Testbench with an OpenSource Free alternative
