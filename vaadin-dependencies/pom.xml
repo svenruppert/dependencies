@@ -30,7 +30,6 @@
   <artifactId>rapidpm-vaadin-dependencies</artifactId>
   <packaging>pom</packaging>
   <version>04.05.04-RPM-SNAPSHOT</version>
-
   <modules>
     <module>vaadin-flow-commons</module>
     <module>vaadin-v14</module>
