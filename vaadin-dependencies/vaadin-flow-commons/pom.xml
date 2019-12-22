@@ -22,7 +22,7 @@
   <parent>
     <artifactId>rapidpm-vaadin-dependencies</artifactId>
     <groupId>org.rapidpm</groupId>
-    <version>04.05.04-RPM-SNAPSHOT</version>
+    <version>04.06.00-RPM-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
