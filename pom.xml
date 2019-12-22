@@ -1144,6 +1144,7 @@
                 <email>sven.ruppert@gmail.com</email>
               </properties>
               <excludes>
+                <excludes>**/pnpm-lock.yaml</excludes>
                 <excludes>**/webpack.generated.js</excludes>
                 <excludes>**/webpack.config.js</excludes>
                 <excludes>**/package.json</excludes>
