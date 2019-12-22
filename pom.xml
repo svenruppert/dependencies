@@ -28,8 +28,6 @@
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
   <version>04.05.04-RPM-SNAPSHOT</version>
-
-
   <inceptionYear>2013</inceptionYear>
   <organization>
     <name>Sven Ruppert</name>
