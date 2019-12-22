@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.06.00-RPM</version>
+  <version>04.06.01-RPM-SNAPSHOT</version>
   <inceptionYear>2013</inceptionYear>
   <organization>
     <name>Sven Ruppert</name>
@@ -77,7 +77,7 @@
     <!--    <deploy-repo-url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</deploy-repo-url>-->
     <!--    <deploy-repo-url>https://api.bintray.com/maven/rapidpm/maven/rapidpm-dependencies/;publish=1</deploy-repo-url>-->
 
-    <rapidpm-dependencies.version>04.06.00-RPM</rapidpm-dependencies.version>
+    <rapidpm-dependencies.version>04.06.01-RPM-SNAPSHOT</rapidpm-dependencies.version>
     <rapidpm-functional-reactive.version>01.00.04-RPM</rapidpm-functional-reactive.version>
     <rapidpm-logger-adapter.version>01.00.06-RPM</rapidpm-logger-adapter.version>
 
