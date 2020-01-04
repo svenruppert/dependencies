@@ -22,6 +22,7 @@
 
 ### Next
 * beginning with this release, Vaadin Versions are not inc every time, anymore. use the property.
+* added ServiceProvider<T>
 
 ### 04.06.00-RPM
 * version updates
