@@ -15,27 +15,39 @@ import static java.util.stream.StreamSupport.stream;
 public interface ServiceProvider<T>
     extends HasLogger {
 
-  static <T> Function<Class<T>, T> loadService() {
+  default boolean failWithException() {
+    return false;
+  }
+
+  default Function<Class<T>, Result<? extends T>> loadServiceFkt() {
     return (service) -> {
       Iterator<T> iterator = ServiceLoader.load(service)
                                           .iterator();
       Iterable<T>  iterable = () -> iterator;
       final Set<T> set      = stream(iterable.spliterator(), false).collect(toSet());
       if (set.isEmpty()) {
+        final String msg = "no implementation found for interface " + service.getName();
         Logger.getLogger(service)
-              .warning("no implementation found for interface " + service.getName());
-        throw new RuntimeException("no implementation found for interface " + service.getName());
+              .warning(msg);
+        if (failWithException()) throw new RuntimeException("no implementation found for interface " + service.getName());
+        return Result.failure(msg);
       }
 
       if (set.size() > 1) {
+        final String msg = "to many implementations found for interface " + service.getName();
         Logger.getLogger(service)
-              .warning("to many implementations found for interface " + service.getName());
-        throw new RuntimeException("to many implementations found for interface " + service.getName());
+              .warning(msg);
+        if (failWithException()) throw new RuntimeException("to many implementations found for interface " + service.getName());
+        return Result.failure(msg);
       }
-      return set.iterator()
-                .next();
+      return Result.success(set.iterator()
+                               .next());
     };
   }
 
-  Result<T> load();
+  Class<T> serviceInterface();
+
+  default Result<? extends T> load() {
+    return loadServiceFkt().apply(serviceInterface());
+  }
 }
