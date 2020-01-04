@@ -47,6 +47,14 @@
     <webdriverextensions.version>3.2.0</webdriverextensions.version>
   </properties>
 
+
+  <repositories>
+    <repository>
+      <id>vaadin-addons</id>
+      <url>https://maven.vaadin.com/vaadin-addons</url>
+    </repository>
+  </repositories>
+
   <build>
     <pluginManagement>
       <plugins>
