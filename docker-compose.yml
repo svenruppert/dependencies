@@ -30,4 +30,4 @@ services:
                     -P_release_prepare
                     -P_release_sign-artifacts
                     -Pvaadin-install-nodejs
-                    -Dmaven.test.skip=true '
+                    -Dmaven.test.skip=true'
