@@ -40,53 +40,12 @@
     <vaadin-v14.version>14.1.3</vaadin-v14.version>
     <vaadin-testbench-v14.version>6.2.1</vaadin-testbench-v14.version>
 
-    <vaadin-vXX.version>15.0.0.alpha10</vaadin-vXX.version>
+    <vaadin-vXX.version>14.1.3</vaadin-vXX.version>
     <vaadin-testbench-vXX.version>6.2.1</vaadin-testbench-vXX.version>
 
     <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
     <webdriverextensions.version>3.2.0</webdriverextensions.version>
   </properties>
-
-  <repositories>
-    <repository>
-      <id>central</id>
-      <url>https://repo1.maven.org/maven2/</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <!-- Repository used by many Vaadin add-ons -->
-    <repository>
-      <id>Vaadin Directory</id>
-      <url>http://maven.vaadin.com/vaadin-addons</url>
-    </repository>
-    <!-- Repository needed for prerelease versions of Vaadin -->
-    <repository>
-      <id>Vaadin - Prereleases</id>
-      <url>https://maven.vaadin.com/vaadin-prereleases</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <id>central</id>
-      <url>https://repo1.maven.org/maven2/</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-    <!-- Repository needed for prerelease versions of Vaadin -->
-    <pluginRepository>
-      <id>Vaadin - Prereleases</id>
-      <url>https://maven.vaadin.com/vaadin-prereleases</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
 
   <build>
     <pluginManagement>

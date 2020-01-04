@@ -153,45 +153,7 @@
         <enabled>true</enabled>
       </releases>
     </repository>
-    <!--    JCenter-->
-    <repository>
-      <id>jcenter</id>
-      <name>bintray</name>
-      <url>https://jcenter.bintray.com</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <!--        <repository>-->
-    <!--          <id>bintray-rapidpm</id>-->
-    <!--          <url>https://dl.bintray.com/rapidpm/maven</url>-->
-    <!--        </repository>-->
-    <repository>
-      <id>central</id>
-      <url>https://repo1.maven.org/maven2/</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
   </repositories>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <id>central</id>
-      <url>https://repo1.maven.org/maven2/</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-    <pluginRepository>
-      <id>bintray</id>
-      <name>bintray-plugins</name>
-      <url>https://jcenter.bintray.com</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
 
   <dependencyManagement>
     <!--project versions-->
@@ -251,6 +213,11 @@
         <version>3.26.0-GA</version>
       </dependency>
 
+      <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy</artifactId>
+        <version>1.10.6</version>
+      </dependency>
 
       <dependency>
         <groupId>com.google.code.gson</groupId>
