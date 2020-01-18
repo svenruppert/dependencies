@@ -145,19 +145,37 @@
     </snapshotRepository>
   </distributionManagement>
   <repositories>
-    <!--    sven-ruppert-->
     <repository>
-      <id>sven-ruppert</id>
-      <name>sven-ruppert</name>
-      <url>http://repo.sven-ruppert.de/repository/maven-public/</url>
       <snapshots>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
       </snapshots>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
+      <id>central</id>
+      <name>libs-release</name>
+      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</url>
+    </repository>
+    <repository>
+      <snapshots />
+      <id>snapshots</id>
+      <name>libs-snapshot</name>
+      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</url>
     </repository>
   </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>libs-release</name>
+      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</url>
+    </pluginRepository>
+    <pluginRepository>
+      <snapshots />
+      <id>snapshots</id>
+      <name>libs-snapshot</name>
+      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</url>
+    </pluginRepository>
+  </pluginRepositories>
 
   <dependencyManagement>
     <!--project versions-->
