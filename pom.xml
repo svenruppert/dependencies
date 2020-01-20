@@ -155,7 +155,10 @@
       <url>${deploy-repo-url}</url>
     </repository>
     <repository>
-      <snapshots />
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
       <id>snapshots</id>
       <name>libs-snapshot</name>
       <url>${deploy-repo-snapshots-url}</url>
@@ -171,7 +174,10 @@
       <url>${deploy-repo-url}</url>
     </pluginRepository>
     <pluginRepository>
-      <snapshots />
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
       <id>snapshots</id>
       <name>libs-snapshot</name>
       <url>${deploy-repo-snapshots-url}</url>
