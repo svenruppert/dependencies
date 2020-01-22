@@ -73,8 +73,7 @@
 
   <properties>
     <deploy-repo-url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</deploy-repo-url>
-    <deploy-repo-snapshots-url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot
-    </deploy-repo-snapshots-url>
+    <deploy-repo-snapshots-url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</deploy-repo-snapshots-url>
 
     <!--    <deploy-repo-url>http://repo.sven-ruppert.de/repository/maven-releases/</deploy-repo-url>-->
     <!--    <deploy-repo-snapshots-url>http://repo.sven-ruppert.de/repository/maven-snapshots/</deploy-repo-snapshots-url>-->
@@ -528,11 +527,11 @@
       </dependency>
 
       <!--Brian Goetz Concurrency Annotations-->
-      <dependency>
-        <groupId>net.jcip</groupId>
-        <artifactId>jcip-annotations</artifactId>
-        <version>1.0</version>
-      </dependency>
+<!--      <dependency>-->
+<!--        <groupId>net.jcip</groupId>-->
+<!--        <artifactId>jcip-annotations</artifactId>-->
+<!--        <version>1.0</version>-->
+<!--      </dependency>-->
 
       <dependency>
         <groupId>org.slf4j</groupId>
@@ -658,10 +657,10 @@
     </dependency>
 
 
-    <dependency>
-      <groupId>net.jcip</groupId>
-      <artifactId>jcip-annotations</artifactId>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>net.jcip</groupId>-->
+<!--      <artifactId>jcip-annotations</artifactId>-->
+<!--    </dependency>-->
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
