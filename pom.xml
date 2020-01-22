@@ -109,7 +109,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <slf4j.version>1.7.28</slf4j.version>
+    <slf4j.version>1.7.30</slf4j.version>
     <log4j-api.version>2.13.0</log4j-api.version>
 
     <jacoco.version>0.8.4</jacoco.version>
@@ -291,7 +291,7 @@
       <dependency>
         <groupId>commons-codec</groupId>
         <artifactId>commons-codec</artifactId>
-        <version>1.13</version>
+        <version>1.14</version>
       </dependency>
       <dependency>
         <groupId>commons-io</groupId>
@@ -328,12 +328,12 @@
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
-        <version>4.5.10</version>
+        <version>4.5.11</version>
       </dependency>
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>fluent-hc</artifactId>
-        <version>4.5.10</version>
+        <version>4.5.11</version>
       </dependency>
 
 
@@ -542,6 +542,11 @@
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-simple</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-jcl</artifactId>
         <version>${slf4j.version}</version>
       </dependency>
       <dependency>
