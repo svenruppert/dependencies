@@ -37,7 +37,7 @@
   </modules>
 
   <properties>
-    <vaadin-v14.version>14.1.6</vaadin-v14.version>
+    <vaadin-v14.version>14.1.16</vaadin-v14.version>
     <vaadin-testbench-v14.version>6.2.1</vaadin-testbench-v14.version>
 
     <vaadin-vXX.version>15.0.0.alpha14</vaadin-vXX.version>
