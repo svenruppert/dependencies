@@ -36,6 +36,16 @@
     <!--    <frontend-maven-plugin.installDirectory>target</frontend-maven-plugin.installDirectory>-->
   </properties>
 
+
+  <repositories>
+    <repository>
+      <id>snapshots</id>
+      <name>jfrog-repo.sven-ruppert.de-snapshots</name>
+      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</url>
+    </repository>
+  </repositories>
+
+
   <dependencyManagement>
     <dependencies>
       <!--Version definitions-->
