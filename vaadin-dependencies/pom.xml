@@ -37,10 +37,10 @@
   </modules>
 
   <properties>
-    <vaadin-v14.version>14.1.5</vaadin-v14.version>
+    <vaadin-v14.version>14.1.6</vaadin-v14.version>
     <vaadin-testbench-v14.version>6.2.1</vaadin-testbench-v14.version>
 
-    <vaadin-vXX.version>14.1.5</vaadin-vXX.version>
+    <vaadin-vXX.version>15.0.0.alpha14</vaadin-vXX.version>
     <vaadin-testbench-vXX.version>6.2.1</vaadin-testbench-vXX.version>
 
     <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
