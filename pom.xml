@@ -210,7 +210,7 @@
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-logger-adapter</artifactId>
-        <version>01.00.08-b36</version>
+        <version>01.00.08.30.31.32.33.34</version>
       </dependency>
 
       <!--API´s-->
