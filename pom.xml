@@ -75,15 +75,10 @@
     <deploy-repo-url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</deploy-repo-url>
     <deploy-repo-snapshots-url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</deploy-repo-snapshots-url>
 
-    <!--    <deploy-repo-url>http://repo.sven-ruppert.de/repository/maven-releases/</deploy-repo-url>-->
-    <!--    <deploy-repo-snapshots-url>http://repo.sven-ruppert.de/repository/maven-snapshots/</deploy-repo-snapshots-url>-->
-
     <!--    <deploy-repo-url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</deploy-repo-url>-->
     <!--    <deploy-repo-url>https://api.bintray.com/maven/rapidpm/maven/rapidpm-dependencies/;publish=1</deploy-repo-url>-->
 
     <rapidpm-dependencies.version>04.06.01-RPM-SNAPSHOT</rapidpm-dependencies.version>
-    <rapidpm-functional-reactive.version>01.00.05-RPM-SNAPSHOT</rapidpm-functional-reactive.version>
-    <rapidpm-logger-adapter.version>01.00.07-RPM-SNAPSHOT</rapidpm-logger-adapter.version>
 
     <activateJavaOnly>false</activateJavaOnly>
 
@@ -113,11 +108,11 @@
 
     <jacoco.version>0.8.4</jacoco.version>
     <pitest.version>1.4.11</pitest.version>
-    <pitest-junit5-plugin.version>0.11</pitest-junit5-plugin.version>
+    <pitest-junit5-plugin.version>0.12</pitest-junit5-plugin.version>
     <pitest-prod-classes>org.rapidpm.*</pitest-prod-classes>
     <pitest-test-classes>junit.org.rapidpm*</pitest-test-classes>
 
-    <jmh.version>1.22</jmh.version>
+    <jmh.version>1.23</jmh.version>
 
     <!--TDD jUnit5-->
     <junit.jupiter.version>5.6.0</junit.jupiter.version>
@@ -210,12 +205,12 @@
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-functional-reactive</artifactId>
-        <version>${rapidpm-functional-reactive.version}</version>
+        <version>01.00.05-b16</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-logger-adapter</artifactId>
-        <version>${rapidpm-logger-adapter.version}</version>
+        <version>01.00.08-b36</version>
       </dependency>
 
       <!--API´s-->
@@ -443,7 +438,7 @@
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
-        <version>3.14.0</version>
+        <version>3.15.0</version>
         <scope>test</scope>
       </dependency>
       <dependency>
@@ -687,6 +682,11 @@
           <version>2.7</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-scm-plugin</artifactId>
+          <version>1.11.2</version>
+        </plugin>
+        <plugin>
           <groupId>com.mycila</groupId>
           <artifactId>license-maven-plugin</artifactId>
           <version>3.0</version>
@@ -786,11 +786,7 @@
           <artifactId>dependency-check-maven</artifactId>
           <version>5.2.2</version>
         </plugin>
-        <plugin>
-          <groupId>org.cyclonedx</groupId>
-          <artifactId>cyclonedx-maven-plugin</artifactId>
-          <version>1.6.0</version>
-        </plugin>
+
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-shade-plugin</artifactId>
@@ -877,7 +873,16 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>versions-maven-plugin</artifactId>
+        <configuration>
+          <rulesUri>file://${maven.multiModuleProjectDirectory}/version-number-rules.xml</rulesUri>
+        </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-scm-plugin</artifactId>
+      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -942,7 +947,7 @@
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>8.28</version> <!-- Checkstyle version -->
+            <version>8.29</version> <!-- Checkstyle version -->
           </dependency>
         </dependencies>
         <executions>
@@ -1104,11 +1109,6 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.cyclonedx</groupId>
-        <artifactId>cyclonedx-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>

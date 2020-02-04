@@ -28,4 +28,16 @@
 
   <artifactId>rapidpm-dependencies-core</artifactId>
 
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <configuration>
+          <rulesUri>file://${maven.multiModuleProjectDirectory}/version-number-rules.xml</rulesUri>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

@@ -27,10 +27,16 @@
 
 	<artifactId>rapidpm-dependencies-core-properties</artifactId>
 
-	<dependencies>
-		<!--<dependency>-->
-			<!--<groupId>org.rapidpm</groupId>-->
-			<!--<artifactId>rapidpm-logger-adapter</artifactId>-->
-		<!--</dependency>-->
-	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<configuration>
+					<rulesUri>file://${maven.multiModuleProjectDirectory}/version-number-rules.xml</rulesUri>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>
