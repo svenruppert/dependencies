@@ -145,7 +145,8 @@
       </snapshots>
       <id>central</id>
       <name>libs-release</name>
-      <url>${deploy-repo-url}</url>
+      <!--      <url>${deploy-repo-url}</url>-->
+      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</url>
     </repository>
     <repository>
       <snapshots>
@@ -154,7 +155,7 @@
       </snapshots>
       <id>snapshots</id>
       <name>libs-snapshot</name>
-      <url>${deploy-repo-snapshots-url}</url>
+      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</url>
     </repository>
   </repositories>
   <pluginRepositories>
@@ -164,7 +165,8 @@
       </snapshots>
       <id>central</id>
       <name>libs-release</name>
-      <url>${deploy-repo-url}</url>
+      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</url>
+      <!--      <url>${deploy-repo-url}</url>-->
     </pluginRepository>
     <pluginRepository>
       <snapshots>
@@ -173,7 +175,7 @@
       </snapshots>
       <id>snapshots</id>
       <name>libs-snapshot</name>
-      <url>${deploy-repo-snapshots-url}</url>
+      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</url>
     </pluginRepository>
   </pluginRepositories>
 
