@@ -27,7 +27,7 @@
   <packaging>pom</packaging>
 
   <!-- !!!Change the properties with rapidpm version too !!! -->
-  <version>04.06.01-RPM-SNAPSHOT</version>
+  <version>04.07.00-alpha</version>
   <inceptionYear>2013</inceptionYear>
   <organization>
     <name>Sven Ruppert</name>
@@ -210,7 +210,8 @@
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-logger-adapter</artifactId>
-        <version>01.00.08-b36</version>
+        <version>01.00.08-RPM</version>
+
       </dependency>
 
       <!--API´s-->
@@ -300,7 +301,7 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-compress</artifactId>
-        <version>1.19</version>
+        <version>1.20</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
@@ -568,10 +569,10 @@
   </dependencyManagement>
 
   <modules>
-    <module>core</module>
-    <module>core-properties</module>
+<!--    <module>core</module>-->
+<!--    <module>core-properties</module>-->
     <!--<module>core-reflection</module>-->
-    <module>vaadin-dependencies</module>
+<!--    <module>vaadin-dependencies</module>-->
   </modules>
 
 

@@ -47,9 +47,6 @@
     <webdriverextensions.version>3.2.0</webdriverextensions.version>
   </properties>
 
-
-
-
   <build>
     <pluginManagement>
       <plugins>
@@ -61,9 +58,4 @@
       </plugins>
     </pluginManagement>
   </build>
-
-<profiles>
-
-</profiles>
-
 </project>

@@ -34,6 +34,8 @@
     <frontend-maven-plugin.nodeVersion>v12.13.0</frontend-maven-plugin.nodeVersion>
     <frontend-maven-plugin.npmVersion>6.12.0</frontend-maven-plugin.npmVersion>
     <!--    <frontend-maven-plugin.installDirectory>target</frontend-maven-plugin.installDirectory>-->
+    <frontend-maven-plugin.npmRegistryURL>http://jfrog-repo.sven-ruppert.de:8081/artifactory/api/npm/npm-release/
+    </frontend-maven-plugin.npmRegistryURL>
   </properties>
 
 
@@ -175,6 +177,7 @@
               </execution>
             </executions>
             <configuration>
+              <npmRegistryURL>${frontend-maven-plugin.npmRegistryURL}</npmRegistryURL>
               <nodeVersion>${frontend-maven-plugin.nodeVersion}</nodeVersion>
               <!-- optional: with node version greater than 4.0.0 will use npm provided by node distribution -->
               <npmVersion>${frontend-maven-plugin.npmVersion}</npmVersion>
@@ -186,7 +189,6 @@
         </plugins>
       </build>
     </profile>
-
     <profile>
       <id>vaadin-productionMode</id>
       <activation>
