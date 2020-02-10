@@ -207,7 +207,7 @@
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-logger-adapter</artifactId>
-        <version>01.00.08-b36</version>
+        <version>01.00.09-alpha-b38</version>
       </dependency>
 
       <!--API´s-->
@@ -297,7 +297,7 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-compress</artifactId>
-        <version>1.19</version>
+        <version>1.20</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
