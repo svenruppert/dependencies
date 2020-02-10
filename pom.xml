@@ -26,7 +26,6 @@
   <artifactId>rapidpm-dependencies</artifactId>
   <packaging>pom</packaging>
 
-  <!-- !!!Change the properties with rapidpm version too !!! -->
   <version>04.07.00-alpha</version>
   <inceptionYear>2013</inceptionYear>
   <organization>
@@ -77,8 +76,6 @@
 
     <!--    <deploy-repo-url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</deploy-repo-url>-->
     <!--    <deploy-repo-url>https://api.bintray.com/maven/rapidpm/maven/rapidpm-dependencies/;publish=1</deploy-repo-url>-->
-
-    <rapidpm-dependencies.version>04.06.01-RPM-SNAPSHOT</rapidpm-dependencies.version>
 
     <activateJavaOnly>false</activateJavaOnly>
 
@@ -183,23 +180,23 @@
   <dependencyManagement>
     <!--project versions-->
     <dependencies>
-      <dependency>
-        <groupId>org.rapidpm</groupId>
-        <artifactId>rapidpm-dependencies-core</artifactId>
-        <version>${rapidpm-dependencies.version}</version>
-      </dependency>
+<!--      <dependency>-->
+<!--        <groupId>org.rapidpm</groupId>-->
+<!--        <artifactId>rapidpm-dependencies-core</artifactId>-->
+<!--        <version>${rapidpm-dependencies.version}</version>-->
+<!--      </dependency>-->
 
-      <dependency>
-        <groupId>org.rapidpm</groupId>
-        <artifactId>rapidpm-dependencies-core-properties</artifactId>
-        <version>${rapidpm-dependencies.version}</version>
-      </dependency>
+<!--      <dependency>-->
+<!--        <groupId>org.rapidpm</groupId>-->
+<!--        <artifactId>rapidpm-dependencies-core-properties</artifactId>-->
+<!--        <version>${rapidpm-dependencies.version}</version>-->
+<!--      </dependency>-->
 
-      <dependency>
-        <groupId>org.rapidpm</groupId>
-        <artifactId>rapidpm-vaadin-flow-commons</artifactId>
-        <version>${rapidpm-dependencies.version}</version>
-      </dependency>
+<!--      <dependency>-->
+<!--        <groupId>org.rapidpm</groupId>-->
+<!--        <artifactId>rapidpm-vaadin-flow-commons</artifactId>-->
+<!--        <version>${rapidpm-dependencies.version}</version>-->
+<!--      </dependency>-->
 
 
       <dependency>
