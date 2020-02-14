@@ -27,6 +27,7 @@
   <packaging>pom</packaging>
 
   <version>04.07.00-alpha</version>
+
   <inceptionYear>2013</inceptionYear>
   <organization>
     <name>Sven Ruppert</name>
@@ -182,25 +183,6 @@
   <dependencyManagement>
     <!--project versions-->
     <dependencies>
-<!--      <dependency>-->
-<!--        <groupId>org.rapidpm</groupId>-->
-<!--        <artifactId>rapidpm-dependencies-core</artifactId>-->
-<!--        <version>${rapidpm-dependencies.version}</version>-->
-<!--      </dependency>-->
-
-<!--      <dependency>-->
-<!--        <groupId>org.rapidpm</groupId>-->
-<!--        <artifactId>rapidpm-dependencies-core-properties</artifactId>-->
-<!--        <version>${rapidpm-dependencies.version}</version>-->
-<!--      </dependency>-->
-
-<!--      <dependency>-->
-<!--        <groupId>org.rapidpm</groupId>-->
-<!--        <artifactId>rapidpm-vaadin-flow-commons</artifactId>-->
-<!--        <version>${rapidpm-dependencies.version}</version>-->
-<!--      </dependency>-->
-
-
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-functional-reactive</artifactId>
