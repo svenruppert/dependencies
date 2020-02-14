@@ -186,7 +186,7 @@
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-functional-reactive</artifactId>
-        <version>01.00.05-b16</version>
+        <version>01.00.06-alpha-b3</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm</groupId>
@@ -432,7 +432,7 @@
       <dependency>
         <groupId>com.github.javafaker</groupId>
         <artifactId>javafaker</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
       </dependency>
 
       <!--Microbenchmarking-->
