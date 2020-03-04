@@ -186,7 +186,7 @@
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-functional-reactive</artifactId>
-        <version>01.00.06-alpha-b3</version>
+        <version>01.00.06-alpha-b4</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm</groupId>
