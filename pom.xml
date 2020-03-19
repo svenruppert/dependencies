@@ -92,7 +92,7 @@
 
     <!--Kotlin-->
     <kotlin.compiler.jvmTarget>${jdk.version}</kotlin.compiler.jvmTarget>
-    <kotlin.version>1.3.61</kotlin.version>
+    <kotlin.version>1.3.70</kotlin.version>
     <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
 
@@ -105,7 +105,7 @@
     <log4j-api.version>2.13.0</log4j-api.version>
 
     <jacoco.version>0.8.4</jacoco.version>
-    <pitest.version>1.4.11</pitest.version>
+    <pitest.version>1.5.0</pitest.version>
     <pitest-junit5-plugin.version>0.12</pitest-junit5-plugin.version>
     <pitest-prod-classes>org.rapidpm.*</pitest-prod-classes>
     <pitest-test-classes>junit.org.rapidpm*</pitest-test-classes>
@@ -120,10 +120,10 @@
     <opentracing-api.version>0.33.0</opentracing-api.version>
     <asm.version>7.1</asm.version>
 
-    <testcontainers.version>1.12.4</testcontainers.version>
+    <testcontainers.version>1.13.0</testcontainers.version>
 
     <junit-platform-maven-plugin.timeout>300</junit-platform-maven-plugin.timeout>
-    <jackson-core.version>2.10.2</jackson-core.version>
+    <jackson-core.version>2.10.3</jackson-core.version>
   </properties>
 
   <distributionManagement>
@@ -303,7 +303,7 @@
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
-        <version>4.5.11</version>
+        <version>4.5.12</version>
       </dependency>
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
@@ -465,7 +465,7 @@
       <dependency>
         <groupId>io.gatling.highcharts</groupId>
         <artifactId>gatling-charts-highcharts</artifactId>
-        <version>3.3.1</version>
+        <version>3.4.0-M1</version>
         <scope>test</scope>
       </dependency>
       <!--tdd-->
@@ -928,7 +928,7 @@
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>8.29</version> <!-- Checkstyle version -->
+            <version>8.30</version> <!-- Checkstyle version -->
           </dependency>
         </dependencies>
         <executions>
