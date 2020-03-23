@@ -376,25 +376,25 @@
       <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-api</artifactId>
-        <version>5.6.0</version>
+        <version>5.6.1</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-params</artifactId>
-        <version>5.6.0</version>
+        <version>5.6.1</version>
       </dependency>
 
       <dependency>
         <groupId>org.junit.platform</groupId>
         <artifactId>junit-platform-launcher</artifactId>
         <scope>test</scope>
-        <version>1.6.0</version>
+        <version>1.6.1</version>
       </dependency>
       <dependency>
         <groupId>org.junit.platform</groupId>
         <artifactId>junit-platform-testkit</artifactId>
-        <version>1.6.0</version>
+        <version>1.6.1</version>
         <scope>test</scope>
       </dependency>
       <!-- Only required to run tests in an IDE that bundles an older version -->
@@ -402,7 +402,7 @@
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-engine</artifactId>
         <scope>test</scope>
-        <version>5.6.0</version>
+        <version>5.6.1</version>
       </dependency>
 
       <dependency>
