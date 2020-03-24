@@ -186,12 +186,12 @@
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-functional-reactive</artifactId>
-        <version>01.00.06-alpha-b100</version>
+        <version>01.00.07-102</version>
       </dependency>
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-logger-adapter</artifactId>
-        <version>01.00.09-alpha-b100</version>
+        <version>01.00.10-101</version>
       </dependency>
 
       <!--API´s-->
