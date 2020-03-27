@@ -191,7 +191,7 @@
       <dependency>
         <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-logger-adapter</artifactId>
-        <version>01.00.10-101</version>
+        <version>01.00.10-103</version>
       </dependency>
 
       <!--API´s-->
