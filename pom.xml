@@ -180,8 +180,6 @@
   <dependencyManagement>
     <!--project versions-->
     <dependencies>
-
-
       <!--API´s-->
       <dependency>
         <groupId>javax.annotation</groupId>
@@ -545,18 +543,6 @@
 
 
   <dependencies>
-
-    <dependency>
-      <groupId>org.rapidpm</groupId>
-      <artifactId>rapidpm-functional-reactive</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.rapidpm</groupId>
-      <artifactId>rapidpm-logger-adapter</artifactId>
-    </dependency>
-
-
     <!--jUnit5-->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
