@@ -75,9 +75,6 @@
     <deploy-repo-url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</deploy-repo-url>
     <deploy-repo-snapshots-url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</deploy-repo-snapshots-url>
 
-    <!--    <deploy-repo-url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</deploy-repo-url>-->
-    <!--    <deploy-repo-url>https://api.bintray.com/maven/rapidpm/maven/rapidpm-dependencies/;publish=1</deploy-repo-url>-->
-
     <activateJavaOnly>false</activateJavaOnly>
 
     <jdk.version>1.8</jdk.version>
@@ -183,16 +180,7 @@
   <dependencyManagement>
     <!--project versions-->
     <dependencies>
-      <dependency>
-        <groupId>org.rapidpm</groupId>
-        <artifactId>rapidpm-functional-reactive</artifactId>
-        <version>01.00.07-102</version>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm</groupId>
-        <artifactId>rapidpm-logger-adapter</artifactId>
-        <version>01.00.10-103</version>
-      </dependency>
+
 
       <!--API´s-->
       <dependency>
