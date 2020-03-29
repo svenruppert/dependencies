@@ -92,7 +92,6 @@
     <kotlin.version>1.3.70</kotlin.version>
     <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
-
     <minimum-maven.version>3.3.9</minimum-maven.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
