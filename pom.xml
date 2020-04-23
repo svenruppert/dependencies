@@ -1376,37 +1376,36 @@
       <build>
         <plugins>
           <plugin>
+            <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-maven-plugin</artifactId>
             <configuration>
               <jvmTarget>${kotlin.compiler.jvmTarget}</jvmTarget>
             </configuration>
-            <groupId>org.jetbrains.kotlin</groupId>
             <version>${kotlin.version}</version>
             <executions>
               <execution>
                 <id>compile</id>
-                <phase>compile</phase>
+<!--                <phase>compile</phase>-->
                 <goals>
                   <goal>compile</goal>
                 </goals>
                 <configuration>
                   <sourceDirs>
-                    <source>src/main/java</source>
                     <source>src/main/kotlin</source>
+                    <source>src/main/java</source>
                     <source>${project.build.directory}/generated-sources/annotations</source>
                   </sourceDirs>
                 </configuration>
               </execution>
               <execution>
                 <id>test-compile</id>
-                <phase>test-compile</phase>
                 <goals>
                   <goal>test-compile</goal>
                 </goals>
                 <configuration>
                   <sourceDirs>
-                    <source>src/test/java</source>
                     <source>src/test/kotlin</source>
+                    <source>src/test/java</source>
                     <source>${project.build.directory}/generated-test-sources/test-annotations</source>
                   </sourceDirs>
                 </configuration>
@@ -1424,7 +1423,7 @@
               <!-- Replacing default-compile as it is treated specially by maven -->
               <execution>
                 <id>default-compile</id>
-                <phase>compile</phase>
+                <phase>none</phase>
                 <!--For AnnotationProcessing Compile-->
                 <configuration>
                   <useIncrementalCompilation>false</useIncrementalCompilation>
@@ -1434,7 +1433,7 @@
               <!-- Replacing default-testCompile as it is treated specially by maven -->
               <execution>
                 <id>default-testCompile</id>
-                <phase>test-compile</phase>
+                <phase>none</phase>
                 <!--For AnnotationProcessing Compile-->
                 <configuration>
                   <useIncrementalCompilation>false</useIncrementalCompilation>
