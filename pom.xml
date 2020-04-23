@@ -89,7 +89,7 @@
 
     <!--Kotlin-->
     <kotlin.compiler.jvmTarget>${jdk.version}</kotlin.compiler.jvmTarget>
-    <kotlin.version>1.3.70</kotlin.version>
+    <kotlin.version>1.3.71</kotlin.version>
     <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
     <minimum-maven.version>3.3.9</minimum-maven.version>
@@ -116,7 +116,6 @@
     <opentracing-api.version>0.33.0</opentracing-api.version>
     <asm.version>7.1</asm.version>
 
-    <testcontainers.version>1.13.0</testcontainers.version>
 
     <junit-platform-maven-plugin.timeout>300</junit-platform-maven-plugin.timeout>
     <jackson-core.version>2.10.3</jackson-core.version>
@@ -348,13 +347,13 @@
         <groupId>org.testcontainers</groupId>
         <artifactId>selenium</artifactId>
         <scope>test</scope>
-        <version>1.13.0</version>
+        <version>1.14.0</version>
       </dependency>
       <dependency>
         <groupId>org.testcontainers</groupId>
         <artifactId>testcontainers</artifactId>
         <scope>test</scope>
-        <version>1.13.0</version>
+        <version>1.14.0</version>
       </dependency>
 
       <!--jUnit5-->
