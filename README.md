@@ -24,7 +24,7 @@
 * added ServiceProvider<T>
 * Vxx - Vaadin Versions are only releases. Vaadin is to instabile with pre releases.
 
-### 04.07.01-RPM
+### 04.07.03-RPM
 * version updates
 * maven plugins updates
 
