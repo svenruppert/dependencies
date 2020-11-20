@@ -26,7 +26,7 @@
   <artifactId>rapidpm-dependencies</artifactId>
   <packaging>pom</packaging>
 
-  <version>04.07.04</version>
+  <version>04.07.05</version>
 
   <inceptionYear>2013</inceptionYear>
   <organization>
@@ -89,7 +89,7 @@
 
     <!--Kotlin-->
     <kotlin.compiler.jvmTarget>${jdk.version}</kotlin.compiler.jvmTarget>
-    <kotlin.version>1.3.72</kotlin.version>
+    <kotlin.version>1.4.20</kotlin.version>
     <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
     <minimum-maven.version>3.3.9</minimum-maven.version>
@@ -100,17 +100,17 @@
     <slf4j.version>1.7.30</slf4j.version>
     <log4j-api.version>2.13.0</log4j-api.version>
 
-    <jacoco.version>0.8.5</jacoco.version>
+    <jacoco.version>0.8.6</jacoco.version>
     <pitest.version>1.5.0</pitest.version>
     <pitest-junit5-plugin.version>0.12</pitest-junit5-plugin.version>
     <pitest-prod-classes>org.rapidpm.*</pitest-prod-classes>
     <pitest-test-classes>junit.org.rapidpm*</pitest-test-classes>
 
-    <jmh.version>1.23</jmh.version>
+<!--    <jmh.version>1.26</jmh.version>-->
 
     <!--TDD jUnit5-->
-    <junit.jupiter.version>5.7.0-M1</junit.jupiter.version>
-    <junit.platform.version>1.7.0-M1</junit.platform.version>
+<!--    <junit.jupiter.version>5.7.0</junit.jupiter.version>-->
+<!--    <junit.platform.version>1.7.0</junit.platform.version>-->
     <junit-platform-maven-plugin.version>1.0.0-M5</junit-platform-maven-plugin.version>
 
     <opentracing-api.version>0.33.0</opentracing-api.version>
@@ -204,30 +204,30 @@
       <dependency>
         <groupId>net.bytebuddy</groupId>
         <artifactId>byte-buddy</artifactId>
-        <version>1.10.13</version>
+        <version>1.10.18</version>
       </dependency>
 
 
       <dependency>
         <groupId>com.fasterxml.jackson.datatype</groupId>
         <artifactId>jackson-datatype-jdk8</artifactId>
-        <version>2.11.1</version>
+        <version>2.11.3</version>
       </dependency>
 
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-core</artifactId>
-        <version>2.11.1</version>
+        <version>2.11.3</version>
       </dependency>
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-annotations</artifactId>
-        <version>2.11.1</version>
+        <version>2.11.3</version>
       </dependency>
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-databind</artifactId>
-        <version>2.11.1</version>
+        <version>2.11.3</version>
       </dependency>
       <dependency>
         <groupId>com.google.code.gson</groupId>
@@ -248,12 +248,12 @@
       <dependency>
         <groupId>commons-codec</groupId>
         <artifactId>commons-codec</artifactId>
-        <version>1.14</version>
+        <version>1.15</version>
       </dependency>
       <dependency>
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
-        <version>2.7</version>
+        <version>2.8.0</version>
       </dependency>
       <dependency>
         <groupId>commons-cli</groupId>
@@ -268,7 +268,7 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <version>3.10</version>
+        <version>3.11</version>
       </dependency>
       <dependency>
         <groupId>commons-fileupload</groupId>
@@ -278,19 +278,19 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-vfs2</artifactId>
-        <version>2.6.0</version>
+        <version>2.7.0</version>
         <scope>provided</scope>
         <optional>true</optional>
       </dependency>
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
-        <version>4.5.12</version>
+        <version>4.5.13</version>
       </dependency>
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>fluent-hc</artifactId>
-        <version>4.5.12</version>
+        <version>4.5.13</version>
       </dependency>
 
 
@@ -304,7 +304,7 @@
       <dependency>
         <groupId>org.cache2k</groupId>
         <artifactId>cache2k-base-bom</artifactId>
-        <version>1.2.4.Final</version>
+        <version>1.6.0.Final</version>
         <type>pom</type>
       </dependency>
       <dependency>
@@ -345,38 +345,38 @@
         <groupId>org.testcontainers</groupId>
         <artifactId>selenium</artifactId>
         <scope>test</scope>
-        <version>1.14.3</version>
+        <version>1.15.0</version>
       </dependency>
       <dependency>
         <groupId>org.testcontainers</groupId>
         <artifactId>testcontainers</artifactId>
         <scope>test</scope>
-        <version>1.14.3</version>
+        <version>1.15.0</version>
       </dependency>
 
       <!--jUnit5-->
       <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-api</artifactId>
-        <version>5.7.0-M1</version>
+        <version>5.7.0</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-params</artifactId>
-        <version>5.7.0-M1</version>
+        <version>5.7.0</version>
       </dependency>
 
       <dependency>
         <groupId>org.junit.platform</groupId>
         <artifactId>junit-platform-launcher</artifactId>
         <scope>test</scope>
-        <version>1.7.0-M1</version>
+        <version>1.7.0</version>
       </dependency>
       <dependency>
         <groupId>org.junit.platform</groupId>
         <artifactId>junit-platform-testkit</artifactId>
-        <version>1.7.0-M1</version>
+        <version>1.7.0</version>
         <scope>test</scope>
       </dependency>
       <!-- Only required to run tests in an IDE that bundles an older version -->
@@ -384,7 +384,7 @@
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-engine</artifactId>
         <scope>test</scope>
-        <version>5.7.0-M1</version>
+        <version>5.7.0</version>
       </dependency>
 
       <dependency>
@@ -401,13 +401,13 @@
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
-        <version>3.16.1</version>
+        <version>3.18.1</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>com.google.truth</groupId>
         <artifactId>truth</artifactId>
-        <version>1.0.1</version>
+        <version>1.1</version>
         <scope>test</scope>
       </dependency>
 
@@ -421,25 +421,25 @@
       <dependency>
         <groupId>org.openjdk.jmh</groupId>
         <artifactId>jmh-core</artifactId>
-        <version>1.23</version>
+        <version>1.26</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.openjdk.jmh</groupId>
         <artifactId>jmh-core-benchmarks</artifactId>
-        <version>1.23</version>
+        <version>1.26</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.openjdk.jmh</groupId>
         <artifactId>jmh-generator-annprocess</artifactId>
-        <version>1.23</version>
+        <version>1.26</version>
         <!--<scope>provided</scope>-->
       </dependency>
       <dependency>
         <groupId>org.openjdk.jmh</groupId>
         <artifactId>jmh-generator-reflection</artifactId>
-        <version>1.23</version>
+        <version>1.26</version>
         <scope>test</scope>
       </dependency>
 
@@ -447,7 +447,7 @@
       <dependency>
         <groupId>io.gatling.highcharts</groupId>
         <artifactId>gatling-charts-highcharts</artifactId>
-        <version>3.4.0-M1</version>
+        <version>3.4.1</version>
         <scope>test</scope>
       </dependency>
       <!--tdd-->
@@ -514,17 +514,17 @@
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-api</artifactId>
-        <version>2.13.3</version>
+        <version>2.14.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
-        <version>2.13.3</version>
+        <version>2.14.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-1.2-api</artifactId>
-        <version>2.13.3</version>
+        <version>2.14.0</version>
       </dependency>
 
     </dependencies>
@@ -630,7 +630,7 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>versions-maven-plugin</artifactId>
-          <version>2.7</version>
+          <version>2.8.1</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -695,7 +695,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
-          <version>3.1.0</version>
+          <version>3.2.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -735,7 +735,7 @@
         <plugin>
           <groupId>org.owasp</groupId>
           <artifactId>dependency-check-maven</artifactId>
-          <version>5.3.2</version>
+          <version>6.0.2</version>
         </plugin>
 
         <plugin>
@@ -891,7 +891,7 @@
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>8.34</version> <!-- Checkstyle version -->
+            <version>8.37</version> <!-- Checkstyle version -->
           </dependency>
         </dependencies>
         <executions>
@@ -1169,7 +1169,7 @@
               <dependency>
                 <groupId>org.ow2.asm</groupId>
                 <artifactId>asm</artifactId>
-                <version>7.3.1</version> <!-- Use newer version of ASM -->
+                <version>9.0</version> <!-- Use newer version of ASM -->
               </dependency>
             </dependencies>
             <executions>
