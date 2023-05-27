@@ -14,15 +14,10 @@
 
 ## Version's
 
-### Backlog
-* replace commercial Testbench with an OpenSource Free alternative
-* add custom TestEngine for VaadinTests
-* add OSS Charting WebComponents
+### 04.08.00-RPM
+* version updates
+* maven plugins updates
 
-### Next
-* beginning with this release, Vaadin Versions are not inc every time, anymore. use the property.
-* added ServiceProvider<T>
-* Vxx - Vaadin Versions are only releases. Vaadin is to instabile with pre releases.
 
 ### 04.07.03-RPM
 * version updates
