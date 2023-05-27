@@ -58,10 +58,6 @@
     <system>GitHub</system>
     <url>https://github.com/RapidPM/rapidpm-dependencies/issues</url>
   </issueManagement>
-  <ciManagement>
-    <system>TeamCity</system>
-    <url>http://build.sven-ruppert.de:8111/</url>
-  </ciManagement>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
