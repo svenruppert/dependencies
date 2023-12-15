@@ -89,7 +89,8 @@
 
         <!--Kotlin-->
         <kotlin.compiler.jvmTarget>${jdk.version}</kotlin.compiler.jvmTarget>
-        <kotlin.version>12.0.0-Beta2</kotlin.version>
+        <kotlin.version>1.9.20-Beta</kotlin.version>
+        <kotlin.compiler.version>1.9.20-Beta</kotlin.compiler.version>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
         <minimum-maven.version>3.9.6</minimum-maven.version>
@@ -1460,7 +1461,7 @@
                             <jvmTarget>${kotlin.compiler.jvmTarget}</jvmTarget>
                         </configuration>
                         <groupId>org.jetbrains.kotlin</groupId>
-                        <version>${kotlin.version}</version>
+                        <version>${kotlin.compiler.version}</version>
                         <executions>
                             <execution>
                                 <id>compile</id>
