@@ -1102,8 +1102,6 @@
                     <executor>JAVA</executor>
                     <javaOptions>
                         <additionalOptions>
-                            <!--<protools>-Dactivate.vaadin.protools=false</protools>-->
-                            <jacoco>${jacoco.java.option}</jacoco>
                         </additionalOptions>
                     </javaOptions>
 
