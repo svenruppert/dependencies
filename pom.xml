@@ -20,1490 +20,1574 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.rapidpm</groupId>
-  <artifactId>rapidpm-dependencies</artifactId>
-  <packaging>pom</packaging>
+    <groupId>com.svenruppert</groupId>
+    <artifactId>dependencies</artifactId>
+    <packaging>pom</packaging>
 
-  <version>04.07.05</version>
+    <version>05.00.00-RPM</version>
 
-  <inceptionYear>2013</inceptionYear>
-  <organization>
-    <name>Sven Ruppert</name>
-    <url>http://www.sven-ruppert.de</url>
-  </organization>
+    <inceptionYear>2013</inceptionYear>
+    <organization>
+        <name>Sven Ruppert</name>
+        <url>https://www.svenruppert.com</url>
+    </organization>
 
-  <url>https://github.com/RapidPM/rapidpm-dependencies</url>
-  <name>RapidPM Dependencies</name>
-  <description>Dependencies for the Java/Kotlin projects</description>
-  <scm>
     <url>https://github.com/RapidPM/rapidpm-dependencies</url>
-    <connection>scm:git:https://github.com/RapidPM/rapidpm-dependencies.git</connection>
-    <developerConnection>scm:git:https://github.com/RapidPM/rapidpm-dependencies.git</developerConnection>
-    <tag>HEAD</tag>
-  </scm>
-  <developers>
-    <developer>
-      <name>Sven Ruppert</name>
-      <email>sven.ruppert@gmail.com</email>
-      <roles>
-        <role>Founder</role>
-        <role>Developer</role>
-      </roles>
-      <timezone>+1</timezone>
-    </developer>
-  </developers>
-  <issueManagement>
-    <system>GitHub</system>
-    <url>https://github.com/RapidPM/rapidpm-dependencies/issues</url>
-  </issueManagement>
-  <ciManagement>
-    <system>TeamCity</system>
-    <url>http://build.sven-ruppert.de:8111/</url>
-  </ciManagement>
-  <licenses>
-    <license>
-      <name>The Apache Software License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-      <comments>A business-friendly OSS license</comments>
-    </license>
-  </licenses>
+    <name>SvenRuppert - Dependencies</name>
+    <description>Dependencies for the Java/Kotlin projects</description>
+    <scm>
+        <url>https://github.com/RapidPM/rapidpm-dependencies</url>
+        <connection>scm:git:https://github.com/RapidPM/rapidpm-dependencies.git</connection>
+        <developerConnection>scm:git:https://github.com/RapidPM/rapidpm-dependencies.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+    <developers>
+        <developer>
+            <name>Sven Ruppert</name>
+            <email>sven.ruppert@gmail.com</email>
+            <roles>
+                <role>Founder</role>
+                <role>Developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/RapidPM/rapidpm-dependencies/issues</url>
+    </issueManagement>
+    <!--  <ciManagement>-->
+    <!--    <system>TeamCity</system>-->
+    <!--    <url>http://build.sven-ruppert.de:8111/</url>-->
+    <!--  </ciManagement>-->
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
 
-  <properties>
-    <deploy-repo-url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</deploy-repo-url>
-    <deploy-repo-snapshots-url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</deploy-repo-snapshots-url>
+    <properties>
+<!--        <deploy-repo-url>https://repo.maven.apache.org/maven2/</deploy-repo-url>-->
+        <deploy-repo-url>https://maven.pkg.github.com/svenruppert/dependencies/</deploy-repo-url>
+<!--        <deploy-repo-snapshots-url>https://repo.maven.apache.org/maven2/</deploy-repo-snapshots-url>-->
+        <deploy-repo-snapshots-url>https://maven.pkg.github.com/svenruppert/dependencies/</deploy-repo-snapshots-url>
 
-    <activateJavaOnly>false</activateJavaOnly>
+        <activateJavaOnly>false</activateJavaOnly>
 
-    <jdk.version>1.8</jdk.version>
-    <!--technical-->
-    <!--<maven.compiler.release>8</maven.compiler.release> &lt;!&ndash;release makes source and target&ndash;&gt;-->
-    <maven.compiler.source>${jdk.version}</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
-    <maven.compiler.target>${jdk.version}</maven.compiler.target> <!--use release when importing-->
+        <jdk.version>21</jdk.version>
+        <!--technical-->
+        <!--<maven.compiler.release>8</maven.compiler.release> &lt;!&ndash;release makes source and target&ndash;&gt;-->
+        <maven.compiler.source>${jdk.version}</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
+        <maven.compiler.target>${jdk.version}</maven.compiler.target> <!--use release when importing-->
 
-    <!--    <maven.compiler.testRelease>11</maven.compiler.testRelease>-->
-    <maven.compiler.testSource>${jdk.version}</maven.compiler.testSource>
-    <maven.compiler.testTarget>${jdk.version}</maven.compiler.testTarget>
+        <!--    <maven.compiler.testRelease>11</maven.compiler.testRelease>-->
+        <maven.compiler.testSource>${jdk.version}</maven.compiler.testSource>
+        <maven.compiler.testTarget>${jdk.version}</maven.compiler.testTarget>
 
-    <!--Kotlin-->
-    <kotlin.compiler.jvmTarget>${jdk.version}</kotlin.compiler.jvmTarget>
-    <kotlin.version>1.4.20</kotlin.version>
-    <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
+        <!--Kotlin-->
+        <kotlin.compiler.jvmTarget>${jdk.version}</kotlin.compiler.jvmTarget>
+        <kotlin.version>1.9.20-Beta</kotlin.version>
+        <kotlin.compiler.version>1.9.20-Beta</kotlin.compiler.version>
+        <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
-    <minimum-maven.version>3.3.9</minimum-maven.version>
+        <minimum-maven.version>3.9.6</minimum-maven.version>
 
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <slf4j.version>1.7.30</slf4j.version>
-    <log4j-api.version>2.13.0</log4j-api.version>
+        <slf4j.version>1.7.30</slf4j.version>
+        <log4j-api.version>2.13.0</log4j-api.version>
 
-    <jacoco.version>0.8.6</jacoco.version>
-    <pitest.version>1.5.0</pitest.version>
-    <pitest-junit5-plugin.version>0.12</pitest-junit5-plugin.version>
-    <pitest-prod-classes>org.rapidpm.*</pitest-prod-classes>
-    <pitest-test-classes>junit.org.rapidpm*</pitest-test-classes>
+        <jacoco.version>0.8.10</jacoco.version>
+        <pitest.version>1.15.3</pitest.version>
+        <pitest-prod-classes>org.rapidpm.*</pitest-prod-classes>
+        <pitest-test-classes>junit.org.rapidpm*</pitest-test-classes>
 
-<!--    <jmh.version>1.26</jmh.version>-->
+        <!--    <jmh.version>1.26</jmh.version>-->
 
-    <!--TDD jUnit5-->
-<!--    <junit.jupiter.version>5.7.0</junit.jupiter.version>-->
-<!--    <junit.platform.version>1.7.0</junit.platform.version>-->
-    <junit-platform-maven-plugin.version>1.0.0-M5</junit-platform-maven-plugin.version>
+        <!--TDD jUnit5-->
+        <!--    <junit.jupiter.version>5.7.0</junit.jupiter.version>-->
+        <!--    <junit.platform.version>1.7.0</junit.platform.version>-->
+        <junit-platform-maven-plugin.version>1.1.7</junit-platform-maven-plugin.version>
 
-    <opentracing-api.version>0.33.0</opentracing-api.version>
-    <asm.version>7.2</asm.version>
+        <opentracing-api.version>0.33.0</opentracing-api.version>
+        <asm.version>7.2</asm.version>
 
-    <junit-platform-maven-plugin.timeout>300</junit-platform-maven-plugin.timeout>
-  </properties>
+        <junit-platform-maven-plugin.timeout>300</junit-platform-maven-plugin.timeout>
+    </properties>
 
-  <distributionManagement>
-    <repository>
-      <id>deploy-repo-maven</id>
-      <name>deploy-repo-maven</name>
-      <url>${deploy-repo-url}</url>
-    </repository>
-    <snapshotRepository>
-      <id>deploy-repo-maven-snapshots</id>
-      <name>deploy-repo-maven-snapshots</name>
-      <url>${deploy-repo-snapshots-url}</url>
-    </snapshotRepository>
-  </distributionManagement>
+    <distributionManagement>
+        <repository>
+            <id>deploy-repo-maven</id>
+            <name>deploy-repo-maven</name>
+            <url>${deploy-repo-url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>deploy-repo-maven-snapshots</id>
+            <name>deploy-repo-maven-snapshots</name>
+            <url>${deploy-repo-snapshots-url}</url>
+        </snapshotRepository>
+    </distributionManagement>
 
-  <repositories>
-    <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>central</id>
-      <name>libs-release</name>
-      <!--      <url>${deploy-repo-url}</url>-->
-      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</url>
-    </repository>
-    <repository>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
-      <id>snapshots</id>
-      <name>libs-snapshot</name>
-      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</url>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>central</id>
-      <name>libs-release</name>
-      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-release</url>
-      <!--      <url>${deploy-repo-url}</url>-->
-    </pluginRepository>
-    <pluginRepository>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
-      <id>snapshots</id>
-      <name>libs-snapshot</name>
-      <url>http://jfrog-repo.sven-ruppert.de:8081/artifactory/libs-snapshot</url>
-    </pluginRepository>
-  </pluginRepositories>
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>libs-release</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <id>snapshots</id>
+            <name>libs-snapshot</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>libs-release</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <id>snapshots</id>
+            <name>libs-snapshot</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
-  <dependencyManagement>
-    <!--project versions-->
+    <dependencyManagement>
+        <!--project versions-->
+        <dependencies>
+            <!--API´s-->
+            <dependency>
+                <groupId>javax.annotation</groupId>
+                <artifactId>javax.annotation-api</artifactId>
+                <version>1.3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>4.0.1</version>
+            </dependency>
+
+            <!--Reflection Utils-->
+            <dependency>
+                <groupId>net.oneandone.reflections8</groupId>
+                <artifactId>reflections8</artifactId>
+                <version>0.11.7</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <version>3.29.2-GA</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy</artifactId>
+                <version>1.14.10</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jdk8</artifactId>
+                <version>2.16.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.16.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.16.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.16.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.10.1</version>
+                <optional>true</optional>
+                <!-- case: when no json de/serialization -->
+            </dependency>
+            <dependency>
+                <groupId>com.google.auto.service</groupId>
+                <artifactId>auto-service</artifactId>
+                <version>1.1.1</version>
+                <!--<optional>true</optional>-->
+            </dependency>
+            <!--Google stuff-->
+
+            <!--Apache Commons-->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.16.0</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.15.1</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-cli</groupId>
+                <artifactId>commons-cli</artifactId>
+                <version>1.6.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>1.25.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.14.0</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>1.5</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-vfs2</artifactId>
+                <version>2.9.0</version>
+                <scope>provided</scope>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>4.5.14</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>fluent-hc</artifactId>
+                <version>4.5.14</version>
+            </dependency>
+
+
+            <!--Apache Commons-->
+
+            <dependency>
+                <groupId>javax.cache</groupId>
+                <artifactId>cache-api</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.cache2k</groupId>
+                <artifactId>cache2k-base-bom</artifactId>
+                <version>1.9.1.Alpha</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.cache2k</groupId>
+                <artifactId>cache2k-jcache</artifactId>
+                <version>2.6.1.Final</version>
+                <scope>runtime</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>dom4j</groupId>
+                <artifactId>org.dom4j</artifactId>
+                <version>2.1.1</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>5.1.0</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mapdb</groupId>
+                <artifactId>mapdb</artifactId>
+                <version>3.0.10</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>jsr305</artifactId>
+                <version>3.0.2</version>
+            </dependency>
+
+            <!--Testcontainers-->
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>selenium</artifactId>
+                <scope>test</scope>
+                <version>1.19.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers</artifactId>
+                <scope>test</scope>
+                <version>1.19.3</version>
+            </dependency>
+
+            <!--jUnit5-->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>5.10.1</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-params</artifactId>
+                <version>5.10.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-launcher</artifactId>
+                <scope>test</scope>
+                <version>1.10.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-testkit</artifactId>
+                <version>1.10.1</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- Only required to run tests in an IDE that bundles an older version -->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <scope>test</scope>
+                <version>5.10.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-all</artifactId>
+                <version>1.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest</artifactId>
+                <version>1.15.3</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>3.24.2</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.truth</groupId>
+                <artifactId>truth</artifactId>
+                <version>1.1.5</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.javafaker</groupId>
+                <artifactId>javafaker</artifactId>
+                <version>1.0.2</version>
+            </dependency>
+
+            <!--Microbenchmarking-->
+            <dependency>
+                <groupId>org.openjdk.jmh</groupId>
+                <artifactId>jmh-core</artifactId>
+                <version>1.37</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.openjdk.jmh</groupId>
+                <artifactId>jmh-core-benchmarks</artifactId>
+                <version>1.37</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.openjdk.jmh</groupId>
+                <artifactId>jmh-generator-annprocess</artifactId>
+                <version>1.37</version>
+                <!--<scope>provided</scope>-->
+            </dependency>
+            <dependency>
+                <groupId>org.openjdk.jmh</groupId>
+                <artifactId>jmh-generator-reflection</artifactId>
+                <version>1.37</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!--benchmarking gatlin-->
+            <dependency>
+                <groupId>io.gatling.highcharts</groupId>
+                <artifactId>gatling-charts-highcharts</artifactId>
+                <version>3.9.5</version>
+                <scope>test</scope>
+            </dependency>
+            <!--tdd-->
+
+            <!--OpenTracing API-->
+            <dependency>
+                <groupId>io.opentracing</groupId>
+                <artifactId>opentracing-api</artifactId>
+                <version>0.33.0</version>
+            </dependency>
+            <dependency>
+                <groupId>io.opentracing</groupId>
+                <artifactId>opentracing-util</artifactId>
+                <version>0.33.0</version>
+            </dependency>
+            <dependency>
+                <groupId>io.opentracing.contrib</groupId>
+                <artifactId>jdbi-opentracing</artifactId>
+                <version>0.6.2</version>
+            </dependency>
+            <dependency>
+                <groupId>io.opentracing.contrib</groupId>
+                <artifactId>opentracing-cdi</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>io.opentracing.contrib</groupId>
+                <artifactId>opentracing-jdbc</artifactId>
+                <version>0.010</version>
+            </dependency>
+            <dependency>
+                <groupId>io.opentracing.contrib</groupId>
+                <artifactId>opentracing-jaxrs2</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+
+            <!--Brian Goetz Concurrency Annotations-->
+            <!--      <dependency>-->
+            <!--        <groupId>net.jcip</groupId>-->
+            <!--        <artifactId>jcip-annotations</artifactId>-->
+            <!--        <version>1.0</version>-->
+            <!--      </dependency>-->
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>2.0.9</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>2.0.9</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-jcl</artifactId>
+                <version>1.7.36</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-ext</artifactId>
+                <version>2.0.9</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>3.0.0-alpha1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>3.0.0-alpha1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-1.2-api</artifactId>
+                <version>3.0.0-alpha1</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+        <!--    <module>core</module>-->
+        <!--    <module>core-properties</module>-->
+        <!--<module>core-reflection</module>-->
+        <!--    <module>vaadin-dependencies</module>-->
+    </modules>
+
+
     <dependencies>
-      <!--API´s-->
-      <dependency>
-        <groupId>javax.annotation</groupId>
-        <artifactId>javax.annotation-api</artifactId>
-        <version>1.3.2</version>
-      </dependency>
-      <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>javax.servlet-api</artifactId>
-        <version>4.0.1</version>
-      </dependency>
+        <!--jUnit5-->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-      <!--Reflection Utils-->
-      <dependency>
-        <groupId>net.oneandone.reflections8</groupId>
-        <artifactId>reflections8</artifactId>
-        <version>0.11.7</version>
-      </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Only required to run tests in an IDE that bundles an older version -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-testkit</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-      <dependency>
-        <groupId>org.javassist</groupId>
-        <artifactId>javassist</artifactId>
-        <version>3.27.0-GA</version>
-      </dependency>
-
-      <dependency>
-        <groupId>net.bytebuddy</groupId>
-        <artifactId>byte-buddy</artifactId>
-        <version>1.10.18</version>
-      </dependency>
-
-
-      <dependency>
-        <groupId>com.fasterxml.jackson.datatype</groupId>
-        <artifactId>jackson-datatype-jdk8</artifactId>
-        <version>2.11.3</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-core</artifactId>
-        <version>2.11.3</version>
-      </dependency>
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-annotations</artifactId>
-        <version>2.11.3</version>
-      </dependency>
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-databind</artifactId>
-        <version>2.11.3</version>
-      </dependency>
-      <dependency>
-        <groupId>com.google.code.gson</groupId>
-        <artifactId>gson</artifactId>
-        <version>2.8.6</version>
-        <optional>true</optional>
-        <!-- case: when no json de/serialization -->
-      </dependency>
-      <dependency>
-        <groupId>com.google.auto.service</groupId>
-        <artifactId>auto-service</artifactId>
-        <version>1.0-rc6</version>
-        <!--<optional>true</optional>-->
-      </dependency>
-      <!--Google stuff-->
-
-      <!--Apache Commons-->
-      <dependency>
-        <groupId>commons-codec</groupId>
-        <artifactId>commons-codec</artifactId>
-        <version>1.15</version>
-      </dependency>
-      <dependency>
-        <groupId>commons-io</groupId>
-        <artifactId>commons-io</artifactId>
-        <version>2.8.0</version>
-      </dependency>
-      <dependency>
-        <groupId>commons-cli</groupId>
-        <artifactId>commons-cli</artifactId>
-        <version>1.4</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-compress</artifactId>
-        <version>1.20</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-lang3</artifactId>
-        <version>3.11</version>
-      </dependency>
-      <dependency>
-        <groupId>commons-fileupload</groupId>
-        <artifactId>commons-fileupload</artifactId>
-        <version>1.4</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-vfs2</artifactId>
-        <version>2.7.0</version>
-        <scope>provided</scope>
-        <optional>true</optional>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.httpcomponents</groupId>
-        <artifactId>httpclient</artifactId>
-        <version>4.5.13</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.httpcomponents</groupId>
-        <artifactId>fluent-hc</artifactId>
-        <version>4.5.13</version>
-      </dependency>
+        <dependency>
+            <groupId>com.google.truth</groupId>
+            <artifactId>truth</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--Microbenchmarking-->
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core-benchmarks</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-reflection</artifactId>
+            <scope>test</scope>
+        </dependency>
 
 
-      <!--Apache Commons-->
 
-      <dependency>
-        <groupId>javax.cache</groupId>
-        <artifactId>cache-api</artifactId>
-        <version>1.1.1</version>
-      </dependency>
-      <dependency>
-        <groupId>org.cache2k</groupId>
-        <artifactId>cache2k-base-bom</artifactId>
-        <version>1.6.0.Final</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.cache2k</groupId>
-        <artifactId>cache2k-jcache</artifactId>
-        <version>1.2.4.Final</version>
-        <scope>runtime</scope>
-      </dependency>
+        <!--    <dependency>-->
+        <!--      <groupId>net.jcip</groupId>-->
+        <!--      <artifactId>jcip-annotations</artifactId>-->
+        <!--    </dependency>-->
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+        </dependency>
 
-      <dependency>
-        <groupId>dom4j</groupId>
-        <artifactId>org.dom4j</artifactId>
-        <version>2.1.1</version>
-      </dependency>
-
-
-      <dependency>
-        <groupId>com.zaxxer</groupId>
-        <artifactId>HikariCP</artifactId>
-        <version>3.4.5</version>
-        <scope>compile</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.mapdb</groupId>
-        <artifactId>mapdb</artifactId>
-        <version>3.0.8</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.google.code.findbugs</groupId>
-        <artifactId>jsr305</artifactId>
-        <version>3.0.2</version>
-      </dependency>
-
-
-      <!--Testcontainers-->
-      <dependency>
-        <groupId>org.testcontainers</groupId>
-        <artifactId>selenium</artifactId>
-        <scope>test</scope>
-        <version>1.15.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.testcontainers</groupId>
-        <artifactId>testcontainers</artifactId>
-        <scope>test</scope>
-        <version>1.15.0</version>
-      </dependency>
-
-      <!--jUnit5-->
-      <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-api</artifactId>
-        <version>5.7.0</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-params</artifactId>
-        <version>5.7.0</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.junit.platform</groupId>
-        <artifactId>junit-platform-launcher</artifactId>
-        <scope>test</scope>
-        <version>1.7.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.junit.platform</groupId>
-        <artifactId>junit-platform-testkit</artifactId>
-        <version>1.7.0</version>
-        <scope>test</scope>
-      </dependency>
-      <!-- Only required to run tests in an IDE that bundles an older version -->
-      <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-engine</artifactId>
-        <scope>test</scope>
-        <version>5.7.0</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.hamcrest</groupId>
-        <artifactId>hamcrest-all</artifactId>
-        <version>1.3</version>
-      </dependency>
-      <dependency>
-        <groupId>org.pitest</groupId>
-        <artifactId>pitest</artifactId>
-        <version>1.5.2</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.assertj</groupId>
-        <artifactId>assertj-core</artifactId>
-        <version>3.18.1</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.google.truth</groupId>
-        <artifactId>truth</artifactId>
-        <version>1.1</version>
-        <scope>test</scope>
-      </dependency>
-
-      <dependency>
-        <groupId>com.github.javafaker</groupId>
-        <artifactId>javafaker</artifactId>
-        <version>1.0.2</version>
-      </dependency>
-
-      <!--Microbenchmarking-->
-      <dependency>
-        <groupId>org.openjdk.jmh</groupId>
-        <artifactId>jmh-core</artifactId>
-        <version>1.26</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.openjdk.jmh</groupId>
-        <artifactId>jmh-core-benchmarks</artifactId>
-        <version>1.26</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.openjdk.jmh</groupId>
-        <artifactId>jmh-generator-annprocess</artifactId>
-        <version>1.26</version>
-        <!--<scope>provided</scope>-->
-      </dependency>
-      <dependency>
-        <groupId>org.openjdk.jmh</groupId>
-        <artifactId>jmh-generator-reflection</artifactId>
-        <version>1.26</version>
-        <scope>test</scope>
-      </dependency>
-
-      <!--benchmarking gatlin-->
-      <dependency>
-        <groupId>io.gatling.highcharts</groupId>
-        <artifactId>gatling-charts-highcharts</artifactId>
-        <version>3.4.1</version>
-        <scope>test</scope>
-      </dependency>
-      <!--tdd-->
-
-      <!--OpenTracing API-->
-      <dependency>
-        <groupId>io.opentracing</groupId>
-        <artifactId>opentracing-api</artifactId>
-        <version>0.33.0</version>
-      </dependency>
-      <dependency>
-        <groupId>io.opentracing</groupId>
-        <artifactId>opentracing-util</artifactId>
-        <version>0.33.0</version>
-      </dependency>
-      <dependency>
-        <groupId>io.opentracing.contrib</groupId>
-        <artifactId>jdbi-opentracing</artifactId>
-        <version>0.6.2</version>
-      </dependency>
-      <dependency>
-        <groupId>io.opentracing.contrib</groupId>
-        <artifactId>opentracing-cdi</artifactId>
-        <version>0.1.0</version>
-      </dependency>
-      <dependency>
-        <groupId>io.opentracing.contrib</groupId>
-        <artifactId>opentracing-jdbc</artifactId>
-        <version>0.010</version>
-      </dependency>
-      <dependency>
-        <groupId>io.opentracing.contrib</groupId>
-        <artifactId>opentracing-jaxrs2</artifactId>
-        <version>1.0.0</version>
-      </dependency>
-
-      <!--Brian Goetz Concurrency Annotations-->
-<!--      <dependency>-->
-<!--        <groupId>net.jcip</groupId>-->
-<!--        <artifactId>jcip-annotations</artifactId>-->
-<!--        <version>1.0</version>-->
-<!--      </dependency>-->
-
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>1.7.30</version>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-simple</artifactId>
-        <version>1.7.30</version>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-jcl</artifactId>
-        <version>1.7.30</version>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-ext</artifactId>
-        <version>1.7.30</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-api</artifactId>
-        <version>2.14.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-core</artifactId>
-        <version>2.14.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-1.2-api</artifactId>
-        <version>2.14.0</version>
-      </dependency>
-
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-  </dependencyManagement>
 
-  <modules>
-<!--    <module>core</module>-->
-<!--    <module>core-properties</module>-->
-    <!--<module>core-reflection</module>-->
-<!--    <module>vaadin-dependencies</module>-->
-  </modules>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>2.16.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-scm-plugin</artifactId>
+                    <version>2.0.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.mycila</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>4.3</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>4.0.0-M12</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>3.1.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>3.1.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>3.0.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.6.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.11.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.3.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.4.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.2.3</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.3.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.3.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-repository-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.6.3</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>3.4.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jdeps-plugin</artifactId>
+                    <version>3.1.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.owasp</groupId>
+                    <artifactId>dependency-check-maven</artifactId>
+                    <version>9.0.6</version>
+                </plugin>
 
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>3.5.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>5.1.9</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>3.5.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.pitest</groupId>
+                    <artifactId>pitest-maven</artifactId>
+                    <version>${pitest.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>3.1.1</version>
+                </plugin>
 
-  <dependencies>
-    <!--jUnit5-->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-params</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-launcher</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <!-- Only required to run tests in an IDE that bundles an older version -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-testkit</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>com.google.truth</groupId>
-      <artifactId>truth</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <!--Microbenchmarking-->
-    <dependency>
-      <groupId>org.openjdk.jmh</groupId>
-      <artifactId>jmh-core</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.openjdk.jmh</groupId>
-      <artifactId>jmh-core-benchmarks</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.openjdk.jmh</groupId>
-      <artifactId>jmh-generator-annprocess</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.openjdk.jmh</groupId>
-      <artifactId>jmh-generator-reflection</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-
-    <dependency>
-      <groupId>com.github.javafaker</groupId>
-      <artifactId>javafaker</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-
-<!--    <dependency>-->
-<!--      <groupId>net.jcip</groupId>-->
-<!--      <artifactId>jcip-annotations</artifactId>-->
-<!--    </dependency>-->
-    <dependency>
-      <groupId>com.google.code.findbugs</groupId>
-      <artifactId>jsr305</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>versions-maven-plugin</artifactId>
-          <version>2.8.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-scm-plugin</artifactId>
-          <version>1.11.2</version>
-        </plugin>
-        <plugin>
-          <groupId>com.mycila</groupId>
-          <artifactId>license-maven-plugin</artifactId>
-          <version>3.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.9.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>3.0.0-M1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>3.0.0-M1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-release-plugin</artifactId>
-          <version>3.0.0-M1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <version>3.1.2</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>3.2.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-war-plugin</artifactId>
-          <version>3.3.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.0.0-M5</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-source-plugin</artifactId>
-          <version>3.2.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.2.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.1.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-repository-plugin</artifactId>
-          <version>2.4</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-gpg-plugin</artifactId>
-          <version>1.6</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-javadoc-plugin</artifactId>
-          <version>3.2.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>3.1.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-enforcer-plugin</artifactId>
-          <version>3.0.0-M3</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jdeps-plugin</artifactId>
-          <version>3.1.2</version>
-        </plugin>
-        <plugin>
-          <groupId>org.owasp</groupId>
-          <artifactId>dependency-check-maven</artifactId>
-          <version>6.0.2</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-shade-plugin</artifactId>
-          <version>3.2.4</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.felix</groupId>
-          <artifactId>maven-bundle-plugin</artifactId>
-          <version>5.1.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>build-helper-maven-plugin</artifactId>
-          <version>3.2.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.pitest</groupId>
-          <artifactId>pitest-maven</artifactId>
-          <version>${pitest.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>exec-maven-plugin</artifactId>
-          <version>3.0.0</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-failsafe-plugin</artifactId>
-          <version>3.0.0-M5</version>
-        </plugin>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>findbugs-maven-plugin</artifactId>
-          <version>3.0.5</version>
-        </plugin>
-        <plugin>
-          <groupId>com.github.webdriverextensions</groupId>
-          <artifactId>webdriverextensions-maven-plugin</artifactId>
-          <version>3.2.0</version>
-        </plugin>
-        <plugin>
-          <groupId>de.sormuras.junit</groupId>
-          <artifactId>junit-platform-maven-plugin</artifactId>
-          <version>${junit-platform-maven-plugin.version}</version>
-        </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>3.2.3</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>findbugs-maven-plugin</artifactId>
+                    <version>3.0.5</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.github.webdriverextensions</groupId>
+                    <artifactId>webdriverextensions-maven-plugin</artifactId>
+                    <version>3.4.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>de.sormuras.junit</groupId>
+                    <artifactId>junit-platform-maven-plugin</artifactId>
+                    <version>${junit-platform-maven-plugin.version}</version>
+                </plugin>
 
 
+            </plugins>
+        </pluginManagement>
 
-
-      </plugins>
-    </pluginManagement>
-
-    <plugins>
-      <plugin>
-        <inherited>true</inherited>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-enforcer-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>enforce-maven-3</id>
-            <goals>
-              <goal>enforce</goal>
-            </goals>
-            <configuration>
-              <rules>
-                <requireMavenVersion>
-                  <version>${minimum-maven.version}</version>
-                </requireMavenVersion>
-              </rules>
-              <fail>true</fail>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>versions-maven-plugin</artifactId>
-        <configuration>
-          <rulesUri>file://${maven.multiModuleProjectDirectory}/version-number-rules.xml</rulesUri>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-scm-plugin</artifactId>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <!--<goal>jar</goal> do not define it here again !!-->
-              <goal>test-jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-repository-plugin</artifactId>
-      </plugin>
-
-
-      <!--Enable mutation testing-->
-      <plugin>
-        <groupId>org.pitest</groupId>
-        <artifactId>pitest-maven</artifactId>
-        <dependencies>
-          <dependency>
-            <groupId>org.pitest</groupId>
-            <artifactId>pitest-junit5-plugin</artifactId>
-            <version>${pitest-junit5-plugin.version}</version>
-          </dependency>
-        </dependencies>
-        <configuration>
-          <threads>2</threads>
-          <outputFormats>
-            <outputFormat>XML</outputFormat>
-            <outputFormat>HTML</outputFormat>
-          </outputFormats>
-          <targetClasses>
-            <param>${pitest-prod-classes}</param>
-            <!--<param>org.reflections.*</param>-->
-          </targetClasses>
-          <targetTests>
-            <param>${pitest-test-classes}</param>
-          </targetTests>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <dependencies>
-          <dependency>
-            <groupId>com.puppycrawl.tools</groupId>
-            <artifactId>checkstyle</artifactId>
-            <version>8.37</version> <!-- Checkstyle version -->
-          </dependency>
-        </dependencies>
-        <executions>
-          <execution>
-            <id>validate</id>
-            <phase>validate</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-            <configuration>
-              <sourceDirectories>
-                <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
-              </sourceDirectories>
-              <excludes>webpack.generated.js</excludes>
-              <excludes>webpack.config.js</excludes>
-              <excludes>package.json</excludes>
-              <excludes>package-lock.json</excludes>
-              <excludes>**/node/**</excludes>
-              <excludes>**/node_modules/**</excludes>
-              <excludes>**/generated/**/*</excludes>
-              <excludes>**/generated-sources/vwscdn/**/*</excludes>
-              <excludes>**/generated-sources/wscdn/**/*</excludes>
-              <excludes>com/vaadin/**/*,in/virit/**/*,com/acme/**/*</excludes>
-              <checkstyleRules>
-
-                <module name="Checker">
-                  <module name="BeforeExecutionExclusionFileFilter">
-                    <property name="fileNamePattern" value="module\-info\.java$"/>
-                  </module>
-                  <!--<module name="JavadocPackage"/>-->
-                  <!--<module name="NewlineAtEndOfFile"/>-->
-                  <module name="FileTabCharacter"/>
-
-                  <module name="RegexpSingleline">
-                    <property name="format" value="\s+$"/>
-                    <property name="minimum" value="0"/>
-                    <property name="maximum" value="0"/>
-                    <property name="message" value="Line has trailing spaces."/>
-                  </module>
-
-                  <module name="TreeWalker">
-
-                    <!--<module name="FileContentsHolder"/>-->
-                    <!-- Checkstyle has a bug that disallows @return in annotation methods, enable only on demand -->
-                    <!--<module name="JavadocMethod"/>-->
-
-                    <!--<module name="JavadocType"/>-->
-                    <!--<module name="JavadocVariable"/>-->
-                    <!--<module name="JavadocStyle"/>-->
-
-                    <module name="TodoComment"/>
-
-                    <module name="ConstantName"/>
-                    <module name="LocalFinalVariableName"/>
-                    <module name="LocalVariableName"/>
-                    <module name="MemberName"/>
-                    <module name="MethodName"/>
-                    <module name="PackageName"/>
-                    <module name="ParameterName"/>
-                    <module name="StaticVariableName"/>
-                    <module name="TypeName"/>
-
-                    <module name="IllegalImport"/>
-                    <module name="RedundantImport"/>
-                    <module name="UnusedImports"/>
-
-                    <module name="EmptyForIteratorPad"/>
-                    <module name="GenericWhitespace"/>
-                    <module name="MethodParamPad"/>
-                    <module name="ParenPad"/>
-                    <module name="TypecastParenPad"/>
-                    <module name="WhitespaceAfter"/>
-                    <module name="WhitespaceAround">
-                      <!-- The RCURLY token has strange semantics where annotation arrays should have a spacing while normal
-                           arrays should not have such a spacing - therefore, we rather exclude it from automatic checks -->
-                      <property name="tokens"
-                                value="ASSIGN,BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,EQUAL,GE,GT,LAND,LCURLY,LE,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,QUESTION,SL,SLIST,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN,TYPE_EXTENSION_AND"/>
-                    </module>
-                    <!--<module name="NoWhitespaceAfter"/>-->
-                    <!--<module name="NoWhitespaceBefore"/>-->
-
-                    <module name="ModifierOrder"/>
-
-                    <module name="LeftCurly"/>
-                    <module name="RightCurly"/>
-
-                    <module name="EmptyStatement"/>
-                    <module name="EqualsHashCode"/>
-                    <module name="IllegalInstantiation"/>
-                    <module name="MissingSwitchDefault"/>
-                    <!--<module name="RedundantThrows"/>-->
-                    <module name="SimplifyBooleanExpression"/>
-                    <module name="SimplifyBooleanReturn"/>
-
-                    <module name="HideUtilityClassConstructor"/>
-                    <module name="InterfaceIsType"/>
-
-                    <module name="ArrayTypeStyle"/>
-                    <module name="UpperEll"/>
-                    <module name="SuppressionCommentFilter"/>
-                  </module>
-                </module>
-              </checkstyleRules>
-              <consoleOutput>true</consoleOutput>
-              <failsOnError>true</failsOnError>
-              <encoding>UTF-8</encoding>
-              <outputFileFormat>plain</outputFileFormat>
-              <outputFileFormat>xml</outputFileFormat>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>de.sormuras.junit</groupId>
-        <artifactId>junit-platform-maven-plugin</artifactId>
-        <version>1.0.0-M5</version>
-        <extensions>true</extensions> <!-- Necessary to execute it in 'test' phase. -->
-        <configuration>
-          <timeout>${junit-platform-maven-plugin.timeout}</timeout>
-          <classNamePatterns>
-            <pattern>^(Test.*|.*Test*.|.+[.$]Test.*|.*Tests?)$</pattern>
-            <pattern>.*TestCase</pattern>
-          </classNamePatterns>
-          <tweaks>
-            <failIfNoTests>false</failIfNoTests>
-          </tweaks>
-          <executor>JAVA</executor>
-          <javaOptions>
-            <additionalOptions>
-              <!--<protools>-Dactivate.vaadin.protools=false</protools>-->
-              <jacoco>${jacoco.java.option}</jacoco>
-            </additionalOptions>
-          </javaOptions>
-
-          <!--<tags>-->
-          <!--<tag>vaadin-protools</tag>-->
-          <!--</tags>-->
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>${jacoco.version}</version>
-        <executions>
-          <execution>
-            <id>pre-unit-test</id>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-            <configuration>
-              <propertyName>jacoco.java.option</propertyName>
-            </configuration>
-          </execution>
-          <execution>
-            <id>post-unit-test</id>
-            <phase>test</phase>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.pitest</groupId>
-        <artifactId>pitest-maven</artifactId>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>report</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>${jacoco.version}</version>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <!-- select non-aggregate reports -->
-              <report>report</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-    </plugins>
-  </reporting>
-
-
-  <profiles>
-
-
-    <profile>
-      <id>_release_prepare</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <build>
         <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-release-plugin</artifactId>
-            <configuration>
-              <useReleaseProfile>false</useReleaseProfile>
-              <releaseProfiles>extras</releaseProfiles>
-              <autoVersionSubmodules>true</autoVersionSubmodules>
-            </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-enforcer-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>enforce-no-snapshots</id>
-                <goals>
-                  <goal>enforce</goal>
-                </goals>
-                <configuration>
-                  <rules>
-                    <requireReleaseDeps>
-                      <message>No Snapshots Allowed!</message>
-                    </requireReleaseDeps>
-                  </rules>
-                  <fail>true</fail>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
+            <plugin>
+                <inherited>true</inherited>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-maven-3</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>${minimum-maven.version}</version>
+                                </requireMavenVersion>
+                            </rules>
+                            <fail>true</fail>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
-          <plugin>
-            <groupId>com.mycila</groupId>
-            <artifactId>license-maven-plugin</artifactId>
-            <configuration>
-              <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
-              <properties>
-                <owner>Sven Ruppert</owner>
-                <email>sven.ruppert@gmail.com</email>
-              </properties>
-              <excludes>
-                <excludes>**/pnpm-lock.yaml</excludes>
-                <excludes>**/webpack.generated.js</excludes>
-                <excludes>**/webpack.config.js</excludes>
-                <excludes>**/package.json</excludes>
-                <excludes>**/package-lock.json</excludes>
-                <excludes>**/node/**</excludes>
-                <excludes>**/node_modules/**</excludes>
-                <exclude>**/*.iml</exclude>
-                <exclude>**/README*</exclude>
-                <exclude>**/jacoco.exec*</exclude>
-                <exclude>**/LICENSE.txt</exclude>
-                <exclude>**/_data/webdrivers/*</exclude>
-                <!--<exclude>src/test/resources/**</exclude>-->
-                <!--<exclude>src/main/resources/**</exclude>-->
-                <exclude>**/target/**</exclude>
-              </excludes>
-            </configuration>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>check</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+<!--                <configuration>-->
+<!--                    <ruleSet>-->
+<!--                        <ignoreVersions>-->
+<!--                            <ignoreVersion>-->
+<!--                                <type>regex</type>-->
+<!--                                <version>(?i).*[-_\.]CR[0-9\.]*</version>-->
+<!--                            </ignoreVersion>-->
+<!--                            <ignoreVersion>-->
+<!--                                <type>regex</type>-->
+<!--                                <version>(?i).*[-_\.]rc[0-9\.]*</version>-->
+<!--                            </ignoreVersion>-->
+<!--                            <ignoreVersion>-->
+<!--                                <type>regex</type>-->
+<!--                                <version>(?i).*[-_\.]beta[0-9\.-]*</version>-->
+<!--                            </ignoreVersion>-->
+<!--                            <ignoreVersion>-->
+<!--                                <type>regex</type>-->
+<!--                                <version>(?i).*[-_\.]alpha[0-9\.-]*</version>-->
+<!--                            </ignoreVersion>-->
+<!--                            <ignoreVersion>-->
+<!--                                <type>regex</type>-->
+<!--                                <version>(?i).*[-_\.]Alpha</version>-->
+<!--                            </ignoreVersion>-->
+<!--                            <ignoreVersion>-->
+<!--                                <type>regex</type>-->
+<!--                                <version>(?i).*[-_\.]nightly[0-9\.]*</version>-->
+<!--                            </ignoreVersion>-->
+<!--                            <ignoreVersion>-->
+<!--                                <type>regex</type>-->
+<!--                                <version>(?i).*[-_\.]jboss[0-9\.]*</version>-->
+<!--                            </ignoreVersion>-->
+<!--                            <ignoreVersion>-->
+<!--                                <type>regex</type>-->
+<!--                                <version>(?i).*-atlassian-[0-9\.]*</version>-->
+<!--                            </ignoreVersion>-->
+<!--                            <ignoreVersion>-->
+<!--                                <type>regex</type>-->
+<!--                                <version>(?i).*-jenkins-[0-9\.]*</version>-->
+<!--                            </ignoreVersion>-->
+<!--                            <ignoreVersion>-->
+<!--                                <type>regex</type>-->
+<!--                                <version>.*[-\.]redhat-[0-9]+</version>-->
+<!--                            </ignoreVersion>-->
+<!--                            <ignoreVersion>-->
+<!--                                <type>regex</type>-->
+<!--                                <version>.*-xwiki</version>-->
+<!--                            </ignoreVersion>-->
+<!--                            <ignoreVersion>-->
+<!--                                <version>9c6abc2</version>-->
+<!--                            </ignoreVersion>-->
+<!--                            <ignoreVersion>-->
+<!--                                <type>regex</type>-->
+<!--                                <version>.*-tc</version>-->
+<!--                            </ignoreVersion>-->
+<!--                            <ignoreVersion>-->
+<!--                                <type>regex</type>-->
+<!--                                <version>.*-r\d+</version>-->
+<!--                            </ignoreVersion>-->
+<!--                            <ignoreVersion>-->
+<!--                                <type>regex</type>-->
+<!--                                <version>.*-Draft\d+</version>-->
+<!--                            </ignoreVersion>-->
+<!--                            <ignoreVersion>-->
+<!--                                <type>regex</type>-->
+<!--                                <version>\d{4,}.*</version>-->
+<!--                            </ignoreVersion>  &lt;!&ndash; z.B. commons-collections:commons-collections ... 3.2.1.redhat-7 -> 20040117.000000 &ndash;&gt;-->
+<!--                        </ignoreVersions>-->
+<!--                        <rules>-->
+<!--                            <rule groupId="org.cache2k" comparisonMethod="maven">-->
+<!--                                <ignoreVersions>-->
+<!--                                    <ignoreVersion>1.3.1.Alpha</ignoreVersion>-->
+<!--                                </ignoreVersions>-->
+<!--                            </rule>-->
+<!--                            <rule groupId="org.slf4j" comparisonMethod="maven">-->
+<!--                            </rule>-->
+<!--                            <rule groupId="org.apache.maven.plugins" artifactId="maven-surefire-plugin"-->
+<!--                                  comparisonMethod="maven">-->
+<!--                                &lt;!&ndash;                                <ignoreVersions>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                    <ignoreVersion>9c6abc2</ignoreVersion>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                </ignoreVersions>&ndash;&gt;-->
+<!--                            </rule>-->
+<!--                            <rule groupId="org.codehaus.mojo" artifactId="properties-maven-plugin"-->
+<!--                                  comparisonMethod="maven">-->
+<!--                                &lt;!&ndash;                                <ignoreVersions>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                    <ignoreVersion type="regex">.*-tc</ignoreVersion>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                </ignoreVersions>&ndash;&gt;-->
+<!--                            </rule>-->
+<!--                            <rule groupId="javax.portlet" artifactId="portlet-api" comparisonMethod="maven">-->
+<!--                                &lt;!&ndash;                                <ignoreVersions>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                    <ignoreVersion type="regex">.*-r\d+</ignoreVersion>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                    <ignoreVersion type="regex">.*-Draft\d+</ignoreVersion>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                </ignoreVersions>&ndash;&gt;-->
+<!--                            </rule>-->
+<!--                        </rules>-->
+<!--                    </ruleSet>-->
+<!--                </configuration>-->
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <!--<goal>jar</goal> do not define it here again !!-->
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-repository-plugin</artifactId>
+            </plugin>
+
+
+            <!--Enable mutation testing-->
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-junit5-plugin</artifactId>
+                        <version>1.2.1</version>
+                    </dependency>
+
+                </dependencies>
+                <configuration>
+                    <threads>2</threads>
+                    <outputFormats>
+                        <outputFormat>XML</outputFormat>
+                        <outputFormat>HTML</outputFormat>
+                    </outputFormats>
+                    <targetClasses>
+                        <param>${pitest-prod-classes}</param>
+                        <!--<param>org.reflections.*</param>-->
+                    </targetClasses>
+                    <targetTests>
+                        <param>${pitest-test-classes}</param>
+                    </targetTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>10.12.6</version> <!-- Checkstyle version -->
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectories>
+                                <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
+                            </sourceDirectories>
+                            <excludes>webpack.generated.js</excludes>
+                            <excludes>webpack.config.js</excludes>
+                            <excludes>package.json</excludes>
+                            <excludes>package-lock.json</excludes>
+                            <excludes>**/node/**</excludes>
+                            <excludes>**/node_modules/**</excludes>
+                            <excludes>**/generated/**/*</excludes>
+                            <excludes>**/generated-sources/vwscdn/**/*</excludes>
+                            <excludes>**/generated-sources/wscdn/**/*</excludes>
+                            <excludes>com/vaadin/**/*,in/virit/**/*,com/acme/**/*</excludes>
+                            <checkstyleRules>
+
+                                <module name="Checker">
+                                    <module name="BeforeExecutionExclusionFileFilter">
+                                        <property name="fileNamePattern" value="module\-info\.java$"/>
+                                    </module>
+                                    <!--<module name="JavadocPackage"/>-->
+                                    <!--<module name="NewlineAtEndOfFile"/>-->
+                                    <module name="FileTabCharacter"/>
+
+                                    <module name="RegexpSingleline">
+                                        <property name="format" value="\s+$"/>
+                                        <property name="minimum" value="0"/>
+                                        <property name="maximum" value="0"/>
+                                        <property name="message" value="Line has trailing spaces."/>
+                                    </module>
+
+                                    <module name="TreeWalker">
+
+                                        <!--<module name="FileContentsHolder"/>-->
+                                        <!-- Checkstyle has a bug that disallows @return in annotation methods, enable only on demand -->
+                                        <!--<module name="JavadocMethod"/>-->
+
+                                        <!--<module name="JavadocType"/>-->
+                                        <!--<module name="JavadocVariable"/>-->
+                                        <!--<module name="JavadocStyle"/>-->
+
+                                        <module name="TodoComment"/>
+
+                                        <module name="ConstantName"/>
+                                        <module name="LocalFinalVariableName"/>
+                                        <module name="LocalVariableName"/>
+                                        <module name="MemberName"/>
+                                        <module name="MethodName"/>
+                                        <module name="PackageName"/>
+                                        <module name="ParameterName"/>
+                                        <module name="StaticVariableName"/>
+                                        <module name="TypeName"/>
+
+                                        <module name="IllegalImport"/>
+                                        <module name="RedundantImport"/>
+                                        <module name="UnusedImports"/>
+
+                                        <module name="EmptyForIteratorPad"/>
+                                        <module name="GenericWhitespace"/>
+                                        <module name="MethodParamPad"/>
+                                        <module name="ParenPad"/>
+                                        <module name="TypecastParenPad"/>
+                                        <module name="WhitespaceAfter"/>
+                                        <module name="WhitespaceAround">
+                                            <!-- The RCURLY token has strange semantics where annotation arrays should have a spacing while normal
+                                                 arrays should not have such a spacing - therefore, we rather exclude it from automatic checks -->
+                                            <property name="tokens"
+                                                      value="ASSIGN,BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,EQUAL,GE,GT,LAND,LCURLY,LE,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,QUESTION,SL,SLIST,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN,TYPE_EXTENSION_AND"/>
+                                        </module>
+                                        <!--<module name="NoWhitespaceAfter"/>-->
+                                        <!--<module name="NoWhitespaceBefore"/>-->
+
+                                        <module name="ModifierOrder"/>
+
+                                        <module name="LeftCurly"/>
+                                        <module name="RightCurly"/>
+
+                                        <module name="EmptyStatement"/>
+                                        <module name="EqualsHashCode"/>
+                                        <module name="IllegalInstantiation"/>
+                                        <module name="MissingSwitchDefault"/>
+                                        <!--<module name="RedundantThrows"/>-->
+                                        <module name="SimplifyBooleanExpression"/>
+                                        <module name="SimplifyBooleanReturn"/>
+
+                                        <module name="HideUtilityClassConstructor"/>
+                                        <module name="InterfaceIsType"/>
+
+                                        <module name="ArrayTypeStyle"/>
+                                        <module name="UpperEll"/>
+                                        <module name="SuppressionCommentFilter"/>
+                                    </module>
+                                </module>
+                            </checkstyleRules>
+                            <consoleOutput>true</consoleOutput>
+                            <failsOnError>true</failsOnError>
+                            <outputFileFormat>plain</outputFileFormat>
+                            <outputFileFormat>xml</outputFileFormat>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>de.sormuras.junit</groupId>
+                <artifactId>junit-platform-maven-plugin</artifactId>
+                <version>1.1.7</version>
+                <extensions>true</extensions> <!-- Necessary to execute it in 'test' phase. -->
+                <configuration>
+                    <timeout>${junit-platform-maven-plugin.timeout}</timeout>
+                    <classNamePatterns>
+                        <pattern>^(Test.*|.*Test*.|.+[.$]Test.*|.*Tests?)$</pattern>
+                        <pattern>.*TestCase</pattern>
+                    </classNamePatterns>
+                    <tweaks>
+                        <failIfNoTests>false</failIfNoTests>
+                    </tweaks>
+                    <executor>JAVA</executor>
+                    <javaOptions>
+                        <additionalOptions>
+                        </additionalOptions>
+                    </javaOptions>
+
+                    <!--<tags>-->
+                    <!--<tag>vaadin-protools</tag>-->
+                    <!--</tags>-->
+                </configuration>
+            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.jacoco</groupId>-->
+<!--                <artifactId>jacoco-maven-plugin</artifactId>-->
+<!--                <version>${jacoco.version}</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>pre-unit-test</id>-->
+<!--                        <goals>-->
+<!--                            <goal>prepare-agent</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <propertyName>jacoco.java.option</propertyName>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                    <execution>-->
+<!--                        <id>post-unit-test</id>-->
+<!--                        <phase>test</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>report</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.jacoco</groupId>-->
+<!--                <artifactId>jacoco-maven-plugin</artifactId>-->
+<!--                <version>${jacoco.version}</version>-->
+<!--                <reportSets>-->
+<!--                    <reportSet>-->
+<!--                        <reports>-->
+<!--                            &lt;!&ndash; select non-aggregate reports &ndash;&gt;-->
+<!--                            <report>report</report>-->
+<!--                        </reports>-->
+<!--                    </reportSet>-->
+<!--                </reportSets>-->
+<!--            </plugin>-->
+        </plugins>
+    </reporting>
+
+
+    <profiles>
+
+
+        <profile>
+            <id>_release_prepare</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-release-plugin</artifactId>
+                        <configuration>
+                            <useReleaseProfile>false</useReleaseProfile>
+                            <releaseProfiles>extras</releaseProfiles>
+                            <autoVersionSubmodules>true</autoVersionSubmodules>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-enforcer-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>enforce-no-snapshots</id>
+                                <goals>
+                                    <goal>enforce</goal>
+                                </goals>
+                                <configuration>
+                                    <rules>
+                                        <requireReleaseDeps>
+                                            <message>No Snapshots Allowed!</message>
+                                        </requireReleaseDeps>
+                                    </rules>
+                                    <fail>true</fail>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>com.mycila</groupId>
+                        <artifactId>license-maven-plugin</artifactId>
+                        <configuration>
+                            <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+                            <properties>
+                                <owner>Sven Ruppert</owner>
+                                <email>sven.ruppert@gmail.com</email>
+                            </properties>
+                            <excludes>
+                                <excludes>**/pnpm-lock.yaml</excludes>
+                                <excludes>**/webpack.generated.js</excludes>
+                                <excludes>**/webpack.config.js</excludes>
+                                <excludes>**/package.json</excludes>
+                                <excludes>**/package-lock.json</excludes>
+                                <excludes>**/node/**</excludes>
+                                <excludes>**/node_modules/**</excludes>
+                                <exclude>**/*.iml</exclude>
+                                <exclude>**/README*</exclude>
+                                <exclude>**/jacoco.exec*</exclude>
+                                <exclude>**/LICENSE.txt</exclude>
+                                <exclude>**/_data/webdrivers/*</exclude>
+                                <!--<exclude>src/test/resources/**</exclude>-->
+                                <!--<exclude>src/main/resources/**</exclude>-->
+                                <exclude>**/target/**</exclude>
+                            </excludes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.ow2.asm</groupId>
+                                <artifactId>asm</artifactId>
+                                <version>9.5</version> <!-- Use newer version of ASM -->
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <additionalOptions>
+                                <failOnError>false</failOnError>
+                                <!--                <additionalOption>-Xdoclint:none</additionalOption>-->
+                                <!--                <additionalOption>-html5</additionalOption>-->
+                                <!--                <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>-->
+                            </additionalOptions>
+<!--                            <destDir>target/doc/apidoc/</destDir>-->
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>jar</goal>
+                                    <goal>test-jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>_release_sign-artifacts</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>_release_scan_dependencies</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.owasp</groupId>
+                        <artifactId>dependency-check-maven</artifactId>
+                        <configuration>
+                            <failBuildOnCVSS>8</failBuildOnCVSS>
+                            <skipProvidedScope>true</skipProvidedScope>
+                            <skipRuntimeScope>true</skipRuntimeScope>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>_java</id>
+            <activation>
+                <property>
+                    <name>activateJavaOnly</name>
+                </property>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.ow2.asm</groupId>
+                                <artifactId>asm</artifactId>
+                                <version>${asm.version}</version> <!-- Use newer version of ASM -->
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>add sources</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>add-source</goal>
+                                </goals>
+                                <configuration>
+                                    <sources>
+                                        <source>${project.build.directory}/generated-sources/annotations</source>
+                                        <source>src/main/java</source>
+                                        <!--                    <source>src/main/kotlin</source>-->
+                                    </sources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>add generated sources</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>add-source</goal>
+                                </goals>
+                                <configuration>
+                                    <sources>
+                                        <source>${project.build.directory}/generated-sources/annotations</source>
+                                        <source>src/main/java</source>
+                                        <!--                    <source>src/main/kotlin</source>-->
+                                    </sources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>add generated test sources</id>
+                                <phase>generate-test-sources</phase>
+                                <goals>
+                                    <goal>add-test-source</goal>
+                                </goals>
+                                <configuration>
+                                    <sources>
+                                        <source>${project.build.directory}/generated-test-sources/test-annotations
+                                        </source>
+                                        <source>src/test/java</source>
+                                        <!--                    <source>src/test/kotlin</source>-->
+                                    </sources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>_java-and-kotlin</id>
+            <activation>
+                <property>
+                    <name>!activateJavaOnly</name>
+                </property>
+            </activation>
+            <properties>
+
+            </properties>
             <dependencies>
-              <dependency>
-                <groupId>org.ow2.asm</groupId>
-                <artifactId>asm</artifactId>
-                <version>9.0</version> <!-- Use newer version of ASM -->
-              </dependency>
+                <!--Adding Kotlin stuff-->
+                <dependency>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-stdlib-jdk8</artifactId>
+                    <version>${kotlin.version}</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-reflect</artifactId>
+                    <version>${kotlin.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-test-junit</artifactId>
+                    <version>${kotlin.version}</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-test-junit5</artifactId>
+                    <version>${kotlin.version}</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-test</artifactId>
+                    <version>${kotlin.version}</version>
+                    <scope>test</scope>
+                </dependency>
+
             </dependencies>
-            <executions>
-              <execution>
-                <id>attach-javadocs</id>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <additionalOptions>
-                <failOnError>false</failOnError>
-                <!--                <additionalOption>-Xdoclint:none</additionalOption>-->
-                <!--                <additionalOption>-html5</additionalOption>-->
-                <!--                <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>-->
-              </additionalOptions>
-              <destDir>target/doc/apidoc/</destDir>
-            </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>jar</goal>
-                  <goal>test-jar</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>_release_sign-artifacts</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>_release_scan_dependencies</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.owasp</groupId>
-            <artifactId>dependency-check-maven</artifactId>
-            <configuration>
-              <failBuildOnCVSS>8</failBuildOnCVSS>
-              <skipProvidedScope>true</skipProvidedScope>
-              <skipRuntimeScope>true</skipRuntimeScope>
-            </configuration>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>check</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
-    <profile>
-      <id>_java</id>
-      <activation>
-        <property>
-          <name>activateJavaOnly</name>
-        </property>
-      </activation>
-
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <dependencies>
-              <dependency>
-                <groupId>org.ow2.asm</groupId>
-                <artifactId>asm</artifactId>
-                <version>${asm.version}</version> <!-- Use newer version of ASM -->
-              </dependency>
-            </dependencies>
-          </plugin>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>build-helper-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>add sources</id>
-                <phase>compile</phase>
-                <goals>
-                  <goal>add-source</goal>
-                </goals>
-                <configuration>
-                  <sources>
-                    <source>${project.build.directory}/generated-sources/annotations</source>
-                    <source>src/main/java</source>
-                    <!--                    <source>src/main/kotlin</source>-->
-                  </sources>
-                </configuration>
-              </execution>
-              <execution>
-                <id>add generated sources</id>
-                <phase>generate-sources</phase>
-                <goals>
-                  <goal>add-source</goal>
-                </goals>
-                <configuration>
-                  <sources>
-                    <source>${project.build.directory}/generated-sources/annotations</source>
-                    <source>src/main/java</source>
-                    <!--                    <source>src/main/kotlin</source>-->
-                  </sources>
-                </configuration>
-              </execution>
-              <execution>
-                <id>add generated test sources</id>
-                <phase>generate-test-sources</phase>
-                <goals>
-                  <goal>add-test-source</goal>
-                </goals>
-                <configuration>
-                  <sources>
-                    <source>${project.build.directory}/generated-test-sources/test-annotations</source>
-                    <source>src/test/java</source>
-                    <!--                    <source>src/test/kotlin</source>-->
-                  </sources>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
-    <profile>
-      <id>_java-and-kotlin</id>
-      <activation>
-        <property>
-          <name>!activateJavaOnly</name>
-        </property>
-      </activation>
-      <properties>
-
-      </properties>
-      <dependencies>
-        <!--Adding Kotlin stuff-->
-        <dependency>
-          <groupId>org.jetbrains.kotlin</groupId>
-          <artifactId>kotlin-stdlib-jdk8</artifactId>
-          <version>${kotlin.version}</version>
-        </dependency>
-
-        <dependency>
-          <groupId>org.jetbrains.kotlin</groupId>
-          <artifactId>kotlin-reflect</artifactId>
-          <version>${kotlin.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>org.jetbrains.kotlin</groupId>
-          <artifactId>kotlin-test-junit</artifactId>
-          <version>${kotlin.version}</version>
-          <scope>test</scope>
-        </dependency>
-        <dependency>
-          <groupId>org.jetbrains.kotlin</groupId>
-          <artifactId>kotlin-test-junit5</artifactId>
-          <version>${kotlin.version}</version>
-          <scope>test</scope>
-        </dependency>
-        <dependency>
-          <groupId>org.jetbrains.kotlin</groupId>
-          <artifactId>kotlin-test</artifactId>
-          <version>${kotlin.version}</version>
-          <scope>test</scope>
-        </dependency>
-
-      </dependencies>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>kotlin-maven-plugin</artifactId>
-            <configuration>
-              <jvmTarget>${kotlin.compiler.jvmTarget}</jvmTarget>
-            </configuration>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <version>${kotlin.version}</version>
-            <executions>
-              <execution>
-                <id>compile</id>
-<!--                <phase>compile</phase>-->
-                <goals>
-                  <goal>compile</goal>
-                </goals>
-                <configuration>
-                  <sourceDirs>
-                    <source>src/main/kotlin</source>
-                    <source>src/main/java</source>
-                    <source>${project.build.directory}/generated-sources/annotations</source>
-                  </sourceDirs>
-                </configuration>
-              </execution>
-              <execution>
-                <id>test-compile</id>
-                <goals>
-                  <goal>test-compile</goal>
-                </goals>
-                <configuration>
-                  <sourceDirs>
-                    <source>src/test/kotlin</source>
-                    <source>src/test/java</source>
-                    <source>${project.build.directory}/generated-test-sources/test-annotations</source>
-                  </sourceDirs>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-              <optimize>true</optimize>
-              <useIncrementalCompilation>false</useIncrementalCompilation>
-            </configuration>
-            <executions>
-              <!-- Replacing default-compile as it is treated specially by maven -->
-              <execution>
-                <id>default-compile</id>
-                <phase>none</phase>
-                <!--For AnnotationProcessing Compile-->
-                <configuration>
-                  <useIncrementalCompilation>false</useIncrementalCompilation>
-                </configuration>
-                <!--For AnnotationProcessing Compile-->
-              </execution>
-              <!-- Replacing default-testCompile as it is treated specially by maven -->
-              <execution>
-                <id>default-testCompile</id>
-                <phase>none</phase>
-                <!--For AnnotationProcessing Compile-->
-                <configuration>
-                  <useIncrementalCompilation>false</useIncrementalCompilation>
-                </configuration>
-                <!--For AnnotationProcessing Compile-->
-              </execution>
-              <execution>
-                <id>java-compile</id>
-                <phase>compile</phase>
-                <goals>
-                  <goal>compile</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>java-test-compile</id>
-                <phase>test-compile</phase>
-                <goals>
-                  <goal>testCompile</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>build-helper-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>add sources</id>
-                <phase>compile</phase>
-                <goals>
-                  <goal>add-source</goal>
-                </goals>
-                <configuration>
-                  <sources>
-                    <source>${project.build.directory}/generated-sources/annotations</source>
-                    <source>src/main/java</source>
-                    <source>src/main/kotlin</source>
-                  </sources>
-                </configuration>
-              </execution>
-              <execution>
-                <id>add generated sources</id>
-                <phase>generate-sources</phase>
-                <goals>
-                  <goal>add-source</goal>
-                </goals>
-                <configuration>
-                  <sources>
-                    <source>${project.build.directory}/generated-sources/annotations</source>
-                    <source>src/main/java</source>
-                    <source>src/main/kotlin</source>
-                  </sources>
-                </configuration>
-              </execution>
-              <execution>
-                <id>add generated test sources</id>
-                <phase>generate-test-sources</phase>
-                <goals>
-                  <goal>add-test-source</goal>
-                </goals>
-                <configuration>
-                  <sources>
-                    <source>${project.build.directory}/generated-test-sources/test-annotations</source>
-                    <source>src/test/java</source>
-                    <source>src/test/kotlin</source>
-                  </sources>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>kotlin-maven-plugin</artifactId>
+                        <configuration>
+                            <jvmTarget>${kotlin.compiler.jvmTarget}</jvmTarget>
+                        </configuration>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <version>${kotlin.compiler.version}</version>
+                        <executions>
+                            <execution>
+                                <id>compile</id>
+                                <!--                <phase>compile</phase>-->
+                                <goals>
+                                    <goal>compile</goal>
+                                </goals>
+                                <configuration>
+                                    <sourceDirs>
+                                        <source>src/main/kotlin</source>
+                                        <source>src/main/java</source>
+                                        <source>${project.build.directory}/generated-sources/annotations</source>
+                                    </sourceDirs>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>test-compile</id>
+                                <goals>
+                                    <goal>test-compile</goal>
+                                </goals>
+                                <configuration>
+                                    <sourceDirs>
+                                        <source>src/test/kotlin</source>
+                                        <source>src/test/java</source>
+                                        <source>${project.build.directory}/generated-test-sources/test-annotations
+                                        </source>
+                                    </sourceDirs>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <optimize>true</optimize>
+                            <useIncrementalCompilation>false</useIncrementalCompilation>
+                        </configuration>
+                        <executions>
+                            <!-- Replacing default-compile as it is treated specially by maven -->
+                            <execution>
+                                <id>default-compile</id>
+                                <phase>none</phase>
+                                <!--For AnnotationProcessing Compile-->
+                                <configuration>
+                                    <useIncrementalCompilation>false</useIncrementalCompilation>
+                                </configuration>
+                                <!--For AnnotationProcessing Compile-->
+                            </execution>
+                            <!-- Replacing default-testCompile as it is treated specially by maven -->
+                            <execution>
+                                <id>default-testCompile</id>
+                                <phase>none</phase>
+                                <!--For AnnotationProcessing Compile-->
+                                <configuration>
+                                    <useIncrementalCompilation>false</useIncrementalCompilation>
+                                </configuration>
+                                <!--For AnnotationProcessing Compile-->
+                            </execution>
+                            <execution>
+                                <id>java-compile</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>compile</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>java-test-compile</id>
+                                <phase>test-compile</phase>
+                                <goals>
+                                    <goal>testCompile</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>add sources</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>add-source</goal>
+                                </goals>
+                                <configuration>
+                                    <sources>
+                                        <source>${project.build.directory}/generated-sources/annotations</source>
+                                        <source>src/main/java</source>
+                                        <source>src/main/kotlin</source>
+                                    </sources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>add generated sources</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>add-source</goal>
+                                </goals>
+                                <configuration>
+                                    <sources>
+                                        <source>${project.build.directory}/generated-sources/annotations</source>
+                                        <source>src/main/java</source>
+                                        <source>src/main/kotlin</source>
+                                    </sources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>add generated test sources</id>
+                                <phase>generate-test-sources</phase>
+                                <goals>
+                                    <goal>add-test-source</goal>
+                                </goals>
+                                <configuration>
+                                    <sources>
+                                        <source>${project.build.directory}/generated-test-sources/test-annotations
+                                        </source>
+                                        <source>src/test/java</source>
+                                        <source>src/test/kotlin</source>
+                                    </sources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

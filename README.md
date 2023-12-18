@@ -1,10 +1,14 @@
 # This is the base definition of the versions used by my projects.
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-dependencies/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-dependencies)
+[//]: # ()
+[//]: # ([![Maven Central]&#40;https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-dependencies/badge.svg&#41;]&#40;https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-dependencies&#41;)
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c1133e6bd62d49d39c79c5b58d31c661)](https://app.codacy.com/app/sven-ruppert/rapidpm-dependencies?utm_source=github.com&utm_medium=referral&utm_content=RapidPM/rapidpm-dependencies&utm_campaign=badger)
-![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/RapidPM/rapidpm-dependencies?style=plastic)
-![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/RapidPM/rapidpm-dependencies)
+[//]: # ()
+[//]: # ([![Codacy Badge]&#40;https://api.codacy.com/project/badge/Grade/c1133e6bd62d49d39c79c5b58d31c661&#41;]&#40;https://app.codacy.com/app/sven-ruppert/rapidpm-dependencies?utm_source=github.com&utm_medium=referral&utm_content=RapidPM/rapidpm-dependencies&utm_campaign=badger&#41;)
+
+[//]: # (![Libraries.io dependency status for GitHub repo]&#40;https://img.shields.io/librariesio/github/RapidPM/rapidpm-dependencies?style=plastic&#41;)
+
+[//]: # (![Snyk Vulnerabilities for GitHub Repo]&#40;https://img.shields.io/snyk/vulnerabilities/github/RapidPM/rapidpm-dependencies&#41;)
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
@@ -13,16 +17,22 @@
 
 
 ## Version's
+### 05.00.00-SRU - BREAKING CHANGE
+With version 5.x I will switch the namespace from org.rapidpm to com.svenruppert
+This has to do with organisational requirements on my side.
+I will move this repo to the Github organisation **svenruppert**.
+The license will be still the same. The change on your side, 
+should be only the declaration of the parent pom.
 
-### Backlog
-* replace commercial Testbench with an OpenSource Free alternative
-* add custom TestEngine for VaadinTests
-* add OSS Charting WebComponents
+* version updates
+* maven plugin updates
+* compile JDK will be 21 LTS
+* switch from docker to podman - _tools/docker/develop
 
-### Next
-* beginning with this release, Vaadin Versions are not inc every time, anymore. use the property.
-* added ServiceProvider<T>
-* Vxx - Vaadin Versions are only releases. Vaadin is to instabile with pre releases.
+### 04.08.00-RPM
+* version updates
+* maven plugins updates
+
 
 ### 04.07.03-RPM
 * version updates
@@ -148,34 +158,11 @@ The default is mostly the latest maven version.
 
 
 ## Properties
-* **minimum-maven.version** - setting required maven version, default is 3.3.9
+* **minimum-maven.version** - setting required maven version, default is latest version
 * **activateJavaOnly** - true = JDK only / false JDK plus Kotlin activated
-* **vaadin-productionMode** - activated inside the vaadin-dependencies the production mode
-* **vaadin-install-nodejs** - true or false (default)
-    * frontend-maven-plugin.nodeVersion
-    * frontend-maven-plugin.npmVersion
-    * frontend-maven-plugin.installDirectory - default value - target
-* **kotlin.compiler.jvmTarget** - default 1.8
+* **kotlin.compiler.jvmTarget** - default latest release
 * **kotlin.version** - default mostly latest version
 * **kotlin.compiler.incremental** - default true
-
-
-## Profiles
-
-### _nodejs_npm - For NodeJS && NMP installation
-Some Webprojects need NodeJS and NPM installed. Vaadin 14 Flow is one example.
-To configure this you can use the following properties.
-
-```xml
-    <!--Vaadin-->
-    <vaadin-productionMode>false</vaadin-productionMode>
-    <vaadin-install-nodejs>true</vaadin-install-nodejs>
-    <frontend-maven-plugin.nodeVersion>v4.6.0</frontend-maven-plugin.nodeVersion>
-    <frontend-maven-plugin.npmVersion>2.15.9</frontend-maven-plugin.npmVersion>
-    <frontend-maven-plugin.installDirectory>target</frontend-maven-plugin.installDirectory>
-```
-
-
 
 ## switched to new version string format
 To make search/replace easier, I started with a new version format.

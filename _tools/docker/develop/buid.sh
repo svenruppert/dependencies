@@ -1,3 +1,4 @@
+#!/bin/bash
 #
 # Copyright © 2013 Sven Ruppert (sven.ruppert@gmail.com)
 #
@@ -14,19 +15,10 @@
 # limitations under the License.
 #
 
-version: '3.5'
+    echo start building the images
+    podman build -t svenruppert/zulu-dev .
 
-services:
-  deploy:
-    image: svenruppert/deploy:21.0.1-zulu
-    container_name: deploy-rpm-dependencies
-    hostname: deploy-rpm-dependencies
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - $PWD/:/usr/src/mymaven
-    working_dir: /usr/src/mymaven
-    #    command: 'mvn help:active-profiles
-    command: 'mvn license:format clean deploy
-                    -P_release_prepare
-                    -P_release_sign-artifacts
-                    -Dmaven.test.skip=true'
+    podman tag svenruppert/zulu-dev:latest svenruppert/zulu-dev:21.0.1-zulu
+    #docker push svenruppert/zulu-dev:21.0.1-zulu
+
+    #docker image rm svenruppert/zulu-dev:latest
