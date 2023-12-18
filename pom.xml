@@ -26,7 +26,7 @@
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <version>05.00.00-SRU</version>
+    <version>05.00.00-RPM</version>
 
     <inceptionYear>2013</inceptionYear>
     <organization>
@@ -72,8 +72,10 @@
     </licenses>
 
     <properties>
-        <deploy-repo-url>https://repo.maven.apache.org/maven2/</deploy-repo-url>
-        <deploy-repo-snapshots-url>https://repo.maven.apache.org/maven2/</deploy-repo-snapshots-url>
+<!--        <deploy-repo-url>https://repo.maven.apache.org/maven2/</deploy-repo-url>-->
+        <deploy-repo-url>https://maven.pkg.github.com/svenruppert/dependencies/</deploy-repo-url>
+<!--        <deploy-repo-snapshots-url>https://repo.maven.apache.org/maven2/</deploy-repo-snapshots-url>-->
+        <deploy-repo-snapshots-url>https://maven.pkg.github.com/svenruppert/dependencies/</deploy-repo-snapshots-url>
 
         <activateJavaOnly>false</activateJavaOnly>
 
@@ -1088,7 +1090,7 @@
             <plugin>
                 <groupId>de.sormuras.junit</groupId>
                 <artifactId>junit-platform-maven-plugin</artifactId>
-                <version>1.0.0-M5</version>
+                <version>1.1.7</version>
                 <extensions>true</extensions> <!-- Necessary to execute it in 'test' phase. -->
                 <configuration>
                     <timeout>${junit-platform-maven-plugin.timeout}</timeout>
@@ -1266,7 +1268,7 @@
                                 <!--                <additionalOption>-html5</additionalOption>-->
                                 <!--                <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>-->
                             </additionalOptions>
-                            <destDir>target/doc/apidoc/</destDir>
+<!--                            <destDir>target/doc/apidoc/</destDir>-->
                         </configuration>
                     </plugin>
                     <plugin>

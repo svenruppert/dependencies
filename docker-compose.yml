@@ -18,7 +18,7 @@ version: '3.5'
 
 services:
   deploy:
-    image: svenruppert/deploy:1.8.0-222
+    image: svenruppert/deploy:21.0.1-zulu
     container_name: deploy-rpm-dependencies
     hostname: deploy-rpm-dependencies
     volumes:
@@ -29,5 +29,4 @@ services:
     command: 'mvn license:format clean deploy
                     -P_release_prepare
                     -P_release_sign-artifacts
-                    -Pvaadin-install-nodejs
                     -Dmaven.test.skip=true'
