@@ -22,8 +22,8 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.rapidpm</groupId>
-    <artifactId>core-dependencies</artifactId>
+    <groupId>com.svenruppert</groupId>
+    <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
     <version>05.00.00-RPM</version>
@@ -72,8 +72,10 @@
     </licenses>
 
     <properties>
-        <deploy-repo-url>https://repo.maven.apache.org/maven2/</deploy-repo-url>
-        <deploy-repo-snapshots-url>https://repo.maven.apache.org/maven2/</deploy-repo-snapshots-url>
+<!--        <deploy-repo-url>https://repo.maven.apache.org/maven2/</deploy-repo-url>-->
+        <deploy-repo-url>https://maven.pkg.github.com/svenruppert/dependencies/</deploy-repo-url>
+<!--        <deploy-repo-snapshots-url>https://repo.maven.apache.org/maven2/</deploy-repo-snapshots-url>-->
+        <deploy-repo-snapshots-url>https://maven.pkg.github.com/svenruppert/dependencies/</deploy-repo-snapshots-url>
 
         <activateJavaOnly>false</activateJavaOnly>
 
@@ -1266,7 +1268,7 @@
                                 <!--                <additionalOption>-html5</additionalOption>-->
                                 <!--                <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>-->
                             </additionalOptions>
-                            <destDir>target/doc/apidoc/</destDir>
+<!--                            <destDir>target/doc/apidoc/</destDir>-->
                         </configuration>
                     </plugin>
                     <plugin>
