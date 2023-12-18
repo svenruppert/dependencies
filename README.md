@@ -18,8 +18,6 @@
 
 ## Version's
 ### 05.00.00-SRU - BREAKING CHANGE
-With version 5.x I will switch teh namespace from org.rapidpm to com.svenruppert
-This has to do with organisational requirements on my side.
 I will move this repo to the Github organisation **svenruppert**.
 The license will be still the same. The change on your side, 
 should be only the declaration of the parent pom.

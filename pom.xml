@@ -22,11 +22,11 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.svenruppert</groupId>
-    <artifactId>dependencies</artifactId>
+    <groupId>org.rapidpm</groupId>
+    <artifactId>core-dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <version>05.00.00-SRU</version>
+    <version>05.00.00-SNAPSHOT</version>
 
     <inceptionYear>2013</inceptionYear>
     <organization>
