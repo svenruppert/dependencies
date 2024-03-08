@@ -2,6 +2,7 @@
 
 [//]: # ()
 [//]: # ([![Maven Central]&#40;https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-dependencies/badge.svg&#41;]&#40;https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-dependencies&#41;)
+[![](https://jitpack.io/v/svenruppert/dependencies.svg)](https://jitpack.io/#svenruppert/dependencies)
 
 [//]: # ()
 [//]: # ([![Codacy Badge]&#40;https://api.codacy.com/project/badge/Grade/c1133e6bd62d49d39c79c5b58d31c661&#41;]&#40;https://app.codacy.com/app/sven-ruppert/rapidpm-dependencies?utm_source=github.com&utm_medium=referral&utm_content=RapidPM/rapidpm-dependencies&utm_campaign=badger&#41;)
@@ -17,6 +18,14 @@
 
 
 ## Version's
+### 05.00.01-SRU
+Fixed the pitest pattern
+<pitest-prod-classes>com.svenruppert.*</pitest-prod-classes>
+<pitest-test-classes>junit.com.svenruppert.*</pitest-test-classes>
+
+removed the distribution repo definitions, because jitpack is doing it.
+
+
 ### 05.00.00-SRU - BREAKING CHANGE
 With version 5.x I will switch the namespace from org.rapidpm to com.svenruppert
 This has to do with organisational requirements on my side.
