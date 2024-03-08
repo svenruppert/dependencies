@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-FROM debian:bookworm-slim
+FROM debian:trixie-slim
 
 LABEL maintainer="Sven Ruppert sven.ruppert@gmail.com" description="zulu-dev-fx:21.0.1-zulu"
 
