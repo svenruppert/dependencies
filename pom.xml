@@ -89,8 +89,8 @@
 
         <!--Kotlin-->
         <kotlin.compiler.jvmTarget>${jdk.version}</kotlin.compiler.jvmTarget>
-        <kotlin.version>2.0.0-BETA4</kotlin.version>
-        <kotlin.compiler.version>2.0.0-BETA4</kotlin.compiler.version>
+        <kotlin.version>1.8.21</kotlin.version>
+        <kotlin.compiler.version>1.8.21</kotlin.compiler.version>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
         <minimum-maven.version>3.9.6</minimum-maven.version>
