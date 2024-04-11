@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.github.svenruppert</groupId>
+        <artifactId>dependencies</artifactId>
+        <version>05.00.02-SRU</version>
+    </parent>
+
+    <artifactId>core</artifactId>
+
+    <name>SvenRuppert - Dependencies - Core</name>
+    <properties>
+<!--        <maven.compiler.source>21</maven.compiler.source>-->
+<!--        <maven.compiler.target>21</maven.compiler.target>-->
+<!--        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+    </properties>
+
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>libs-release</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>jitpack</id>
+            <name>libs-release</name>
+            <url>https://jitpack.io/</url>
+        </repository>
+
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <id>snapshots</id>
+            <name>libs-snapshot</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>libs-release</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <id>snapshots</id>
+            <name>libs-snapshot</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </pluginRepository>
+    </pluginRepositories>
+    <dependencies>
+        <dependency>
+            <groupId>com.github.svenruppert</groupId>
+            <artifactId>logger-adapter</artifactId>
+            <version>05.00.02-SRU</version>
+        </dependency>
+    </dependencies>
+
+</project>
