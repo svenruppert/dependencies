@@ -17,8 +17,10 @@
 Project is build via JitPack
 
 ## Version's
-### 05.00.04-SRU
+### 05.00.05-SRU
 updated plugins and minimum maven version to 3.9.6
+### 05.00.04-SRU
+skipped
 
 ### 05.00.03-SRU
 Switched to the groupd ID com.github.svenruppert
