@@ -26,7 +26,7 @@
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <version>05.00.03-SRU</version>
+    <version>05.00.04-SRU</version>
 
     <inceptionYear>2013</inceptionYear>
     <organization>
@@ -93,7 +93,7 @@
         <kotlin.compiler.version>1.9.23</kotlin.compiler.version>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
-        <minimum-maven.version>3.9.1</minimum-maven.version>
+        <minimum-maven.version>3.9.6</minimum-maven.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -785,7 +785,7 @@
                 <plugin>
                     <groupId>com.github.webdriverextensions</groupId>
                     <artifactId>webdriverextensions-maven-plugin</artifactId>
-                    <version>3.4.0</version>
+                    <version>4.0.0</version>
                 </plugin>
                 <plugin>
                     <groupId>de.sormuras.junit</groupId>

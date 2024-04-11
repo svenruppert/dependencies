@@ -17,6 +17,9 @@
 Project is build via JitPack
 
 ## Version's
+### 05.00.04-SRU
+updated plugins and minimum maven version to 4.0.0
+
 ### 05.00.03-SRU
 Switched to the groupd ID com.github.svenruppert
 because custom domain names (com.svenruppert) are not working properly with Jitpack.
