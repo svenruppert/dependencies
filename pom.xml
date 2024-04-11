@@ -22,11 +22,11 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.svenruppert</groupId>
+    <groupId>com.github.svenruppert</groupId>
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <version>05.00.02-SRU</version>
+    <version>05.00.03-SRU</version>
 
     <inceptionYear>2013</inceptionYear>
     <organization>
@@ -181,6 +181,12 @@
     </pluginRepositories>
 
     <dependencyManagement>
+
+
+
+
+
+
         <!--project versions-->
         <dependencies>
             <!--API´s-->
@@ -540,6 +546,9 @@
         <!--    <module>core-properties</module>-->
         <!--<module>core-reflection</module>-->
         <!--    <module>vaadin-dependencies</module>-->
+        <module>logger-adapter</module>
+        <module>core</module>
+        <module>core-properties</module>
     </modules>
 
 

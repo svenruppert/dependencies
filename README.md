@@ -14,10 +14,25 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Info
-**Project is build with svenruppert/deploy:21.0.1-zulu docker image !!**
-
+Project is build via JitPack
 
 ## Version's
+### 05.00.03-SRU
+Switched to the groupd ID com.github.svenruppert
+because custom domain names (com.svenruppert) are not working properly with Jitpack.
+Java Packages are still under com.svenruppert
+
+Added the Modules:
+- Logger Adapter
+- Core 
+- Core Properties
+
+I archived the original git repos and merged everything into this one.
+With this, building new versions is way easier or better - less work. :-)
+
+### 05.00.02-SRU
+updated versions
+
 ### 05.00.01-SRU
 Fixed the pitest pattern
 <pitest-prod-classes>com.svenruppert.*</pitest-prod-classes>
