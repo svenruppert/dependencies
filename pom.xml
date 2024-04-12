@@ -26,7 +26,7 @@
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <version>05.00.06-SRU</version>
+    <version>05.00.07-SRU</version>
 
     <inceptionYear>2013</inceptionYear>
     <organization>

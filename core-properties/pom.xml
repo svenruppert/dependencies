@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.github.svenruppert</groupId>
         <artifactId>dependencies</artifactId>
-        <version>05.00.06-SRU</version>
+        <version>05.00.07-SRU</version>
     </parent>
 
     <artifactId>core-properties</artifactId>
@@ -69,7 +69,7 @@
         <dependency>
             <groupId>com.github.svenruppert</groupId>
             <artifactId>logger-adapter</artifactId>
-            <version>05.00.06-SRU</version>
+            <version>05.00.07-SRU</version>
         </dependency>
     </dependencies>
 </project>

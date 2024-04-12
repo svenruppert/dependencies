@@ -17,6 +17,11 @@
 Project is build via JitPack
 
 ## Version's
+## 05.00.07-SRU
+one round for jitpack... 
+
+## 05.00.06-SRU
+fixed jitpack.yml
 ### 05.00.05-SRU
 updated plugins and minimum maven version to 3.9.6
 ### 05.00.04-SRU
