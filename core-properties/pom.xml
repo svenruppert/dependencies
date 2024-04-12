@@ -6,10 +6,12 @@
     <parent>
         <groupId>com.github.svenruppert</groupId>
         <artifactId>dependencies</artifactId>
-        <version>05.00.05-SRU</version>
+        <version>05.00.06-SRU</version>
     </parent>
 
     <artifactId>core-properties</artifactId>
+    <packaging>jar</packaging>
+
     <name>SvenRuppert - Dependencies - Core Properties</name>
     <properties>
 <!--        <maven.compiler.source>21</maven.compiler.source>-->
@@ -67,7 +69,7 @@
         <dependency>
             <groupId>com.github.svenruppert</groupId>
             <artifactId>logger-adapter</artifactId>
-            <version>05.00.05-SRU</version>
+            <version>05.00.06-SRU</version>
         </dependency>
     </dependencies>
 </project>
