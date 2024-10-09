@@ -2,6 +2,7 @@
 
 [//]: # ()
 [//]: # ([![Maven Central]&#40;https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-dependencies/badge.svg&#41;]&#40;https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-dependencies&#41;)
+[![](https://jitpack.io/v/svenruppert/dependencies.svg)](https://jitpack.io/#svenruppert/dependencies)
 
 [//]: # ()
 [//]: # ([![Codacy Badge]&#40;https://api.codacy.com/project/badge/Grade/c1133e6bd62d49d39c79c5b58d31c661&#41;]&#40;https://app.codacy.com/app/sven-ruppert/rapidpm-dependencies?utm_source=github.com&utm_medium=referral&utm_content=RapidPM/rapidpm-dependencies&utm_campaign=badger&#41;)
@@ -13,10 +14,67 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Info
-**Project is build with svenruppert/deploy:21.0.1-zulu docker image !!**
 
 
 ## Version's
+
+## 06.00.00-SRU - BREAKING CHANGE
+Switched away from jitpack, it is just not working!
+Started with new Major-Version for current developments and to get rid of the example stuff 
+that I have done for jitpack.
+
+Using JDK 21 (LTS) - managed by sdkman
+sdk install java 21.0.4-tem
+sdk use java 21.0.4-tem
+
+Used infrastructure for development
+### Reposilite
+java -Xmx32M -jar reposilite-3.5.18-all.jar
+inside the console you need to generate a token first
+token-generate --secret=admin admin m
+This will generate a user admin with pwd admin and the role manager
+
+Add maven central https://repo1.maven.org/maven2/ to the mirrored repos.
+
+
+
+
+
+
+## 05.00.07-SRU
+one round for jitpack... 
+
+## 05.00.06-SRU
+fixed jitpack.yml
+### 05.00.05-SRU
+updated plugins and minimum maven version to 3.9.6
+### 05.00.04-SRU
+skipped
+
+### 05.00.03-SRU
+Switched to the groupd ID com.github.svenruppert
+because custom domain names (com.svenruppert) are not working properly with Jitpack.
+Java Packages are still under com.svenruppert
+
+Added the Modules:
+- Logger Adapter
+- Core 
+- Core Properties
+
+I archived the original git repos and merged everything into this one.
+With this, building new versions is way easier or better - less work. :-)
+
+### 05.00.02-SRU
+updated versions
+
+### 05.00.01-SRU
+Fixed the pitest pattern
+<pitest-prod-classes>com.svenruppert.*</pitest-prod-classes>
+<pitest-test-classes>junit.com.svenruppert.*</pitest-test-classes>
+
+removed the distribution repo definitions, because jitpack is doing it.
+
+
 ### 05.00.00-SRU - BREAKING CHANGE
 With version 5.x I will switch the namespace from org.rapidpm to com.svenruppert
 This has to do with organisational requirements on my side.

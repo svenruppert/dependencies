@@ -26,7 +26,7 @@
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <version>05.00.00-SRU</version>
+    <version>06.00.00-SNAPSHOT</version>
 
     <inceptionYear>2013</inceptionYear>
     <organization>
@@ -72,25 +72,23 @@
     </licenses>
 
     <properties>
-<!--        <deploy-repo-url>https://repo.maven.apache.org/maven2/</deploy-repo-url>-->
-        <deploy-repo-url>https://maven.pkg.github.com/svenruppert/dependencies/</deploy-repo-url>
-<!--        <deploy-repo-snapshots-url>https://repo.maven.apache.org/maven2/</deploy-repo-snapshots-url>-->
-        <deploy-repo-snapshots-url>https://maven.pkg.github.com/svenruppert/dependencies/</deploy-repo-snapshots-url>
+        <deploy-repo-url>http://0.0.0.0:8080/releases</deploy-repo-url>
+<!--        <deploy-repo-url>https://maven.pkg.github.com/svenruppert/dependencies/</deploy-repo-url>-->
+        <deploy-repo-snapshots-url>http://0.0.0.0:8080/snapshots</deploy-repo-snapshots-url>
+<!--        <deploy-repo-snapshots-url>https://maven.pkg.github.com/svenruppert/dependencies/</deploy-repo-snapshots-url>-->
+
         <activateJavaOnly>false</activateJavaOnly>
         <jdk.version>21</jdk.version>
         <!--technical-->
-        <!--<maven.compiler.release>8</maven.compiler.release> &lt;!&ndash;release makes source and target&ndash;&gt;-->
         <maven.compiler.source>${jdk.version}</maven.compiler.source> <!--redundant, but IntelliJ doesn't-->
         <maven.compiler.target>${jdk.version}</maven.compiler.target> <!--use release when importing-->
-
-        <!--    <maven.compiler.testRelease>11</maven.compiler.testRelease>-->
         <maven.compiler.testSource>${jdk.version}</maven.compiler.testSource>
         <maven.compiler.testTarget>${jdk.version}</maven.compiler.testTarget>
 
         <!--Kotlin-->
         <kotlin.compiler.jvmTarget>${jdk.version}</kotlin.compiler.jvmTarget>
-        <kotlin.version>2.0.0-BETA4</kotlin.version>
-        <kotlin.compiler.version>2.0.0-BETA4</kotlin.compiler.version>
+<!--        <kotlin.version>2.1.0-Beta1</kotlin.version>-->
+<!--        <kotlin.compiler.version>2.1.0-Beta1</kotlin.compiler.version>-->
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
         <minimum-maven.version>3.9.6</minimum-maven.version>
@@ -102,16 +100,12 @@
         <log4j-api.version>2.13.0</log4j-api.version>
 
         <jacoco.version>0.8.10</jacoco.version>
-        <pitest.version>1.15.8</pitest.version>
-        <pitest-prod-classes>org.rapidpm.*</pitest-prod-classes>
-        <pitest-test-classes>junit.org.rapidpm*</pitest-test-classes>
+        <pitest.version>1.17.0</pitest.version>
+        <pitest-prod-classes>com.svenruppert.*</pitest-prod-classes>
+        <pitest-test-classes>junit.com.svenruppert.*</pitest-test-classes>
 
         <!--    <jmh.version>1.26</jmh.version>-->
 
-        <!--TDD jUnit5-->
-        <!--    <junit.jupiter.version>5.7.0</junit.jupiter.version>-->
-        <!--    <junit.platform.version>1.7.0</junit.platform.version>-->
-        <junit-platform-maven-plugin.version>1.1.7</junit-platform-maven-plugin.version>
 
         <opentracing-api.version>0.33.0</opentracing-api.version>
         <asm.version>9.6</asm.version>
@@ -135,52 +129,50 @@
     <repositories>
         <repository>
             <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <id>reposilite-repository-snapshots</id>
+            <name>Reposilite Repository</name>
+            <url>http://0.0.0.0:8080/snapshots</url>
+        </repository>
+        <repository>
+            <id>reposilite-repository-releases</id>
+            <name>Reposilite Repository</name>
+            <url>http://0.0.0.0:8080/releases</url>
+        </repository>
+        <repository>
+            <snapshots>
                 <enabled>false</enabled>
             </snapshots>
             <id>central</id>
             <name>libs-release</name>
             <url>https://repo.maven.apache.org/maven2/</url>
         </repository>
-        <repository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>jitpack</id>
-            <name>libs-release</name>
-            <url>https://jitpack.io/</url>
-        </repository>
 
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <id>snapshots</id>
-            <name>libs-snapshot</name>
-            <url>https://repo.maven.apache.org/maven2/</url>
-        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-            <id>central</id>
-            <name>libs-release</name>
-            <url>https://repo.maven.apache.org/maven2/</url>
+            <id>reposilite-repository-releases</id>
+            <name>Reposilite Repository</name>
+            <url>http://0.0.0.0:8080/releases</url>
         </pluginRepository>
         <pluginRepository>
             <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
+                <enabled>false</enabled>
             </snapshots>
-            <id>snapshots</id>
-            <name>libs-snapshot</name>
+            <id>central</id>
+            <name>libs-release</name>
             <url>https://repo.maven.apache.org/maven2/</url>
         </pluginRepository>
     </pluginRepositories>
 
     <dependencyManagement>
+
+
         <!--project versions-->
         <dependencies>
             <!--API´s-->
@@ -211,34 +203,34 @@
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.14.12</version>
+                <version>1.15.3</version>
             </dependency>
 
             <dependency>
                 <groupId>com.fasterxml.jackson.datatype</groupId>
                 <artifactId>jackson-datatype-jdk8</artifactId>
-                <version>2.17.0-rc1</version>
+                <version>2.18.0</version>
             </dependency>
 
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
-                <version>2.17.0-rc1</version>
+                <version>2.18.0</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
-                <version>2.17.0-rc1</version>
+                <version>2.18.0</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>2.17.0-rc1</version>
+                <version>2.18.0</version>
             </dependency>
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
-                <version>2.10.1</version>
+                <version>2.11.0</version>
                 <optional>true</optional>
                 <!-- case: when no json de/serialization -->
             </dependency>
@@ -254,27 +246,27 @@
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
-                <version>1.16.1</version>
+                <version>1.17.1</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>2.15.1</version>
+                <version>2.17.0</version>
             </dependency>
             <dependency>
                 <groupId>commons-cli</groupId>
                 <artifactId>commons-cli</artifactId>
-                <version>1.6.0</version>
+                <version>1.9.0</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-compress</artifactId>
-                <version>1.26.0</version>
+                <version>1.27.1</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.14.0</version>
+                <version>3.17.0</version>
             </dependency>
             <dependency>
                 <groupId>commons-fileupload</groupId>
@@ -330,7 +322,7 @@
             <dependency>
                 <groupId>com.zaxxer</groupId>
                 <artifactId>HikariCP</artifactId>
-                <version>5.1.0</version>
+                <version>6.0.0</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
@@ -350,38 +342,38 @@
                 <groupId>org.testcontainers</groupId>
                 <artifactId>selenium</artifactId>
                 <scope>test</scope>
-                <version>1.19.7</version>
+                <version>1.20.2</version>
             </dependency>
             <dependency>
                 <groupId>org.testcontainers</groupId>
                 <artifactId>testcontainers</artifactId>
                 <scope>test</scope>
-                <version>1.19.7</version>
+                <version>1.20.2</version>
             </dependency>
 
             <!--jUnit5-->
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-api</artifactId>
-                <version>5.10.2</version>
+                <version>5.11.2</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-params</artifactId>
-                <version>5.10.2</version>
+                <version>5.11.2</version>
             </dependency>
 
             <dependency>
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-launcher</artifactId>
                 <scope>test</scope>
-                <version>1.10.2</version>
+                <version>1.11.2</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-testkit</artifactId>
-                <version>1.10.2</version>
+                <version>1.11.2</version>
                 <scope>test</scope>
             </dependency>
             <!-- Only required to run tests in an IDE that bundles an older version -->
@@ -389,7 +381,7 @@
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
                 <scope>test</scope>
-                <version>5.10.2</version>
+                <version>5.11.2</version>
             </dependency>
 
             <dependency>
@@ -400,19 +392,19 @@
             <dependency>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest</artifactId>
-                <version>1.15.8</version>
+                <version>1.17.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
-                <version>3.25.3</version>
+                <version>3.26.3</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.google.truth</groupId>
                 <artifactId>truth</artifactId>
-                <version>1.4.2</version>
+                <version>1.4.4</version>
                 <scope>test</scope>
             </dependency>
 
@@ -452,7 +444,7 @@
             <dependency>
                 <groupId>io.gatling.highcharts</groupId>
                 <artifactId>gatling-charts-highcharts</artifactId>
-                <version>3.10.4</version>
+                <version>3.12.0</version>
                 <scope>test</scope>
             </dependency>
             <!--tdd-->
@@ -536,10 +528,9 @@
     </dependencyManagement>
 
     <modules>
-        <!--    <module>core</module>-->
-        <!--    <module>core-properties</module>-->
-        <!--<module>core-reflection</module>-->
-        <!--    <module>vaadin-dependencies</module>-->
+        <module>logger-adapter</module>
+        <module>core</module>
+        <module>core-properties</module>
     </modules>
 
 
@@ -601,7 +592,6 @@
         </dependency>
 
 
-
         <!--    <dependency>-->
         <!--      <groupId>net.jcip</groupId>-->
         <!--      <artifactId>jcip-annotations</artifactId>-->
@@ -627,6 +617,16 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.sonatype.central</groupId>
+                    <artifactId>central-publishing-maven-plugin</artifactId>
+                    <version>0.4.0</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <publishingServerId>central</publishingServerId>
+                        <tokenAuth>true</tokenAuth>
+                    </configuration>
+                </plugin>
+                <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>versions-maven-plugin</artifactId>
                     <version>2.16.2</version>
@@ -649,12 +649,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-install-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.1.3</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.1.3</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -669,12 +669,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.12.1</version>
+                    <version>3.13.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.4.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -689,7 +689,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.3.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -699,7 +699,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.3.2</version>
+                    <version>3.4.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -776,7 +776,7 @@
                 <plugin>
                     <groupId>com.github.webdriverextensions</groupId>
                     <artifactId>webdriverextensions-maven-plugin</artifactId>
-                    <version>3.4.0</version>
+                    <version>4.0.0</version>
                 </plugin>
                 <plugin>
                     <groupId>de.sormuras.junit</groupId>
@@ -814,102 +814,102 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
-<!--                <configuration>-->
-<!--                    <ruleSet>-->
-<!--                        <ignoreVersions>-->
-<!--                            <ignoreVersion>-->
-<!--                                <type>regex</type>-->
-<!--                                <version>(?i).*[-_\.]CR[0-9\.]*</version>-->
-<!--                            </ignoreVersion>-->
-<!--                            <ignoreVersion>-->
-<!--                                <type>regex</type>-->
-<!--                                <version>(?i).*[-_\.]rc[0-9\.]*</version>-->
-<!--                            </ignoreVersion>-->
-<!--                            <ignoreVersion>-->
-<!--                                <type>regex</type>-->
-<!--                                <version>(?i).*[-_\.]beta[0-9\.-]*</version>-->
-<!--                            </ignoreVersion>-->
-<!--                            <ignoreVersion>-->
-<!--                                <type>regex</type>-->
-<!--                                <version>(?i).*[-_\.]alpha[0-9\.-]*</version>-->
-<!--                            </ignoreVersion>-->
-<!--                            <ignoreVersion>-->
-<!--                                <type>regex</type>-->
-<!--                                <version>(?i).*[-_\.]Alpha</version>-->
-<!--                            </ignoreVersion>-->
-<!--                            <ignoreVersion>-->
-<!--                                <type>regex</type>-->
-<!--                                <version>(?i).*[-_\.]nightly[0-9\.]*</version>-->
-<!--                            </ignoreVersion>-->
-<!--                            <ignoreVersion>-->
-<!--                                <type>regex</type>-->
-<!--                                <version>(?i).*[-_\.]jboss[0-9\.]*</version>-->
-<!--                            </ignoreVersion>-->
-<!--                            <ignoreVersion>-->
-<!--                                <type>regex</type>-->
-<!--                                <version>(?i).*-atlassian-[0-9\.]*</version>-->
-<!--                            </ignoreVersion>-->
-<!--                            <ignoreVersion>-->
-<!--                                <type>regex</type>-->
-<!--                                <version>(?i).*-jenkins-[0-9\.]*</version>-->
-<!--                            </ignoreVersion>-->
-<!--                            <ignoreVersion>-->
-<!--                                <type>regex</type>-->
-<!--                                <version>.*[-\.]redhat-[0-9]+</version>-->
-<!--                            </ignoreVersion>-->
-<!--                            <ignoreVersion>-->
-<!--                                <type>regex</type>-->
-<!--                                <version>.*-xwiki</version>-->
-<!--                            </ignoreVersion>-->
-<!--                            <ignoreVersion>-->
-<!--                                <version>9c6abc2</version>-->
-<!--                            </ignoreVersion>-->
-<!--                            <ignoreVersion>-->
-<!--                                <type>regex</type>-->
-<!--                                <version>.*-tc</version>-->
-<!--                            </ignoreVersion>-->
-<!--                            <ignoreVersion>-->
-<!--                                <type>regex</type>-->
-<!--                                <version>.*-r\d+</version>-->
-<!--                            </ignoreVersion>-->
-<!--                            <ignoreVersion>-->
-<!--                                <type>regex</type>-->
-<!--                                <version>.*-Draft\d+</version>-->
-<!--                            </ignoreVersion>-->
-<!--                            <ignoreVersion>-->
-<!--                                <type>regex</type>-->
-<!--                                <version>\d{4,}.*</version>-->
-<!--                            </ignoreVersion>  &lt;!&ndash; z.B. commons-collections:commons-collections ... 3.2.1.redhat-7 -> 20040117.000000 &ndash;&gt;-->
-<!--                        </ignoreVersions>-->
-<!--                        <rules>-->
-<!--                            <rule groupId="org.cache2k" comparisonMethod="maven">-->
-<!--                                <ignoreVersions>-->
-<!--                                    <ignoreVersion>1.3.1.Alpha</ignoreVersion>-->
-<!--                                </ignoreVersions>-->
-<!--                            </rule>-->
-<!--                            <rule groupId="org.slf4j" comparisonMethod="maven">-->
-<!--                            </rule>-->
-<!--                            <rule groupId="org.apache.maven.plugins" artifactId="maven-surefire-plugin"-->
-<!--                                  comparisonMethod="maven">-->
-<!--                                &lt;!&ndash;                                <ignoreVersions>&ndash;&gt;-->
-<!--                                &lt;!&ndash;                                    <ignoreVersion>9c6abc2</ignoreVersion>&ndash;&gt;-->
-<!--                                &lt;!&ndash;                                </ignoreVersions>&ndash;&gt;-->
-<!--                            </rule>-->
-<!--                            <rule groupId="org.codehaus.mojo" artifactId="properties-maven-plugin"-->
-<!--                                  comparisonMethod="maven">-->
-<!--                                &lt;!&ndash;                                <ignoreVersions>&ndash;&gt;-->
-<!--                                &lt;!&ndash;                                    <ignoreVersion type="regex">.*-tc</ignoreVersion>&ndash;&gt;-->
-<!--                                &lt;!&ndash;                                </ignoreVersions>&ndash;&gt;-->
-<!--                            </rule>-->
-<!--                            <rule groupId="javax.portlet" artifactId="portlet-api" comparisonMethod="maven">-->
-<!--                                &lt;!&ndash;                                <ignoreVersions>&ndash;&gt;-->
-<!--                                &lt;!&ndash;                                    <ignoreVersion type="regex">.*-r\d+</ignoreVersion>&ndash;&gt;-->
-<!--                                &lt;!&ndash;                                    <ignoreVersion type="regex">.*-Draft\d+</ignoreVersion>&ndash;&gt;-->
-<!--                                &lt;!&ndash;                                </ignoreVersions>&ndash;&gt;-->
-<!--                            </rule>-->
-<!--                        </rules>-->
-<!--                    </ruleSet>-->
-<!--                </configuration>-->
+                <!--                <configuration>-->
+                <!--                    <ruleSet>-->
+                <!--                        <ignoreVersions>-->
+                <!--                            <ignoreVersion>-->
+                <!--                                <type>regex</type>-->
+                <!--                                <version>(?i).*[-_\.]CR[0-9\.]*</version>-->
+                <!--                            </ignoreVersion>-->
+                <!--                            <ignoreVersion>-->
+                <!--                                <type>regex</type>-->
+                <!--                                <version>(?i).*[-_\.]rc[0-9\.]*</version>-->
+                <!--                            </ignoreVersion>-->
+                <!--                            <ignoreVersion>-->
+                <!--                                <type>regex</type>-->
+                <!--                                <version>(?i).*[-_\.]beta[0-9\.-]*</version>-->
+                <!--                            </ignoreVersion>-->
+                <!--                            <ignoreVersion>-->
+                <!--                                <type>regex</type>-->
+                <!--                                <version>(?i).*[-_\.]alpha[0-9\.-]*</version>-->
+                <!--                            </ignoreVersion>-->
+                <!--                            <ignoreVersion>-->
+                <!--                                <type>regex</type>-->
+                <!--                                <version>(?i).*[-_\.]Alpha</version>-->
+                <!--                            </ignoreVersion>-->
+                <!--                            <ignoreVersion>-->
+                <!--                                <type>regex</type>-->
+                <!--                                <version>(?i).*[-_\.]nightly[0-9\.]*</version>-->
+                <!--                            </ignoreVersion>-->
+                <!--                            <ignoreVersion>-->
+                <!--                                <type>regex</type>-->
+                <!--                                <version>(?i).*[-_\.]jboss[0-9\.]*</version>-->
+                <!--                            </ignoreVersion>-->
+                <!--                            <ignoreVersion>-->
+                <!--                                <type>regex</type>-->
+                <!--                                <version>(?i).*-atlassian-[0-9\.]*</version>-->
+                <!--                            </ignoreVersion>-->
+                <!--                            <ignoreVersion>-->
+                <!--                                <type>regex</type>-->
+                <!--                                <version>(?i).*-jenkins-[0-9\.]*</version>-->
+                <!--                            </ignoreVersion>-->
+                <!--                            <ignoreVersion>-->
+                <!--                                <type>regex</type>-->
+                <!--                                <version>.*[-\.]redhat-[0-9]+</version>-->
+                <!--                            </ignoreVersion>-->
+                <!--                            <ignoreVersion>-->
+                <!--                                <type>regex</type>-->
+                <!--                                <version>.*-xwiki</version>-->
+                <!--                            </ignoreVersion>-->
+                <!--                            <ignoreVersion>-->
+                <!--                                <version>9c6abc2</version>-->
+                <!--                            </ignoreVersion>-->
+                <!--                            <ignoreVersion>-->
+                <!--                                <type>regex</type>-->
+                <!--                                <version>.*-tc</version>-->
+                <!--                            </ignoreVersion>-->
+                <!--                            <ignoreVersion>-->
+                <!--                                <type>regex</type>-->
+                <!--                                <version>.*-r\d+</version>-->
+                <!--                            </ignoreVersion>-->
+                <!--                            <ignoreVersion>-->
+                <!--                                <type>regex</type>-->
+                <!--                                <version>.*-Draft\d+</version>-->
+                <!--                            </ignoreVersion>-->
+                <!--                            <ignoreVersion>-->
+                <!--                                <type>regex</type>-->
+                <!--                                <version>\d{4,}.*</version>-->
+                <!--                            </ignoreVersion>  &lt;!&ndash; z.B. commons-collections:commons-collections ... 3.2.1.redhat-7 -> 20040117.000000 &ndash;&gt;-->
+                <!--                        </ignoreVersions>-->
+                <!--                        <rules>-->
+                <!--                            <rule groupId="org.cache2k" comparisonMethod="maven">-->
+                <!--                                <ignoreVersions>-->
+                <!--                                    <ignoreVersion>1.3.1.Alpha</ignoreVersion>-->
+                <!--                                </ignoreVersions>-->
+                <!--                            </rule>-->
+                <!--                            <rule groupId="org.slf4j" comparisonMethod="maven">-->
+                <!--                            </rule>-->
+                <!--                            <rule groupId="org.apache.maven.plugins" artifactId="maven-surefire-plugin"-->
+                <!--                                  comparisonMethod="maven">-->
+                <!--                                &lt;!&ndash;                                <ignoreVersions>&ndash;&gt;-->
+                <!--                                &lt;!&ndash;                                    <ignoreVersion>9c6abc2</ignoreVersion>&ndash;&gt;-->
+                <!--                                &lt;!&ndash;                                </ignoreVersions>&ndash;&gt;-->
+                <!--                            </rule>-->
+                <!--                            <rule groupId="org.codehaus.mojo" artifactId="properties-maven-plugin"-->
+                <!--                                  comparisonMethod="maven">-->
+                <!--                                &lt;!&ndash;                                <ignoreVersions>&ndash;&gt;-->
+                <!--                                &lt;!&ndash;                                    <ignoreVersion type="regex">.*-tc</ignoreVersion>&ndash;&gt;-->
+                <!--                                &lt;!&ndash;                                </ignoreVersions>&ndash;&gt;-->
+                <!--                            </rule>-->
+                <!--                            <rule groupId="javax.portlet" artifactId="portlet-api" comparisonMethod="maven">-->
+                <!--                                &lt;!&ndash;                                <ignoreVersions>&ndash;&gt;-->
+                <!--                                &lt;!&ndash;                                    <ignoreVersion type="regex">.*-r\d+</ignoreVersion>&ndash;&gt;-->
+                <!--                                &lt;!&ndash;                                    <ignoreVersion type="regex">.*-Draft\d+</ignoreVersion>&ndash;&gt;-->
+                <!--                                &lt;!&ndash;                                </ignoreVersions>&ndash;&gt;-->
+                <!--                            </rule>-->
+                <!--                        </rules>-->
+                <!--                    </ruleSet>-->
+                <!--                </configuration>-->
             </plugin>
 
             <plugin>
@@ -982,7 +982,7 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>10.14.0</version> <!-- Checkstyle version -->
+                        <version>10.18.2</version> <!-- Checkstyle version -->
                     </dependency>
                 </dependencies>
                 <executions>
@@ -1119,29 +1119,29 @@
                     <!--</tags>-->
                 </configuration>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.jacoco</groupId>-->
-<!--                <artifactId>jacoco-maven-plugin</artifactId>-->
-<!--                <version>${jacoco.version}</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>pre-unit-test</id>-->
-<!--                        <goals>-->
-<!--                            <goal>prepare-agent</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <propertyName>jacoco.java.option</propertyName>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                    <execution>-->
-<!--                        <id>post-unit-test</id>-->
-<!--                        <phase>test</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>report</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <groupId>org.jacoco</groupId>-->
+            <!--                <artifactId>jacoco-maven-plugin</artifactId>-->
+            <!--                <version>${jacoco.version}</version>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>pre-unit-test</id>-->
+            <!--                        <goals>-->
+            <!--                            <goal>prepare-agent</goal>-->
+            <!--                        </goals>-->
+            <!--                        <configuration>-->
+            <!--                            <propertyName>jacoco.java.option</propertyName>-->
+            <!--                        </configuration>-->
+            <!--                    </execution>-->
+            <!--                    <execution>-->
+            <!--                        <id>post-unit-test</id>-->
+            <!--                        <phase>test</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>report</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
         </plugins>
     </build>
 
@@ -1158,19 +1158,19 @@
                     </reportSet>
                 </reportSets>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.jacoco</groupId>-->
-<!--                <artifactId>jacoco-maven-plugin</artifactId>-->
-<!--                <version>${jacoco.version}</version>-->
-<!--                <reportSets>-->
-<!--                    <reportSet>-->
-<!--                        <reports>-->
-<!--                            &lt;!&ndash; select non-aggregate reports &ndash;&gt;-->
-<!--                            <report>report</report>-->
-<!--                        </reports>-->
-<!--                    </reportSet>-->
-<!--                </reportSets>-->
-<!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <groupId>org.jacoco</groupId>-->
+            <!--                <artifactId>jacoco-maven-plugin</artifactId>-->
+            <!--                <version>${jacoco.version}</version>-->
+            <!--                <reportSets>-->
+            <!--                    <reportSet>-->
+            <!--                        <reports>-->
+            <!--                            &lt;!&ndash; select non-aggregate reports &ndash;&gt;-->
+            <!--                            <report>report</report>-->
+            <!--                        </reports>-->
+            <!--                    </reportSet>-->
+            <!--                </reportSets>-->
+            <!--            </plugin>-->
         </plugins>
     </reporting>
 
@@ -1275,7 +1275,7 @@
                                 <!--                <additionalOption>-html5</additionalOption>-->
                                 <!--                <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>-->
                             </additionalOptions>
-<!--                            <destDir>target/doc/apidoc/</destDir>-->
+                            <!--                            <destDir>target/doc/apidoc/</destDir>-->
                         </configuration>
                     </plugin>
                     <plugin>
@@ -1432,30 +1432,35 @@
                 <dependency>
                     <groupId>org.jetbrains.kotlin</groupId>
                     <artifactId>kotlin-stdlib-jdk8</artifactId>
-                    <version>${kotlin.version}</version>
+<!--                    <version>${kotlin.version}</version>-->
+                                        <version>2.1.0-Beta1</version>
                 </dependency>
 
                 <dependency>
                     <groupId>org.jetbrains.kotlin</groupId>
                     <artifactId>kotlin-reflect</artifactId>
-                    <version>${kotlin.version}</version>
+<!--                    <version>${kotlin.version}</version>-->
+                                        <version>2.1.0-Beta1</version>
                 </dependency>
                 <dependency>
                     <groupId>org.jetbrains.kotlin</groupId>
                     <artifactId>kotlin-test-junit</artifactId>
-                    <version>${kotlin.version}</version>
+<!--                    <version>${kotlin.version}</version>-->
+                                        <version>2.1.0-Beta1</version>
                     <scope>test</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.jetbrains.kotlin</groupId>
                     <artifactId>kotlin-test-junit5</artifactId>
-                    <version>${kotlin.version}</version>
+<!--                    <version>${kotlin.version}</version>-->
+                                        <version>2.1.0-Beta1</version>
                     <scope>test</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.jetbrains.kotlin</groupId>
                     <artifactId>kotlin-test</artifactId>
-                    <version>${kotlin.version}</version>
+<!--                    <version>${kotlin.version}</version>-->
+                                        <version>2.1.0-Beta1</version>
                     <scope>test</scope>
                 </dependency>
 
@@ -1468,7 +1473,8 @@
                             <jvmTarget>${kotlin.compiler.jvmTarget}</jvmTarget>
                         </configuration>
                         <groupId>org.jetbrains.kotlin</groupId>
-                        <version>${kotlin.compiler.version}</version>
+<!--                        <version>${kotlin.compiler.version}</version>-->
+                                                <version>1.9.23</version>
                         <executions>
                             <execution>
                                 <id>compile</id>
