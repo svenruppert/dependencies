@@ -32,8 +32,11 @@ RUN groupadd -g $USER_GID $USER_NAME && \
 	useradd -m -g $USER_GID -u $USER_UID $USER_NAME
 
 # Installing basic packages
+RUN apt-get remove gnupg
+
 RUN apt-get update && \
 	apt-get install -y zip unzip curl && \
+	apt-get install -y gnupg2 && \
 	rm -rf /var/lib/apt/lists/* && \
 	rm -rf /tmp/*
 
@@ -55,4 +58,7 @@ RUN bash -c "source $HOME/.sdkman/bin/sdkman-init.sh && \
 ENV PATH=/root/.sdkman/candidates/java/current/bin:$PATH
 ENV PATH=/root/.sdkman/candidates/maven/current/bin:$PATH
 
+RUN gpg --help
+
 CMD ["mvn"]
+
