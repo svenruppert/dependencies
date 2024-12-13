@@ -72,10 +72,12 @@
     </licenses>
 
     <properties>
-        <deploy-repo-url>http://0.0.0.0:8080/releases</deploy-repo-url>
-<!--        <deploy-repo-url>https://maven.pkg.github.com/svenruppert/dependencies/</deploy-repo-url>-->
-        <deploy-repo-snapshots-url>http://0.0.0.0:8080/snapshots</deploy-repo-snapshots-url>
-<!--        <deploy-repo-snapshots-url>https://maven.pkg.github.com/svenruppert/dependencies/</deploy-repo-snapshots-url>-->
+        <deploy-repo-url>https://repo.maven.apache.org/maven2/releases</deploy-repo-url>
+<!--        <deploy-repo-url>http://0.0.0.0:8080/releases</deploy-repo-url>-->
+        <!--        <deploy-repo-url>https://maven.pkg.github.com/svenruppert/dependencies/</deploy-repo-url>-->
+        <deploy-repo-snapshots-url>https://repo.maven.apache.org/maven2/snapshots</deploy-repo-snapshots-url>
+<!--        <deploy-repo-snapshots-url>http://0.0.0.0:8080/snapshots</deploy-repo-snapshots-url>-->
+        <!--        <deploy-repo-snapshots-url>https://maven.pkg.github.com/svenruppert/dependencies/</deploy-repo-snapshots-url>-->
 
         <activateJavaOnly>false</activateJavaOnly>
         <jdk.version>21</jdk.version>
@@ -87,8 +89,8 @@
 
         <!--Kotlin-->
         <kotlin.compiler.jvmTarget>${jdk.version}</kotlin.compiler.jvmTarget>
-<!--        <kotlin.version>2.1.0-Beta1</kotlin.version>-->
-<!--        <kotlin.compiler.version>2.1.0-Beta1</kotlin.compiler.version>-->
+        <!--        <kotlin.version>2.1.0-Beta1</kotlin.version>-->
+        <!--        <kotlin.compiler.version>2.1.0-Beta1</kotlin.compiler.version>-->
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
         <minimum-maven.version>3.9.6</minimum-maven.version>
@@ -100,7 +102,7 @@
         <log4j-api.version>2.13.0</log4j-api.version>
 
         <jacoco.version>0.8.10</jacoco.version>
-        <pitest.version>1.17.0</pitest.version>
+        <pitest.version>1.17.2</pitest.version>
         <pitest-prod-classes>com.svenruppert.*</pitest-prod-classes>
         <pitest-test-classes>junit.com.svenruppert.*</pitest-test-classes>
 
@@ -127,20 +129,20 @@
     </distributionManagement>
 
     <repositories>
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <id>reposilite-repository-snapshots</id>
-            <name>Reposilite Repository</name>
-            <url>http://0.0.0.0:8080/snapshots</url>
-        </repository>
-        <repository>
-            <id>reposilite-repository-releases</id>
-            <name>Reposilite Repository</name>
-            <url>http://0.0.0.0:8080/releases</url>
-        </repository>
+<!--        <repository>-->
+<!--            <snapshots>-->
+<!--                <enabled>true</enabled>-->
+<!--                <updatePolicy>always</updatePolicy>-->
+<!--            </snapshots>-->
+<!--            <id>reposilite-repository-snapshots</id>-->
+<!--            <name>Reposilite Repository</name>-->
+<!--            <url>http://0.0.0.0:8080/snapshots</url>-->
+<!--        </repository>-->
+<!--        <repository>-->
+<!--            <id>reposilite-repository-releases</id>-->
+<!--            <name>Reposilite Repository</name>-->
+<!--            <url>http://0.0.0.0:8080/releases</url>-->
+<!--        </repository>-->
         <repository>
             <snapshots>
                 <enabled>false</enabled>
@@ -152,14 +154,14 @@
 
     </repositories>
     <pluginRepositories>
-        <pluginRepository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>reposilite-repository-releases</id>
-            <name>Reposilite Repository</name>
-            <url>http://0.0.0.0:8080/releases</url>
-        </pluginRepository>
+<!--        <pluginRepository>-->
+<!--            <snapshots>-->
+<!--                <enabled>false</enabled>-->
+<!--            </snapshots>-->
+<!--            <id>reposilite-repository-releases</id>-->
+<!--            <name>Reposilite Repository</name>-->
+<!--            <url>http://0.0.0.0:8080/releases</url>-->
+<!--        </pluginRepository>-->
         <pluginRepository>
             <snapshots>
                 <enabled>false</enabled>
@@ -203,29 +205,29 @@
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.15.3</version>
+                <version>1.15.10</version>
             </dependency>
 
             <dependency>
                 <groupId>com.fasterxml.jackson.datatype</groupId>
                 <artifactId>jackson-datatype-jdk8</artifactId>
-                <version>2.18.0</version>
+                <version>2.18.2</version>
             </dependency>
 
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
-                <version>2.18.0</version>
+                <version>2.18.2</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
-                <version>2.18.0</version>
+                <version>2.18.2</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>2.18.0</version>
+                <version>2.18.2</version>
             </dependency>
             <dependency>
                 <groupId>com.google.code.gson</groupId>
@@ -251,7 +253,7 @@
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>2.17.0</version>
+                <version>2.18.0</version>
             </dependency>
             <dependency>
                 <groupId>commons-cli</groupId>
@@ -322,7 +324,7 @@
             <dependency>
                 <groupId>com.zaxxer</groupId>
                 <artifactId>HikariCP</artifactId>
-                <version>6.0.0</version>
+                <version>6.2.1</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
@@ -342,38 +344,38 @@
                 <groupId>org.testcontainers</groupId>
                 <artifactId>selenium</artifactId>
                 <scope>test</scope>
-                <version>1.20.2</version>
+                <version>1.20.4</version>
             </dependency>
             <dependency>
                 <groupId>org.testcontainers</groupId>
                 <artifactId>testcontainers</artifactId>
                 <scope>test</scope>
-                <version>1.20.2</version>
+                <version>1.20.4</version>
             </dependency>
 
             <!--jUnit5-->
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-api</artifactId>
-                <version>5.11.2</version>
+                <version>5.11.3</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-params</artifactId>
-                <version>5.11.2</version>
+                <version>5.11.3</version>
             </dependency>
 
             <dependency>
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-launcher</artifactId>
                 <scope>test</scope>
-                <version>1.11.2</version>
+                <version>1.11.3</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-testkit</artifactId>
-                <version>1.11.2</version>
+                <version>1.11.3</version>
                 <scope>test</scope>
             </dependency>
             <!-- Only required to run tests in an IDE that bundles an older version -->
@@ -381,18 +383,19 @@
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
                 <scope>test</scope>
-                <version>5.11.2</version>
+                <version>5.11.3</version>
             </dependency>
 
             <dependency>
                 <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest-all</artifactId>
-                <version>1.3</version>
+                <artifactId>hamcrest</artifactId>
+                <version>3.0</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest</artifactId>
-                <version>1.17.0</version>
+                <version>1.17.2</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -444,7 +447,7 @@
             <dependency>
                 <groupId>io.gatling.highcharts</groupId>
                 <artifactId>gatling-charts-highcharts</artifactId>
-                <version>3.12.0</version>
+                <version>3.13.1</version>
                 <scope>test</scope>
             </dependency>
             <!--tdd-->
@@ -516,7 +519,7 @@
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-core</artifactId>
-                <version>3.0.0-beta2</version>
+                <version>3.0.0-beta3</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
@@ -619,7 +622,7 @@
                 <plugin>
                     <groupId>org.sonatype.central</groupId>
                     <artifactId>central-publishing-maven-plugin</artifactId>
-                    <version>0.4.0</version>
+                    <version>0.6.0</version>
                     <extensions>true</extensions>
                     <configuration>
                         <publishingServerId>central</publishingServerId>
@@ -629,22 +632,22 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>versions-maven-plugin</artifactId>
-                    <version>2.16.2</version>
+                    <version>2.18.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-scm-plugin</artifactId>
-                    <version>2.0.1</version>
+                    <version>2.1.0</version>
                 </plugin>
                 <plugin>
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
-                    <version>4.3</version>
+                    <version>4.6</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>4.0.0-M13</version>
+                    <version>4.0.0-M16</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -659,12 +662,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
-                    <version>3.0.1</version>
+                    <version>3.1.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.6.1</version>
+                    <version>3.8.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -684,7 +687,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.2.5</version>
+                    <version>3.5.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -709,22 +712,22 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.2.7</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.6.3</version>
+                    <version>3.11.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>3.3.1</version>
+                    <version>3.6.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.4.1</version>
+                    <version>3.5.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -734,23 +737,23 @@
                 <plugin>
                     <groupId>org.owasp</groupId>
                     <artifactId>dependency-check-maven</artifactId>
-                    <version>9.0.9</version>
+                    <version>11.1.1</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-shade-plugin</artifactId>
-                    <version>3.5.2</version>
+                    <version>3.6.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>5.1.9</version>
+                    <version>6.0.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.5.0</version>
+                    <version>3.6.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.pitest</groupId>
@@ -760,13 +763,13 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.5.0</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.2.5</version>
+                    <version>3.5.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -781,7 +784,7 @@
                 <plugin>
                     <groupId>de.sormuras.junit</groupId>
                     <artifactId>junit-platform-maven-plugin</artifactId>
-                    <version>${junit-platform-maven-plugin.version}</version>
+                    <version>1.1.8</version>
                 </plugin>
 
 
@@ -982,7 +985,7 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>10.18.2</version> <!-- Checkstyle version -->
+                        <version>10.21.0</version> <!-- Checkstyle version -->
                     </dependency>
                 </dependencies>
                 <executions>
@@ -1219,28 +1222,36 @@
                         <groupId>com.mycila</groupId>
                         <artifactId>license-maven-plugin</artifactId>
                         <configuration>
-                            <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
                             <properties>
                                 <owner>Sven Ruppert</owner>
                                 <email>sven.ruppert@gmail.com</email>
                             </properties>
-                            <excludes>
-                                <excludes>**/pnpm-lock.yaml</excludes>
-                                <excludes>**/webpack.generated.js</excludes>
-                                <excludes>**/webpack.config.js</excludes>
-                                <excludes>**/package.json</excludes>
-                                <excludes>**/package-lock.json</excludes>
-                                <excludes>**/node/**</excludes>
-                                <excludes>**/node_modules/**</excludes>
-                                <exclude>**/*.iml</exclude>
-                                <exclude>**/README*</exclude>
-                                <exclude>**/jacoco.exec*</exclude>
-                                <exclude>**/LICENSE.txt</exclude>
-                                <exclude>**/_data/webdrivers/*</exclude>
-                                <!--<exclude>src/test/resources/**</exclude>-->
-                                <!--<exclude>src/main/resources/**</exclude>-->
-                                <exclude>**/target/**</exclude>
-                            </excludes>
+                            <licenseSets>
+                                <licenseSet>
+                                    <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+                                    <excludes>
+                                        <exclude>**/README</exclude>
+                                        <exclude>**/README*</exclude>
+                                        <exclude>**/LICENSE.txt</exclude>
+                                        <exclude>src/test/resources/**</exclude>
+                                        <exclude>src/main/resources/**</exclude>
+                                        <excludes>**/pnpm-lock.yaml</excludes>
+                                        <excludes>**/webpack.generated.js</excludes>
+                                        <excludes>**/webpack.config.js</excludes>
+                                        <excludes>**/package.json</excludes>
+                                        <excludes>**/package-lock.json</excludes>
+                                        <excludes>**/node/**</excludes>
+                                        <excludes>**/node_modules/**</excludes>
+                                        <exclude>**/*.iml</exclude>
+                                        <exclude>**/jacoco.exec*</exclude>
+                                        <exclude>**/_data/webdrivers/*</exclude>
+                                        <!--<exclude>src/test/resources/**</exclude>-->
+                                        <!--<exclude>src/main/resources/**</exclude>-->
+                                        <exclude>**/target/**</exclude>
+                                    </excludes>
+                                </licenseSet>
+                            </licenseSets>
+
                         </configuration>
                         <executions>
                             <execution>
@@ -1330,6 +1341,8 @@
                             <failBuildOnCVSS>8</failBuildOnCVSS>
                             <skipProvidedScope>true</skipProvidedScope>
                             <skipRuntimeScope>true</skipRuntimeScope>
+                            <nvdApiKey>3ebfd143-924e-48a8-9ec8-4bd969112744</nvdApiKey>
+                            <nvdApiDelay>8000</nvdApiDelay>
                         </configuration>
                         <executions>
                             <execution>
@@ -1432,35 +1445,35 @@
                 <dependency>
                     <groupId>org.jetbrains.kotlin</groupId>
                     <artifactId>kotlin-stdlib-jdk8</artifactId>
-<!--                    <version>${kotlin.version}</version>-->
-                                        <version>2.1.0-Beta1</version>
+                    <!--                    <version>${kotlin.version}</version>-->
+                    <version>2.1.0</version>
                 </dependency>
 
                 <dependency>
                     <groupId>org.jetbrains.kotlin</groupId>
                     <artifactId>kotlin-reflect</artifactId>
-<!--                    <version>${kotlin.version}</version>-->
-                                        <version>2.1.0-Beta1</version>
+                    <!--                    <version>${kotlin.version}</version>-->
+                    <version>2.1.0</version>
                 </dependency>
                 <dependency>
                     <groupId>org.jetbrains.kotlin</groupId>
                     <artifactId>kotlin-test-junit</artifactId>
-<!--                    <version>${kotlin.version}</version>-->
-                                        <version>2.1.0-Beta1</version>
+                    <!--                    <version>${kotlin.version}</version>-->
+                    <version>2.1.0</version>
                     <scope>test</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.jetbrains.kotlin</groupId>
                     <artifactId>kotlin-test-junit5</artifactId>
-<!--                    <version>${kotlin.version}</version>-->
-                                        <version>2.1.0-Beta1</version>
+                    <!--                    <version>${kotlin.version}</version>-->
+                    <version>2.1.0</version>
                     <scope>test</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.jetbrains.kotlin</groupId>
                     <artifactId>kotlin-test</artifactId>
-<!--                    <version>${kotlin.version}</version>-->
-                                        <version>2.1.0-Beta1</version>
+                    <!--                    <version>${kotlin.version}</version>-->
+                    <version>2.1.0</version>
                     <scope>test</scope>
                 </dependency>
 
@@ -1473,8 +1486,8 @@
                             <jvmTarget>${kotlin.compiler.jvmTarget}</jvmTarget>
                         </configuration>
                         <groupId>org.jetbrains.kotlin</groupId>
-<!--                        <version>${kotlin.compiler.version}</version>-->
-                                                <version>1.9.23</version>
+                        <!--                        <version>${kotlin.compiler.version}</version>-->
+                        <version>2.1.0</version>
                         <executions>
                             <execution>
                                 <id>compile</id>
@@ -1510,7 +1523,6 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
                         <configuration>
-                            <optimize>true</optimize>
                             <useIncrementalCompilation>false</useIncrementalCompilation>
                         </configuration>
                         <executions>
