@@ -72,11 +72,11 @@
     </licenses>
 
     <properties>
-        <deploy-repo-url>https://repo.maven.apache.org/maven2/releases</deploy-repo-url>
-<!--        <deploy-repo-url>http://0.0.0.0:8080/releases</deploy-repo-url>-->
+        <deploy-repo-url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</deploy-repo-url>
+        <!--        <deploy-repo-url>http://0.0.0.0:8080/releases</deploy-repo-url>-->
         <!--        <deploy-repo-url>https://maven.pkg.github.com/svenruppert/dependencies/</deploy-repo-url>-->
-        <deploy-repo-snapshots-url>https://repo.maven.apache.org/maven2/snapshots</deploy-repo-snapshots-url>
-<!--        <deploy-repo-snapshots-url>http://0.0.0.0:8080/snapshots</deploy-repo-snapshots-url>-->
+        <deploy-repo-snapshots-url>https://s01.oss.sonatype.org/content/repositories/snapshots</deploy-repo-snapshots-url>
+        <!--        <deploy-repo-snapshots-url>http://0.0.0.0:8080/snapshots</deploy-repo-snapshots-url>-->
         <!--        <deploy-repo-snapshots-url>https://maven.pkg.github.com/svenruppert/dependencies/</deploy-repo-snapshots-url>-->
 
         <activateJavaOnly>false</activateJavaOnly>
@@ -129,20 +129,20 @@
     </distributionManagement>
 
     <repositories>
-<!--        <repository>-->
-<!--            <snapshots>-->
-<!--                <enabled>true</enabled>-->
-<!--                <updatePolicy>always</updatePolicy>-->
-<!--            </snapshots>-->
-<!--            <id>reposilite-repository-snapshots</id>-->
-<!--            <name>Reposilite Repository</name>-->
-<!--            <url>http://0.0.0.0:8080/snapshots</url>-->
-<!--        </repository>-->
-<!--        <repository>-->
-<!--            <id>reposilite-repository-releases</id>-->
-<!--            <name>Reposilite Repository</name>-->
-<!--            <url>http://0.0.0.0:8080/releases</url>-->
-<!--        </repository>-->
+        <!--        <repository>-->
+        <!--            <snapshots>-->
+        <!--                <enabled>true</enabled>-->
+        <!--                <updatePolicy>always</updatePolicy>-->
+        <!--            </snapshots>-->
+        <!--            <id>reposilite-repository-snapshots</id>-->
+        <!--            <name>Reposilite Repository</name>-->
+        <!--            <url>http://0.0.0.0:8080/snapshots</url>-->
+        <!--        </repository>-->
+        <!--        <repository>-->
+        <!--            <id>reposilite-repository-releases</id>-->
+        <!--            <name>Reposilite Repository</name>-->
+        <!--            <url>http://0.0.0.0:8080/releases</url>-->
+        <!--        </repository>-->
         <repository>
             <snapshots>
                 <enabled>false</enabled>
@@ -154,14 +154,14 @@
 
     </repositories>
     <pluginRepositories>
-<!--        <pluginRepository>-->
-<!--            <snapshots>-->
-<!--                <enabled>false</enabled>-->
-<!--            </snapshots>-->
-<!--            <id>reposilite-repository-releases</id>-->
-<!--            <name>Reposilite Repository</name>-->
-<!--            <url>http://0.0.0.0:8080/releases</url>-->
-<!--        </pluginRepository>-->
+        <!--        <pluginRepository>-->
+        <!--            <snapshots>-->
+        <!--                <enabled>false</enabled>-->
+        <!--            </snapshots>-->
+        <!--            <id>reposilite-repository-releases</id>-->
+        <!--            <name>Reposilite Repository</name>-->
+        <!--            <url>http://0.0.0.0:8080/releases</url>-->
+        <!--        </pluginRepository>-->
         <pluginRepository>
             <snapshots>
                 <enabled>false</enabled>
@@ -531,7 +531,7 @@
     </dependencyManagement>
 
     <modules>
-<!--        <module>logger-adapter</module>-->
+        <!--        <module>logger-adapter</module>-->
         <module>core</module>
         <module>core-properties</module>
     </modules>
@@ -607,12 +607,12 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-<!--            <scope>test</scope>-->
+            <!--            <scope>test</scope>-->
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-<!--            <scope>test</scope>-->
+            <!--            <scope>test</scope>-->
         </dependency>
     </dependencies>
 
@@ -1180,6 +1180,39 @@
 
     <profiles>
 
+        <profile>
+            <id>_deploy</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>central</publishingServerId>
+                            <autoPublish>true</autoPublish>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <!-- Fixing version & activating "release" profile for those who use release plugin -->
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-release-plugin</artifactId>
+                        <configuration>
+                            <autoVersionSubmodules>true</autoVersionSubmodules>
+
+                            <!-- Forward compatibility: "release-profile" will be removed from super POM.
+                                 It's better to define javadocs, sources, signing, etc. in an independent "release" profile. -->
+                            <useReleaseProfile>false</useReleaseProfile>
+                            <releaseProfiles>_release_prepare</releaseProfiles>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
 
         <profile>
             <id>_release_prepare</id>
@@ -1188,15 +1221,15 @@
             </activation>
             <build>
                 <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-release-plugin</artifactId>
-                        <configuration>
-                            <useReleaseProfile>false</useReleaseProfile>
-                            <releaseProfiles>extras</releaseProfiles>
-                            <autoVersionSubmodules>true</autoVersionSubmodules>
-                        </configuration>
-                    </plugin>
+                    <!--                    <plugin>-->
+                    <!--                        <groupId>org.apache.maven.plugins</groupId>-->
+                    <!--                        <artifactId>maven-release-plugin</artifactId>-->
+                    <!--                        <configuration>-->
+                    <!--                            <useReleaseProfile>false</useReleaseProfile>-->
+                    <!--                            <releaseProfiles>extras</releaseProfiles>-->
+                    <!--                            <autoVersionSubmodules>true</autoVersionSubmodules>-->
+                    <!--                        </configuration>-->
+                    <!--                    </plugin>-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-enforcer-plugin</artifactId>
