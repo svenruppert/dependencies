@@ -1341,7 +1341,7 @@
                             <failBuildOnCVSS>8</failBuildOnCVSS>
                             <skipProvidedScope>true</skipProvidedScope>
                             <skipRuntimeScope>true</skipRuntimeScope>
-                            <nvdApiKey>3ebfd143-924e-48a8-9ec8-4bd969112744</nvdApiKey>
+                            <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
                             <nvdApiDelay>8000</nvdApiDelay>
                         </configuration>
                         <executions>
