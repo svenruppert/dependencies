@@ -15,6 +15,7 @@
  */
 package com.svenruppert.dependencies.core.properties;
 
+
 import com.svenruppert.dependencies.core.logger.HasLogger;
 
 import java.io.*;
@@ -82,9 +83,9 @@ public class PropertiesResolver implements HasLogger {
       logger().info("Load properties from file: " + file);
       properties.load(in);
     } catch (FileNotFoundException e) {
-      logger().fine("No properties file " + file + " found.");
+      logger().trace("No properties file " + file + " found.");
     } catch (IOException e) {
-      logger().severe("Failure loading properties from file: " + file, e);
+      logger().trace("Failure loading properties from file: " + file, e);
     }
 
     return properties;
@@ -102,14 +103,14 @@ public class PropertiesResolver implements HasLogger {
     Properties properties = new Properties();
 
     String resourceName = "/" + createFileName(name);
-    logger().fine("Resource name: " + resourceName);
+    logger().trace("Resource name: " + resourceName);
     try (InputStream in = getClass().getResourceAsStream(resourceName);) {
       if (in != null) {
         logger().info("Load properties from resource: " + resourceName);
         properties.load(in);
       }
     } catch (IOException e) {
-      logger().severe("Failure loading properteis from resource: " + resourceName, e);
+      logger().trace("Failure loading properteis from resource: " + resourceName, e);
     }
     return properties;
   }

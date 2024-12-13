@@ -15,7 +15,6 @@
  */
 package com.svenruppert.dependencies.core.logger
 
-import java.lang.reflect.Constructor
 import java.lang.reflect.InvocationTargetException
 
 import com.svenruppert.dependencies.core.logger.factory.LoggerFactory

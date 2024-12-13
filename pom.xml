@@ -26,7 +26,7 @@
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <version>06.00.00-SNAPSHOT</version>
+    <version>06.00.00</version>
 
     <inceptionYear>2013</inceptionYear>
     <organization>
@@ -531,7 +531,7 @@
     </dependencyManagement>
 
     <modules>
-        <module>logger-adapter</module>
+<!--        <module>logger-adapter</module>-->
         <module>core</module>
         <module>core-properties</module>
     </modules>
@@ -607,12 +607,12 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <scope>test</scope>
+<!--            <scope>test</scope>-->
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <scope>test</scope>
+<!--            <scope>test</scope>-->
         </dependency>
     </dependencies>
 
@@ -1264,13 +1264,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.ow2.asm</groupId>
-                                <artifactId>asm</artifactId>
-                                <version>9.6</version> <!-- Use newer version of ASM -->
-                            </dependency>
-                        </dependencies>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
@@ -1279,15 +1272,6 @@
                                 </goals>
                             </execution>
                         </executions>
-                        <configuration>
-                            <additionalOptions>
-                                <failOnError>false</failOnError>
-                                <!--                <additionalOption>-Xdoclint:none</additionalOption>-->
-                                <!--                <additionalOption>-html5</additionalOption>-->
-                                <!--                <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>-->
-                            </additionalOptions>
-                            <!--                            <destDir>target/doc/apidoc/</destDir>-->
-                        </configuration>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>

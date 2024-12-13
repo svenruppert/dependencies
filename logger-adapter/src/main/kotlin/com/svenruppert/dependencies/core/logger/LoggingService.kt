@@ -17,7 +17,6 @@ package com.svenruppert.dependencies.core.logger
 
 import java.util.function.Supplier
 import java.util.logging.Level
-import java.util.logging.LogRecord
 
 /**
  *

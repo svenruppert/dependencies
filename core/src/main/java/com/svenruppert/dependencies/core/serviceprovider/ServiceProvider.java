@@ -16,7 +16,6 @@
 package com.svenruppert.dependencies.core.serviceprovider;
 
 import com.svenruppert.dependencies.core.logger.HasLogger;
-import com.svenruppert.dependencies.core.logger.Logger;
 
 import java.util.Iterator;
 import java.util.Optional;
@@ -42,19 +41,17 @@ public interface ServiceProvider<T>
       final Set<T> set      = stream(iterable.spliterator(), false).collect(toSet());
       if (set.isEmpty()) {
         final String msg = "no implementation found for interface " + service.getName();
-        Logger.getLogger(service)
-              .warning(msg);
+        logger(service).warn(msg);
 //        if (failWithException()) throw new RuntimeException("no implementation found for interface " + service.getName());
-        logger().warning("no implementation found for interface " + service.getName());
+        logger().warn("no implementation found for interface " + service.getName());
         return Optional.empty();
       }
 
       if (set.size() > 1) {
         final String msg = "to many implementations found for interface " + service.getName();
-        Logger.getLogger(service)
-              .warning(msg);
+        logger(service).warn(msg);
 //        if (failWithException()) throw new RuntimeException("to many implementations found for interface " + service.getName());
-        logger().warning("to many implementations found for interface " + service.getName());
+        logger().warn("to many implementations found for interface " + service.getName());
         return Optional.empty();
       }
       return Optional.of(set.iterator()
