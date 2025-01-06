@@ -102,7 +102,7 @@
         <log4j-api.version>2.13.0</log4j-api.version>
 
         <jacoco.version>0.8.10</jacoco.version>
-        <pitest.version>1.17.2</pitest.version>
+        <pitest.version>1.17.3</pitest.version>
         <pitest-prod-classes>com.svenruppert.*</pitest-prod-classes>
         <pitest-test-classes>junit.com.svenruppert.*</pitest-test-classes>
 
@@ -173,10 +173,21 @@
     </pluginRepositories>
 
     <dependencyManagement>
-
-
         <!--project versions-->
         <dependencies>
+
+            <!--        module definitions-->
+            <dependency>
+                <groupId>com.svenruppert</groupId>
+                <artifactId>core</artifactId>
+                <version>06.00.01-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.svenruppert</groupId>
+                <artifactId>core-properties</artifactId>
+                <version>06.00.01-SNAPSHOT</version>
+            </dependency>
+
             <!--API´s-->
             <dependency>
                 <groupId>javax.annotation</groupId>
@@ -205,7 +216,7 @@
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.15.10</version>
+                <version>1.15.11</version>
             </dependency>
 
             <dependency>
@@ -357,25 +368,25 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-api</artifactId>
-                <version>5.11.3</version>
+                <version>5.11.4</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-params</artifactId>
-                <version>5.11.3</version>
+                <version>5.11.4</version>
             </dependency>
 
             <dependency>
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-launcher</artifactId>
                 <scope>test</scope>
-                <version>1.11.3</version>
+                <version>1.11.4</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-testkit</artifactId>
-                <version>1.11.3</version>
+                <version>1.11.4</version>
                 <scope>test</scope>
             </dependency>
             <!-- Only required to run tests in an IDE that bundles an older version -->
@@ -383,7 +394,7 @@
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
                 <scope>test</scope>
-                <version>5.11.3</version>
+                <version>5.11.4</version>
             </dependency>
 
             <dependency>
@@ -395,13 +406,19 @@
             <dependency>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest</artifactId>
-                <version>1.17.2</version>
+                <version>1.17.3</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
-                <version>3.26.3</version>
+                <version>3.27.2</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.rest-assured</groupId>
+                <artifactId>rest-assured</artifactId>
+                <version>5.5.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -985,7 +1002,7 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>10.21.0</version> <!-- Checkstyle version -->
+                        <version>10.21.1</version> <!-- Checkstyle version -->
                     </dependency>
                 </dependencies>
                 <executions>
