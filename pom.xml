@@ -26,7 +26,7 @@
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <version>06.00.02-SNAPSHOT</version>
+    <version>06.00.02</version>
 
     <inceptionYear>2013</inceptionYear>
     <organization>
@@ -102,7 +102,7 @@
         <log4j-api.version>2.13.0</log4j-api.version>
 
         <jacoco.version>0.8.10</jacoco.version>
-        <pitest.version>1.17.3</pitest.version>
+        <pitest.version>1.17.4</pitest.version>
         <pitest-prod-classes>com.svenruppert.*</pitest-prod-classes>
         <pitest-test-classes>junit.com.svenruppert.*</pitest-test-classes>
 
@@ -180,12 +180,12 @@
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core</artifactId>
-                <version>06.00.02-SNAPSHOT</version>
+                <version>06.00.02</version>
             </dependency>
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core-properties</artifactId>
-                <version>06.00.02-SNAPSHOT</version>
+                <version>06.00.02</version>
             </dependency>
 
             <!--API´s-->
@@ -216,7 +216,7 @@
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.15.11</version>
+                <version>1.16.1</version>
             </dependency>
 
             <dependency>
@@ -259,7 +259,7 @@
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
-                <version>1.17.1</version>
+                <version>1.17.2</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
@@ -406,13 +406,13 @@
             <dependency>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest</artifactId>
-                <version>1.17.3</version>
+                <version>${pitest.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
-                <version>3.27.2</version>
+                <version>3.27.3</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
