@@ -23,7 +23,7 @@
     <parent>
         <groupId>com.svenruppert</groupId>
         <artifactId>dependencies</artifactId>
-        <version>06.00.03</version>
+        <version>06.00.04-SNAPSHOT</version>
     </parent>
 
     <artifactId>core-properties</artifactId>
