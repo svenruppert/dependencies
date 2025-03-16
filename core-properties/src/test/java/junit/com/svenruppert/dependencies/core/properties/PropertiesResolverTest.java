@@ -31,7 +31,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import com.svenruppert.dependencies.core.logger.HasLogger;
 
-public class PropertiesResolverTest implements HasLogger {
+class PropertiesResolverTest implements HasLogger {
 
   private PropertiesResolver propertiesResolver;
 
