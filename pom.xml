@@ -803,11 +803,7 @@
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <version>3.5.2</version>
                 </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>findbugs-maven-plugin</artifactId>
-                    <version>3.0.5</version>
-                </plugin>
+
                 <plugin>
                     <groupId>com.github.webdriverextensions</groupId>
                     <artifactId>webdriverextensions-maven-plugin</artifactId>
