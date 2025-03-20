@@ -1146,7 +1146,6 @@
             <plugin>
                 <groupId>de.sormuras.junit</groupId>
                 <artifactId>junit-platform-maven-plugin</artifactId>
-                <version>1.1.7</version>
                 <extensions>true</extensions> <!-- Necessary to execute it in 'test' phase. -->
                 <configuration>
                     <timeout>${junit-platform-maven-plugin.timeout}</timeout>
