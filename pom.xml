@@ -400,8 +400,8 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
-                <scope>test</scope>
                 <version>${junit-jupiter-api.version}</version>
+                <scope>test</scope>
             </dependency>
 
             <dependency>
@@ -652,9 +652,15 @@
                     <extensions>true</extensions>
                     <configuration>
                         <publishingServerId>central</publishingServerId>
-                        <tokenAuth>true</tokenAuth>
+<!--                        <tokenAuth>true</tokenAuth>-->
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-exec-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>versions-maven-plugin</artifactId>
@@ -812,7 +818,11 @@
                     <artifactId>junit-platform-maven-plugin</artifactId>
                     <version>1.1.8</version>
                 </plugin>
-
+                <plugin>
+                    <groupId>com.github.spotbugs</groupId>
+                    <artifactId>spotbugs-maven-plugin</artifactId>
+                    <version>4.8.6.0</version>
+                </plugin>
 
             </plugins>
         </pluginManagement>
@@ -827,6 +837,7 @@
                         <id>enforce-maven-3</id>
                         <goals>
                             <goal>enforce</goal>
+<!--                            <goal>execute</goal>-->
                         </goals>
                         <configuration>
                             <rules>
@@ -1120,6 +1131,18 @@
                             <outputFileFormat>plain</outputFileFormat>
                             <outputFileFormat>xml</outputFileFormat>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
