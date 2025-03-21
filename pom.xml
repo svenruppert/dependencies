@@ -26,7 +26,7 @@
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <version>06.00.04-SNAPSHOT</version>
+    <version>06.00.04</version>
 
     <inceptionYear>2013</inceptionYear>
     <organization>
@@ -182,15 +182,20 @@
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core</artifactId>
-                <version>06.00.04-SNAPSHOT</version>
+                <version>06.00.04</version>
             </dependency>
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core-properties</artifactId>
-                <version>06.00.04-SNAPSHOT</version>
+                <version>06.00.04</version>
             </dependency>
 
             <!--API´s-->
+            <dependency>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-annotations</artifactId>
+                <version>4.9.3</version> <!-- oder die aktuelle Version -->
+            </dependency>
             <dependency>
                 <groupId>javax.annotation</groupId>
                 <artifactId>javax.annotation-api</artifactId>
@@ -562,6 +567,11 @@
 
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-annotations</artifactId>
+        </dependency>
+
         <!--jUnit5-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
