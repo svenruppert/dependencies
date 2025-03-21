@@ -38,7 +38,7 @@ public abstract class NestedBuilder<T, V> {
       V build = this.build();
       String methodname = "with" + build.getClass().getSimpleName();
       Method method = parentClass.getDeclaredMethod(methodname, build.getClass());
-      final boolean accessible = method.isAccessible();
+      final boolean accessible = method.canAccess(parent);
       method.setAccessible(true);
       method.invoke(parent, build);
       method.setAccessible(accessible);
