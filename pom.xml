@@ -26,7 +26,7 @@
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <version>06.00.05-SNAPSHOT</version>
+    <version>06.00.05</version>
 
     <inceptionYear>2013</inceptionYear>
     <organization>
@@ -182,12 +182,12 @@
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core</artifactId>
-                <version>06.00.05-SNAPSHOT</version>
+                <version>06.00.05</version>
             </dependency>
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core-properties</artifactId>
-                <version>06.00.05-SNAPSHOT</version>
+                <version>06.00.05</version>
             </dependency>
 
             <!--API´s-->
@@ -1158,6 +1158,7 @@
                 <artifactId>junit-platform-maven-plugin</artifactId>
                 <extensions>true</extensions> <!-- Necessary to execute it in 'test' phase. -->
                 <configuration>
+                    <charset>UTF-8</charset>
                     <timeout>${junit-platform-maven-plugin.timeout}</timeout>
                     <classNamePatterns>
                         <pattern>^(Test.*|.*Test*.|.+[.$]Test.*|.*Tests?)$</pattern>
@@ -1169,37 +1170,15 @@
                     <executor>JAVA</executor>
                     <javaOptions>
                         <additionalOptions>
+                            <additionalOption>--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED</additionalOption>
+                            <additionalOption>--enable-native-access=ALL-UNNAMED</additionalOption>
                         </additionalOptions>
                     </javaOptions>
-
                     <!--<tags>-->
                     <!--<tag>vaadin-protools</tag>-->
                     <!--</tags>-->
                 </configuration>
             </plugin>
-            <!--            <plugin>-->
-            <!--                <groupId>org.jacoco</groupId>-->
-            <!--                <artifactId>jacoco-maven-plugin</artifactId>-->
-            <!--                <version>${jacoco.version}</version>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <id>pre-unit-test</id>-->
-            <!--                        <goals>-->
-            <!--                            <goal>prepare-agent</goal>-->
-            <!--                        </goals>-->
-            <!--                        <configuration>-->
-            <!--                            <propertyName>jacoco.java.option</propertyName>-->
-            <!--                        </configuration>-->
-            <!--                    </execution>-->
-            <!--                    <execution>-->
-            <!--                        <id>post-unit-test</id>-->
-            <!--                        <phase>test</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>report</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
         </plugins>
     </build>
 
