@@ -23,7 +23,7 @@
     <parent>
         <groupId>com.svenruppert</groupId>
         <artifactId>dependencies</artifactId>
-        <version>06.00.04</version>
+        <version>06.00.05-SNAPSHOT</version>
     </parent>
 
     <artifactId>logger-adapter</artifactId>
@@ -31,9 +31,6 @@
 
     <name>SvenRuppert - Dependencies - Logger Adapter</name>
     <properties>
-        <!--        <maven.compiler.source>21</maven.compiler.source>-->
-        <!--        <maven.compiler.target>21</maven.compiler.target>-->
-        <!--        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
     </properties>
 
     <dependencies>

@@ -20,4 +20,15 @@ public interface HasLogger {
     return Logger.getLogger(getClass());
   }
 
+
+  // Caching Map: calling class -> Logger
+  ConcurrentMap<Class<?>, LoggingService> LOGGER_CACHE = new ConcurrentHashMap<>();
+
+  static LoggingService staticLogger() {
+    Class<?> callerClass = StackWalker
+        .getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE)
+        .getCallerClass();
+    return LOGGER_CACHE.computeIfAbsent(callerClass, Logger::getLogger);
+  }
+
 }

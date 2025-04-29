@@ -23,7 +23,7 @@
     <parent>
         <groupId>com.svenruppert</groupId>
         <artifactId>dependencies</artifactId>
-        <version>06.00.04</version>
+        <version>06.00.05-SNAPSHOT</version>
     </parent>
 
     <artifactId>core-properties</artifactId>
@@ -31,9 +31,6 @@
 
     <name>SvenRuppert - Dependencies - Core Properties</name>
     <properties>
-<!--        <maven.compiler.source>21</maven.compiler.source>-->
-<!--        <maven.compiler.target>21</maven.compiler.target>-->
-<!--        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
     </properties>
     <dependencies>
         <dependency>
@@ -43,12 +40,4 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
-
-    <!--    <dependencies>-->
-<!--        <dependency>-->
-<!--            <groupId>com.svenruppert</groupId>-->
-<!--            <artifactId>logger-adapter</artifactId>-->
-<!--            <version>${project.parent.version}</version>-->
-<!--        </dependency>-->
-<!--    </dependencies>-->
 </project>

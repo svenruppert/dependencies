@@ -19,7 +19,19 @@ package com.svenruppert.dependencies.core.logger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 public interface HasLogger {
+  // Cache für Klassen-Logger
+  Map<Class<?>, Logger> LOGGER_CACHE = new ConcurrentHashMap<>();
+
+  static Logger staticLogger() {
+    Class<?> callerClass = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE)
+        .getCallerClass();
+    return LOGGER_CACHE.computeIfAbsent(callerClass, LoggerFactory::getLogger);
+  }
+
   default Logger logger() {
     return LoggerFactory.getLogger(getClass());
   }
