@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Random;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * <p>PortUtils class.</p>
  *
@@ -51,6 +53,10 @@ public class PortUtils {
    *
    * @return a int.
    */
+  @SuppressFBWarnings(
+      value = "DMI_RANDOM_USED_ONLY_ONCE",
+      justification = "The creation is don eon purpose"
+  )
   public int nextFreePortForTest() {
     int counter = 0;
     final Random random = new Random();
