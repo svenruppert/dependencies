@@ -24,12 +24,12 @@
     <parent>
         <groupId>com.svenruppert</groupId>
         <artifactId>dependencies</artifactId>
-        <version>06.00.06-SNAPSHOT</version>
+        <version>06.00.06</version>
     </parent>
 
     <artifactId>core</artifactId>
     <packaging>jar</packaging>
-    <name>SvenRuppert - Dependencies - Core</name>
+    <name>SRU - Core</name>
     <properties>
     </properties>
 

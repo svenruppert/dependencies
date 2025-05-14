@@ -26,7 +26,7 @@
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <version>06.00.06-SNAPSHOT</version>
+    <version>06.00.06</version>
 
     <inceptionYear>2013</inceptionYear>
     <organization>
@@ -35,7 +35,7 @@
     </organization>
 
     <url>https://github.com/svenruppert/dependencies</url>
-    <name>SvenRuppert - Dependencies</name>
+    <name>SRU - Dependencies</name>
     <description>Dependencies for the Java/Kotlin projects</description>
     <scm>
         <url>https://github.com/svenruppert/dependencies</url>
@@ -182,12 +182,12 @@
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core</artifactId>
-                <version>06.00.06-SNAPSHOT</version>
+                <version>06.00.06</version>
             </dependency>
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core-properties</artifactId>
-                <version>06.00.06-SNAPSHOT</version>
+                <version>06.00.06</version>
             </dependency>
 
             <!--API´s-->
@@ -563,6 +563,7 @@
         <!--        <module>logger-adapter</module>-->
         <module>core</module>
         <module>core-properties</module>
+        <module>functional-reactive</module>
     </modules>
 
 

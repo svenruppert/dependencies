@@ -26,18 +26,16 @@
         <version>06.00.06</version>
     </parent>
 
-    <artifactId>core-properties</artifactId>
-    <packaging>jar</packaging>
-
-    <name>SRU - Properties</name>
+    <artifactId>functional-reactive</artifactId>
+    <name>SRU - Functional</name>
     <properties>
     </properties>
     <dependencies>
         <dependency>
-            <groupId>com.svenruppert</groupId>
-            <artifactId>core</artifactId>
-            <version>${project.parent.version}</version>
-            <scope>compile</scope>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
+
 </project>
