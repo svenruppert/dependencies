@@ -26,7 +26,7 @@
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <version>06.00.06</version>
+    <version>06.00.07</version>
 
     <inceptionYear>2013</inceptionYear>
     <organization>
@@ -182,12 +182,17 @@
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core</artifactId>
-                <version>06.00.06</version>
+                <version>06.00.07</version>
             </dependency>
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core-properties</artifactId>
-                <version>06.00.06</version>
+                <version>06.00.07</version>
+            </dependency>
+            <dependency>
+                <groupId>com.svenruppert</groupId>
+                <artifactId>functional-reactive</artifactId>
+                <version>06.00.07</version>
             </dependency>
 
             <!--API´s-->
@@ -564,6 +569,7 @@
         <module>core</module>
         <module>core-properties</module>
         <module>functional-reactive</module>
+        <module>ddi</module>
     </modules>
 
 

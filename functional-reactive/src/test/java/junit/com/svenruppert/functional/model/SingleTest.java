@@ -15,7 +15,7 @@
  */
 package junit.com.svenruppert.functional.model;
 
-import com.svenruppert.functional.model.Single;
+import com.svenruppert.functional.model.DataRecords;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,23 +24,23 @@ public class SingleTest {
 
   @Test
   public void testEquals() {
-    final Single single = new Single(0);
+    final DataRecords.Single single = new DataRecords.Single(0);
 
     assertFalse(single.equals(null));
     assertTrue(single.equals(single));
-    assertTrue(single.equals(new Single(0)));
+    assertTrue(single.equals(new DataRecords.Single(0)));
   }
 
   @Test
   public void testHashCode() {
-    final Single single = new Single(0);
+    final DataRecords.Single single = new DataRecords.Single(0);
 
     assertEquals(31, single.hashCode());
   }
 
   @Test
   public void testNext() {
-    final Single single = Single.next(0);
+    final DataRecords.Single single = DataRecords.Single.next(0);
 
     assertNotNull(single);
     assertEquals(0, single.getT1());
@@ -48,7 +48,7 @@ public class SingleTest {
 
   @Test
   public void testToString() {
-    final Single single = new Single(0);
+    final DataRecords.Single single = new DataRecords.Single(0);
 
     assertEquals("Single{t1=0}", single.toString());
   }

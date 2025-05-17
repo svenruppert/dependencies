@@ -15,13 +15,13 @@
  */
 package com.svenruppert.functional.matcher;
 
-import com.svenruppert.functional.model.Pair;
+import com.svenruppert.functional.model.DataRecords;
 import com.svenruppert.functional.model.Result;
 
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-public class Case<T> extends Pair<Supplier<Boolean>, Supplier<Result<T>>> {
+public class Case<T> extends DataRecords.Pair<Supplier<Boolean>, Supplier<Result<T>>> {
 
   /**
    * <p>Constructor for Case.</p>

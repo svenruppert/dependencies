@@ -15,7 +15,7 @@
  */
 package junit.com.svenruppert.functional.model;
 
-import com.svenruppert.functional.model.Pair;
+import com.svenruppert.functional.model.DataRecords;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,25 +24,25 @@ public class PairTest {
 
   @Test
   public void testEquals() {
-    final Pair pair = new Pair(0, 1);
+    final DataRecords.Pair pair = new DataRecords.Pair(0, 1);
 
     assertFalse(pair.equals(null));
-    assertFalse(pair.equals(new Pair(null, 1)));
-    assertFalse(pair.equals(new Pair(0, null)));
+    assertFalse(pair.equals(new DataRecords.Pair(null, 1)));
+    assertFalse(pair.equals(new DataRecords.Pair(0, null)));
     assertTrue(pair.equals(pair));
-    assertTrue(pair.equals(new Pair(0, 1)));
+    assertTrue(pair.equals(new DataRecords.Pair(0, 1)));
   }
 
   @Test
   public void testHashCode() {
-    final Pair pair = new Pair(0, 1);
+    final DataRecords.Pair pair = new DataRecords.Pair(0, 1);
 
     assertEquals(962, pair.hashCode());
   }
 
   @Test
   public void testNext() {
-    final Pair pair = Pair.next(0, 1);
+    final DataRecords.Pair pair = DataRecords.Pair.next(0, 1);
 
     assertNotNull(pair);
     assertEquals(0, pair.getT1());
@@ -51,7 +51,7 @@ public class PairTest {
 
   @Test
   public void testToString() {
-    final Pair pair = new Pair(0, 1);
+    final DataRecords.Pair pair = new DataRecords.Pair(0, 1);
 
     assertEquals("Pair{t1=0, t2=1}", pair.toString());
   }

@@ -15,7 +15,7 @@
  */
 package junit.com.svenruppert.functional.model;
 
-import com.svenruppert.functional.model.Quad;
+import com.svenruppert.functional.model.DataRecords.Quad;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,13 +24,13 @@ public class QuadTest {
 
   @Test
   public void testEquals() {
-    final Quad quad = new Quad(0, 1, 2, 3);
+    final Quad<Integer, Integer, Integer, Integer> quad = new Quad<>(0, 1, 2, 3);
 
-    assertTrue(quad.equals(quad));
-    assertFalse(quad.equals(null));
-    assertFalse(quad.equals(new Quad(null, 1, 2, 3)));
-    assertFalse(quad.equals(new Quad(0, null, 2, 3)));
-    assertFalse(quad.equals(new Quad(0, 1, null, 3)));
+    assertEquals(quad, quad);
+    assertNotEquals(null, quad);
+    assertNotEquals(quad, new Quad<>(null, 1, 2, 3));
+    assertNotEquals(quad, new Quad<>(0, null, 2, 3));
+    assertNotEquals(quad, new Quad<>(0, 1, null, 3));
   }
 
   @Test
