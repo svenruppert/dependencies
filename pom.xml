@@ -26,7 +26,7 @@
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <version>06.00.05</version>
+    <version>06.00.07</version>
 
     <inceptionYear>2013</inceptionYear>
     <organization>
@@ -35,7 +35,7 @@
     </organization>
 
     <url>https://github.com/svenruppert/dependencies</url>
-    <name>SvenRuppert - Dependencies</name>
+    <name>SRU - Dependencies</name>
     <description>Dependencies for the Java/Kotlin projects</description>
     <scm>
         <url>https://github.com/svenruppert/dependencies</url>
@@ -102,15 +102,15 @@
         <log4j-api.version>2.13.0</log4j-api.version>
 
         <jacoco.version>0.8.10</jacoco.version>
-        <pitest.version>1.19.1</pitest.version>
+        <pitest.version>1.19.2</pitest.version>
         <pitest-prod-classes>com.svenruppert.*</pitest-prod-classes>
         <pitest-test-classes>junit.com.svenruppert.*</pitest-test-classes>
 
         <junit-platform-maven-plugin.timeout>300</junit-platform-maven-plugin.timeout>
 <!--        <junit-jupiter-api.version>5.12.1</junit-jupiter-api.version>-->
-        <junit-jupiter-api.version>5.13.0-M2</junit-jupiter-api.version>
+        <junit-jupiter-api.version>5.13.0-M3</junit-jupiter-api.version>
 <!--        <junit-platform-launcher.version>1.12.1</junit-platform-launcher.version>-->
-        <junit-platform-launcher.version>1.13.0-M2</junit-platform-launcher.version>
+        <junit-platform-launcher.version>1.13.0-M3</junit-platform-launcher.version>
 
         <!--    <jmh.version>1.26</jmh.version>-->
         <opentracing-api.version>0.33.0</opentracing-api.version>
@@ -182,12 +182,17 @@
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core</artifactId>
-                <version>06.00.05</version>
+                <version>06.00.07</version>
             </dependency>
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core-properties</artifactId>
-                <version>06.00.05</version>
+                <version>06.00.07</version>
+            </dependency>
+            <dependency>
+                <groupId>com.svenruppert</groupId>
+                <artifactId>functional-reactive</artifactId>
+                <version>06.00.07</version>
             </dependency>
 
             <!--API´s-->
@@ -240,7 +245,7 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
-                <version>3.0-rc3</version>
+                <version>3.0-rc4</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
@@ -430,7 +435,7 @@
             <dependency>
                 <groupId>io.rest-assured</groupId>
                 <artifactId>rest-assured</artifactId>
-                <version>5.5.1</version>
+                <version>5.5.2</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -476,7 +481,7 @@
             <dependency>
                 <groupId>io.gatling.highcharts</groupId>
                 <artifactId>gatling-charts-highcharts</artifactId>
-                <version>3.13.5</version>
+                <version>3.14.1</version>
                 <scope>test</scope>
             </dependency>
             <!--tdd-->
@@ -563,6 +568,8 @@
         <!--        <module>logger-adapter</module>-->
         <module>core</module>
         <module>core-properties</module>
+        <module>functional-reactive</module>
+        <module>ddi</module>
     </modules>
 
 

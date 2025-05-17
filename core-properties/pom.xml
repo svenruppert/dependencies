@@ -23,13 +23,13 @@
     <parent>
         <groupId>com.svenruppert</groupId>
         <artifactId>dependencies</artifactId>
-        <version>06.00.05</version>
+        <version>06.00.07</version>
     </parent>
 
     <artifactId>core-properties</artifactId>
     <packaging>jar</packaging>
 
-    <name>SvenRuppert - Dependencies - Core Properties</name>
+    <name>SRU - Properties</name>
     <properties>
     </properties>
     <dependencies>

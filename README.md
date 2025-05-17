@@ -1,22 +1,14 @@
 # This is the base definition of the versions used by my projects.
 
-[//]: # ()
-[//]: # ([![Maven Central]&#40;https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-dependencies/badge.svg&#41;]&#40;https://maven-badges.herokuapp.com/maven-central/org.rapidpm/rapidpm-dependencies&#41;)
-[![](https://jitpack.io/v/svenruppert/dependencies.svg)](https://jitpack.io/#svenruppert/dependencies)
-
-[//]: # ()
-[//]: # ([![Codacy Badge]&#40;https://api.codacy.com/project/badge/Grade/c1133e6bd62d49d39c79c5b58d31c661&#41;]&#40;https://app.codacy.com/app/sven-ruppert/rapidpm-dependencies?utm_source=github.com&utm_medium=referral&utm_content=RapidPM/rapidpm-dependencies&utm_campaign=badger&#41;)
-
-[//]: # (![Libraries.io dependency status for GitHub repo]&#40;https://img.shields.io/librariesio/github/RapidPM/rapidpm-dependencies?style=plastic&#41;)
-
-[//]: # (![Snyk Vulnerabilities for GitHub Repo]&#40;https://img.shields.io/snyk/vulnerabilities/github/RapidPM/rapidpm-dependencies&#41;)
-
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Info
 
 
 ## Version's
+
+## 06.00.06
+Merged functional reactive lib into the project as sub-module.
 
 ## 06.00.00-SRU - BREAKING CHANGE
 Switched away from jitpack, it is just not working!
@@ -35,11 +27,6 @@ token-generate --secret=admin admin m
 This will generate a user admin with pwd admin and the role manager
 
 Add maven central https://repo1.maven.org/maven2/ to the mirrored repos.
-
-
-
-
-
 
 ## 05.00.07-SRU
 one round for jitpack... 
@@ -244,7 +231,3 @@ JDK 11 will be a LTS Version again.
 ## Version 4.*
 With the beginning of this version
 the project will be compiled with the actual JDK but on source level Java 8.
-
-
-
-
