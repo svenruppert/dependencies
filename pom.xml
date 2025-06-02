@@ -26,7 +26,7 @@
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <version>06.00.07</version>
+    <version>06.00.08-SNAPSHOT</version>
 
     <inceptionYear>2013</inceptionYear>
     <organization>
@@ -102,15 +102,15 @@
         <log4j-api.version>2.13.0</log4j-api.version>
 
         <jacoco.version>0.8.10</jacoco.version>
-        <pitest.version>1.19.2</pitest.version>
+        <pitest.version>1.19.4</pitest.version>
         <pitest-prod-classes>com.svenruppert.*</pitest-prod-classes>
         <pitest-test-classes>junit.com.svenruppert.*</pitest-test-classes>
 
         <junit-platform-maven-plugin.timeout>300</junit-platform-maven-plugin.timeout>
 <!--        <junit-jupiter-api.version>5.12.1</junit-jupiter-api.version>-->
-        <junit-jupiter-api.version>5.13.0-M3</junit-jupiter-api.version>
+        <junit-jupiter-api.version>5.13.0</junit-jupiter-api.version>
 <!--        <junit-platform-launcher.version>1.12.1</junit-platform-launcher.version>-->
-        <junit-platform-launcher.version>1.13.0-M3</junit-platform-launcher.version>
+        <junit-platform-launcher.version>1.13.0</junit-platform-launcher.version>
 
         <!--    <jmh.version>1.26</jmh.version>-->
         <opentracing-api.version>0.33.0</opentracing-api.version>
@@ -182,17 +182,17 @@
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core</artifactId>
-                <version>06.00.07</version>
+                <version>06.00.08-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core-properties</artifactId>
-                <version>06.00.07</version>
+                <version>06.00.08-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>functional-reactive</artifactId>
-                <version>06.00.07</version>
+                <version>06.00.08-SNAPSHOT</version>
             </dependency>
 
             <!--API´s-->
@@ -245,7 +245,7 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
-                <version>3.0-rc4</version>
+                <version>3.0-rc5</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
@@ -367,13 +367,13 @@
                 <groupId>org.testcontainers</groupId>
                 <artifactId>selenium</artifactId>
                 <scope>test</scope>
-                <version>1.21.0</version>
+                <version>1.21.1</version>
             </dependency>
             <dependency>
                 <groupId>org.testcontainers</groupId>
                 <artifactId>testcontainers</artifactId>
                 <scope>test</scope>
-                <version>1.21.0</version>
+                <version>1.21.1</version>
             </dependency>
 
             <!--jUnit5-->
@@ -435,7 +435,7 @@
             <dependency>
                 <groupId>io.rest-assured</groupId>
                 <artifactId>rest-assured</artifactId>
-                <version>5.5.2</version>
+                <version>5.5.5</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -481,7 +481,7 @@
             <dependency>
                 <groupId>io.gatling.highcharts</groupId>
                 <artifactId>gatling-charts-highcharts</artifactId>
-                <version>3.14.1</version>
+                <version>3.14.3</version>
                 <scope>test</scope>
             </dependency>
             <!--tdd-->
@@ -524,7 +524,6 @@
             <!--        <artifactId>jcip-annotations</artifactId>-->
             <!--        <version>1.0</version>-->
             <!--      </dependency>-->
-
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -1009,7 +1008,7 @@
                     <dependency>
                         <groupId>org.pitest</groupId>
                         <artifactId>pitest-junit5-plugin</artifactId>
-                        <version>1.2.2</version>
+                        <version>1.2.3</version>
                     </dependency>
 
                 </dependencies>
@@ -1035,7 +1034,7 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>10.23.1</version> <!-- Checkstyle version -->
+                        <version>10.25.0</version> <!-- Checkstyle version -->
                     </dependency>
                 </dependencies>
                 <executions>
