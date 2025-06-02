@@ -26,7 +26,7 @@
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <version>06.00.08</version>
+    <version>06.00.09-SNAPSHOT</version>
 
     <inceptionYear>2013</inceptionYear>
     <organization>
@@ -75,7 +75,8 @@
         <deploy-repo-url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</deploy-repo-url>
         <!--        <deploy-repo-url>http://0.0.0.0:8080/releases</deploy-repo-url>-->
         <!--        <deploy-repo-url>https://maven.pkg.github.com/svenruppert/dependencies/</deploy-repo-url>-->
-        <deploy-repo-snapshots-url>https://s01.oss.sonatype.org/content/repositories/snapshots</deploy-repo-snapshots-url>
+        <deploy-repo-snapshots-url>https://s01.oss.sonatype.org/content/repositories/snapshots
+        </deploy-repo-snapshots-url>
         <!--        <deploy-repo-snapshots-url>http://0.0.0.0:8080/snapshots</deploy-repo-snapshots-url>-->
         <!--        <deploy-repo-snapshots-url>https://maven.pkg.github.com/svenruppert/dependencies/</deploy-repo-snapshots-url>-->
 
@@ -107,9 +108,9 @@
         <pitest-test-classes>junit.com.svenruppert.*</pitest-test-classes>
 
         <junit-platform-maven-plugin.timeout>300</junit-platform-maven-plugin.timeout>
-<!--        <junit-jupiter-api.version>5.12.1</junit-jupiter-api.version>-->
+        <!--        <junit-jupiter-api.version>5.12.1</junit-jupiter-api.version>-->
         <junit-jupiter-api.version>5.13.0</junit-jupiter-api.version>
-<!--        <junit-platform-launcher.version>1.12.1</junit-platform-launcher.version>-->
+        <!--        <junit-platform-launcher.version>1.12.1</junit-platform-launcher.version>-->
         <junit-platform-launcher.version>1.13.0</junit-platform-launcher.version>
 
         <!--    <jmh.version>1.26</jmh.version>-->
@@ -182,17 +183,17 @@
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core</artifactId>
-                <version>06.00.08</version>
+                <version>06.00.09-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core-properties</artifactId>
-                <version>06.00.08</version>
+                <version>06.00.09-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>functional-reactive</artifactId>
-                <version>06.00.08</version>
+                <version>06.00.09-SNAPSHOT</version>
             </dependency>
 
             <!--API´s-->
@@ -643,10 +644,10 @@
         <!--      <groupId>net.jcip</groupId>-->
         <!--      <artifactId>jcip-annotations</artifactId>-->
         <!--    </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.google.code.findbugs</groupId>-->
-<!--            <artifactId>jsr305</artifactId>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.google.code.findbugs</groupId>-->
+        <!--            <artifactId>jsr305</artifactId>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -662,13 +663,18 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.cyclonedx</groupId>
+                    <artifactId>cyclonedx-maven-plugin</artifactId>
+                    <version>2.9.1</version>
+                </plugin>
+                <plugin>
                     <groupId>org.sonatype.central</groupId>
                     <artifactId>central-publishing-maven-plugin</artifactId>
                     <version>0.7.0</version>
                     <extensions>true</extensions>
                     <configuration>
                         <publishingServerId>central</publishingServerId>
-<!--                        <tokenAuth>true</tokenAuth>-->
+                        <!--                        <tokenAuth>true</tokenAuth>-->
                     </configuration>
                 </plugin>
                 <plugin>
@@ -849,7 +855,7 @@
                         <id>enforce-maven-3</id>
                         <goals>
                             <goal>enforce</goal>
-<!--                            <goal>execute</goal>-->
+                            <!--                            <goal>execute</goal>-->
                         </goals>
                         <configuration>
                             <rules>

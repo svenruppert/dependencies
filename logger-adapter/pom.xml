@@ -23,7 +23,7 @@
     <parent>
         <groupId>com.svenruppert</groupId>
         <artifactId>dependencies</artifactId>
-        <version>06.00.08</version>
+        <version>06.00.09-SNAPSHOT</version>
     </parent>
 
     <artifactId>logger-adapter</artifactId>
