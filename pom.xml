@@ -26,7 +26,7 @@
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <version>06.00.09-SNAPSHOT</version>
+    <version>06.00.09</version>
 
     <inceptionYear>2013</inceptionYear>
     <organization>
@@ -103,15 +103,15 @@
         <log4j-api.version>2.13.0</log4j-api.version>
 
         <jacoco.version>0.8.10</jacoco.version>
-        <pitest.version>1.19.4</pitest.version>
+        <pitest.version>1.19.5</pitest.version>
         <pitest-prod-classes>com.svenruppert.*</pitest-prod-classes>
         <pitest-test-classes>junit.com.svenruppert.*</pitest-test-classes>
 
         <junit-platform-maven-plugin.timeout>300</junit-platform-maven-plugin.timeout>
         <!--        <junit-jupiter-api.version>5.12.1</junit-jupiter-api.version>-->
-        <junit-jupiter-api.version>5.13.0</junit-jupiter-api.version>
+        <junit-jupiter-api.version>5.13.1</junit-jupiter-api.version>
         <!--        <junit-platform-launcher.version>1.12.1</junit-platform-launcher.version>-->
-        <junit-platform-launcher.version>1.13.0</junit-platform-launcher.version>
+        <junit-platform-launcher.version>1.13.1</junit-platform-launcher.version>
 
         <!--    <jmh.version>1.26</jmh.version>-->
         <opentracing-api.version>0.33.0</opentracing-api.version>
@@ -183,17 +183,17 @@
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core</artifactId>
-                <version>06.00.09-SNAPSHOT</version>
+                <version>06.00.09</version>
             </dependency>
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core-properties</artifactId>
-                <version>06.00.09-SNAPSHOT</version>
+                <version>06.00.09</version>
             </dependency>
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>functional-reactive</artifactId>
-                <version>06.00.09-SNAPSHOT</version>
+                <version>06.00.09</version>
             </dependency>
 
             <!--API´s-->
@@ -297,7 +297,7 @@
             <dependency>
                 <groupId>commons-fileupload</groupId>
                 <artifactId>commons-fileupload</artifactId>
-                <version>1.5</version>
+                <version>1.6.0</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -741,7 +741,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.5.2</version>
+                    <version>3.5.3</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -756,7 +756,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.4.1</version>
+                    <version>3.5.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -791,7 +791,7 @@
                 <plugin>
                     <groupId>org.owasp</groupId>
                     <artifactId>dependency-check-maven</artifactId>
-                    <version>12.1.0</version>
+                    <version>12.1.2</version>
                 </plugin>
 
                 <plugin>
@@ -807,7 +807,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.6.0</version>
+                    <version>3.6.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.pitest</groupId>
@@ -817,13 +817,13 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
-                    <version>3.5.0</version>
+                    <version>3.5.1</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.5.2</version>
+                    <version>3.5.3</version>
                 </plugin>
 
                 <plugin>
@@ -1550,7 +1550,7 @@
                         </configuration>
                         <groupId>org.jetbrains.kotlin</groupId>
                         <!--                        <version>${kotlin.compiler.version}</version>-->
-                        <version>2.1.20</version>
+                        <version>2.2.0-RC2</version>
                         <executions>
                             <execution>
                                 <id>compile</id>
