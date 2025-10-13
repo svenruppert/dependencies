@@ -26,7 +26,7 @@
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <version>06.00.11-SNAPSHOT</version>
+    <version>06.00.11</version>
 
     <inceptionYear>2013</inceptionYear>
     <organization>
@@ -103,19 +103,19 @@
         <log4j-api.version>2.13.0</log4j-api.version>
 
         <jacoco.version>0.8.10</jacoco.version>
-        <pitest.version>1.20.2</pitest.version>
+        <pitest.version>1.21.0</pitest.version>
         <pitest-prod-classes>com.svenruppert.*</pitest-prod-classes>
         <pitest-test-classes>junit.com.svenruppert.*</pitest-test-classes>
 
         <junit-platform-maven-plugin.timeout>300</junit-platform-maven-plugin.timeout>
         <!--        <junit-jupiter-api.version>5.12.1</junit-jupiter-api.version>-->
-        <junit-jupiter-api.version>6.0.0-RC2</junit-jupiter-api.version>
+        <junit-jupiter-api.version>6.0.0</junit-jupiter-api.version>
         <!--        <junit-platform-launcher.version>1.12.1</junit-platform-launcher.version>-->
-        <junit-platform-launcher.version>6.0.0-RC2</junit-platform-launcher.version>
+        <junit-platform-launcher.version>6.0.0</junit-platform-launcher.version>
 
         <!--    <jmh.version>1.26</jmh.version>-->
         <opentracing-api.version>0.33.0</opentracing-api.version>
-        <asm.version>9.8</asm.version>
+        <asm.version>9.9</asm.version>
     </properties>
 
     <distributionManagement>
@@ -183,24 +183,24 @@
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core</artifactId>
-                <version>06.00.11-SNAPSHOT</version>
+                <version>06.00.11</version>
             </dependency>
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core-properties</artifactId>
-                <version>06.00.11-SNAPSHOT</version>
+                <version>06.00.11</version>
             </dependency>
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>functional-reactive</artifactId>
-                <version>06.00.11-SNAPSHOT</version>
+                <version>06.00.11</version>
             </dependency>
 
             <!--API´s-->
             <dependency>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-annotations</artifactId>
-                <version>4.9.4</version> <!-- oder die aktuelle Version -->
+                <version>4.9.6</version> <!-- oder die aktuelle Version -->
             </dependency>
             <dependency>
                 <groupId>javax.annotation</groupId>
@@ -229,7 +229,7 @@
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.17.7</version>
+                <version>1.17.8</version>
             </dependency>
 
             <dependency>
@@ -292,7 +292,7 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.18.0</version>
+                <version>3.19.0</version>
             </dependency>
             <dependency>
                 <groupId>commons-fileupload</groupId>
@@ -482,7 +482,7 @@
             <dependency>
                 <groupId>io.gatling.highcharts</groupId>
                 <artifactId>gatling-charts-highcharts</artifactId>
-                <version>3.14.3</version>
+                <version>3.14.6</version>
                 <scope>test</scope>
             </dependency>
             <!--tdd-->
@@ -670,7 +670,7 @@
                 <plugin>
                     <groupId>org.sonatype.central</groupId>
                     <artifactId>central-publishing-maven-plugin</artifactId>
-                    <version>0.7.0</version>
+                    <version>0.9.0</version>
                     <extensions>true</extensions>
                     <configuration>
                         <publishingServerId>central</publishingServerId>
@@ -686,12 +686,12 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>versions-maven-plugin</artifactId>
-                    <version>2.18.0</version>
+                    <version>2.19.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-scm-plugin</artifactId>
-                    <version>2.1.0</version>
+                    <version>2.2.1</version>
                 </plugin>
                 <plugin>
                     <groupId>com.mycila</groupId>
@@ -721,12 +721,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.8.1</version>
+                    <version>3.9.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.14.0</version>
+                    <version>3.14.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -741,7 +741,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.5.3</version>
+                    <version>3.5.4</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -766,12 +766,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
-                    <version>3.2.7</version>
+                    <version>3.2.8</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.11.2</version>
+                    <version>3.12.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -781,7 +781,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.5.0</version>
+                    <version>3.6.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -791,13 +791,13 @@
                 <plugin>
                     <groupId>org.owasp</groupId>
                     <artifactId>dependency-check-maven</artifactId>
-                    <version>12.1.2</version>
+                    <version>12.1.7</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-shade-plugin</artifactId>
-                    <version>3.6.0</version>
+                    <version>3.6.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>
@@ -817,13 +817,13 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
-                    <version>3.5.1</version>
+                    <version>3.6.1</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.5.3</version>
+                    <version>3.5.4</version>
                 </plugin>
 
                 <plugin>
@@ -839,7 +839,7 @@
                 <plugin>
                     <groupId>com.github.spotbugs</groupId>
                     <artifactId>spotbugs-maven-plugin</artifactId>
-                    <version>4.9.3.0</version>
+                    <version>4.9.6.0</version>
                 </plugin>
 
             </plugins>
@@ -1040,7 +1040,7 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>11.0.1</version> <!-- Checkstyle version -->
+                        <version>12.0.1</version> <!-- Checkstyle version -->
                     </dependency>
                 </dependencies>
                 <executions>

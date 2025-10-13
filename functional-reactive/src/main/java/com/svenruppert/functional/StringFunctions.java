@@ -1120,7 +1120,7 @@ public interface StringFunctions {
    * @return a {@link Function} object.
    */
   static Function<String, String> capitalize() {
-    return (input) -> (input.length() == 0)
+    return (input) -> (input.isEmpty())
         ? ""
         : Optional
         .ofNullable(head().apply(input))
