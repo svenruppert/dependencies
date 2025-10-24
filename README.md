@@ -7,6 +7,20 @@
 
 ## Version's
 
+## 06.00.11
+
+### HttpStatus
+Added more codes plus default message including a flag that indicates if it is a nonStandard code.
+With the message family() you will get the group of each code.
+For performance a cache is added into the lookup
+The method fromCode() will transform an int into the instance of the status code
+
+### HttpResponseUtils
+
+### JsonUtils
+
+
+
 ## 06.00.06
 Merged functional reactive lib into the project as sub-module.
 
