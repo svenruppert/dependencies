@@ -23,7 +23,7 @@
     <parent>
         <groupId>com.svenruppert</groupId>
         <artifactId>dependencies</artifactId>
-        <version>06.00.14-SNAPSHOT</version>
+        <version>06.00.14</version>
     </parent>
 
     <artifactId>ddi</artifactId>

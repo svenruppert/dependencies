@@ -7,6 +7,20 @@
 
 ## Version's
 
+## 06.00.14
+Changed Code inspections checkstyle to allow single line methods
+
+```xml
+<module name="LeftCurly">
+  <property name="option" value="eol"/>
+  <property name="ignoreEnums" value="true"/>
+  <property name="ignoreEmptyCtors" value="true"/>
+  <property name="ignoreEmptyMethods" value="true"/>
+  <property name="ignoreSingleline" value="true"/>
+</module>
+```
+
+
 ## 06.00.11
 
 ### HttpStatus
