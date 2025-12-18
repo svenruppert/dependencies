@@ -139,6 +139,10 @@ public enum HttpStatus {
     return code;
   }
 
+  public String codeStr() {
+    return String.valueOf(code());
+  }
+
   public String reason() {
     return reason;
   }
