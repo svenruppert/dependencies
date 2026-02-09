@@ -24,7 +24,7 @@
     <parent>
         <groupId>com.svenruppert</groupId>
         <artifactId>dependencies</artifactId>
-        <version>06.00.15</version>
+        <version>06.00.16-SNAPSHOT</version>
     </parent>
 
     <artifactId>core</artifactId>
