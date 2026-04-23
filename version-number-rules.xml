@@ -15,8 +15,8 @@
     limitations under the Licence.
 
 -->
-<ruleset comparisonMethod="maven"
-         xmlns="https://www.mojohaus.org/VERSIONS/RULE/2.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         comparisonMethod="maven" xmlns="https://www.mojohaus.org/VERSIONS/RULE/2.1.0"
          xsi:schemaLocation="https://www.mojohaus.org/VERSIONS/RULE/2.1.0 https://www.mojohaus.org/versions/versions-model/xsd/rule-2.1.0.xsd">
     <ignoreVersions>
         <ignoreVersion type="regex">(?i).*[-_\.]CR[0-9\.]*</ignoreVersion>

@@ -16,22 +16,18 @@
 package com.svenruppert.dependencies.core.logger.tp.org.slf4j.helpers;
 /**
  * Copyright (c) 2004-2011 QOS.ch All rights reserved.
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  * associated documentation files (the "Software"), to deal in the Software without restriction,
  * including without limitation the rights to use, copy, modify, merge, publish, distribute,
  * sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in all copies or
  * substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
  * NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
  * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *
  */
 
 import java.text.MessageFormat;
@@ -103,13 +99,12 @@ import java.util.Map;
  */
 public final class MessageFormatter {
 
+  static final char DELIM_START = '{';
+  static final char DELIM_STOP = '}';
+  static final String DELIM_STR = "{}";
+  private static final char ESCAPE_CHAR = '\\';
   private MessageFormatter() {
   }
-
-  static final         char   DELIM_START = '{';
-  static final         char   DELIM_STOP  = '}';
-  static final         String DELIM_STR   = "{}";
-  private static final char   ESCAPE_CHAR = '\\';
 
   /**
    * Performs single argument substitution for the 'messagePattern' passed as parameter.
@@ -167,7 +162,7 @@ public final class MessageFormatter {
 
   public static FormattingTuple arrayFormat(final String messagePattern, final Object[] argArray) {
     Throwable throwableCandidate = getThrowableCandidate(argArray);
-    Object[]  args               = argArray;
+    Object[] args = argArray;
     if (throwableCandidate != null) {
       args = trimmedCopy(argArray);
     }
@@ -179,14 +174,14 @@ public final class MessageFormatter {
       throw new IllegalStateException("non-sensical empty or null argument array");
     }
     final int trimemdLen = argArray.length - 1;
-    Object[]  trimmed    = new Object[trimemdLen];
+    Object[] trimmed = new Object[trimemdLen];
     System.arraycopy(argArray, 0, trimmed, 0, trimemdLen);
     return trimmed;
   }
 
   public static FormattingTuple arrayFormat(final String messagePattern,
-                                                  final Object[] argArray,
-                                                  Throwable throwable) {
+                                            final Object[] argArray,
+                                            Throwable throwable) {
 
     if (messagePattern == null) {
       return new FormattingTuple(null, argArray, throwable);
@@ -263,7 +258,7 @@ public final class MessageFormatter {
       return;
     }
     if (!o.getClass()
-          .isArray()) {
+        .isArray()) {
       safeObjectAppend(sbuf, o);
     } else {
       // check for primitive array types because they
@@ -296,7 +291,7 @@ public final class MessageFormatter {
       sbuf.append(oAsString);
     } catch (Throwable t) {
       Util.INSTANCE.report("SLF4J: Failed toString() invocation on an object of type [" + o.getClass()
-                                                                                           .getName() + "]", t);
+          .getName() + "]", t);
       sbuf.append("[FAILED toString()]");
     }
 

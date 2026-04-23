@@ -41,12 +41,13 @@ package com.svenruppert.dependencies.core.logger.tp.org.slf4j.helpers
  *
  * @author Joern Huxhorn
  */
-class FormattingTuple @JvmOverloads constructor(val message: String?,
-                                                val argArray: Array<Any>? = null,
-                                                val throwable: Throwable? = null) {
-  companion object {
-    var NULL = FormattingTuple(null)
-  }
+class FormattingTuple @JvmOverloads constructor(
+    val message: String?,
+    val argArray: Array<Any>? = null,
+    val throwable: Throwable? = null
+) {
+    companion object {
+        var NULL = FormattingTuple(null)
+    }
 
 }
-

@@ -15,6 +15,31 @@
  */
 package com.svenruppert.dependencies.core.stream;
 
+/*-
+ * #%L
+ * SRU - Core
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -35,8 +60,8 @@ public class ImmutableListCollector {
    * <p>toImmutableList.</p>
    *
    * @param collectionFactory a {@link java.util.function.Supplier} object.
-   * @param <T> a T object.
-   * @param <A> a A object.
+   * @param <T>               a T object.
+   * @param <A>               a A object.
    * @return a {@link java.util.stream.Collector} object.
    */
   public static <T, A extends List<T>> Collector<T, A, List<T>> toImmutableList(Supplier<A> collectionFactory) {
@@ -56,4 +81,3 @@ public class ImmutableListCollector {
     return toImmutableList(ArrayList::new);
   }
 }
-

@@ -15,6 +15,31 @@
  */
 package junit.com.svenruppert.functional;
 
+/*-
+ * #%L
+ * SRU - Functional
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import com.svenruppert.functional.Transformations;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -59,7 +84,7 @@ public class TransformationsTest {
 
 
   @Test
-  public void test004(){
+  public void test004() {
     String helloWorld = Transformations
         .<String, String, String, String>unCurryTriFunction()
         .apply(inputA -> inputB -> inputC -> inputA + " " + inputB + " " + inputC)
@@ -68,7 +93,7 @@ public class TransformationsTest {
   }
 
   @Test
-  public void test005(){
+  public void test005() {
     String helloWorld = Transformations
         .<String, String, String, String>unCurryCheckedTriFunction()
         .apply(inputA -> inputB -> inputC -> inputA + " " + inputB + " " + inputC)
@@ -78,7 +103,7 @@ public class TransformationsTest {
   }
 
   @Test
-  public void test006()  {
+  public void test006() {
     Transformations
         .<String, String, String, String>unCurryCheckedTriFunction()
         .apply(inputA -> inputB -> inputC -> {
@@ -101,10 +126,10 @@ public class TransformationsTest {
   }
 
   @Test
-  public void test008(){
+  public void test008() {
     Transformations
         .<String, String, String, String>curryCheckedTriFunction()
-        .apply((s1, s2, s3) -> {throw new RuntimeException("");})
+        .apply((s1, s2, s3) -> { throw new RuntimeException(""); })
         .apply("Hello").apply("World").apply("!")
         .ifPresent(e -> Assertions.fail("should be false"));
   }
@@ -123,7 +148,7 @@ public class TransformationsTest {
   public void test010() {
     Transformations
         .<String, String, String>curryCheckedBiFunction()
-        .apply((s1, s2) -> {throw new RuntimeException("");})
+        .apply((s1, s2) -> { throw new RuntimeException(""); })
         .apply("Hello").apply("World")
         .ifPresent(e -> Assertions.fail("should be false"));
   }
@@ -142,7 +167,7 @@ public class TransformationsTest {
   public void test012() {
     Transformations
         .<String, String, String>unCurryCheckedBiFunction()
-        .apply(inputA -> inputB -> {throw new RuntimeException("");})
+        .apply(inputA -> inputB -> { throw new RuntimeException(""); })
         .apply("Hello", "World")
         .ifPresent(e -> Assertions.fail("should be false"));
   }

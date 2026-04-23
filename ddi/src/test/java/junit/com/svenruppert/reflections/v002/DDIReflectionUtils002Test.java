@@ -15,9 +15,34 @@
  */
 package junit.com.svenruppert.reflections.v002;
 
+/*-
+ * #%L
+ * SRU - DDI
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
+import com.svenruppert.ddi.reflections.DDIReflectionUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import com.svenruppert.ddi.reflections.DDIReflectionUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,7 +58,6 @@ import java.util.Set;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Licence for the specific language governing permissions and
  * limitations under the Licence.
- *
  * Created by RapidPM - Team on 02.08.16.
  */
 public class DDIReflectionUtils002Test {
@@ -82,44 +106,58 @@ public class DDIReflectionUtils002Test {
   public interface Service {
   }
 
-  public interface ServiceA extends Service {
+  public interface ServiceA
+      extends Service {
   }
 
-  public interface ServiceB extends ServiceA {
+  public interface ServiceB
+      extends ServiceA {
   }
 
-//  @IsGeneratedProxy
-  public static class ServiceImplA implements Service {
+  //  @IsGeneratedProxy
+  public static class ServiceImplA
+      implements Service {
   }
 
-//  @IsMetricsProxy
-  public static class ServiceImplB implements ServiceA {
+  //  @IsMetricsProxy
+  public static class ServiceImplB
+      implements ServiceA {
   }
 
-  public static class ServiceImplAB extends ServiceImplA {
+  public static class ServiceImplAB
+      extends ServiceImplA {
   }
 
-  public static class ServiceImplBB extends ServiceImplB {
+  public static class ServiceImplBB
+      extends ServiceImplB {
   }
 
   public static class A {
   }
 
-  public static class B extends A implements Service {
+  public static class B
+      extends A
+      implements Service {
   }
 
-//  @IsStaticObjectAdapter
-  public static class C extends B {
+  //  @IsStaticObjectAdapter
+  public static class C
+      extends B {
   }
 
-//  @IsLoggingProxy
-  public static class D extends A implements ServiceA {
+  //  @IsLoggingProxy
+  public static class D
+      extends A
+      implements ServiceA {
   }
 
-  public static class E extends A implements ServiceB {
+  public static class E
+      extends A
+      implements ServiceB {
   }
 
-  public static class F extends ServiceImplAB {
+  public static class F
+      extends ServiceImplAB {
   }
 
 

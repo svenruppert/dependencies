@@ -15,15 +15,40 @@
  */
 package junit.com.svenruppert.ddi.producerresolver.v002;
 
-import junit.com.svenruppert.ddi.DDIBaseTest;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+/*-
+ * #%L
+ * SRU - DDI
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import com.svenruppert.ddi.DI;
 import com.svenruppert.ddi.Produces;
 import com.svenruppert.ddi.ResponsibleFor;
 import com.svenruppert.ddi.implresolver.ClassResolver;
 import com.svenruppert.ddi.producer.Producer;
 import com.svenruppert.ddi.producerresolver.ProducerResolver;
+import junit.com.svenruppert.ddi.DDIBaseTest;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
 
@@ -32,7 +57,8 @@ public class ProducerResolver002Test
 
   static boolean producer_a_1;
   static boolean producer_a_2;
-  @Inject MyService myService;
+  @Inject
+  MyService myService;
 
   @Test
   public void test001() {
@@ -49,14 +75,16 @@ public class ProducerResolver002Test
     String doWork(String txt);
   }
 
-  public static class MyServiceImpl_A implements MyService {
+  public static class MyServiceImpl_A
+      implements MyService {
     @Override
     public String doWork(final String txt) {
       return this.getClass().getSimpleName() + txt;
     }
   }
 
-  public static class MyServiceImpl_B implements MyService {
+  public static class MyServiceImpl_B
+      implements MyService {
     @Override
     public String doWork(final String txt) {
       return this.getClass().getSimpleName() + txt;
@@ -64,7 +92,8 @@ public class ProducerResolver002Test
   }
 
   @ResponsibleFor(MyService.class)
-  public static class MyServiceImplResolver implements ClassResolver<MyService> {
+  public static class MyServiceImplResolver
+      implements ClassResolver<MyService> {
 
     @Override
     public Class<? extends MyService> resolve(final Class<MyService> interf) {
@@ -74,7 +103,8 @@ public class ProducerResolver002Test
   }
 
   @Produces(MyServiceImpl_A.class)
-  public static class Producer_A_1 implements Producer<MyServiceImpl_A> {
+  public static class Producer_A_1
+      implements Producer<MyServiceImpl_A> {
     @Override
     public MyServiceImpl_A create() {
       producer_a_1 = true;
@@ -83,7 +113,8 @@ public class ProducerResolver002Test
   }
 
   @Produces(MyServiceImpl_A.class)
-  public static class Producer_A_2 implements Producer<MyServiceImpl_A> {
+  public static class Producer_A_2
+      implements Producer<MyServiceImpl_A> {
     @Override
     public MyServiceImpl_A create() {
       producer_a_2 = true;
@@ -92,7 +123,8 @@ public class ProducerResolver002Test
   }
 
   @ResponsibleFor(MyServiceImpl_A.class)
-  public static class MyProducerResolver implements ProducerResolver<MyServiceImpl_A,Producer<MyServiceImpl_A>> {
+  public static class MyProducerResolver
+      implements ProducerResolver<MyServiceImpl_A, Producer<MyServiceImpl_A>> {
     @Override
     public Class resolve(final Class<? extends MyServiceImpl_A> interf) {
       System.out.println("MyProducerResolver.resolve = " + interf);

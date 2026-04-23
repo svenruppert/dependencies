@@ -17,8 +17,8 @@ package com.svenruppert.dependencies.core.logger
 
 
 interface HasLoggerKotlin {
-  //@JvmDefault still experimental
-  fun logger(): LoggingService {
-    return Logger.getLogger(javaClass)
-  }
+    //@JvmDefault still experimental
+    fun logger(): LoggingService {
+        return Logger.getLogger(javaClass)
+    }
 }

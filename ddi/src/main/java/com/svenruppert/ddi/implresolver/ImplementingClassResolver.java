@@ -15,6 +15,31 @@
  */
 package com.svenruppert.ddi.implresolver;
 
+/*-
+ * #%L
+ * SRU - DDI
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import com.svenruppert.ddi.DDIModelException;
 import com.svenruppert.ddi.DI;
 import com.svenruppert.ddi.ResponsibleFor;
@@ -62,9 +87,9 @@ public class ImplementingClassResolver {
 
       if (subTypesOf.isEmpty()) return interf;
       else if (subTypesOf.size() == 1) {
-        return handleOneSubType(interf , subTypesOf.toArray()[0]);
+        return handleOneSubType(interf, subTypesOf.toArray()[0]);
       } else {
-        return handleManySubTypes(interf , subTypesOf);
+        return handleManySubTypes(interf, subTypesOf);
       }
     } else {
       return interf;
@@ -73,7 +98,7 @@ public class ImplementingClassResolver {
 
 
   //ToDo this result could be cached....
-  private <I> Class<? extends I> handleOneSubType(final Class<I> interf , final Object o) {
+  private <I> Class<? extends I> handleOneSubType(final Class<I> interf, final Object o) {
     final Class<? extends I> implClass = (Class<? extends I>) o;
     final Set<Class<?>> producersForInterface = findProducersFor(interf);
     final Set<Class<?>> producersForImpl = findProducersFor(implClass);
@@ -86,49 +111,49 @@ public class ImplementingClassResolver {
     return null;
   }
 
-  private <I> Class<? extends I> handleManySubTypes(final Class<I> interf , final Set<Class<? extends I>> subTypesOf) {
+  private <I> Class<? extends I> handleManySubTypes(final Class<I> interf, final Set<Class<? extends I>> subTypesOf) {
 
     if (resolverCacheForClass2ClassResolver.containsKey(interf)) {
-      return handleOneResolver(interf , resolverCacheForClass2ClassResolver.get(interf));
+      return handleOneResolver(interf, resolverCacheForClass2ClassResolver.get(interf));
     }
 
     final List<Class<? extends ClassResolver>> clearedListOfResolvers = DI.getSubTypesWithoutInterfacesAndGeneratedOf(ClassResolver.class)
-                                                                          .stream()
-                                                                          .filter(aClassResolver -> aClassResolver.isAnnotationPresent(ResponsibleFor.class))
-                                                                          .filter(aClassResolver -> {
-                                                                            final ResponsibleFor responsibleFor = aClassResolver.getAnnotation(ResponsibleFor.class);
-                                                                            return interf.equals(responsibleFor.value());
-                                                                          })
-                                                                          .collect(Collectors.toList());
+        .stream()
+        .filter(aClassResolver -> aClassResolver.isAnnotationPresent(ResponsibleFor.class))
+        .filter(aClassResolver -> {
+          final ResponsibleFor responsibleFor = aClassResolver.getAnnotation(ResponsibleFor.class);
+          return interf.equals(responsibleFor.value());
+        })
+        .collect(Collectors.toList());
 
     if (clearedListOfResolvers.size() == 1) {
       final Class<? extends ClassResolver> classResolverClass = clearedListOfResolvers.get(0);
-      resolverCacheForClass2ClassResolver.put(interf , classResolverClass);
-      return handleOneResolver(interf , classResolverClass);
+      resolverCacheForClass2ClassResolver.put(interf, classResolverClass);
+      return handleOneResolver(interf, classResolverClass);
     } else if (clearedListOfResolvers.isEmpty()) {
-      return handleNoResolvers(interf , subTypesOf);
+      return handleNoResolvers(interf, subTypesOf);
     }
 
     final String message = "interface with multiple implementations and more as 1 ClassResolver = "
-                           + interf
-                           + " ClassResolver: " + clearedListOfResolvers;
+        + interf
+        + " ClassResolver: " + clearedListOfResolvers;
     throw new DDIModelException(message);
   }
 
-  private <I> Class<? extends I> handleOneResolver(final Class<I> interf , final Class<? extends ClassResolver> classResolverClass) {
+  private <I> Class<? extends I> handleOneResolver(final Class<I> interf, final Class<? extends ClassResolver> classResolverClass) {
     try {
       final ClassResolver<I> classResolver = classResolverClass.getDeclaredConstructor().newInstance();
       return classResolver.resolve(interf);
     } catch (InstantiationException | IllegalAccessException | NoSuchMethodException e) {
-      LOGGER.warn("could not create instance " , e);
+      LOGGER.warn("could not create instance ", e);
       throw new DDIModelException(interf + " -- " + e);
     } catch (InvocationTargetException e) {
-      LOGGER.warn("could not create instance " , e);
+      LOGGER.warn("could not create instance ", e);
       throw new DDIModelException(interf + " -- " + e);
     }
   }
 
-  private <I> Class<? extends I> handleNoResolvers(final Class<I> interf , final Set<Class<? extends I>> subTypesOf) {
+  private <I> Class<? extends I> handleNoResolvers(final Class<I> interf, final Set<Class<? extends I>> subTypesOf) {
     final Set<Class<?>> producersForInterface = findProducersFor(interf);
     if (producersForInterface.isEmpty()) {
       final StringBuilder stringBuilder = new StringBuilder("interface with multiple implementations and no ClassResolver= " + interf);

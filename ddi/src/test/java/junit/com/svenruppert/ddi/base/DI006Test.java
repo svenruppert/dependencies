@@ -15,10 +15,35 @@
  */
 package junit.com.svenruppert.ddi.base;
 
+/*-
+ * #%L
+ * SRU - DDI
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
+import com.svenruppert.ddi.DI;
 import junit.com.svenruppert.ddi.DDIBaseTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import com.svenruppert.ddi.DI;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -30,11 +55,11 @@ public class DI006Test
   static boolean postconstructB1;
   static boolean postconstructB2;
 
-//  @BeforeEach
-//  public void setUp() throws Exception {
-//    DI.clearReflectionModel();
-//    DI.activatePackages(DITest006.class.getPackage().getName());
-//  }
+  //  @BeforeEach
+  //  public void setUp() throws Exception {
+  //    DI.clearReflectionModel();
+  //    DI.activatePackages(DITest006.class.getPackage().getName());
+  //  }
 
   @Test
   public void test001() {
@@ -58,7 +83,8 @@ public class DI006Test
     String doWork(String txt);
   }
 
-  public static class ServiceImpl implements Service {
+  public static class ServiceImpl
+      implements Service {
     @Override
     public String doWork(final String txt) {
       return this.getClass().getSimpleName() + " " + txt;
@@ -78,7 +104,8 @@ public class DI006Test
   }
 
   public static class BusinessModule {
-    @Inject Service service;
+    @Inject
+    Service service;
 
     @PostConstruct
     public void post001() {
@@ -96,4 +123,3 @@ public class DI006Test
 
 
 }
-

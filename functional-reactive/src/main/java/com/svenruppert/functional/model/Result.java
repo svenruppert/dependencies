@@ -15,6 +15,31 @@
  */
 package com.svenruppert.functional.model;
 
+/*-
+ * #%L
+ * SRU - Functional
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import com.svenruppert.functional.functions.CheckedFunction;
 
 import java.util.Objects;
@@ -29,26 +54,18 @@ import java.util.stream.Stream;
 /**
  * Copyright (C) 2017 RapidPM - Sven Ruppert
  * Licensed under the EUPL, Version 1.2 (the "Licence");
-   * you may not use this file except in compliance with the Licence.
-   * You may obtain a copy of the Licence at:
-   * <a href="https://joinup.ec.europa.eu/software/page/eupl">EUPL 1.2</a>
-   * Unless required by applicable law or agreed to in writing, software
-   * distributed under the Licence is distributed on an "AS IS" basis,
-   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   * See the Licence for the specific language governing permissions and
-   * limitations under the Licence.
+ * you may not use this file except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ * <a href="https://joinup.ec.europa.eu/software/page/eupl">EUPL 1.2</a>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
  * <p>
  * Created by Sven Ruppert - RapidPM - Team on 16.03.17.
  */
 public interface Result<T> {
-
-  void ifPresentOrElse(Consumer<? super T> action, Runnable emptyAction);
-
-  void ifPresentOrElse(Consumer<T> success, Consumer<String> failure);
-
-  void ifPresentOrElseAsync(Consumer<? super T> action, Runnable emptyAction);
-
-  void ifPresentOrElseAsync(Consumer<T> success, Consumer<String> failure);
 
   static <T> Result<T> failure(String errorMessage) {
     Objects.requireNonNull(errorMessage);
@@ -65,9 +82,24 @@ public interface Result<T> {
 
   static <T> Result<T> ofNullable(T value, String failedMessage) {
     return (Objects.nonNull(value))
-           ? success(value)
-           : failure(failedMessage);
+        ? success(value)
+        : failure(failedMessage);
   }
+
+  static <T> Result<T> fromOptional(Optional<T> optional) {
+    Objects.requireNonNull(optional);
+    return optional
+        .map(Result::success)
+        .orElseGet(() -> failure("Optional hold a null value"));
+  }
+
+  void ifPresentOrElse(Consumer<? super T> action, Runnable emptyAction);
+
+  void ifPresentOrElse(Consumer<T> success, Consumer<String> failure);
+
+  void ifPresentOrElseAsync(Consumer<? super T> action, Runnable emptyAction);
+
+  void ifPresentOrElseAsync(Consumer<T> success, Consumer<String> failure);
 
   T get();
 
@@ -102,21 +134,14 @@ public interface Result<T> {
     }
   }
 
-
   default Optional<T> toOptional() {
     return Optional.ofNullable(get());
-  }
-
-  static <T> Result<T> fromOptional(Optional<T> optional) {
-    Objects.requireNonNull(optional);
-    return optional
-        .map(Result::success)
-        .orElseGet(() -> failure("Optional hold a null value"));
   }
 
   default <V, R> Result<R> thenCombine(V value, BiFunction<T, V, Result<R>> func) {
     return func.apply(get(), value);
   }
+
   default <V, R> Result<R> thenCombineFlat(V value, BiFunction<T, V, R> func) {
     return Result.ofNullable(func.apply(get(), value));
   }
@@ -128,26 +153,27 @@ public interface Result<T> {
   default <U> Result<U> map(Function<? super T, ? extends U> mapper) {
     Objects.requireNonNull(mapper);
     return isPresent()
-           ? ((CheckedFunction<T, U>) mapper::apply).apply(get())
-           : this.asFailure();
+        ? ((CheckedFunction<T, U>) mapper::apply).apply(get())
+        : this.asFailure();
   }
 
   default <U> Result<U> flatMap(Function<? super T, Result<U>> mapper) {
     Objects.requireNonNull(mapper);
     return this.isPresent()
-           ? mapper.apply(get())
-           : this.asFailure();
+        ? mapper.apply(get())
+        : this.asFailure();
   }
 
 
   default <U> Result<U> asFailure() {
     return (isAbsent())
-           ? ofNullable(null)
-           : failure("converted to Failure orig was " + this);
+        ? ofNullable(null)
+        : failure("converted to Failure orig was " + this);
   }
 
 
-  abstract class AbstractResult<T> implements Result<T> {
+  abstract class AbstractResult<T>
+      implements Result<T> {
     protected final T value;
 
     public AbstractResult(T value) {
@@ -159,8 +185,8 @@ public interface Result<T> {
       Objects.requireNonNull(consumer);
       if (value != null) consumer.accept(value);
       return (this instanceof Failure)
-             ? this
-             : ofNullable(value);
+          ? this
+          : ofNullable(value);
     }
 
     @Override
@@ -168,8 +194,8 @@ public interface Result<T> {
       Objects.requireNonNull(action);
       if (value == null) action.run();
       return (this instanceof Failure)
-             ? this
-             : ofNullable(value);
+          ? this
+          : ofNullable(value);
     }
 
     public Boolean isPresent() {
@@ -192,7 +218,8 @@ public interface Result<T> {
     }
   }
 
-  class Success<T> extends AbstractResult<T> {
+  class Success<T>
+      extends AbstractResult<T> {
 
     public Success(T value) {
       super(value);
@@ -227,7 +254,8 @@ public interface Result<T> {
 
   }
 
-  class Failure<T> extends AbstractResult<T> {
+  class Failure<T>
+      extends AbstractResult<T> {
 
     private final String errorMessage;
 

@@ -15,8 +15,37 @@
  */
 package junit.com.svenruppert.dependencies.core.properties;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+/*-
+ * #%L
+ * SRU - Properties
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
+import com.svenruppert.dependencies.core.logger.HasLogger;
+import com.svenruppert.dependencies.core.properties.PropertiesResolver;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,13 +54,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Properties;
 
-import com.svenruppert.dependencies.core.properties.PropertiesResolver;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import com.svenruppert.dependencies.core.logger.HasLogger;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class PropertiesResolverTest implements HasLogger {
+class PropertiesResolverTest
+    implements HasLogger {
 
   private PropertiesResolver propertiesResolver;
 
@@ -66,7 +93,8 @@ class PropertiesResolverTest implements HasLogger {
 
   @Test
   @DisplayName("load from home dir")
-  void test003() throws IOException {
+  void test003()
+      throws IOException {
     String homeDir = System.getProperty("user.home");
     File file = new File(homeDir, "test003.properties");
     createPropertiesFile(file);
@@ -80,7 +108,8 @@ class PropertiesResolverTest implements HasLogger {
 
   @Test
   @DisplayName("load from dir specified in enviroment")
-  void test004() throws IOException {
+  void test004()
+      throws IOException {
     Path tempDir = Files.createTempDirectory(getClass().getSimpleName());
     System.setProperty(PropertiesResolver.CONFIG_LOCATION_PROPERTY, tempDir.toString());
 
@@ -95,10 +124,11 @@ class PropertiesResolverTest implements HasLogger {
     assertEquals("Hello", properties.getProperty("a.b"));
   }
 
-  private void createPropertiesFile(File file) throws IOException {
+  private void createPropertiesFile(File file)
+      throws IOException {
     logger().info("Create properties file: " + file);
     try (InputStream is = getClass().getResourceAsStream("/test001.properties");
-        OutputStream os = Files.newOutputStream(file.toPath())) {
+         OutputStream os = Files.newOutputStream(file.toPath())) {
       byte[] buffer = new byte[1024];
       int length;
       while ((length = is.read(buffer)) > 0) {

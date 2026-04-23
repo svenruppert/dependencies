@@ -22,21 +22,21 @@ import com.svenruppert.dependencies.core.logger.factory.LoggerFactory
 
 abstract class LoggerFactorySupport : LoggerFactory {
 
-  internal val mapLoggers: ConcurrentMap<String, LoggingService> = ConcurrentHashMap(100)
+    internal val mapLoggers: ConcurrentMap<String, LoggingService> = ConcurrentHashMap(100)
 
-  internal val loggerConstructor = object : ConstructorFunction<String, LoggingService> {
-    override fun createNew(arg: String): LoggingService {
-      return createLogger(arg)
+    internal val loggerConstructor = object : ConstructorFunction<String, LoggingService> {
+        override fun createNew(arg: String): LoggingService {
+            return createLogger(arg)
+        }
+
     }
 
-  }
+    /** {@inheritDoc}  */
+    override fun getLogger(name: String): LoggingService {
+        return ConcurrencyUtil.getOrPutIfAbsent(mapLoggers, name, loggerConstructor)
+    }
 
-  /** {@inheritDoc}  */
-  override fun getLogger(name: String): LoggingService {
-    return ConcurrencyUtil.getOrPutIfAbsent(mapLoggers, name, loggerConstructor)
-  }
-
-  protected abstract fun createLogger(name: String): LoggingService
+    protected abstract fun createLogger(name: String): LoggingService
 
 
 }

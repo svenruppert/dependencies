@@ -15,6 +15,31 @@
  */
 package com.svenruppert.dependencies.core.basepattern.builder;
 
+/*-
+ * #%L
+ * SRU - Core
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -43,8 +68,8 @@ public abstract class NestedBuilder<T, V> {
       method.invoke(parent, build);
       method.setAccessible(accessible);
     } catch (NoSuchMethodException
-        | IllegalAccessException
-        | InvocationTargetException e) {
+             | IllegalAccessException
+             | InvocationTargetException e) {
       e.printStackTrace();
     }
     return parent;
@@ -61,7 +86,7 @@ public abstract class NestedBuilder<T, V> {
    * <p>withParentBuilder.</p>
    *
    * @param parent a T object.
-   * @param <P> a P object.
+   * @param <P>    a P object.
    * @return a P object.
    */
   public <P extends NestedBuilder<T, V>> P withParentBuilder(T parent) {

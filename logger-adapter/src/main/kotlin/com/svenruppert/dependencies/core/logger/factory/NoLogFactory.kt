@@ -28,105 +28,105 @@ import java.util.logging.Level
  * @version $Id: $Id
  */
 class NoLogFactory : LoggerFactory {
-  internal val noLogger: LoggingService = NoLogger()
+    internal val noLogger: LoggingService = NoLogger()
 
-  /** {@inheritDoc}  */
-  override fun getLogger(name: String): LoggingService {
-    return noLogger
-  }
-
-  internal class NoLogger : LoggingService {
-
-    override val isFinestEnabled: Boolean
-      get() = false
-
-    override val isFineEnabled: Boolean
-      get() = false
-
-    override val isWarningEnabled: Boolean
-      get() = false
-
-    override val isSevereEnabled: Boolean
-      get() = false
-
-    override val isInfoEnabled: Boolean
-      get() = false
-
-    override val level: Level
-      get() = Level.OFF
-
-    override fun finest(message: String) {}
-
-    override fun finest(message: String, thrown: Throwable) {}
-
-    override fun finest(thrown: Throwable) {}
-
-    override fun finest(message: Supplier<String>) {}
-
-    override fun finest(message: Supplier<String>, thrown: Throwable) {}
-
-    override fun finest(format: String, arg0: Any) {}
-
-    override fun finest(format: String, arg1: Any, arg2: Any) {}
-
-    override fun finest(format: String, vararg arguments: Any) {}
-
-    override fun fine(message: String) {}
-
-    override fun info(message: String) {}
-
-    override fun info(message: Supplier<String>) {}
-
-    override fun info(message: Supplier<String>, thrown: Throwable) {}
-
-    override fun info(message: String, thrown: Throwable) {}
-
-    override fun info(format: String, arg0: Any) {}
-
-    override fun info(format: String, arg1: Any, arg2: Any) {}
-
-    override fun info(format: String, vararg arguments: Any) {}
-
-    override fun severe(message: String) {}
-
-    override fun severe(thrown: Throwable) {}
-
-    override fun severe(message: String, thrown: Throwable) {}
-
-    override fun severe(message: Supplier<String>) {}
-
-    override fun severe(message: Supplier<String>, thrown: Throwable) {}
-
-    override fun severe(format: String, arg0: Any) {}
-
-    override fun severe(format: String, arg1: Any, arg2: Any) {}
-
-    override fun severe(format: String, vararg arguments: Any) {}
-
-    override fun warning(message: String) {}
-
-    override fun warning(thrown: Throwable) {}
-
-    override fun warning(message: String, thrown: Throwable) {}
-
-    override fun warning(message: Supplier<String>) {}
-
-    override fun warning(message: Supplier<String>, thrown: Throwable) {}
-
-    override fun warning(format: String, arg0: Any) {}
-
-    override fun warning(format: String, arg1: Any, arg2: Any) {}
-
-    override fun warning(format: String, vararg arguments: Any) {}
-
-    override fun log(level: Level, message: String) {}
-
-    override fun log(level: Level, message: String, thrown: Throwable?) {}
-
-    override fun log(logEvent: LogEvent<*>) {}
-
-    override fun isLoggable(level: Level): Boolean {
-      return false
+    /** {@inheritDoc}  */
+    override fun getLogger(name: String): LoggingService {
+        return noLogger
     }
-  }
+
+    internal class NoLogger : LoggingService {
+
+        override val isFinestEnabled: Boolean
+            get() = false
+
+        override val isFineEnabled: Boolean
+            get() = false
+
+        override val isWarningEnabled: Boolean
+            get() = false
+
+        override val isSevereEnabled: Boolean
+            get() = false
+
+        override val isInfoEnabled: Boolean
+            get() = false
+
+        override val level: Level
+            get() = Level.OFF
+
+        override fun finest(message: String) {}
+
+        override fun finest(message: String, thrown: Throwable) {}
+
+        override fun finest(thrown: Throwable) {}
+
+        override fun finest(message: Supplier<String>) {}
+
+        override fun finest(message: Supplier<String>, thrown: Throwable) {}
+
+        override fun finest(format: String, arg0: Any) {}
+
+        override fun finest(format: String, arg1: Any, arg2: Any) {}
+
+        override fun finest(format: String, vararg arguments: Any) {}
+
+        override fun fine(message: String) {}
+
+        override fun info(message: String) {}
+
+        override fun info(message: Supplier<String>) {}
+
+        override fun info(message: Supplier<String>, thrown: Throwable) {}
+
+        override fun info(message: String, thrown: Throwable) {}
+
+        override fun info(format: String, arg0: Any) {}
+
+        override fun info(format: String, arg1: Any, arg2: Any) {}
+
+        override fun info(format: String, vararg arguments: Any) {}
+
+        override fun severe(message: String) {}
+
+        override fun severe(thrown: Throwable) {}
+
+        override fun severe(message: String, thrown: Throwable) {}
+
+        override fun severe(message: Supplier<String>) {}
+
+        override fun severe(message: Supplier<String>, thrown: Throwable) {}
+
+        override fun severe(format: String, arg0: Any) {}
+
+        override fun severe(format: String, arg1: Any, arg2: Any) {}
+
+        override fun severe(format: String, vararg arguments: Any) {}
+
+        override fun warning(message: String) {}
+
+        override fun warning(thrown: Throwable) {}
+
+        override fun warning(message: String, thrown: Throwable) {}
+
+        override fun warning(message: Supplier<String>) {}
+
+        override fun warning(message: Supplier<String>, thrown: Throwable) {}
+
+        override fun warning(format: String, arg0: Any) {}
+
+        override fun warning(format: String, arg1: Any, arg2: Any) {}
+
+        override fun warning(format: String, vararg arguments: Any) {}
+
+        override fun log(level: Level, message: String) {}
+
+        override fun log(level: Level, message: String, thrown: Throwable?) {}
+
+        override fun log(logEvent: LogEvent<*>) {}
+
+        override fun isLoggable(level: Level): Boolean {
+            return false
+        }
+    }
 }

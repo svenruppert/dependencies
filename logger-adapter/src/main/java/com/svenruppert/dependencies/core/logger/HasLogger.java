@@ -16,11 +16,6 @@
 package com.svenruppert.dependencies.core.logger;
 
 public interface HasLogger {
-  default LoggingService logger() {
-    return Logger.getLogger(getClass());
-  }
-
-
   // Caching Map: calling class -> Logger
   ConcurrentMap<Class<?>, LoggingService> LOGGER_CACHE = new ConcurrentHashMap<>();
 
@@ -29,6 +24,10 @@ public interface HasLogger {
         .getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE)
         .getCallerClass();
     return LOGGER_CACHE.computeIfAbsent(callerClass, Logger::getLogger);
+  }
+
+  default LoggingService logger() {
+    return Logger.getLogger(getClass());
   }
 
 }

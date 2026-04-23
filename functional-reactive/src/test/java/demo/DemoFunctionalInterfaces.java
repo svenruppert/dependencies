@@ -15,17 +15,75 @@
  */
 package demo;
 
+/*-
+ * #%L
+ * SRU - Functional
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import org.junit.jupiter.api.Test;
 
 import static java.lang.System.out;
 
 public class DemoFunctionalInterfaces {
-  private static String doWorkStatic() {return null;}
+  private static String doWorkStatic() {
+    return null;
+  }
+
+  @Test
+  void demoA() {
+    new ClassAB().doWork(); //"default B"
+    //ClassAB.doStaticWork()
+
+    A.doStaticWork();
+
+    new ClassAC().doWork(); //"default ClassAC"
+
+  }
+
+  @Test
+  void demoB() {
+    DemoClass demoClass = new DemoClass();
+
+    demoClass.consumeInterfaceA(new InterfaceA() {
+      @Override
+      public String doWork() {
+        return null;
+      }
+    });
+
+    demoClass.consumeInterfaceA(() -> { return null; });
+    demoClass.consumeInterfaceA(() -> null);
+    //be careful !!! inheritance ??
+    demoClass.consumeInterfaceA(DemoFunctionalInterfaces::doWorkStatic);
+
+
+  }
 
   @FunctionalInterface
   interface InterfaceA {
     String doWork();
   }
+
 
   @FunctionalInterface
   interface InterfaceB {
@@ -43,68 +101,48 @@ public class DemoFunctionalInterfaces {
     default String doMoreWork() {
       return "useless";
     }
-//with JDK9++
-//    private String doHiddenWork() {
-//      return "useless";
-//    }
+    //with JDK9++
+    //    private String doHiddenWork() {
+    //      return "useless";
+    //    }
   }
-
 
   interface A {
-    static void doStaticWork() {out.println("interface A");}
-    default void doWork() {out.println("default A");}
+    static void doStaticWork() {
+      out.println("interface A");
+    }
+
+    default void doWork() {
+      out.println("default A");
+    }
   }
 
-  interface B extends A {
-    default void doWork() {out.println("default B");}
+  interface B
+      extends A {
+    default void doWork() {
+      out.println("default B");
+    }
   }
 
   interface C {
-    default void doWork() {out.println("default C");}
+    default void doWork() {
+      out.println("default C");
+    }
   }
 
-  public static class ClassAB implements A , B { }
-  public static class ClassAC implements A , C {
+  public static class ClassAB
+      implements A, B { }
+
+  public static class ClassAC
+      implements A, C {
     @Override
     public void doWork() {
       out.println("default ClassAC");
     }
   }
 
-
-  @Test
-  void demoA() {
-    new ClassAB().doWork(); //"default B"
-    //ClassAB.doStaticWork()
-
-    A.doStaticWork();
-
-    new ClassAC().doWork(); //"default ClassAC"
-
-  }
-
-
-  public static class DemoClass{
-    public void consumeInterfaceA(InterfaceA a){ }
-  }
-
-  @Test
-  void demoB() {
-    DemoClass demoClass = new DemoClass();
-
-    demoClass.consumeInterfaceA(new InterfaceA() {
-      @Override
-      public String doWork() {
-        return null;
-      }
-    });
-
-    demoClass.consumeInterfaceA(() -> { return null;});
-    demoClass.consumeInterfaceA(() -> null);
-    //be careful !!! inheritance ??
-    demoClass.consumeInterfaceA(DemoFunctionalInterfaces::doWorkStatic);
-
-
-
+  public static class DemoClass {
+    public void consumeInterfaceA(InterfaceA a) {
+    }
   }
 }

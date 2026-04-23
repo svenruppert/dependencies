@@ -15,6 +15,31 @@
  */
 package demo;
 
+/*-
+ * #%L
+ * SRU - Functional
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import com.svenruppert.functional.model.Result;
 import org.junit.jupiter.api.Test;
 
@@ -31,11 +56,11 @@ public class DemoResult {
 
     Result.fromOptional(Optional.empty());
     Result.success("ok")
-          .toOptional();
+        .toOptional();
 
-    Result<Long>    nullable = Result.ofNullable(null);
-    Result<String>  success  = Result.success("String");
-    Result<Integer> ooops    = Result.failure("Ooops");
+    Result<Long> nullable = Result.ofNullable(null);
+    Result<String> success = Result.success("String");
+    Result<Integer> ooops = Result.failure("Ooops");
 
 
     Result<String> a = Result.success("A");
@@ -43,16 +68,16 @@ public class DemoResult {
     a.isAbsent();
 
     a.ifPresent(String::toUpperCase);
-    a.ifFailed(f -> {});
+    a.ifFailed(f -> { });
 
-    a.ifPresentOrElse(String::toLowerCase, () -> {});
-    a.ifPresentOrElse(String::toLowerCase, (failed) -> {});
+    a.ifPresentOrElse(String::toLowerCase, () -> { });
+    a.ifPresentOrElse(String::toLowerCase, (failed) -> { });
 
-    a.ifPresentOrElseAsync(String::toLowerCase, () -> {});
-    a.ifPresentOrElseAsync(String::toLowerCase, (failed) -> {});
+    a.ifPresentOrElseAsync(String::toLowerCase, () -> { });
+    a.ifPresentOrElseAsync(String::toLowerCase, (failed) -> { });
 
     BiFunction<String, String, Result<String>> fkt = (x, y) -> Result.ofNullable(x + y);
-    Result<String>                             r   = a.thenCombine("B", fkt);
+    Result<String> r = a.thenCombine("B", fkt);
 
     CompletableFuture<Result<String>> rAsync = a.thenCombineAsync("B", fkt);
 
@@ -67,13 +92,13 @@ public class DemoResult {
         Function<Integer, Integer>> rF
         = Function::andThen;
 
-//    var transform = rF.andThen(Result::ofNullable);
+    //    var transform = rF.andThen(Result::ofNullable);
 
-//    Result.success(f1)
-//          .thenCombineAsync(f2, transform)
-//          .join()
-//          .map(f -> f.apply(10))
-//          .get();
+    //    Result.success(f1)
+    //          .thenCombineAsync(f2, transform)
+    //          .join()
+    //          .map(f -> f.apply(10))
+    //          .get();
 
 
   }

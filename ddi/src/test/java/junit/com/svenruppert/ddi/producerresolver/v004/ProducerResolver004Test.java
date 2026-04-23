@@ -15,17 +15,42 @@
  */
 package junit.com.svenruppert.ddi.producerresolver.v004;
 
-import junit.com.svenruppert.ddi.DDIBaseTest;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+/*-
+ * #%L
+ * SRU - DDI
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import com.svenruppert.ddi.DDIModelException;
 import com.svenruppert.ddi.DI;
 import com.svenruppert.ddi.Produces;
 import com.svenruppert.ddi.producer.Producer;
 import com.svenruppert.ddi.producerresolver.ProducerResolver;
+import junit.com.svenruppert.ddi.DDIBaseTest;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class ProducerResolver004Test
-    extends DDIBaseTest{
+    extends DDIBaseTest {
 
   @Test()
   public void test001() {
@@ -42,7 +67,8 @@ public class ProducerResolver004Test
   }
 
   @Produces(MyService.class)
-  public static class Producer_A_1 implements Producer<MyService> {
+  public static class Producer_A_1
+      implements Producer<MyService> {
     @Override
     public MyService create() {
       return null;
@@ -50,15 +76,17 @@ public class ProducerResolver004Test
   }
 
   @Produces(MyService.class)
-  public static class Producer_A_2 implements Producer<MyService> {
+  public static class Producer_A_2
+      implements Producer<MyService> {
     @Override
     public MyService create() {
       return null;
     }
   }
 
-//  @ResponsibleFor(MyService.class)
-  public static class MyProducerResolver_A implements ProducerResolver<MyService,Producer<MyService>> {
+  //  @ResponsibleFor(MyService.class)
+  public static class MyProducerResolver_A
+      implements ProducerResolver<MyService, Producer<MyService>> {
     @Override
     public Class resolve(final Class<? extends MyService> interf) {
       return Producer_A_2.class;

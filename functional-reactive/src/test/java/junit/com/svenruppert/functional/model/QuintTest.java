@@ -15,6 +15,31 @@
  */
 package junit.com.svenruppert.functional.model;
 
+/*-
+ * #%L
+ * SRU - Functional
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import com.svenruppert.functional.model.DataRecords;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +51,7 @@ public class QuintTest {
   public void testEquals() {
     final DataRecords.Quint quint = new DataRecords.Quint(0, 1, 2, 3, 4);
 
-//    assertTrue(quint.equals(quint));
+    //    assertTrue(quint.equals(quint));
     assertEquals(quint, quint);
     assertFalse(quint.equals(null));
     assertFalse(quint.equals(new DataRecords.Quint(null, 1, 2, 3, 4)));
@@ -111,7 +136,8 @@ public class QuintTest {
   }
 
   @Test
-  public void testHashCodeT5() throws Exception {
+  public void testHashCodeT5()
+      throws Exception {
     final DataRecords.Quint quint = new DataRecords.Quint(0, 1, 2, 3, null);
 
     assertEquals(31806, quint.hashCode());

@@ -15,6 +15,31 @@
  */
 package demo;
 
+/*-
+ * #%L
+ * SRU - Functional
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -35,11 +60,11 @@ public class DemoExtraction {
                                 "Lotta",
                                 "Maria");
     names.stream()
-         .filter(v -> v.contains("L"))
-         .forEach(System.out::println);
+        .filter(v -> v.contains("L"))
+        .forEach(System.out::println);
     names.stream()
-         .filter(v -> v.contains("H"))
-         .forEach(System.out::println);
+        .filter(v -> v.contains("H"))
+        .forEach(System.out::println);
   }
 
   @Test
@@ -49,15 +74,15 @@ public class DemoExtraction {
                                 "Lotta",
                                 "Maria");
     Consumer<String> println = System.out::println;
-    String           l       = "L";//final
+    String l = "L";//final
     names.stream()
-         .filter(v -> v.contains(l))
-         .forEach(println);
+        .filter(v -> v.contains(l))
+        .forEach(println);
 
     String h = "H"; //final
     names.stream()
-         .filter(v -> v.contains(h))
-         .forEach(println);
+        .filter(v -> v.contains(h))
+        .forEach(println);
   }
 
   @Test
@@ -75,21 +100,21 @@ public class DemoExtraction {
         = input -> s -> s.contains(input);
 
     names.stream()
-         .filter(f.apply(l))
-         .forEach(println);
+        .filter(f.apply(l))
+        .forEach(println);
 
     names.stream()
-         .filter(f.apply(h))
-         .forEach(println);
+        .filter(f.apply(h))
+        .forEach(println);
 
 
     BiFunction<List<String>, String, Void>
         f2 = (list, input) -> {
-          list.stream()
-                .filter(f.apply(input))
-                .forEach(println);
-          return null;
-        };
+      list.stream()
+          .filter(f.apply(input))
+          .forEach(println);
+      return null;
+    };
 
     f2.apply(names, l);
     f2.apply(names, h);

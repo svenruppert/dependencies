@@ -15,13 +15,38 @@
  */
 package junit.com.svenruppert.ddi.reflectionmodel.v004;
 
+/*-
+ * #%L
+ * SRU - DDI
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
+import com.svenruppert.ddi.DI;
 import junit.com.svenruppert.ddi.reflectionmodel.v004.api.DemoAnnotation;
 import junit.com.svenruppert.ddi.reflectionmodel.v004.api.Service;
 import junit.com.svenruppert.ddi.reflectionmodel.v004.model001.ServiceImplA;
 import junit.com.svenruppert.ddi.reflectionmodel.v004.model002.ServiceImplB;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import com.svenruppert.ddi.DI;
 
 import java.lang.annotation.Annotation;
 import java.util.Set;
@@ -36,8 +61,8 @@ public class ReflectionModel004Test {
     DI.activatePackages(ServiceImplA.class.getPackage().getName());
 
     Assertions.assertFalse(DI.getTypesAnnotatedWith(DemoAnnotation.class).isEmpty());
-    Assertions.assertFalse(DI.getTypesAnnotatedWith(DemoAnnotation.class,false).isEmpty());
-    Assertions.assertFalse(DI.getTypesAnnotatedWith(DemoAnnotation.class,true).isEmpty());
+    Assertions.assertFalse(DI.getTypesAnnotatedWith(DemoAnnotation.class, false).isEmpty());
+    Assertions.assertFalse(DI.getTypesAnnotatedWith(DemoAnnotation.class, true).isEmpty());
   }
 
   private void preCheck() {
@@ -64,8 +89,8 @@ public class ReflectionModel004Test {
 
     Annotation annotation = () -> DemoAnnotation.class;
     Assertions.assertFalse(DI.getTypesAnnotatedWith(annotation).isEmpty());
-    Assertions.assertFalse(DI.getTypesAnnotatedWith(annotation,false).isEmpty());
-    Assertions.assertFalse(DI.getTypesAnnotatedWith(annotation,true).isEmpty());
+    Assertions.assertFalse(DI.getTypesAnnotatedWith(annotation, false).isEmpty());
+    Assertions.assertFalse(DI.getTypesAnnotatedWith(annotation, true).isEmpty());
   }
 
   @Test
@@ -75,8 +100,8 @@ public class ReflectionModel004Test {
     DI.activatePackages(ServiceImplB.class.getPackage().getName());
 
     Assertions.assertTrue(DI.getTypesAnnotatedWith(DemoAnnotation.class).isEmpty());
-    Assertions.assertTrue(DI.getTypesAnnotatedWith(DemoAnnotation.class,false).isEmpty());
-    Assertions.assertTrue(DI.getTypesAnnotatedWith(DemoAnnotation.class,true).isEmpty());
+    Assertions.assertTrue(DI.getTypesAnnotatedWith(DemoAnnotation.class, false).isEmpty());
+    Assertions.assertTrue(DI.getTypesAnnotatedWith(DemoAnnotation.class, true).isEmpty());
 
     DI.activatePackages(ServiceImplA.class.getPackage().getName());
     Assertions.assertFalse(DI.getTypesAnnotatedWith(DemoAnnotation.class).isEmpty());
@@ -98,8 +123,8 @@ public class ReflectionModel004Test {
     Annotation annotation = () -> DemoAnnotation.class;
 
     Assertions.assertTrue(DI.getTypesAnnotatedWith(annotation).isEmpty());
-    Assertions.assertTrue(DI.getTypesAnnotatedWith(annotation,false).isEmpty());
-    Assertions.assertTrue(DI.getTypesAnnotatedWith(annotation,true).isEmpty());
+    Assertions.assertTrue(DI.getTypesAnnotatedWith(annotation, false).isEmpty());
+    Assertions.assertTrue(DI.getTypesAnnotatedWith(annotation, true).isEmpty());
 
     DI.activatePackages(ServiceImplA.class.getPackage().getName());
     Assertions.assertFalse(DI.getTypesAnnotatedWith(annotation).isEmpty());

@@ -15,14 +15,39 @@
  */
 package junit.com.svenruppert.ddi.producerresolver.v006;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+/*-
+ * #%L
+ * SRU - DDI
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import com.svenruppert.ddi.DI;
 import com.svenruppert.ddi.Produces;
 import com.svenruppert.ddi.ResponsibleFor;
 import com.svenruppert.ddi.implresolver.ClassResolver;
 import com.svenruppert.ddi.producer.Producer;
 import com.svenruppert.ddi.producerresolver.ProducerResolver;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class ProducerResolver006Test {
 
@@ -61,7 +86,8 @@ public class ProducerResolver006Test {
     String doWork(String txt);
   }
 
-  public static class ServiceA implements Service {
+  public static class ServiceA
+      implements Service {
     private String postVAlue;
 
     public String doWork(String txt) {
@@ -69,14 +95,16 @@ public class ProducerResolver006Test {
     }
   }
 
-  public static class ServiceB implements Service {
+  public static class ServiceB
+      implements Service {
     public String doWork(String txt) {
       return txt + "B";
     }
   }
 
   @ResponsibleFor(Service.class)
-  public static class ServiceClassResolver implements ClassResolver<Service> {
+  public static class ServiceClassResolver
+      implements ClassResolver<Service> {
 
     @Override
     public Class<? extends Service> resolve(final Class<Service> interf) {
@@ -87,7 +115,8 @@ public class ProducerResolver006Test {
   }
 
   @ResponsibleFor(ServiceA.class)
-  public static class ServiceAProducerResolver implements ProducerResolver<Service, Producer<Service>> {
+  public static class ServiceAProducerResolver
+      implements ProducerResolver<Service, Producer<Service>> {
     @Override
     public Class<? extends Producer<Service>> resolve(final Class<? extends Service> interf) {
       toggleProducer = !toggleProducer;
@@ -98,7 +127,8 @@ public class ProducerResolver006Test {
   }
 
   @Produces(ServiceA.class)
-  public static class ServiceAProducerA implements Producer<Service> {
+  public static class ServiceAProducerA
+      implements Producer<Service> {
 
     @Override
     public Service create() {
@@ -109,7 +139,8 @@ public class ProducerResolver006Test {
   }
 
   @Produces(ServiceA.class)
-  public static class ServiceAProducerB implements Producer<Service> {
+  public static class ServiceAProducerB
+      implements Producer<Service> {
 
     @Override
     public Service create() {

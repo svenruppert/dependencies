@@ -15,6 +15,31 @@
  */
 package com.svenruppert.functional.reactive;
 
+/*-
+ * #%L
+ * SRU - Functional
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
@@ -60,7 +85,7 @@ public class CompletableFutureQueue<T, R> {
   }
 
 
-//TODO : how to combine a list of CF ?
+  //TODO : how to combine a list of CF ?
 
   public <N> CompletableFutureQueue<T, N> thenCombineAsyncFromArray(Function<R, N>[] nextTransformations) {
     CompletableFutureQueue cfq = this;
@@ -70,34 +95,34 @@ public class CompletableFutureQueue<T, R> {
     return cfq;
   }
 
-//  public <N> CompletableFutureQueue<T, N> thenCombineAsync(Collection<Function<R, N>> nextTransformations) {
-//
-//    nextTransformations
-//        .forEach(nextTransformation -> {
-//      this.resultFunction = this.resultFunction
-//          .andThen(before -> before.thenComposeAsync(v -> supplyAsync(() -> nextTransformation.apply(v))));
-//    });
-//
-//
-//    return new CompletableFutureQueue<>(this.resultFunction);
-//  }
-//
-//
-//
-//
-//  public <N> CompletableFutureQueue<T, N> thenCombineAsync(Function<R, N> firstTransformation, Function<R, N>... nextTransformations) {
-//    final Function<T, CompletableFuture<N>> f = this.resultFunction
-//        .andThen(before -> before.thenComposeAsync(v -> supplyAsync(() -> firstTransformation.apply(v))));
-//
-//    if (nextTransformations != null) {
-//      Arrays
-//          .stream(nextTransformations)
-//          .map(nf -> this.resultFunction.andThen(before -> before.thenComposeAsync(v -> supplyAsync(() -> nf.apply(v)))))
-//          .forEach(nF -> { /** don something **/ });
-//
-//    }
-//    return new CompletableFutureQueue<>(f);
-//  }
+  //  public <N> CompletableFutureQueue<T, N> thenCombineAsync(Collection<Function<R, N>> nextTransformations) {
+  //
+  //    nextTransformations
+  //        .forEach(nextTransformation -> {
+  //      this.resultFunction = this.resultFunction
+  //          .andThen(before -> before.thenComposeAsync(v -> supplyAsync(() -> nextTransformation.apply(v))));
+  //    });
+  //
+  //
+  //    return new CompletableFutureQueue<>(this.resultFunction);
+  //  }
+  //
+  //
+  //
+  //
+  //  public <N> CompletableFutureQueue<T, N> thenCombineAsync(Function<R, N> firstTransformation, Function<R, N>... nextTransformations) {
+  //    final Function<T, CompletableFuture<N>> f = this.resultFunction
+  //        .andThen(before -> before.thenComposeAsync(v -> supplyAsync(() -> firstTransformation.apply(v))));
+  //
+  //    if (nextTransformations != null) {
+  //      Arrays
+  //          .stream(nextTransformations)
+  //          .map(nf -> this.resultFunction.andThen(before -> before.thenComposeAsync(v -> supplyAsync(() -> nf.apply(v)))))
+  //          .forEach(nF -> { /** don something **/ });
+  //
+  //    }
+  //    return new CompletableFutureQueue<>(f);
+  //  }
 
   /**
    * <p>resultFunction.</p>

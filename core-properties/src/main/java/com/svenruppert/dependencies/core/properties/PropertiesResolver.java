@@ -15,6 +15,31 @@
  */
 package com.svenruppert.dependencies.core.properties;
 
+/*-
+ * #%L
+ * SRU - Properties
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 
 import com.svenruppert.dependencies.core.logger.HasLogger;
 
@@ -28,7 +53,8 @@ import java.util.Properties;
  * @author svenruppert
  * @version $Id: $Id
  */
-public class PropertiesResolver implements HasLogger {
+public class PropertiesResolver
+    implements HasLogger {
   /**
    * Constant <code>CONFIG_LOCATION_PROPERTY="rapidpm.configlocation"</code>
    */
@@ -41,7 +67,6 @@ public class PropertiesResolver implements HasLogger {
 
   /**
    * Creates a {@link Properties} object from different sources. The sources are:
-   *
    * <ol>
    * <li>the root of the classpath</li>
    * <li>the current working directory</li>
@@ -61,7 +86,7 @@ public class PropertiesResolver implements HasLogger {
     Properties propertiesFromHomeDir = loadFromHomeDir(name);
     Properties propertiesFromEnvironmentSource = loadFromEnvironmentSource(name);
     return merge(propertiesFromResource, propertiesFromWorkingDir, propertiesFromHomeDir,
-        propertiesFromEnvironmentSource);
+                 propertiesFromEnvironmentSource);
   }
 
   private Properties loadFromEnvironmentSource(String name) {

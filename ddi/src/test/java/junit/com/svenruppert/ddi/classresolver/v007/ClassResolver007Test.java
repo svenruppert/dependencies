@@ -15,13 +15,38 @@
  */
 package junit.com.svenruppert.ddi.classresolver.v007;
 
-import javax.inject.Inject;
+/*-
+ * #%L
+ * SRU - DDI
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import com.svenruppert.ddi.DDIModelException;
 import com.svenruppert.ddi.DI;
 import junit.com.svenruppert.ddi.DDIBaseTest;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import javax.inject.Inject;
 
 public class ClassResolver007Test
     extends DDIBaseTest {
@@ -31,14 +56,13 @@ public class ClassResolver007Test
    * Anonymous Class inside the create() Method.. will be removed
    * <p>
    * 1 Interface , 1 Impl -> Impl ServiceA will be used
-   *
    */
   @Test()
   public void testProxy001() {
     final BusinessModulVirtual instance = new BusinessModulVirtual();
     Assertions.assertNotNull(instance);
     Assertions.assertNull(instance.service);
-    Assertions.assertThrows(DDIModelException.class, ()->DI.activateDI(instance));
+    Assertions.assertThrows(DDIModelException.class, () -> DI.activateDI(instance));
   }
 
 
@@ -47,7 +71,8 @@ public class ClassResolver007Test
   }
 
   public static class BusinessModulVirtual {
-    @Inject Service service;
+    @Inject
+    Service service;
 
     public String work(String str) {
       return service.doWork(str);
@@ -67,7 +92,8 @@ public class ClassResolver007Test
     }
   }
 
-  public static class ServiceA implements Service {
+  public static class ServiceA
+      implements Service {
 
     public ServiceA() {
       System.out.println(" ServiceA = constructed...");

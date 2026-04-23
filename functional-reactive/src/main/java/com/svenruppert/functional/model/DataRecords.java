@@ -15,6 +15,31 @@
  */
 package com.svenruppert.functional.model;
 
+/*-
+ * #%L
+ * SRU - Functional
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import java.util.Objects;
 
 public interface DataRecords {
@@ -88,9 +113,9 @@ public interface DataRecords {
     @Override
     public String toString() {
       return "Pair{" +
-             "t1=" + t1 +
-             ", t2=" + t2 +
-             '}';
+          "t1=" + t1 +
+          ", t2=" + t2 +
+          '}';
     }
 
     @Override
@@ -232,11 +257,11 @@ public interface DataRecords {
     @Override
     public String toString() {
       return "Quad{" +
-             "t1=" + t1 +
-             ", t2=" + t2 +
-             ", t3=" + t3 +
-             ", t4=" + t4 +
-             '}';
+          "t1=" + t1 +
+          ", t2=" + t2 +
+          ", t3=" + t3 +
+          ", t4=" + t4 +
+          '}';
     }
   }
 
@@ -382,12 +407,12 @@ public interface DataRecords {
     @Override
     public String toString() {
       return "Quint{" +
-             "t1=" + t1 +
-             ", t2=" + t2 +
-             ", t3=" + t3 +
-             ", t4=" + t4 +
-             ", t5=" + t5 +
-             '}';
+          "t1=" + t1 +
+          ", t2=" + t2 +
+          ", t3=" + t3 +
+          ", t4=" + t4 +
+          ", t5=" + t5 +
+          '}';
     }
   }
 
@@ -492,14 +517,14 @@ public interface DataRecords {
     @Override
     public String toString() {
       return "Sept{" +
-             "t1=" + t1 +
-             ", t2=" + t2 +
-             ", t3=" + t3 +
-             ", t4=" + t4 +
-             ", t5=" + t5 +
-             ", t6=" + t6 +
-             ", t7=" + t7 +
-             '}';
+          "t1=" + t1 +
+          ", t2=" + t2 +
+          ", t3=" + t3 +
+          ", t4=" + t4 +
+          ", t5=" + t5 +
+          ", t6=" + t6 +
+          ", t7=" + t7 +
+          '}';
     }
 
     /**
@@ -715,13 +740,13 @@ public interface DataRecords {
     @Override
     public String toString() {
       return "Sext{" +
-             "t1=" + t1 +
-             ", t2=" + t2 +
-             ", t3=" + t3 +
-             ", t4=" + t4 +
-             ", t5=" + t5 +
-             ", t6=" + t6 +
-             '}';
+          "t1=" + t1 +
+          ", t2=" + t2 +
+          ", t3=" + t3 +
+          ", t4=" + t4 +
+          ", t5=" + t5 +
+          ", t6=" + t6 +
+          '}';
     }
 
 
@@ -765,8 +790,8 @@ public interface DataRecords {
     @Override
     public String toString() {
       return "Single{" +
-             "t1=" + t1 +
-             '}';
+          "t1=" + t1 +
+          '}';
     }
 
     @Override
@@ -892,10 +917,10 @@ public interface DataRecords {
     @Override
     public String toString() {
       return "Triple{" +
-             "t1=" + t1 +
-             ", t2=" + t2 +
-             ", t3=" + t3 +
-             '}';
+          "t1=" + t1 +
+          ", t2=" + t2 +
+          ", t3=" + t3 +
+          '}';
     }
   }
 }

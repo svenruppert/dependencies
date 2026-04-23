@@ -15,6 +15,31 @@
  */
 package com.svenruppert.functional;
 
+/*-
+ * #%L
+ * SRU - Functional
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import com.svenruppert.functional.model.Result;
 
 import java.util.function.BiFunction;
@@ -27,7 +52,7 @@ import static java.lang.System.getProperty;
 public interface SystemProperties {
 
   static BiFunction<Class, String, String> qualifiedParameter() {
-    return (clazz , unqualifiedName) -> clazz.getName() + "." + unqualifiedName;
+    return (clazz, unqualifiedName) -> clazz.getName() + "." + unqualifiedName;
   }
 
   static BiFunction<Class, String, Boolean> hasSystemProperty() {
@@ -35,7 +60,7 @@ public interface SystemProperties {
   }
 
   static Function<String, Boolean> hasSystemProperty(Class qualifier) {
-    return (key) -> hasSystemProperty().apply(qualifier , key);
+    return (key) -> hasSystemProperty().apply(qualifier, key);
   }
 
 
@@ -44,20 +69,20 @@ public interface SystemProperties {
   }
 
   static BiFunction<Class, String, Result<String>> systemProperty(String defaultValue) {
-    return qualifiedParameter().andThen(key -> ofNullable(getProperty(key , defaultValue)));
+    return qualifiedParameter().andThen(key -> ofNullable(getProperty(key, defaultValue)));
   }
 
 
   static Function<String, Result<String>> systemProperty(Class qualifier) {
     return (key) -> qualifiedParameter()
         .andThen(k -> ofNullable(getProperty(k)))
-        .apply(qualifier , key);
+        .apply(qualifier, key);
   }
 
-  static Function<String, Result<String>> systemProperty(Class qualifier , String defaultValue) {
+  static Function<String, Result<String>> systemProperty(Class qualifier, String defaultValue) {
     return (key) -> qualifiedParameter()
-        .andThen(k -> ofNullable(getProperty(k , defaultValue)))
-        .apply(qualifier , key);
+        .andThen(k -> ofNullable(getProperty(k, defaultValue)))
+        .apply(qualifier, key);
   }
 
 
@@ -67,7 +92,7 @@ public interface SystemProperties {
         .flatMap(convertToBoolean());
   }
 
-  static Function<String, Result<Boolean>> systemPropertyBoolean(Class qualifier , String defaultValue) {
+  static Function<String, Result<Boolean>> systemPropertyBoolean(Class qualifier, String defaultValue) {
     return (key) -> systemProperty(qualifier, defaultValue)
         .apply(key)
         .flatMap(convertToBoolean());
@@ -79,7 +104,7 @@ public interface SystemProperties {
         .flatMap(convertToInteger());
   }
 
-  static Function<String, Result<Integer>> systemPropertyInt(Class qualifier , String defaultValue) {
+  static Function<String, Result<Integer>> systemPropertyInt(Class qualifier, String defaultValue) {
     return (key) -> systemProperty(qualifier, defaultValue)
         .apply(key)
         .flatMap(convertToInteger());
@@ -91,7 +116,7 @@ public interface SystemProperties {
         .flatMap(convertToDouble());
   }
 
-  static Function<String, Result<Double>> systemPropertyDouble(Class qualifier , String defaultValue) {
+  static Function<String, Result<Double>> systemPropertyDouble(Class qualifier, String defaultValue) {
     return (key) -> systemProperty(qualifier, defaultValue)
         .apply(key)
         .flatMap(convertToDouble());

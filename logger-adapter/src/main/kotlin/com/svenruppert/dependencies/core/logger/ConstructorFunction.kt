@@ -24,5 +24,5 @@ package com.svenruppert.dependencies.core.logger
  * @version $Id: $Id
 </V></K> */
 interface ConstructorFunction<K, V> {
-  fun createNew(arg: K): V
+    fun createNew(arg: K): V
 }

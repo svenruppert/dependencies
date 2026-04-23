@@ -15,6 +15,31 @@
  */
 package com.svenruppert.functional;
 
+/*-
+ * #%L
+ * SRU - Functional
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import com.svenruppert.functional.functions.CheckedBiFunction;
 import com.svenruppert.functional.functions.CheckedFunction;
 import com.svenruppert.functional.functions.CheckedTriFunction;
@@ -124,7 +149,7 @@ public interface Transformations {
    */
   static <A, B, R> Function<Function<A, Function<B, R>>, BiFunction<A, B, R>> unCurryBiFunction() {
     return (func) -> (a, b) -> func.apply(a)
-                                   .apply(b);
+        .apply(b);
   }
 
   /**
@@ -137,7 +162,7 @@ public interface Transformations {
    */
   static <A, B, R> Function<Function<A, CheckedFunction<B, R>>, CheckedBiFunction<A, B, R>> unCurryCheckedBiFunction() {
     return (func) -> (a, b) -> func.apply(a)
-                                   .applyWithException(b);
+        .applyWithException(b);
   }
 
   /**
@@ -177,8 +202,8 @@ public interface Transformations {
    */
   static <A, B, C, R> Function<Function<A, Function<B, Function<C, R>>>, TriFunction<A, B, C, R>> unCurryTriFunction() {
     return (func) -> (a, b, c) -> func.apply(a)
-                                      .apply(b)
-                                      .apply(c);
+        .apply(b)
+        .apply(c);
   }
 
 
@@ -193,8 +218,8 @@ public interface Transformations {
    */
   static <A, B, C, R> Function<Function<A, Function<B, CheckedFunction<C, R>>>, CheckedTriFunction<A, B, C, R>> unCurryCheckedTriFunction() {
     return (func) -> (a, b, c) -> func.apply(a)
-                                      .apply(b)
-                                      .applyWithException(c);
+        .apply(b)
+        .applyWithException(c);
   }
 
 

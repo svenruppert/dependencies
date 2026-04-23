@@ -15,12 +15,37 @@
  */
 package junit.com.svenruppert.ddi.producer.v001;
 
-import junit.com.svenruppert.ddi.DDIBaseTest;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+/*-
+ * #%L
+ * SRU - DDI
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import com.svenruppert.ddi.DI;
 import com.svenruppert.ddi.Produces;
 import com.svenruppert.ddi.producer.Producer;
+import junit.com.svenruppert.ddi.DDIBaseTest;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
 
@@ -46,14 +71,16 @@ public class Producer001Test
   }
 
   @Produces(Service.class)
-  public static class ServiceProducer implements Producer<Service> {
+  public static class ServiceProducer
+      implements Producer<Service> {
     public Service create() {
       return txt -> txt + "_" + ServiceProducer.class.getSimpleName();
     }
   }
 
   public static class BusinessModul {
-    @Inject Service service;
+    @Inject
+    Service service;
 
     public String doIt(String txt) {
       return service.workOn(txt);

@@ -15,6 +15,31 @@
  */
 package com.svenruppert.functional.model;
 
+/*-
+ * #%L
+ * SRU - Functional
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -36,7 +61,8 @@ public interface DataRecordsSerializable {
    * @author svenruppert
    * @version $Id: $Id
    */
-  class Pair<T1 extends Serializable, T2 extends Serializable> implements Serializable {
+  class Pair<T1 extends Serializable, T2 extends Serializable>
+      implements Serializable {
     private T1 t1;
     private T2 t2;
 
@@ -49,6 +75,19 @@ public interface DataRecordsSerializable {
     public Pair(final T1 t1, final T2 t2) {
       this.t1 = t1;
       this.t2 = t2;
+    }
+
+    /**
+     * <p>next.</p>
+     *
+     * @param a    a T1 object.
+     * @param b    a T2 object.
+     * @param <T1> a T1 object.
+     * @param <T2> a T2 object.
+     * @return a {@link Pair} object.
+     */
+    public static <T1 extends Serializable, T2 extends Serializable> Pair<T1, T2> next(T1 a, T2 b) {
+      return new Pair<>(a, b);
     }
 
     /**
@@ -69,7 +108,9 @@ public interface DataRecordsSerializable {
       return t2;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
       return "Pair{" +
@@ -78,33 +119,24 @@ public interface DataRecordsSerializable {
           '}';
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(final Object o) {
       if (this == o) return true;
-      if (! (o instanceof Pair)) return false;
+      if (!(o instanceof Pair)) return false;
       final Pair<?, ?> pair = (Pair<?, ?>) o;
       return Objects.equals(t1, pair.t1) &&
-             Objects.equals(t2, pair.t2);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public int hashCode() {
-      return Objects.hash(t1, t2);
+          Objects.equals(t2, pair.t2);
     }
 
     /**
-     * <p>next.</p>
-     *
-     * @param a a T1 object.
-     * @param b a T2 object.
-     * @param <T1> a T1 object.
-     * @param <T2> a T2 object.
-     * @return a {@link Pair} object.
+     * {@inheritDoc}
      */
-    public static <T1 extends Serializable, T2 extends Serializable> Pair<T1, T2> next(T1 a, T2 b) {
-      return new Pair<>(a, b);
+    @Override
+    public int hashCode() {
+      return Objects.hash(t1, t2);
     }
   }
 
@@ -140,11 +172,31 @@ public interface DataRecordsSerializable {
      * @param t3 a T3 object.
      * @param t4 a T4 object.
      */
-    public Quad(final T1 t1 , final T2 t2 , final T3 t3 , final T4 t4) {
+    public Quad(final T1 t1, final T2 t2, final T3 t3, final T4 t4) {
       this.t1 = t1;
       this.t2 = t2;
       this.t3 = t3;
       this.t4 = t4;
+    }
+
+    /**
+     * <p>next.</p>
+     *
+     * @param t1   a T1 object.
+     * @param t2   a T2 object.
+     * @param t3   a T3 object.
+     * @param t4   a T4 object.
+     * @param <T1> a T1 object.
+     * @param <T2> a T2 object.
+     * @param <T3> a T3 object.
+     * @param <T4> a T4 object.
+     * @return a {@link Quad} object.
+     */
+    public static <T1 extends Serializable,
+        T2 extends Serializable,
+        T3 extends Serializable,
+        T4 extends Serializable> Quad<T1, T2, T3, T4> next(final T1 t1, final T2 t2, final T3 t3, final T4 t4) {
+      return new Quad<>(t1, t2, t3, t4);
     }
 
     /**
@@ -183,21 +235,25 @@ public interface DataRecordsSerializable {
       return t2;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
       if (this == o) return true;
-      if (! (o instanceof Quad)) return false;
+      if (!(o instanceof Quad)) return false;
 
       Quad<?, ?, ?, ?> quad = (Quad<?, ?, ?, ?>) o;
 
-      if (t1 != null ? ! t1.equals(quad.t1) : quad.t1 != null) return false;
-      if (t2 != null ? ! t2.equals(quad.t2) : quad.t2 != null) return false;
-      if (t3 != null ? ! t3.equals(quad.t3) : quad.t3 != null) return false;
+      if (t1 != null ? !t1.equals(quad.t1) : quad.t1 != null) return false;
+      if (t2 != null ? !t2.equals(quad.t2) : quad.t2 != null) return false;
+      if (t3 != null ? !t3.equals(quad.t3) : quad.t3 != null) return false;
       return t4 != null ? t4.equals(quad.t4) : quad.t4 == null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
       int result = t1 != null ? t1.hashCode() : 0;
@@ -207,7 +263,9 @@ public interface DataRecordsSerializable {
       return result;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
       return "Quad{" +
@@ -216,26 +274,6 @@ public interface DataRecordsSerializable {
           ", t3=" + t3 +
           ", t4=" + t4 +
           '}';
-    }
-
-    /**
-     * <p>next.</p>
-     *
-     * @param t1 a T1 object.
-     * @param t2 a T2 object.
-     * @param t3 a T3 object.
-     * @param t4 a T4 object.
-     * @param <T1> a T1 object.
-     * @param <T2> a T2 object.
-     * @param <T3> a T3 object.
-     * @param <T4> a T4 object.
-     * @return a {@link Quad} object.
-     */
-    public static <T1 extends Serializable,
-        T2 extends Serializable,
-        T3 extends Serializable,
-        T4 extends Serializable> Quad<T1, T2, T3, T4> next(final T1 t1 , final T2 t2 , final T3 t3 , final T4 t4) {
-      return new Quad<>(t1 , t2 , t3 , t4);
     }
   }
 
@@ -277,12 +315,35 @@ public interface DataRecordsSerializable {
      * @param t4 a T4 object.
      * @param t5 a T5 object.
      */
-    public Quint(final T1 t1 , final T2 t2 , final T3 t3 , final T4 t4 , final T5 t5) {
+    public Quint(final T1 t1, final T2 t2, final T3 t3, final T4 t4, final T5 t5) {
       this.t1 = t1;
       this.t2 = t2;
       this.t3 = t3;
       this.t4 = t4;
       this.t5 = t5;
+    }
+
+    /**
+     * <p>next.</p>
+     *
+     * @param t1   a T1 object.
+     * @param t2   a T2 object.
+     * @param t3   a T3 object.
+     * @param t4   a T4 object.
+     * @param t5   a T5 object.
+     * @param <T1> a T1 object.
+     * @param <T2> a T2 object.
+     * @param <T3> a T3 object.
+     * @param <T4> a T4 object.
+     * @param <T5> a T5 object.
+     * @return a {@link Quint} object.
+     */
+    public static <T1 extends Serializable,
+        T2 extends Serializable,
+        T3 extends Serializable,
+        T4 extends Serializable,
+        T5 extends Serializable> Quint<T1, T2, T3, T4, T5> next(final T1 t1, final T2 t2, final T3 t3, final T4 t4, final T5 t5) {
+      return new Quint<>(t1, t2, t3, t4, t5);
     }
 
     /**
@@ -330,23 +391,26 @@ public interface DataRecordsSerializable {
       return t2;
     }
 
-
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
       if (this == o) return true;
-      if (! (o instanceof Quint)) return false;
+      if (!(o instanceof Quint)) return false;
 
       Quint<?, ?, ?, ?, ?> quint = (Quint<?, ?, ?, ?, ?>) o;
 
-      if (t1 != null ? ! t1.equals(quint.t1) : quint.t1 != null) return false;
-      if (t2 != null ? ! t2.equals(quint.t2) : quint.t2 != null) return false;
-      if (t3 != null ? ! t3.equals(quint.t3) : quint.t3 != null) return false;
-      if (t4 != null ? ! t4.equals(quint.t4) : quint.t4 != null) return false;
+      if (t1 != null ? !t1.equals(quint.t1) : quint.t1 != null) return false;
+      if (t2 != null ? !t2.equals(quint.t2) : quint.t2 != null) return false;
+      if (t3 != null ? !t3.equals(quint.t3) : quint.t3 != null) return false;
+      if (t4 != null ? !t4.equals(quint.t4) : quint.t4 != null) return false;
       return t5 != null ? t5.equals(quint.t5) : quint.t5 == null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
       int result = t1 != null ? t1.hashCode() : 0;
@@ -357,7 +421,9 @@ public interface DataRecordsSerializable {
       return result;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
       return "Quint{" +
@@ -367,29 +433,6 @@ public interface DataRecordsSerializable {
           ", t4=" + t4 +
           ", t5=" + t5 +
           '}';
-    }
-
-    /**
-     * <p>next.</p>
-     *
-     * @param t1 a T1 object.
-     * @param t2 a T2 object.
-     * @param t3 a T3 object.
-     * @param t4 a T4 object.
-     * @param t5 a T5 object.
-     * @param <T1> a T1 object.
-     * @param <T2> a T2 object.
-     * @param <T3> a T3 object.
-     * @param <T4> a T4 object.
-     * @param <T5> a T5 object.
-     * @return a {@link Quint} object.
-     */
-    public static <T1 extends Serializable,
-        T2 extends Serializable,
-        T3 extends Serializable,
-        T4 extends Serializable,
-        T5 extends Serializable> Quint<T1, T2, T3, T4, T5> next(final T1 t1 , final T2 t2 , final T3 t3 , final T4 t4 , final T5 t5) {
-      return new Quint<>(t1 , t2 , t3 , t4 , t5);
     }
   }
 
@@ -421,7 +464,7 @@ public interface DataRecordsSerializable {
      * @param t6 a T6 object.
      * @param t7 a T7 object.
      */
-    public Sept(T1 t1 , T2 t2 , T3 t3 , T4 t4 , T5 t5 , T6 t6 , T7 t7) {
+    public Sept(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7) {
       this.t1 = t1;
       this.t2 = t2;
       this.t3 = t3;
@@ -431,24 +474,53 @@ public interface DataRecordsSerializable {
       this.t7 = t7;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * <p>next.</p>
+     *
+     * @param t1   a T1 object.
+     * @param t2   a T2 object.
+     * @param t3   a T3 object.
+     * @param t4   a T4 object.
+     * @param t5   a T5 object.
+     * @param t6   a T6 object.
+     * @param t7   a T7 object.
+     * @param <T1> a T1 object.
+     * @param <T2> a T2 object.
+     * @param <T3> a T3 object.
+     * @param <T4> a T4 object.
+     * @param <T5> a T5 object.
+     * @param <T6> a T6 object.
+     * @param <T7> a T7 object.
+     * @return a {@link Sept} object.
+     */
+    public static <T1 extends Serializable, T2 extends Serializable, T3 extends Serializable,
+        T4 extends Serializable, T5 extends Serializable, T6 extends Serializable, T7 extends Serializable> Sept<T1, T2, T3, T4, T5, T6, T7> next(final T1 t1, final T2 t2, final T3 t3,
+                                                                                                                                                  final T4 t4, final T5 t5, final T6 t6, final T7 t7) {
+      return new Sept<>(t1, t2, t3, t4, t5, t6, t7);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
       if (this == o) return true;
-      if (! (o instanceof Sept)) return false;
+      if (!(o instanceof Sept)) return false;
 
       Sept<?, ?, ?, ?, ?, ?, ?> sept = (Sept<?, ?, ?, ?, ?, ?, ?>) o;
 
-      if (t1 != null ? ! t1.equals(sept.t1) : sept.t1 != null) return false;
-      if (t2 != null ? ! t2.equals(sept.t2) : sept.t2 != null) return false;
-      if (t3 != null ? ! t3.equals(sept.t3) : sept.t3 != null) return false;
-      if (t4 != null ? ! t4.equals(sept.t4) : sept.t4 != null) return false;
-      if (t5 != null ? ! t5.equals(sept.t5) : sept.t5 != null) return false;
-      if (t6 != null ? ! t6.equals(sept.t6) : sept.t6 != null) return false;
+      if (t1 != null ? !t1.equals(sept.t1) : sept.t1 != null) return false;
+      if (t2 != null ? !t2.equals(sept.t2) : sept.t2 != null) return false;
+      if (t3 != null ? !t3.equals(sept.t3) : sept.t3 != null) return false;
+      if (t4 != null ? !t4.equals(sept.t4) : sept.t4 != null) return false;
+      if (t5 != null ? !t5.equals(sept.t5) : sept.t5 != null) return false;
+      if (t6 != null ? !t6.equals(sept.t6) : sept.t6 != null) return false;
       return t7 != null ? t7.equals(sept.t7) : sept.t7 == null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
       int result = t1 != null ? t1.hashCode() : 0;
@@ -461,7 +533,9 @@ public interface DataRecordsSerializable {
       return result;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
       return "Sept{" +
@@ -473,31 +547,6 @@ public interface DataRecordsSerializable {
           ", t6=" + t6 +
           ", t7=" + t7 +
           '}';
-    }
-
-    /**
-     * <p>next.</p>
-     *
-     * @param t1 a T1 object.
-     * @param t2 a T2 object.
-     * @param t3 a T3 object.
-     * @param t4 a T4 object.
-     * @param t5 a T5 object.
-     * @param t6 a T6 object.
-     * @param t7 a T7 object.
-     * @param <T1> a T1 object.
-     * @param <T2> a T2 object.
-     * @param <T3> a T3 object.
-     * @param <T4> a T4 object.
-     * @param <T5> a T5 object.
-     * @param <T6> a T6 object.
-     * @param <T7> a T7 object.
-     * @return a {@link Sept} object.
-     */
-    public static <T1 extends Serializable, T2 extends Serializable, T3 extends Serializable,
-        T4 extends Serializable, T5 extends Serializable, T6 extends Serializable, T7 extends Serializable> Sept<T1, T2, T3, T4, T5, T6, T7> next(final T1 t1 , final T2 t2 , final T3 t3 ,
-                                                                                                                                                  final T4 t4 , final T5 t5 , final T6 t6 , final T7 t7) {
-      return new Sept<>(t1 , t2 , t3 , t4 , t5 , t6 , t7);
     }
 
     /**
@@ -590,14 +639,37 @@ public interface DataRecordsSerializable {
      * @param t5 a T5 object.
      * @param t6 a T6 object.
      */
-    public Sext(final T1 t1 , final T2 t2 , final T3 t3 ,
-                final T4 t4 , final T5 t5 , final T6 t6) {
+    public Sext(final T1 t1, final T2 t2, final T3 t3,
+                final T4 t4, final T5 t5, final T6 t6) {
       this.t1 = t1;
       this.t2 = t2;
       this.t3 = t3;
       this.t4 = t4;
       this.t5 = t5;
       this.t6 = t6;
+    }
+
+    /**
+     * <p>next.</p>
+     *
+     * @param t1   a T1 object.
+     * @param t2   a T2 object.
+     * @param t3   a T3 object.
+     * @param t4   a T4 object.
+     * @param t5   a T5 object.
+     * @param t6   a T6 object.
+     * @param <T1> a T1 object.
+     * @param <T2> a T2 object.
+     * @param <T3> a T3 object.
+     * @param <T4> a T4 object.
+     * @param <T5> a T5 object.
+     * @param <T6> a T6 object.
+     * @return a {@link Sext} object.
+     */
+    public static <T1 extends Serializable, T2 extends Serializable, T3 extends Serializable,
+        T4 extends Serializable, T5 extends Serializable, T6 extends Serializable> Sext<T1, T2, T3, T4, T5, T6> next(final T1 t1, final T2 t2, final T3 t3,
+                                                                                                                     final T4 t4, final T5 t5, final T6 t6) {
+      return new Sext<>(t1, t2, t3, t4, t5, t6);
     }
 
     /**
@@ -654,24 +726,27 @@ public interface DataRecordsSerializable {
       return t2;
     }
 
-
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
       if (this == o) return true;
-      if (! (o instanceof Sext)) return false;
+      if (!(o instanceof Sext)) return false;
 
       Sext<?, ?, ?, ?, ?, ?> sext = (Sext<?, ?, ?, ?, ?, ?>) o;
 
-      if (t1 != null ? ! t1.equals(sext.t1) : sext.t1 != null) return false;
-      if (t2 != null ? ! t2.equals(sext.t2) : sext.t2 != null) return false;
-      if (t3 != null ? ! t3.equals(sext.t3) : sext.t3 != null) return false;
-      if (t4 != null ? ! t4.equals(sext.t4) : sext.t4 != null) return false;
-      if (t5 != null ? ! t5.equals(sext.t5) : sext.t5 != null) return false;
+      if (t1 != null ? !t1.equals(sext.t1) : sext.t1 != null) return false;
+      if (t2 != null ? !t2.equals(sext.t2) : sext.t2 != null) return false;
+      if (t3 != null ? !t3.equals(sext.t3) : sext.t3 != null) return false;
+      if (t4 != null ? !t4.equals(sext.t4) : sext.t4 != null) return false;
+      if (t5 != null ? !t5.equals(sext.t5) : sext.t5 != null) return false;
       return t6 != null ? t6.equals(sext.t6) : sext.t6 == null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
       int result = t1 != null ? t1.hashCode() : 0;
@@ -683,7 +758,9 @@ public interface DataRecordsSerializable {
       return result;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
       return "Quint{" +
@@ -693,29 +770,6 @@ public interface DataRecordsSerializable {
           ", t4=" + t4 +
           ", t5=" + t5 +
           '}';
-    }
-
-    /**
-     * <p>next.</p>
-     *
-     * @param t1 a T1 object.
-     * @param t2 a T2 object.
-     * @param t3 a T3 object.
-     * @param t4 a T4 object.
-     * @param t5 a T5 object.
-     * @param t6 a T6 object.
-     * @param <T1> a T1 object.
-     * @param <T2> a T2 object.
-     * @param <T3> a T3 object.
-     * @param <T4> a T4 object.
-     * @param <T5> a T5 object.
-     * @param <T6> a T6 object.
-     * @return a {@link Sext} object.
-     */
-    public static <T1 extends Serializable, T2 extends Serializable, T3 extends Serializable,
-        T4 extends Serializable, T5 extends Serializable, T6 extends Serializable> Sext<T1, T2, T3, T4, T5, T6> next(final T1 t1 , final T2 t2 , final T3 t3 ,
-                                                                                                                     final T4 t4 , final T5 t5 , final T6 t6) {
-      return new Sext<>(t1 , t2 , t3 , t4 , t5 , t6);
     }
 
 
@@ -734,6 +788,17 @@ public interface DataRecordsSerializable {
     }
 
     /**
+     * <p>next.</p>
+     *
+     * @param a    a T1 object.
+     * @param <T1> a T1 object.
+     * @return a {@link Single} object.
+     */
+    public static <T1 extends Serializable> Single<T1> next(T1 a) {
+      return new Single<>(a);
+    }
+
+    /**
      * <p>Getter for the field <code>t1</code>.</p>
      *
      * @return a T1 object.
@@ -741,7 +806,6 @@ public interface DataRecordsSerializable {
     public T1 getT1() {
       return t1;
     }
-
 
     /**
      * {@inheritDoc}
@@ -762,17 +826,6 @@ public interface DataRecordsSerializable {
     @Override
     public int hashCode() {
       return Objects.hash(t1);
-    }
-
-    /**
-     * <p>next.</p>
-     *
-     * @param a    a T1 object.
-     * @param <T1> a T1 object.
-     * @return a {@link Single} object.
-     */
-    public static <T1 extends Serializable> Single<T1> next(T1 a) {
-      return new Single<>(a);
     }
   }
 
@@ -812,6 +865,21 @@ public interface DataRecordsSerializable {
     }
 
     /**
+     * <p>next.</p>
+     *
+     * @param t1   a T1 object.
+     * @param t2   a T2 object.
+     * @param t3   a T3 object.
+     * @param <T1> a T1 object.
+     * @param <T2> a T2 object.
+     * @param <T3> a T3 object.
+     * @return a {@link Triple} object.
+     */
+    public static <T1 extends Serializable, T2 extends Serializable, T3 extends Serializable> Triple<T1, T2, T3> next(final T1 t1, final T2 t2, final T3 t3) {
+      return new Triple<>(t1, t2, t3);
+    }
+
+    /**
      * <p>Getter for the field <code>t3</code>.</p>
      *
      * @return a T3 object.
@@ -838,20 +906,24 @@ public interface DataRecordsSerializable {
       return t2;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
       if (this == o) return true;
-      if (! (o instanceof Triple)) return false;
+      if (!(o instanceof Triple)) return false;
 
       Triple<?, ?, ?> triple = (Triple<?, ?, ?>) o;
 
-      if (t1 != null ? ! t1.equals(triple.t1) : triple.t1 != null) return false;
-      if (t2 != null ? ! t2.equals(triple.t2) : triple.t2 != null) return false;
+      if (t1 != null ? !t1.equals(triple.t1) : triple.t1 != null) return false;
+      if (t2 != null ? !t2.equals(triple.t2) : triple.t2 != null) return false;
       return t3 != null ? t3.equals(triple.t3) : triple.t3 == null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
       int result = t1 != null ? t1.hashCode() : 0;
@@ -860,7 +932,9 @@ public interface DataRecordsSerializable {
       return result;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
       return "Triple{" +
@@ -868,21 +942,6 @@ public interface DataRecordsSerializable {
           ", t2=" + t2 +
           ", t3=" + t3 +
           '}';
-    }
-
-    /**
-     * <p>next.</p>
-     *
-     * @param t1 a T1 object.
-     * @param t2 a T2 object.
-     * @param t3 a T3 object.
-     * @param <T1> a T1 object.
-     * @param <T2> a T2 object.
-     * @param <T3> a T3 object.
-     * @return a {@link Triple} object.
-     */
-    public static <T1 extends Serializable, T2 extends Serializable, T3 extends Serializable> Triple<T1, T2, T3> next(final T1 t1, final T2 t2, final T3 t3) {
-      return new Triple<>(t1, t2, t3);
     }
   }
 }

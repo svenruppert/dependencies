@@ -15,6 +15,31 @@
  */
 package com.svenruppert.ddi.producer;
 
+/*-
+ * #%L
+ * SRU - DDI
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import com.svenruppert.ddi.DDIModelException;
 import com.svenruppert.ddi.DI;
 import com.svenruppert.ddi.producerresolver.ProducerResolver;
@@ -91,8 +116,8 @@ public class InstanceCreator
       if (clazz.isInterface()) {
         throw new DDIModelException(" only interfaces found for " + classOrInterf);
       } else {
-//        final Set<Class<?>> producersForImpl = new ProducerLocator().findProducersFor(clazz);
-//        return createInstanceWithProducers(classOrInterf, clazz, resolverTarget, managedByMeTarget, managedByMeImpl, producersForImpl);
+        //        final Set<Class<?>> producersForImpl = new ProducerLocator().findProducersFor(clazz);
+        //        return createInstanceWithProducers(classOrInterf, clazz, resolverTarget, managedByMeTarget, managedByMeImpl, producersForImpl);
 
         final T result;
         try {
@@ -101,8 +126,8 @@ public class InstanceCreator
           final Set<Class<?>> producersForImpl = findProducersFor(clazz);
           if (producersForImpl.isEmpty()) {
             result = (T) clazz.getDeclaredConstructor().newInstance();
-//            DI.activateDI(result);
-//            putToScope(classOrInterf, clazz, managedByMeTarget, managedByMeImpl, result);
+            //            DI.activateDI(result);
+            //            putToScope(classOrInterf, clazz, managedByMeTarget, managedByMeImpl, result);
           } else if (producersForImpl.size() > 1) {
             //TODO find ProducerResolver
             final Set<Class<? extends ProducerResolver>> producerResolverClasses
@@ -119,15 +144,15 @@ public class InstanceCreator
               final Producer<T> tProducer = producerClass.getDeclaredConstructor().newInstance();
               DI.activateDI(tProducer);
               result = tProducer.create();
-//              DI.activateDI(result);
+              //              DI.activateDI(result);
             }
-//            throw new DDIModelException("to many producers for Impl " + clazz + " - > " + producersForImpl);
+            //            throw new DDIModelException("to many producers for Impl " + clazz + " - > " + producersForImpl);
           } else {
             final Class<Producer<T>> producerClass = (Class<Producer<T>>) producersForImpl.toArray()[0];
             final Producer<T> tProducer = producerClass.getDeclaredConstructor().newInstance();
             DI.activateDI(tProducer);
             result = tProducer.create();
-//            DI.activateDI(result);
+            //            DI.activateDI(result);
           }
           putToScope(classOrInterf, clazz, managedByMeTarget, managedByMeImpl, result);
           return result;
@@ -147,7 +172,7 @@ public class InstanceCreator
       Producer<T> producer = (Producer<T>) cls.getDeclaredConstructor().newInstance();
       DI.activateDI(producer);
       final T instance = producer.create();
-//      return DI.activateDI(instance);
+      //      return DI.activateDI(instance);
       return instance;
     } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
       logger().warn("could not create instance ", e);

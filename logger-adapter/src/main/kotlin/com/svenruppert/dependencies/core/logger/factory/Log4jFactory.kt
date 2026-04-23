@@ -33,70 +33,70 @@ import java.util.logging.Level
  */
 class Log4jFactory : LoggerFactorySupport(), LoggerFactory {
 
-  /** {@inheritDoc}  */
-  override fun createLogger(name: String): LoggingService {
-    val l = LogManager.getLogger(name)
-    return Log4jLogger(l)
-  }
-
-  internal class Log4jLogger(private val logger: Logger) : AbstractLogger() {
-    override val level: Level
-
-    init {
-      val log4jLevel = logger.level
-      this.level = toStandardLevel(log4jLevel)
+    /** {@inheritDoc}  */
+    override fun createLogger(name: String): LoggingService {
+        val l = LogManager.getLogger(name)
+        return Log4jLogger(l)
     }
 
-    override fun log(level: Level, message: String) {
-      logger.log(toLog4jLevel(level), message)
-    }
+    internal class Log4jLogger(private val logger: Logger) : AbstractLogger() {
+        override val level: Level
 
-    override fun log(level: Level, message: String, thrown: Throwable?) {
-      logger.log(toLog4jLevel(level), message, thrown)
-    }
+        init {
+            val log4jLevel = logger.level
+            this.level = toStandardLevel(log4jLevel)
+        }
 
-    override fun isLoggable(level: Level): Boolean {
-      return level !== Level.OFF && logger.isEnabled(toLog4jLevel(level))
-    }
+        override fun log(level: Level, message: String) {
+            logger.log(toLog4jLevel(level), message)
+        }
 
-    override fun log(logEvent: LogEvent<*>) {
-      val logRecord = logEvent.logRecord
-      if (logRecord.level === Level.OFF) {
-        return
-      }
-      val name = logEvent.logRecord.loggerName
-      val logger = LogManager.getLogger(name)
-      val level = toLog4jLevel(logRecord.level)
-      val message = logRecord.message
-      val throwable = logRecord.thrown
-      logger.log(level,message, throwable )
-    }
+        override fun log(level: Level, message: String, thrown: Throwable?) {
+            logger.log(toLog4jLevel(level), message, thrown)
+        }
 
-    private fun toLog4jLevel(level: Level): org.apache.logging.log4j.Level {
-      return when {
-        level === Level.FINEST -> org.apache.logging.log4j.Level.TRACE
-        level === Level.FINE -> org.apache.logging.log4j.Level.DEBUG
-        level === Level.INFO -> org.apache.logging.log4j.Level.INFO
-        level === Level.WARNING -> org.apache.logging.log4j.Level.WARN
-        level === Level.SEVERE -> org.apache.logging.log4j.Level.ERROR
-        level === Level.CONFIG -> org.apache.logging.log4j.Level.INFO
-        level === Level.FINER -> org.apache.logging.log4j.Level.DEBUG
-        level === Level.OFF -> org.apache.logging.log4j.Level.OFF
-        else -> org.apache.logging.log4j.Level.INFO
-      }
-    }
+        override fun isLoggable(level: Level): Boolean {
+            return level !== Level.OFF && logger.isEnabled(toLog4jLevel(level))
+        }
 
-    private fun toStandardLevel(log4jLevel: org.apache.logging.log4j.Level): Level {
-      return when {
-        log4jLevel === org.apache.logging.log4j.Level.TRACE -> Level.FINEST
-        log4jLevel === org.apache.logging.log4j.Level.DEBUG -> Level.FINE
-        log4jLevel === org.apache.logging.log4j.Level.INFO -> Level.INFO
-        log4jLevel === org.apache.logging.log4j.Level.WARN -> Level.WARNING
-        log4jLevel === org.apache.logging.log4j.Level.ERROR -> Level.SEVERE
-        log4jLevel === org.apache.logging.log4j.Level.FATAL -> Level.SEVERE
-        log4jLevel === org.apache.logging.log4j.Level.OFF -> Level.OFF
-        else -> Level.INFO
-      }
+        override fun log(logEvent: LogEvent<*>) {
+            val logRecord = logEvent.logRecord
+            if (logRecord.level === Level.OFF) {
+                return
+            }
+            val name = logEvent.logRecord.loggerName
+            val logger = LogManager.getLogger(name)
+            val level = toLog4jLevel(logRecord.level)
+            val message = logRecord.message
+            val throwable = logRecord.thrown
+            logger.log(level, message, throwable)
+        }
+
+        private fun toLog4jLevel(level: Level): org.apache.logging.log4j.Level {
+            return when {
+                level === Level.FINEST -> org.apache.logging.log4j.Level.TRACE
+                level === Level.FINE -> org.apache.logging.log4j.Level.DEBUG
+                level === Level.INFO -> org.apache.logging.log4j.Level.INFO
+                level === Level.WARNING -> org.apache.logging.log4j.Level.WARN
+                level === Level.SEVERE -> org.apache.logging.log4j.Level.ERROR
+                level === Level.CONFIG -> org.apache.logging.log4j.Level.INFO
+                level === Level.FINER -> org.apache.logging.log4j.Level.DEBUG
+                level === Level.OFF -> org.apache.logging.log4j.Level.OFF
+                else -> org.apache.logging.log4j.Level.INFO
+            }
+        }
+
+        private fun toStandardLevel(log4jLevel: org.apache.logging.log4j.Level): Level {
+            return when {
+                log4jLevel === org.apache.logging.log4j.Level.TRACE -> Level.FINEST
+                log4jLevel === org.apache.logging.log4j.Level.DEBUG -> Level.FINE
+                log4jLevel === org.apache.logging.log4j.Level.INFO -> Level.INFO
+                log4jLevel === org.apache.logging.log4j.Level.WARN -> Level.WARNING
+                log4jLevel === org.apache.logging.log4j.Level.ERROR -> Level.SEVERE
+                log4jLevel === org.apache.logging.log4j.Level.FATAL -> Level.SEVERE
+                log4jLevel === org.apache.logging.log4j.Level.OFF -> Level.OFF
+                else -> Level.INFO
+            }
+        }
     }
-  }
 }

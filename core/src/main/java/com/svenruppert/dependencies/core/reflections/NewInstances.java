@@ -15,6 +15,31 @@
  */
 package com.svenruppert.dependencies.core.reflections;
 
+/*-
+ * #%L
+ * SRU - Core
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.List;
@@ -41,14 +66,15 @@ import java.util.stream.Collectors;
  */
 public class NewInstances {
 
-  private NewInstances() { }
+  private NewInstances() {
+  }
 
 
   /**
    * <p>createInstances.</p>
    *
    * @param classes a {@link java.util.Set} object.
-   * @param <T> a T object.
+   * @param <T>     a T object.
    * @return a {@link java.util.List} object.
    */
   public static <T> List<T> createInstances(final Set<Class<? extends T>> classes) {
@@ -59,12 +85,12 @@ public class NewInstances {
         .stream()
         .map(c -> {
           try {
-//            return Optional.of(c.newInstance());
+            //            return Optional.of(c.newInstance());
             return Optional.of(c.getDeclaredConstructor().newInstance());
           } catch (InstantiationException
-              | IllegalAccessException
-              | NoSuchMethodException
-              | InvocationTargetException e) {
+                   | IllegalAccessException
+                   | NoSuchMethodException
+                   | InvocationTargetException e) {
             e.printStackTrace();
           }
           return Optional.<T>empty();
@@ -79,7 +105,7 @@ public class NewInstances {
    * <p>createInstance.</p>
    *
    * @param clazz a {@link java.lang.Class} object.
-   * @param <T> a T object.
+   * @param <T>   a T object.
    * @return a {@link java.util.Optional} object.
    */
   public static <T> Optional<T> createInstance(final Class<? extends T> clazz) {
@@ -88,9 +114,9 @@ public class NewInstances {
     try {
       return Optional.of(clazz.getDeclaredConstructor().newInstance());
     } catch (InstantiationException
-        | IllegalAccessException
-        | NoSuchMethodException
-        | InvocationTargetException e) {
+             | IllegalAccessException
+             | NoSuchMethodException
+             | InvocationTargetException e) {
       e.printStackTrace();
     }
     return Optional.empty();

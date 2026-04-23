@@ -26,24 +26,26 @@ import java.util.concurrent.ConcurrentMap
  */
 object ConcurrencyUtil {
 
-  /**
-   *
-   * getOrPutIfAbsent.
-   *
-   * @param map a [ConcurrentMap] object.
-   * @param key a K object.
-   * @param func a [org.rapidpm.dependencies.core.logger.ConstructorFunction] object.
-   * @param <K> a K object.
-   * @param <V> a V object.
-   * @return a V object.
-  </V></K> */
-  fun <K, V> getOrPutIfAbsent(map: ConcurrentMap<K, V>,
-                              key: K,
-                              func: ConstructorFunction<K, V>): V {
-    return if (map[key] == null) {
-      val value = func.createNew(key)
-      val current = (map as MutableMap<K, V>).putIfAbsent(key, value)
-      return current ?: value
-    } else map[key]!!
-  }
+    /**
+     *
+     * getOrPutIfAbsent.
+     *
+     * @param map a [ConcurrentMap] object.
+     * @param key a K object.
+     * @param func a [org.rapidpm.dependencies.core.logger.ConstructorFunction] object.
+     * @param <K> a K object.
+     * @param <V> a V object.
+     * @return a V object.
+    </V></K> */
+    fun <K, V> getOrPutIfAbsent(
+        map: ConcurrentMap<K, V>,
+        key: K,
+        func: ConstructorFunction<K, V>
+    ): V {
+        return if (map[key] == null) {
+            val value = func.createNew(key)
+            val current = (map as MutableMap<K, V>).putIfAbsent(key, value)
+            return current ?: value
+        } else map[key]!!
+    }
 }

@@ -18,5 +18,5 @@ package com.svenruppert.dependencies.core.logger.factory
 import com.svenruppert.dependencies.core.logger.LoggingService
 
 interface LoggerFactory {
-  fun getLogger(name: String): LoggingService
+    fun getLogger(name: String): LoggingService
 }

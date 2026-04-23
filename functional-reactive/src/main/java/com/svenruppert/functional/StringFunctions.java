@@ -15,6 +15,31 @@
  */
 package com.svenruppert.functional;
 
+/*-
+ * #%L
+ * SRU - Functional
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import com.svenruppert.functional.functions.QuadFunction;
 import com.svenruppert.functional.functions.TriFunction;
 import com.svenruppert.functional.matcher.Case;
@@ -619,11 +644,11 @@ public interface StringFunctions {
         (index > value.length())
             ? value
             : appendStream()
-            .apply(
-                value.substring(0, index),
-                Stream.of(
-                    subStr,
-                    value.substring(index)));
+              .apply(
+                  value.substring(0, index),
+                  Stream.of(
+                      subStr,
+                      value.substring(index)));
   }
 
   /**
@@ -811,8 +836,8 @@ public interface StringFunctions {
         (caseSenstive)
             ? removeLeft().apply(input, prefix)
             : (notStartsWithCaseSensitive().apply(input, prefix, false))
-            ? input
-            : input.substring(prefix.length());
+              ? input
+              : input.substring(prefix.length());
   }
 
 
@@ -883,9 +908,9 @@ public interface StringFunctions {
         (caseSensitive)
             ? value.replaceAll(search, newValue)
             : Pattern
-            .compile(search, CASE_INSENSITIVE)
-            .matcher(value)
-            .replaceAll(Matcher.quoteReplacement(newValue));
+              .compile(search, CASE_INSENSITIVE)
+              .matcher(value)
+              .replaceAll(Matcher.quoteReplacement(newValue));
   }
 
   /**
@@ -1123,14 +1148,14 @@ public interface StringFunctions {
     return (input) -> (input.isEmpty())
         ? ""
         : Optional
-        .ofNullable(head().apply(input))
-        .map(String::toUpperCase)
-        .map(h ->
-            Optional
-                .ofNullable(tail().apply(input))
-                .map(t -> h + t.toLowerCase())
-                .orElse(h))
-        .get();
+          .ofNullable(head().apply(input))
+          .map(String::toUpperCase)
+          .map(h ->
+                   Optional
+                   .ofNullable(tail().apply(input))
+                   .map(t -> h + t.toLowerCase())
+                   .orElse(h))
+          .get();
   }
 
 
@@ -1141,18 +1166,18 @@ public interface StringFunctions {
    *
    * @return a {@link Function} object.
    */
-//  @SuppressFBWarnings(
-//      value = "RpC_REPEATED_CONDITIONAL_TEST",
-//      justification = "Done on purpose"
-//  )
+  //  @SuppressFBWarnings(
+  //      value = "RpC_REPEATED_CONDITIONAL_TEST",
+  //      justification = "Done on purpose"
+  //  )
   static Function<String, String> lowerFirst() {
     return (input) -> (input.isEmpty())
         ? ""
         : Optional.ofNullable(head().apply(input))
-        .map(String::toLowerCase)
-        .map(h ->
-            Optional.ofNullable(tail().apply(input)).map(t -> h + t).orElse(h))
-        .get();
+          .map(String::toLowerCase)
+          .map(h ->
+                   Optional.ofNullable(tail().apply(input)).map(t -> h + t).orElse(h))
+          .get();
   }
 
 
@@ -1187,10 +1212,10 @@ public interface StringFunctions {
             .ofNullable(head().apply(input))
             .map(String::toUpperCase)
             .map(h ->
-                Optional
-                    .ofNullable(tail().apply(input))
-                    .map(t -> h + t)
-                    .orElse(h))
+                     Optional
+                         .ofNullable(tail().apply(input))
+                         .map(t -> h + t)
+                         .orElse(h))
             .get();
   }
 

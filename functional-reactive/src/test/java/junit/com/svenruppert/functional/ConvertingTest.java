@@ -15,6 +15,31 @@
  */
 package junit.com.svenruppert.functional;
 
+/*-
+ * #%L
+ * SRU - Functional
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import com.svenruppert.functional.Converting;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -29,7 +54,7 @@ public class ConvertingTest {
         .<Integer>convertToString()
         .apply(1)
         .get();
-    Assertions.assertEquals("1" , result);
+    Assertions.assertEquals("1", result);
   }
 
   @Test
@@ -40,7 +65,7 @@ public class ConvertingTest {
         .<Integer>convertToString((i) -> "x" + 1)
         .apply(1)
         .get();
-    Assertions.assertEquals("x1" , result);
+    Assertions.assertEquals("x1", result);
   }
 
   @Test
@@ -51,10 +76,9 @@ public class ConvertingTest {
           throw new RuntimeException("failed");
         })
         .apply(1)
-    .ifPresentOrElse((s) -> Assertions.fail(),
-                     (failed) -> Assertions.assertEquals("RuntimeException - failed", failed));
+        .ifPresentOrElse((s) -> Assertions.fail(),
+                         (failed) -> Assertions.assertEquals("RuntimeException - failed", failed));
   }
-
 
 
 }

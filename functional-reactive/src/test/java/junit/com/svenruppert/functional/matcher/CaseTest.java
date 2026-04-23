@@ -15,6 +15,31 @@
  */
 package junit.com.svenruppert.functional.matcher;
 
+/*-
+ * #%L
+ * SRU - Functional
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import com.svenruppert.functional.model.Result;
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +65,7 @@ public class CaseTest {
         matchCase(() -> Result.success(value))
     )
         .ifPresentOrElse(
-            s -> assertEquals(value , s) ,
+            s -> assertEquals(value, s),
             s -> fail("not good")
         );
   }
@@ -51,12 +76,12 @@ public class CaseTest {
     String value = null;
 
     match(
-        matchCase(() -> Result.success(value)) ,
-        matchCase(() -> isNull(value) , () -> Result.failure(error_message))
+        matchCase(() -> Result.success(value)),
+        matchCase(() -> isNull(value), () -> Result.failure(error_message))
     )
         .ifPresentOrElse(
-            s -> fail("not good") ,
-            s -> assertEquals(error_message , s)
+            s -> fail("not good"),
+            s -> assertEquals(error_message, s)
         );
   }
 
@@ -66,11 +91,11 @@ public class CaseTest {
     String value = "OK";
 
     match(
-        matchCase(() -> Result.success(value)) ,
-        matchCase(() -> isNull(value) , () -> Result.failure(error_message))
+        matchCase(() -> Result.success(value)),
+        matchCase(() -> isNull(value), () -> Result.failure(error_message))
     )
         .ifPresentOrElse(
-            s -> assertEquals(value , s) ,
+            s -> assertEquals(value, s),
             s -> fail("not good")
         );
   }
@@ -81,20 +106,20 @@ public class CaseTest {
 
 
     IntStream
-        .range(0 , 10)
+        .range(0, 10)
         .boxed()
         .forEach(value -> match(
-            matchCase(() -> Result.success(value)) ,
-            matchCase(() -> value == null , () -> Result.failure(error_message)) ,
-            matchCase(() -> value == 1 , () -> Result.success(100)) ,
-            matchCase(() -> value == 2 , () -> Result.success(200))
+            matchCase(() -> Result.success(value)),
+            matchCase(() -> value == null, () -> Result.failure(error_message)),
+            matchCase(() -> value == 1, () -> Result.success(100)),
+            matchCase(() -> value == 2, () -> Result.success(200))
         )
             .ifPresentOrElse(
                 s -> {
-                  if (value == 1) assertEquals(Long.valueOf(100) , Long.valueOf(s));
-                  else if (value == 2) assertEquals(Long.valueOf(200) , Long.valueOf(s));
-                  else assertEquals(Long.valueOf(value) , Long.valueOf(s));
-                } ,
+                  if (value == 1) assertEquals(Long.valueOf(100), Long.valueOf(s));
+                  else if (value == 2) assertEquals(Long.valueOf(200), Long.valueOf(s));
+                  else assertEquals(Long.valueOf(value), Long.valueOf(s));
+                },
                 s -> fail("not good")
             ));
 

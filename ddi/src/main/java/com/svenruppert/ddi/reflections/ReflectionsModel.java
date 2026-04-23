@@ -14,6 +14,32 @@
  * limitations under the Licence.
  */
 package com.svenruppert.ddi.reflections;
+
+/*-
+ * #%L
+ * SRU - DDI
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import com.svenruppert.functional.model.DataRecords;
 import org.reflections8.Reflections;
 import org.reflections8.scanners.MethodAnnotationsScanner;
@@ -53,6 +79,10 @@ public class ReflectionsModel {
           .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix("com.svenruppert")))
           .setScanners(createScanners())
   );
+  private final Function<Set, Set> newSet = (Function<Set, Set>) input -> {
+    final HashSet<Set<Class<?>>> hashSet = new HashSet<>(input);
+    return hashSet;
+  };
 
   public ReflectionsModel() {
   }
@@ -66,8 +96,8 @@ public class ReflectionsModel {
     var include = new FilterBuilder().include(FilterBuilder.prefix(pkgPrefix));
     var scanners = createScanners();
     rescannImpl(configurationBuilder
-        .filterInputsBy(include)
-        .setScanners(scanners));
+                    .filterInputsBy(include)
+                    .setScanners(scanners));
     activatedPackagesMap.put(pkgPrefix, LocalDateTime.now());
   }
 
@@ -94,8 +124,8 @@ public class ReflectionsModel {
     sccannerArray[1] = new TypeAnnotationsScanner();
     sccannerArray[2] = new MethodAnnotationsScanner();
     sccannerArray[3] = new PkgTypesScanner();
-//    sccannerArray[4] = new StaticMetricsProxyScanner();
-//    sccannerArray[5] = new StaticLoggingProxyScanner();
+    //    sccannerArray[4] = new StaticMetricsProxyScanner();
+    //    sccannerArray[5] = new StaticLoggingProxyScanner();
     return sccannerArray;
   }
 
@@ -120,17 +150,17 @@ public class ReflectionsModel {
 
   public void rescan(String pkgPrefix, URL... urls) {
     rescannImpl(createConfigurationBuilder()
-        .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix(pkgPrefix)))
-        .setUrls(urls)
-        .setScanners(createScanners()));
+                    .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix(pkgPrefix)))
+                    .setUrls(urls)
+                    .setScanners(createScanners()));
     activatedPackagesMap.put(pkgPrefix, LocalDateTime.now());
   }
 
   public void rescan(String pkgPrefix, Collection<URL> urls) {
     rescannImpl(createConfigurationBuilder()
-        .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix(pkgPrefix)))
-        .setUrls(urls)
-        .setScanners(createScanners()));
+                    .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix(pkgPrefix)))
+                    .setUrls(urls)
+                    .setScanners(createScanners()));
     activatedPackagesMap.put(pkgPrefix, LocalDateTime.now());
   }
 
@@ -146,6 +176,33 @@ public class ReflectionsModel {
     return activatedPackagesMap.getOrDefault(pkgPrefix, LocalDateTime.MIN);
   }
 
+  //  //TODO to complex for performance
+  //  public <T> Set<Class<? extends T>> getStaticMetricProxiesFor(final Class<T> type) {
+  //
+  //    final ClassLoader[] classLoaders = reflections.getConfiguration().getClassLoaders();
+  //
+  //    final Collection<String> metricProxyClassNames = reflections
+  //        .getStore()
+  //        .get(index(StaticMetricsProxyScanner.class))
+  //        .get(type.getName());
+  //
+  //    final List<Class<? extends T>> classes = ReflectionUtils.forNames(metricProxyClassNames, classLoaders);
+  //    return unmodifiableSet(new HashSet<>(classes));
+  //
+  //  }
+  //
+  //  public <T> Set<Class<? extends T>> getStaticLoggingProxiesFor(final Class<T> type) {
+  //    final ClassLoader[] classLoaders = reflections.getConfiguration().getClassLoaders();
+  //    final Collection<String> loggingProxyClassNames = reflections.getStore()
+  //        .get(index(StaticLoggingProxyScanner.class))
+  //        .get(type.getName());
+  //
+  //    final List<Class<? extends T>> classes = ReflectionUtils.forNames(loggingProxyClassNames, classLoaders);
+  //    return unmodifiableSet(new HashSet<>(classes));
+  //  }
+
+  //delegated methods
+
   public Collection<String> getClassesForPkg(final String pkgName) {
     final Collection<String> clsNames = reflections
         .getStore()
@@ -154,47 +211,15 @@ public class ReflectionsModel {
     return Collections.unmodifiableCollection(clsNames);
   }
 
-//  //TODO to complex for performance
-//  public <T> Set<Class<? extends T>> getStaticMetricProxiesFor(final Class<T> type) {
-//
-//    final ClassLoader[] classLoaders = reflections.getConfiguration().getClassLoaders();
-//
-//    final Collection<String> metricProxyClassNames = reflections
-//        .getStore()
-//        .get(index(StaticMetricsProxyScanner.class))
-//        .get(type.getName());
-//
-//    final List<Class<? extends T>> classes = ReflectionUtils.forNames(metricProxyClassNames, classLoaders);
-//    return unmodifiableSet(new HashSet<>(classes));
-//
-//  }
-//
-//  public <T> Set<Class<? extends T>> getStaticLoggingProxiesFor(final Class<T> type) {
-//    final ClassLoader[] classLoaders = reflections.getConfiguration().getClassLoaders();
-//    final Collection<String> loggingProxyClassNames = reflections.getStore()
-//        .get(index(StaticLoggingProxyScanner.class))
-//        .get(type.getName());
-//
-//    final List<Class<? extends T>> classes = ReflectionUtils.forNames(loggingProxyClassNames, classLoaders);
-//    return unmodifiableSet(new HashSet<>(classes));
-//  }
-
-  //delegated methods
-
-  private final Function<Set, Set> newSet = (Function<Set, Set>) input -> {
-    final HashSet<Set<Class<?>>> hashSet = new HashSet<>(input);
-    return hashSet;
-  };
-
   public <T> Set<Class<? extends T>> getSubTypesOf(final Class<T> type) {
     if (subTypeOfCache.containsKey(type.getName())) {
       return (Set<Class<? extends T>>) subTypeOfCache.get(type.getName());
     }
     final Set<Class<? extends T>> subTypesOf = reflections.getSubTypesOf(type);
-//    final Set<Class<? extends T>> unmodifiableSet = Collections.unmodifiableSet(subTypesOf);
+    //    final Set<Class<? extends T>> unmodifiableSet = Collections.unmodifiableSet(subTypesOf);
     subTypeOfCache.put(type.getName(), subTypesOf);
     return subTypesOf;
-//    return reflections.getSubTypesOf(type);
+    //    return reflections.getSubTypesOf(type);
   }
 
 
@@ -208,7 +233,7 @@ public class ReflectionsModel {
     final Set<Class<? extends T>> unmodifiableSet = new DDIReflectionUtils().removeInterfacesAndGeneratedFromSubTypes(subTypesOf);
     subTypeOfCacheWithoutInterfacesnadGenerated.put(type.getName(), unmodifiableSet);
     return unmodifiableSet;
-//    return reflections.getSubTypesOf(type);
+    //    return reflections.getSubTypesOf(type);
   }
 
   public Set<Class<?>> getTypesAnnotatedWith(final Class<? extends Annotation> annotation) {
@@ -217,7 +242,7 @@ public class ReflectionsModel {
     final Set<Class<?>> typesAnnotatedWith = unmodifiableSet(reflections.getTypesAnnotatedWith(annotation));
     typesAnnotatedWithCache.put(annotation, typesAnnotatedWith);
     return typesAnnotatedWith;
-//    return reflections.getTypesAnnotatedWith(annotation);
+    //    return reflections.getTypesAnnotatedWith(annotation);
   }
 
   public Set<Class<?>> getTypesAnnotatedWith(final Class<? extends Annotation> annotation, final boolean honorInherited) {

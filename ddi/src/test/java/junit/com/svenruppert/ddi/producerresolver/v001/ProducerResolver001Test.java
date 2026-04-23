@@ -15,22 +15,48 @@
  */
 package junit.com.svenruppert.ddi.producerresolver.v001;
 
-import junit.com.svenruppert.ddi.DDIBaseTest;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+/*-
+ * #%L
+ * SRU - DDI
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import com.svenruppert.ddi.Produces;
 import com.svenruppert.ddi.ResponsibleFor;
 import com.svenruppert.ddi.producer.Producer;
 import com.svenruppert.ddi.producerresolver.ProducerResolver;
+import junit.com.svenruppert.ddi.DDIBaseTest;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
 
 public class ProducerResolver001Test
-    extends DDIBaseTest{
+    extends DDIBaseTest {
 
   static boolean producer_a_1;
   static boolean producer_a_2;
-  @Inject MyService myService;
+  @Inject
+  MyService myService;
 
   @Test
   public void test001() {
@@ -46,7 +72,11 @@ public class ProducerResolver001Test
     String doWork(String txt);
   }
 
-  public static class MyServiceImpl_A implements MyService {
+  // useless for this test, but for test coverage
+  public static interface ToRemove { }
+
+  public static class MyServiceImpl_A
+      implements MyService {
     @Override
     public String doWork(final String txt) {
       return this.getClass().getSimpleName() + txt;
@@ -54,7 +84,8 @@ public class ProducerResolver001Test
   }
 
   @Produces(MyServiceImpl_A.class)
-  public static class Producer_A_1 implements Producer<MyServiceImpl_A> {
+  public static class Producer_A_1
+      implements Producer<MyServiceImpl_A> {
     @Override
     public MyServiceImpl_A create() {
       producer_a_1 = true;
@@ -63,7 +94,8 @@ public class ProducerResolver001Test
   }
 
   @Produces(MyServiceImpl_A.class)
-  public static class Producer_A_2 implements Producer<MyServiceImpl_A> {
+  public static class Producer_A_2
+      implements Producer<MyServiceImpl_A> {
     @Override
     public MyServiceImpl_A create() {
       producer_a_2 = true;
@@ -72,19 +104,20 @@ public class ProducerResolver001Test
   }
 
   @ResponsibleFor(MyServiceImpl_A.class)
-  public static class MyProducerResolver implements ProducerResolver<MyServiceImpl_A,Producer<MyServiceImpl_A>> {
+  public static class MyProducerResolver
+      implements ProducerResolver<MyServiceImpl_A, Producer<MyServiceImpl_A>> {
     @Override
     public Class resolve(final Class<? extends MyServiceImpl_A> interf) {
       return Producer_A_2.class;
     }
   }
 
-  // useless for this test, but for test coverage
- public static interface ToRemove {}
- public static class ToRemoveImpl implements ToRemove {}
+  public static class ToRemoveImpl
+      implements ToRemove { }
 
   @ResponsibleFor(ToRemoveImpl.class)
-  public static class ToRemoveImplResolver implements ProducerResolver<ToRemoveImpl,Producer<ToRemoveImpl>> {
+  public static class ToRemoveImplResolver
+      implements ProducerResolver<ToRemoveImpl, Producer<ToRemoveImpl>> {
     @Override
     public Class resolve(final Class<? extends ToRemoveImpl> interf) {
       return null;

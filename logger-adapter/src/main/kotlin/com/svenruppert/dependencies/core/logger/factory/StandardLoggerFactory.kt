@@ -32,34 +32,34 @@ import com.svenruppert.dependencies.core.logger.LoggingService
  */
 class StandardLoggerFactory : LoggerFactorySupport(), LoggerFactory {
 
-  /** {@inheritDoc}  */
-  override fun createLogger(name: String): LoggingService {
-    val l = Logger.getLogger(name)
-    return StandardLogger(l)
-  }
-
-  internal class StandardLogger(private val logger: Logger) : AbstractLogger() {
-    override fun log(level: Level, message: String) {
-      log(level, message, null)
+    /** {@inheritDoc}  */
+    override fun createLogger(name: String): LoggingService {
+        val l = Logger.getLogger(name)
+        return StandardLogger(l)
     }
 
-    override val level: Level
-      get() = logger.level
+    internal class StandardLogger(private val logger: Logger) : AbstractLogger() {
+        override fun log(level: Level, message: String) {
+            log(level, message, null)
+        }
 
-    override fun log(level: Level, message: String, thrown: Throwable?) {
-      val logRecord = LogRecord(level, message)
-      logRecord.loggerName = logger.name
-      logRecord.thrown = thrown
-      logRecord.sourceClassName = logger.name
-      logger.log(logRecord)
-    }
+        override val level: Level
+            get() = logger.level
 
-    override fun log(logEvent: LogEvent<*>) {
-      logger.log(logEvent.logRecord)
-    }
+        override fun log(level: Level, message: String, thrown: Throwable?) {
+            val logRecord = LogRecord(level, message)
+            logRecord.loggerName = logger.name
+            logRecord.thrown = thrown
+            logRecord.sourceClassName = logger.name
+            logger.log(logRecord)
+        }
 
-    override fun isLoggable(level: Level): Boolean {
-      return logger.isLoggable(level)
+        override fun log(logEvent: LogEvent<*>) {
+            logger.log(logEvent.logRecord)
+        }
+
+        override fun isLoggable(level: Level): Boolean {
+            return logger.isLoggable(level)
+        }
     }
-  }
 }

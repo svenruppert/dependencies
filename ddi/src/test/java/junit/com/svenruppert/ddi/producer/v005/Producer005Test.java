@@ -15,13 +15,38 @@
  */
 package junit.com.svenruppert.ddi.producer.v005;
 
-import junit.com.svenruppert.ddi.DDIBaseTest;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+/*-
+ * #%L
+ * SRU - DDI
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2013 - 2026 Sven Ruppert
+ * %%
+ * Licensed under the EUPL, Version 1.1 or – as soon they will be
+ * approved by the European Commission - subsequent versions of the
+ * EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and
+ * limitations under the Licence.
+ * #L%
+ */
+
 import com.svenruppert.ddi.DDIModelException;
 import com.svenruppert.ddi.DI;
 import com.svenruppert.ddi.Produces;
 import com.svenruppert.ddi.producer.Producer;
+import junit.com.svenruppert.ddi.DDIBaseTest;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class Producer005Test
     extends DDIBaseTest {
@@ -38,13 +63,17 @@ public class Producer005Test
     }
   }
 
-  public interface Service{}
+  public interface Service { }
 
-  public static class ServiceImpl_A implements Service{}
-  public static class ServiceImpl_B implements Service{}
+  public static class ServiceImpl_A
+      implements Service { }
+
+  public static class ServiceImpl_B
+      implements Service { }
 
   @Produces(Service.class)
-  public static class ServiceProducer_A implements Producer<Service> {
+  public static class ServiceProducer_A
+      implements Producer<Service> {
     @Override
     public Service create() {
       return new ServiceImpl_A();
@@ -52,7 +81,8 @@ public class Producer005Test
   }
 
   @Produces(Service.class)
-  public static class ServiceProducer_B implements Producer<Service> {
+  public static class ServiceProducer_B
+      implements Producer<Service> {
     @Override
     public Service create() {
       return new ServiceImpl_A();
@@ -60,7 +90,8 @@ public class Producer005Test
   }
 
   @Produces(ServiceImpl_A.class)
-  public static class ServiceImpl_A_Producer implements Producer<Service>{
+  public static class ServiceImpl_A_Producer
+      implements Producer<Service> {
     @Override
     public Service create() {
       throw new RuntimeException("wrong producer activated");
@@ -68,7 +99,8 @@ public class Producer005Test
   }
 
   @Produces(ServiceImpl_B.class)
-  public static class ServiceImpl_B_Producer implements Producer<Service>{
+  public static class ServiceImpl_B_Producer
+      implements Producer<Service> {
     @Override
     public Service create() {
       throw new RuntimeException("wrong producer activated");
