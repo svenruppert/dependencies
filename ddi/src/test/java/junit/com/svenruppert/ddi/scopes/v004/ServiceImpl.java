@@ -40,6 +40,8 @@ package junit.com.svenruppert.ddi.scopes.v004;
  * #L%
  */
 
+
+
 import org.junit.jupiter.api.Assertions;
 
 import javax.annotation.PostConstruct;

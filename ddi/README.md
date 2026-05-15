@@ -80,7 +80,7 @@ Mostly this will lead to constructions that are much more like the production sy
 
 Inside the production source path you will have an interface and one implementation.
 
-```java 
+```java
   public interface Service {
     String doWork(String txt);
   }

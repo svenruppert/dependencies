@@ -41,6 +41,8 @@ package junit.com.svenruppert.ddi.scopes.v004;
  */
 
 
+
+
 public interface Service {
   long value();
 }

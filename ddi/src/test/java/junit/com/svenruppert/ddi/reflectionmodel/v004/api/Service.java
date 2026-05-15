@@ -40,6 +40,8 @@ package junit.com.svenruppert.ddi.reflectionmodel.v004.api;
  * #L%
  */
 
+
+
 public interface Service {
   String doWork(String txt);
 }

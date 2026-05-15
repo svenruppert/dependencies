@@ -40,6 +40,8 @@ package com.svenruppert.ddi;
  * #L%
  */
 
+
+
 public class DDIModelException
     extends RuntimeException {
   public DDIModelException() {

@@ -40,6 +40,8 @@ package com.svenruppert.ddi.implresolver;
  * #L%
  */
 
+
+
 public interface ClassResolver<T> {
   Class<? extends T> resolve(Class<T> interf);
 }

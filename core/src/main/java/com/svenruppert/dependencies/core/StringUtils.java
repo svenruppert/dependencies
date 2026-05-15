@@ -40,5 +40,7 @@ package com.svenruppert.dependencies.core;
  * #L%
  */
 
+
+
 public class StringUtils {
 }

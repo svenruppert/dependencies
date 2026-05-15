@@ -40,6 +40,8 @@ package com.svenruppert.dependencies.core.stream;
  * #L%
  */
 
+
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

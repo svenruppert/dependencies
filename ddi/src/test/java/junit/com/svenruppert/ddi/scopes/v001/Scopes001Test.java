@@ -40,6 +40,8 @@ package junit.com.svenruppert.ddi.scopes.v001;
  * #L%
  */
 
+
+
 import com.svenruppert.ddi.DI;
 import com.svenruppert.ddi.scopes.InjectionScope;
 import com.svenruppert.ddi.scopes.InjectionScopeManager;

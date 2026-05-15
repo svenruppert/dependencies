@@ -40,6 +40,8 @@ package junit.com.svenruppert.ddi.classresolver.v018;
  * #L%
  */
 
+
+
 public enum Context {
 
   DEFAULT,

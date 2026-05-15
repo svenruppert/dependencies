@@ -40,6 +40,8 @@ package junit.com.svenruppert.ddi.scopes.v004;
  * #L%
  */
 
+
+
 public class SingleResource {
 
   public final long value = Math.round(Math.random() * 1000.0);

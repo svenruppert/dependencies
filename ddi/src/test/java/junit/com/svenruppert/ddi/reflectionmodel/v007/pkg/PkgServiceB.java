@@ -40,5 +40,7 @@ package junit.com.svenruppert.ddi.reflectionmodel.v007.pkg;
  * #L%
  */
 
+
+
 public class PkgServiceB {
 }

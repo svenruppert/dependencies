@@ -26,7 +26,7 @@
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <version>06.01.00</version>
+    <version>06.01.01-SNAPSHOT</version>
 
     <inceptionYear>2013</inceptionYear>
     <organization>
@@ -178,17 +178,17 @@
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core</artifactId>
-                <version>06.01.00</version>
+                <version>06.01.01-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core-properties</artifactId>
-                <version>06.01.00</version>
+                <version>06.01.01-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>functional-reactive</artifactId>
-                <version>06.01.00</version>
+                <version>06.01.01-SNAPSHOT</version>
             </dependency>
 
             <!--API´s-->

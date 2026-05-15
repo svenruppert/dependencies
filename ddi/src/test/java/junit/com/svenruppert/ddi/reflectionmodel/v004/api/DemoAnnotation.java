@@ -40,6 +40,8 @@ package junit.com.svenruppert.ddi.reflectionmodel.v004.api;
  * #L%
  */
 
+
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

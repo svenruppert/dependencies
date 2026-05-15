@@ -40,6 +40,8 @@ package junit.com.svenruppert.ddi.producerresolver.v006;
  * #L%
  */
 
+
+
 import com.svenruppert.ddi.DI;
 import com.svenruppert.ddi.Produces;
 import com.svenruppert.ddi.ResponsibleFor;

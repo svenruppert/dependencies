@@ -40,6 +40,8 @@ package junit.com.svenruppert.ddi.classresolver.v008;
  * #L%
  */
 
+
+
 import com.svenruppert.ddi.DI;
 import com.svenruppert.ddi.Produces;
 import com.svenruppert.ddi.producer.Producer;

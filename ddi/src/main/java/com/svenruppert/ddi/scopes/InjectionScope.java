@@ -40,6 +40,8 @@ package com.svenruppert.ddi.scopes;
  * #L%
  */
 
+
+
 public abstract class InjectionScope {
 
   public abstract <T> T getInstance(String clazz);

@@ -40,6 +40,8 @@ package com.svenruppert.dependencies.core.net;
  * #L%
  */
 
+
+
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import java.io.IOException;

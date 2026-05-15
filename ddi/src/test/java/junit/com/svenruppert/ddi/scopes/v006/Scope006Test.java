@@ -40,6 +40,8 @@ package junit.com.svenruppert.ddi.scopes.v006;
  * #L%
  */
 
+
+
 import com.svenruppert.ddi.scopes.InjectionScopeManager;
 import junit.com.svenruppert.ddi.DDIBaseTest;
 import org.junit.jupiter.api.Assertions;

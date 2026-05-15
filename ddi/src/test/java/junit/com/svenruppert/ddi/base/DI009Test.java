@@ -40,6 +40,8 @@ package junit.com.svenruppert.ddi.base;
  * #L%
  */
 
+
+
 import com.svenruppert.ddi.DDIModelException;
 import com.svenruppert.ddi.DI;
 import junit.com.svenruppert.ddi.DDIBaseTest;

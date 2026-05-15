@@ -40,6 +40,8 @@ package junit.com.svenruppert.ddi.reflectionmodel.v004.model002;
  * #L%
  */
 
+
+
 import junit.com.svenruppert.ddi.reflectionmodel.v004.model001.ServiceImplA;
 
 public class ServiceImplB

@@ -40,6 +40,8 @@ package com.svenruppert.ddi.producer;
  * #L%
  */
 
+
+
 public interface Producer<T> {
 
   T create();

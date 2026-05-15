@@ -40,6 +40,8 @@ package com.svenruppert.ddi.producerresolver;
  * #L%
  */
 
+
+
 import com.svenruppert.ddi.producer.Producer;
 
 public interface ProducerResolver<I, P extends Producer<I>> {

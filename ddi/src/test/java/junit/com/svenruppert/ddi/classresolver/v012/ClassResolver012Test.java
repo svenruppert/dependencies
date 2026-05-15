@@ -40,6 +40,8 @@ package junit.com.svenruppert.ddi.classresolver.v012;
  * #L%
  */
 
+
+
 import com.svenruppert.ddi.DI;
 import junit.com.svenruppert.ddi.DDIBaseTest;
 import org.junit.jupiter.api.Assertions;

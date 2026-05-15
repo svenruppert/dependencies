@@ -40,6 +40,8 @@ package junit.com.svenruppert.ddi.base;
  * #L%
  */
 
+
+
 import junit.com.svenruppert.ddi.DDIBaseTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

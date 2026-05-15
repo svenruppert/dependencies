@@ -40,6 +40,8 @@ package junit.com.svenruppert.ddi.classresolver.v018;
  * #L%
  */
 
+
+
 /**
  * Copyright (C) 2010 RapidPM
  * Licensed under the EUPL, Version 1.2 (the "Licence");
