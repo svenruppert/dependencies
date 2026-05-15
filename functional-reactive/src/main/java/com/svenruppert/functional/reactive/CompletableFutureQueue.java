@@ -51,9 +51,9 @@ import static java.util.concurrent.CompletableFuture.supplyAsync;
  * @author svenruppert
  * @version $Id: $Id
  */
-public class CompletableFutureQueue<T, R> {
+public final class CompletableFutureQueue<T, R> {
 
-  private Function<T, CompletableFuture<R>> resultFunction;
+  private final Function<T, CompletableFuture<R>> resultFunction;
 
   private CompletableFutureQueue(Function<T, CompletableFuture<R>> resultFunction) {
     this.resultFunction = resultFunction;
@@ -68,7 +68,13 @@ public class CompletableFutureQueue<T, R> {
    * @return a {@link CompletableFutureQueue} object.
    */
   public static <T, R> CompletableFutureQueue<T, R> define(Function<T, R> transformation) {
-    return new CompletableFutureQueue<>(t -> CompletableFuture.completedFuture(transformation.apply(t)));
+    return new CompletableFutureQueue<>(t -> {
+      try {
+        return CompletableFuture.completedFuture(transformation.apply(t));
+      } catch (Throwable throwable) {
+        return CompletableFuture.failedFuture(throwable);
+      }
+    });
   }
 
   /**

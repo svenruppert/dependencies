@@ -91,7 +91,7 @@ public interface StringFunctions {
     return (input, prefix, caseSensitive) ->
         (caseSensitive)
             ? not().apply(input.startsWith(prefix))
-            : not().apply(input.toLowerCase().startsWith(prefix.toLowerCase()));
+            : not().apply(input.toLowerCase(Locale.ROOT).startsWith(prefix.toLowerCase(Locale.ROOT)));
   }
 
   /**
@@ -162,7 +162,7 @@ public interface StringFunctions {
   static TriFunction<String, String, Boolean, Boolean> containsCaseSensitive() {
     return (value, needle, caseSensitive) ->
         match(
-            matchCase(() -> Result.success(value.toLowerCase().contains(needle.toLowerCase()))),
+            matchCase(() -> Result.success(value.toLowerCase(Locale.ROOT).contains(needle.toLowerCase(Locale.ROOT)))),
             matchCase(() -> caseSensitive, () -> Result.success(value.contains(needle)))
         ).get();
   }
@@ -241,8 +241,8 @@ public interface StringFunctions {
     return (value, subStr, caseSensitive, allowOverlapping) ->
         countSubStrCaseSensitiveOverlapping()
             .apply(
-                caseSensitive ? value : value.toLowerCase(),
-                caseSensitive ? subStr : subStr.toLowerCase(),
+                caseSensitive ? value : value.toLowerCase(Locale.ROOT),
+                caseSensitive ? subStr : subStr.toLowerCase(Locale.ROOT),
                 allowOverlapping,
                 0L);
   }
@@ -303,7 +303,7 @@ public interface StringFunctions {
       int remainingLength = position - search.length();
       return (caseSensitive)
           ? value.indexOf(search, remainingLength) > -1
-          : value.toLowerCase().indexOf(search.toLowerCase(), remainingLength) > -1;
+          : value.toLowerCase(Locale.ROOT).indexOf(search.toLowerCase(Locale.ROOT), remainingLength) > -1;
     };
   }
 
@@ -327,7 +327,7 @@ public interface StringFunctions {
     return (input, prefix, caseSensitive) ->
         (caseSensitive)
             ? (input.startsWith(prefix) ? input : (prefix + input))
-            : (input.toLowerCase().startsWith(prefix.toLowerCase()) ? input : (prefix + input));
+            : (input.toLowerCase(Locale.ROOT).startsWith(prefix.toLowerCase(Locale.ROOT)) ? input : (prefix + input));
   }
 
   /**
@@ -611,11 +611,19 @@ public interface StringFunctions {
    *
    * @return Returns position of first occurrence of needle.
    */
-  static QuadFunction<String, String, Integer, Boolean, Integer> indexOfCoseSensitive() {
+  static QuadFunction<String, String, Integer, Boolean, Integer> indexOfCaseSensitive() {
     return (value, needle, offset, caseSensitive) ->
         (caseSensitive)
             ? value.indexOf(needle, offset)
-            : value.toLowerCase().indexOf(needle.toLowerCase(), offset);
+            : value.toLowerCase(Locale.ROOT).indexOf(needle.toLowerCase(Locale.ROOT), offset);
+  }
+
+  /**
+   * @deprecated use {@link #indexOfCaseSensitive()} — name corrected from typo.
+   */
+  @Deprecated(forRemoval = true)
+  static QuadFunction<String, String, Integer, Boolean, Integer> indexOfCoseSensitive() {
+    return indexOfCaseSensitive();
   }
 
   /**
@@ -659,7 +667,7 @@ public interface StringFunctions {
    * @return true if String is uppercase false otherwise
    */
   static Function<String, Boolean> isUpperCase() {
-    return (input) -> Objects.equals(input, input.toUpperCase());
+    return (input) -> Objects.equals(input, input.toUpperCase(Locale.ROOT));
   }
 
   /**
@@ -670,7 +678,7 @@ public interface StringFunctions {
    * @return true if String is lowercase false otherwise
    */
   static Function<String, Boolean> isLowerCase() {
-    return (input) -> Objects.equals(input, input.toLowerCase());
+    return (input) -> Objects.equals(input, input.toLowerCase(Locale.ROOT));
   }
 
   /**
@@ -744,7 +752,7 @@ public interface StringFunctions {
     return (value, needle, offset, caseSensitive) ->
         (caseSensitive)
             ? value.lastIndexOf(needle, offset)
-            : value.toLowerCase().lastIndexOf(needle.toLowerCase(), offset);
+            : value.toLowerCase(Locale.ROOT).lastIndexOf(needle.toLowerCase(Locale.ROOT), offset);
   }
 
   /**
@@ -878,7 +886,7 @@ public interface StringFunctions {
   static TriFunction<String, String, Boolean, String> removeRightCaseSensitive() {
     return (value, suffix, caseSensitive) ->
         endsWithCaseSensitive().apply(value, suffix, caseSensitive)
-            ? value.substring(0, value.toLowerCase().lastIndexOf(suffix.toLowerCase()))
+            ? value.substring(0, value.toLowerCase(Locale.ROOT).lastIndexOf(suffix.toLowerCase(Locale.ROOT)))
             : value;
   }
 
@@ -1074,7 +1082,7 @@ public interface StringFunctions {
     return (value) -> toStudlyCase()
         .apply(value)
         .substring(0, 1)
-        .toLowerCase()
+        .toLowerCase(Locale.ROOT)
         +
         toStudlyCase()
             .apply(value)
@@ -1091,7 +1099,7 @@ public interface StringFunctions {
     return (value) -> splitStream()
         .apply(collapseWhitespace().apply(value.trim()), "\\s*(_|-|\\s)\\s*")
         .filter(w -> !w.trim().isEmpty())
-        .map(w -> head().apply(w).toUpperCase() + tail().apply(w))
+        .map(w -> head().apply(w).toUpperCase(Locale.ROOT) + tail().apply(w))
         .collect(joining());
   }
 
@@ -1113,7 +1121,7 @@ public interface StringFunctions {
     return (value, chr) ->
         splitStream()
             .apply(toCamelCase().apply(value), "(?=\\p{Upper})")
-            .map(String::toLowerCase)
+            .map(s -> s.toLowerCase(Locale.ROOT))
             .collect(joining(chr));
   }
 
@@ -1149,11 +1157,11 @@ public interface StringFunctions {
         ? ""
         : Optional
           .ofNullable(head().apply(input))
-          .map(String::toUpperCase)
+          .map(s -> s.toUpperCase(Locale.ROOT))
           .map(h ->
                    Optional
                    .ofNullable(tail().apply(input))
-                   .map(t -> h + t.toLowerCase())
+                   .map(t -> h + t.toLowerCase(Locale.ROOT))
                    .orElse(h))
           .get();
   }
@@ -1174,7 +1182,7 @@ public interface StringFunctions {
     return (input) -> (input.isEmpty())
         ? ""
         : Optional.ofNullable(head().apply(input))
-          .map(String::toLowerCase)
+          .map(s -> s.toLowerCase(Locale.ROOT))
           .map(h ->
                    Optional.ofNullable(tail().apply(input)).map(t -> h + t).orElse(h))
           .get();
@@ -1210,7 +1218,7 @@ public interface StringFunctions {
     return (input) ->
         Optional
             .ofNullable(head().apply(input))
-            .map(String::toUpperCase)
+            .map(s -> s.toUpperCase(Locale.ROOT))
             .map(h ->
                      Optional
                          .ofNullable(tail().apply(input))

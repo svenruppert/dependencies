@@ -129,12 +129,21 @@ public class Memoizer<T, U> {
 
   private Supplier<T> doMemoize(final Supplier<T> function) {
     return new Supplier<T>() {
-      private T value;
+      private volatile T value;
 
       @Override
       public T get() {
-        if (value == null) value = function.get();
-        return value;
+        T local = value;
+        if (local == null) {
+          synchronized (this) {
+            local = value;
+            if (local == null) {
+              local = function.get();
+              value = local;
+            }
+          }
+        }
+        return local;
       }
     };
   }

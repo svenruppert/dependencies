@@ -592,6 +592,27 @@ public class StringFunctionsTest {
     assertThat(indexOfCoseSensitive().apply(value, "T", 0, false), equalTo(-1));
   }
 
+  @Test
+  public void indexOfCaseSensitive_correctNameMatchesLegacy() {
+    final String value = "foobar";
+    assertThat(indexOfCaseSensitive().apply(value, "f", 0, true), equalTo(0));
+    assertThat(indexOfCaseSensitive().apply(value, "F", 0, false), equalTo(0));
+    assertThat(indexOfCaseSensitive().apply(value, "T", 0, false), equalTo(-1));
+  }
+
+  @Test
+  public void indexOfCaseSensitive_isLocaleStableForTurkishI() {
+    final java.util.Locale previous = java.util.Locale.getDefault();
+    try {
+      java.util.Locale.setDefault(new java.util.Locale("tr", "TR"));
+      // In tr_TR, "I".toLowerCase() == "ı" (dotless), not "i". With Locale.ROOT
+      // the case-insensitive search must still find "I" in "FILE".
+      assertThat(indexOfCaseSensitive().apply("FILE", "i", 0, false), equalTo(1));
+    } finally {
+      java.util.Locale.setDefault(previous);
+    }
+  }
+
   //  @Test
   //  public void inequal_shouldTestInequalityOfStrings() {
   //    assertThat(unequal("a", "b"), equalTo(true));

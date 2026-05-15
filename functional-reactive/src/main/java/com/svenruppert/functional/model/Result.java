@@ -109,6 +109,14 @@ public interface Result<T> {
 
   Boolean isAbsent();
 
+  default boolean isSuccess() {
+    return isPresent();
+  }
+
+  default boolean isFailure() {
+    return isAbsent();
+  }
+
   Result<T> ifPresent(Consumer<T> consumer);
 
   Result<T> ifAbsent(Runnable action);
@@ -139,15 +147,20 @@ public interface Result<T> {
   }
 
   default <V, R> Result<R> thenCombine(V value, BiFunction<T, V, Result<R>> func) {
-    return func.apply(get(), value);
+    Objects.requireNonNull(func);
+    return isPresent() ? func.apply(get(), value) : this.asFailure();
   }
 
   default <V, R> Result<R> thenCombineFlat(V value, BiFunction<T, V, R> func) {
-    return Result.ofNullable(func.apply(get(), value));
+    Objects.requireNonNull(func);
+    return isPresent() ? Result.ofNullable(func.apply(get(), value)) : this.asFailure();
   }
 
   default <V, R> CompletableFuture<Result<R>> thenCombineAsync(V value, BiFunction<T, V, Result<R>> func) {
-    return CompletableFuture.supplyAsync(() -> func.apply(get(), value));
+    Objects.requireNonNull(func);
+    return isPresent()
+        ? CompletableFuture.supplyAsync(() -> func.apply(get(), value))
+        : CompletableFuture.completedFuture(this.<R>asFailure());
   }
 
   default <U> Result<U> map(Function<? super T, ? extends U> mapper) {
@@ -289,6 +302,11 @@ public interface Result<T> {
       failed.accept(errorMessage);
       // I am a Failure - hold errorMessage, value already null;
       return this;
+    }
+
+    @Override
+    public <U> Result<U> asFailure() {
+      return Result.failure(errorMessage);
     }
   }
 }
