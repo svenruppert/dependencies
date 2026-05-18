@@ -26,12 +26,12 @@ package junit.com.svenruppert.functional.reactive;
  * Licensed under the EUPL, Version 1.1 or – as soon they will be
  * approved by the European Commission - subsequent versions of the
  * EUPL (the "Licence");
- * 
+ *
  * You may not use this work except in compliance with the Licence.
  * You may obtain a copy of the Licence at:
- * 
+ *
  * http://ec.europa.eu/idabc/eupl5
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the Licence is distributed on an "AS IS" basis,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -144,5 +144,33 @@ class CompletableFutureQueueTest {
     assertEquals(4, fn.apply(1).get(2, TimeUnit.SECONDS));
     assertEquals(6, fn.apply(2).get(2, TimeUnit.SECONDS));
     assertEquals(8, fn.apply(3).get(2, TimeUnit.SECONDS));
+  }
+
+  @Test
+  void thenCombineAsyncWithExecutorRunsOnSuppliedThreadPool() throws Exception {
+    java.util.concurrent.ExecutorService pool =
+        java.util.concurrent.Executors.newSingleThreadExecutor(r -> {
+          Thread t = new Thread(r, "cfq-executor-test");
+          t.setDaemon(true);
+          return t;
+        });
+    try {
+      java.util.concurrent.atomic.AtomicReference<String> stageThread =
+          new java.util.concurrent.atomic.AtomicReference<>();
+      CompletableFutureQueue<Integer, Integer> queue =
+          CompletableFutureQueue
+              .<Integer, Integer>define(i -> i + 1)
+              .thenCombineAsync(i -> {
+                stageThread.set(Thread.currentThread().getName());
+                return i * 2;
+              }, pool);
+
+      Integer result = queue.resultFunction().apply(20).get(2, TimeUnit.SECONDS);
+      assertEquals(42, result);
+      assertEquals("cfq-executor-test", stageThread.get(),
+          "stage must execute on the supplied executor, not the common pool");
+    } finally {
+      pool.shutdownNow();
+    }
   }
 }

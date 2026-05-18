@@ -110,13 +110,14 @@ public class ImplementingClassResolver {
         if (producersForImpl.isEmpty())                                      return interf;
         if (producersForInterface.isEmpty())                                 return implClass;
         //@formatter:on
-    return null;
+    throw new IllegalStateException("unreachable: producer-set classification for " + interf);
   }
 
   private <I> Class<? extends I> handleManySubTypes(final Class<I> interf, final Set<Class<? extends I>> subTypesOf) {
 
-    if (resolverCacheForClass2ClassResolver.containsKey(interf)) {
-      return handleOneResolver(interf, resolverCacheForClass2ClassResolver.get(interf));
+    final Class<? extends ClassResolver> cached = resolverCacheForClass2ClassResolver.get(interf);
+    if (cached != null) {
+      return handleOneResolver(interf, cached);
     }
 
     final List<Class<? extends ClassResolver>> clearedListOfResolvers = DI.getSubTypesWithoutInterfacesAndGeneratedOf(ClassResolver.class)

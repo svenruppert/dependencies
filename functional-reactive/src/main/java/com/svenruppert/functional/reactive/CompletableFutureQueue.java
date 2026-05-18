@@ -41,6 +41,7 @@ package com.svenruppert.functional.reactive;
  */
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 import java.util.function.Function;
 
 import static java.util.concurrent.CompletableFuture.supplyAsync;
@@ -87,6 +88,19 @@ public final class CompletableFutureQueue<T, R> {
   public <N> CompletableFutureQueue<T, N> thenCombineAsync(Function<R, N> nextTransformation) {
     final Function<T, CompletableFuture<N>> f = this.resultFunction
         .andThen(before -> before.thenComposeAsync(v -> supplyAsync(() -> nextTransformation.apply(v))));
+    return new CompletableFutureQueue<>(f);
+  }
+
+  /**
+   * Same as {@link #thenCombineAsync(Function)} but submits the transformation to the supplied
+   * {@link Executor} instead of the {@link java.util.concurrent.ForkJoinPool#commonPool() common pool}.
+   * Recommended for IO-bound workloads where a virtual-thread executor avoids starving the common pool.
+   */
+  public <N> CompletableFutureQueue<T, N> thenCombineAsync(Function<R, N> nextTransformation,
+                                                           Executor executor) {
+    final Function<T, CompletableFuture<N>> f = this.resultFunction
+        .andThen(before -> before.thenComposeAsync(
+            v -> supplyAsync(() -> nextTransformation.apply(v), executor), executor));
     return new CompletableFutureQueue<>(f);
   }
 

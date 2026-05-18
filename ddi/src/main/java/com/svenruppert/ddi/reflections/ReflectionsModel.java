@@ -58,7 +58,6 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 import static java.util.Collections.unmodifiableSet;
@@ -81,10 +80,6 @@ public class ReflectionsModel {
           .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix("com.svenruppert")))
           .setScanners(createScanners())
   );
-  private final Function<Set, Set> newSet = (Function<Set, Set>) input -> {
-    final HashSet<Set<Class<?>>> hashSet = new HashSet<>(input);
-    return hashSet;
-  };
 
   public ReflectionsModel() {
   }
@@ -126,8 +121,6 @@ public class ReflectionsModel {
     sccannerArray[1] = new TypeAnnotationsScanner();
     sccannerArray[2] = new MethodAnnotationsScanner();
     sccannerArray[3] = new PkgTypesScanner();
-    //    sccannerArray[4] = new StaticMetricsProxyScanner();
-    //    sccannerArray[5] = new StaticLoggingProxyScanner();
     return sccannerArray;
   }
 
@@ -178,31 +171,6 @@ public class ReflectionsModel {
     return activatedPackagesMap.getOrDefault(pkgPrefix, LocalDateTime.MIN);
   }
 
-  //  //TODO to complex for performance
-  //  public <T> Set<Class<? extends T>> getStaticMetricProxiesFor(final Class<T> type) {
-  //
-  //    final ClassLoader[] classLoaders = reflections.getConfiguration().getClassLoaders();
-  //
-  //    final Collection<String> metricProxyClassNames = reflections
-  //        .getStore()
-  //        .get(index(StaticMetricsProxyScanner.class))
-  //        .get(type.getName());
-  //
-  //    final List<Class<? extends T>> classes = ReflectionUtils.forNames(metricProxyClassNames, classLoaders);
-  //    return unmodifiableSet(new HashSet<>(classes));
-  //
-  //  }
-  //
-  //  public <T> Set<Class<? extends T>> getStaticLoggingProxiesFor(final Class<T> type) {
-  //    final ClassLoader[] classLoaders = reflections.getConfiguration().getClassLoaders();
-  //    final Collection<String> loggingProxyClassNames = reflections.getStore()
-  //        .get(index(StaticLoggingProxyScanner.class))
-  //        .get(type.getName());
-  //
-  //    final List<Class<? extends T>> classes = ReflectionUtils.forNames(loggingProxyClassNames, classLoaders);
-  //    return unmodifiableSet(new HashSet<>(classes));
-  //  }
-
   //delegated methods
 
   public Collection<String> getClassesForPkg(final String pkgName) {
@@ -214,37 +182,21 @@ public class ReflectionsModel {
   }
 
   public <T> Set<Class<? extends T>> getSubTypesOf(final Class<T> type) {
-    if (subTypeOfCache.containsKey(type.getName())) {
-      return (Set<Class<? extends T>>) subTypeOfCache.get(type.getName());
-    }
-    final Set<Class<? extends T>> subTypesOf = reflections.getSubTypesOf(type);
-    //    final Set<Class<? extends T>> unmodifiableSet = Collections.unmodifiableSet(subTypesOf);
-    subTypeOfCache.put(type.getName(), subTypesOf);
-    return subTypesOf;
-    //    return reflections.getSubTypesOf(type);
+    return (Set<Class<? extends T>>) subTypeOfCache.computeIfAbsent(type.getName(),
+        k -> reflections.getSubTypesOf(type));
   }
 
 
   public <T> Set<Class<? extends T>> getSubTypesWithoutInterfacesAndGeneratedOf(final Class<T> type) {
-
-
-    if (subTypeOfCacheWithoutInterfacesnadGenerated.containsKey(type.getName())) {
-      return (Set<Class<? extends T>>) subTypeOfCacheWithoutInterfacesnadGenerated.get(type.getName());
-    }
-    final Set<Class<? extends T>> subTypesOf = reflections.getSubTypesOf(type);
-    final Set<Class<? extends T>> unmodifiableSet = new DDIReflectionUtils().removeInterfacesAndGeneratedFromSubTypes(subTypesOf);
-    subTypeOfCacheWithoutInterfacesnadGenerated.put(type.getName(), unmodifiableSet);
-    return unmodifiableSet;
-    //    return reflections.getSubTypesOf(type);
+    return (Set<Class<? extends T>>) subTypeOfCacheWithoutInterfacesnadGenerated.computeIfAbsent(type.getName(), k -> {
+      final Set<Class<? extends T>> subTypesOf = reflections.getSubTypesOf(type);
+      return new DDIReflectionUtils().removeInterfacesAndGeneratedFromSubTypes(subTypesOf);
+    });
   }
 
   public Set<Class<?>> getTypesAnnotatedWith(final Class<? extends Annotation> annotation) {
-    if (typesAnnotatedWithCache.containsKey(annotation)) return (Set<Class<?>>) typesAnnotatedWithCache.get(annotation);
-
-    final Set<Class<?>> typesAnnotatedWith = unmodifiableSet(reflections.getTypesAnnotatedWith(annotation));
-    typesAnnotatedWithCache.put(annotation, typesAnnotatedWith);
-    return typesAnnotatedWith;
-    //    return reflections.getTypesAnnotatedWith(annotation);
+    return (Set<Class<?>>) typesAnnotatedWithCache.computeIfAbsent(annotation,
+        k -> unmodifiableSet(reflections.getTypesAnnotatedWith(annotation)));
   }
 
   public Set<Class<?>> getTypesAnnotatedWith(final Class<? extends Annotation> annotation, final boolean honorInherited) {
@@ -261,17 +213,17 @@ public class ReflectionsModel {
 
 
   public Set<Method> getMethodsAnnotatedWith(Class clazz, final Annotation annotation) {
+    return getMethodsAnnotatedWith(clazz, annotation.annotationType());
+  }
 
-    final DataRecords.Pair<String, String> key = new DataRecords.Pair<>(clazz.getName(), annotation.annotationType().getName());
+  public Set<Method> getMethodsAnnotatedWith(Class clazz, final Class<? extends Annotation> annotationType) {
+    final DataRecords.Pair<String, String> key = new DataRecords.Pair<>(clazz.getName(), annotationType.getName());
 
-    if (methodsAnnotatedWithCache.containsKey(key)) return methodsAnnotatedWithCache.get(key);
-
-    final Set<Method> allMethods = DDIReflectionUtils.getAllMethods(clazz,
-                                                                    (Predicate<Method>) input -> input != null && input.isAnnotationPresent(annotation.annotationType()));
-
-    final Set<Method> unmodifiableSet = unmodifiableSet(allMethods);
-    methodsAnnotatedWithCache.put(key, unmodifiableSet);
-    return unmodifiableSet;
+    return methodsAnnotatedWithCache.computeIfAbsent(key, k -> {
+      final Set<Method> allMethods = DDIReflectionUtils.getAllMethods(clazz,
+                                                                      (Predicate<Method>) input -> input != null && input.isAnnotationPresent(annotationType));
+      return unmodifiableSet(allMethods);
+    });
   }
 
 }

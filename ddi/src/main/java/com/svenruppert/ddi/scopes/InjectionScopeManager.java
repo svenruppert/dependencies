@@ -159,9 +159,7 @@ public class InjectionScopeManager
   }
 
   public static void deRegisterClassForScope(final Class clazz) {
-    if (CLASS_NAME_2_SCOPENAME_MAP.containsKey(clazz.getName())) {
-      CLASS_NAME_2_SCOPENAME_MAP.remove(clazz.getName());
-    }
+    CLASS_NAME_2_SCOPENAME_MAP.remove(clazz.getName());
   }
 
   public static String scopeForClass(final Class clazz) {

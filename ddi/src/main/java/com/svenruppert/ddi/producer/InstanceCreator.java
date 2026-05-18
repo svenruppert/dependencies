@@ -73,15 +73,12 @@ public class InstanceCreator
   private <T> T createNewInstance(final Class classOrInterf, final Class clazz) {
     logger().info("creating new instance for {} With clazz {}", classOrInterf, clazz);
     final Class resolverTarget;
-    //explicite all combinations
     if (classOrInterf.isInterface() && !clazz.isInterface()) {
       resolverTarget = clazz;
-    } else if (!classOrInterf.isInterface() && clazz.isInterface()) {
-      resolverTarget = classOrInterf;
     } else if (!classOrInterf.isInterface()) {
       resolverTarget = classOrInterf;
-    } else { //both are interfaces
-      resolverTarget = null; // Fallback case
+    } else { // both are interfaces — no resolvable impl
+      resolverTarget = null;
     }
 
     final Set<Class<?>> producerClasses = findProducersFor(classOrInterf);
@@ -166,7 +163,7 @@ public class InstanceCreator
       }
     }
 
-    throw new RuntimeException("this point should never reached...");
+    throw new DDIModelException("unreachable: producer-set classification for " + classOrInterf);
   }
 
   private <T> T createInstanceWithThisProducer(final Class cls) {
@@ -183,11 +180,11 @@ public class InstanceCreator
   }
 
   private <T> void putToScope(final Class classOrInterf, final Class clazz, final boolean managedByMeTarget, final boolean managedByMeImpl, final T result) {
-    if (managedByMeTarget && managedByMeImpl) {
+    if (managedByMeTarget) {
       InjectionScopeManager.manageInstance(classOrInterf, result);
-    } else if (managedByMeTarget) {
-      InjectionScopeManager.manageInstance(classOrInterf, result);
-    } else if (managedByMeImpl) InjectionScopeManager.manageInstance(clazz, result);
+    } else if (managedByMeImpl) {
+      InjectionScopeManager.manageInstance(clazz, result);
+    }
   }
 
   private <T> T createInstanceWithProducers(final Class classOrInterf, final Class clazz, final Class resolverTarget, final boolean managedByMeTarget, final boolean managedByMeImpl, final Set<Class<?>> producerClassses) {

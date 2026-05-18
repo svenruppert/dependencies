@@ -60,8 +60,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
@@ -175,30 +173,6 @@ public class DI {
     bootstrapedNeeded = false;
   }
 
-  //  @Deprecated
-  //  public static synchronized void activatePackages(boolean parallelExecutors , String pkg) {
-  //    reflectionsModel.setParallelExecutors(false);
-  //    reflectionsModel.rescann(pkg);
-  //    clearCaches();
-  //    bootstrapedNeeded = false;
-  //  }
-  //
-  //  @Deprecated
-  //  public static synchronized void activatePackages(boolean parallelExecutors , String pkg , URL... urls) {
-  //    reflectionsModel.setParallelExecutors(false);
-  //    reflectionsModel.rescann(pkg , urls);
-  //    clearCaches();
-  //    bootstrapedNeeded = false;
-  //  }
-  //
-  //  @Deprecated
-  //  public static synchronized void activatePackages(boolean parallelExecutors , String pkg , Collection<URL> urls) {
-  //    reflectionsModel.setParallelExecutors(false);
-  //    reflectionsModel.rescann(pkg , urls);
-  //    clearCaches();
-  //    bootstrapedNeeded = false;
-  //  }
-
   public static synchronized <T> T activateDI(T instance) {
     if (bootstrapedNeeded) bootstrap();
 
@@ -255,19 +229,13 @@ public class DI {
   }
 
   private static void injectIntoField(final Field field, final Object instance, final Object target) {
-    AccessController.doPrivileged((PrivilegedAction) () -> {
-      boolean wasAccessible = field.isAccessible();
+    try {
       field.setAccessible(true);
-      try {
-        field.set(instance, target);
-        return null; // return nothing...
-      } catch (IllegalArgumentException | IllegalAccessException ex) {
-        LOGGER.warn("Cannot set field: ", ex);
-        throw new IllegalStateException("Cannot set field: " + field, ex);
-      } finally {
-        field.setAccessible(wasAccessible);
-      }
-    });
+      field.set(instance, target);
+    } catch (IllegalArgumentException | IllegalAccessException ex) {
+      LOGGER.warn("Cannot set field: ", ex);
+      throw new IllegalStateException("Cannot set field: " + field, ex);
+    }
   }
 
   private static void initialize(Object instance) {
@@ -279,19 +247,12 @@ public class DI {
                                                  final Class<? extends Annotation> annotationClass)
       throws IllegalStateException, SecurityException {
 
-    final Set<Method> methodsAnnotatedWith = reflectionsModel.getMethodsAnnotatedWith(clazz, new PostConstruct() {
-      @Override
-      public Class<? extends Annotation> annotationType() {
-        return PostConstruct.class;
-      }
-    });
+    final Set<Method> methodsAnnotatedWith = reflectionsModel.getMethodsAnnotatedWith(clazz, annotationClass);
 
     methodsAnnotatedWith.forEach(m -> {
       try {
-        final boolean accessible = m.isAccessible();
         m.setAccessible(true);
         m.invoke(instance);
-        m.setAccessible(accessible);
       } catch (IllegalAccessException | InvocationTargetException e) {
         LOGGER.warn("method could not invoked ", e);
       }
