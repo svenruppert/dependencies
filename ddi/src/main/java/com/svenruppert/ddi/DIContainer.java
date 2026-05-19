@@ -641,12 +641,19 @@ public final class DIContainer {
   }
 
   /**
-   * Exposes the underlying {@link ReflectionsModel} for low-level introspection.
-   * Production callers should prefer {@link #getSubTypesOf(Class)} and the other
-   * {@code get*} convenience methods on this container; tests occasionally need
-   * the raw model to query activation timestamps or per-package class lists.
+   * Class names (FQN) discovered by the {@code PkgTypesScanner} under the given
+   * package. Used for diagnostic queries against the underlying
+   * {@link ReflectionsModel} without exposing the model itself.
    */
-  public ReflectionsModel reflectionsModel() {
-    return reflectionsModel;
+  public Collection<String> getClassesForPkg(final String pkgName) {
+    return reflectionsModel.getClassesForPkg(pkgName);
+  }
+
+  /**
+   * Names of all package prefixes that have been activated on this container
+   * via {@code activatePackages(...)}. The returned set is a defensive copy.
+   */
+  public Set<String> getActivatedPkgs() {
+    return reflectionsModel.getActivatedPkgs();
   }
 }

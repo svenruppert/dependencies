@@ -92,8 +92,5 @@ public class ScanPrefixTest {
     container.clearReflectionModel();
     assertEquals("junit.com.svenruppert.ddi.container", container.scanPrefix(),
                  "scanPrefix must survive clearReflectionModel()");
-    assertEquals("junit.com.svenruppert.ddi.container",
-                 container.reflectionsModel().scanPrefix(),
-                 "the rebuilt ReflectionsModel must carry the same prefix");
   }
 }

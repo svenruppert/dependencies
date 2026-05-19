@@ -76,7 +76,6 @@ public class ReflectionsModel {
   private final Map<String, Set> subTypeOfCacheWithoutInterfacesnadGenerated = new ConcurrentHashMap<>();
   private final Map<Class<? extends Annotation>, Set> typesAnnotatedWithCache = new ConcurrentHashMap<>();
   private final ThreadLocal<Boolean> parallelExecutors = ThreadLocal.withInitial(() -> false);
-  private final String scanPrefix;
   private final Reflections reflections;
 
   public ReflectionsModel() {
@@ -84,16 +83,11 @@ public class ReflectionsModel {
   }
 
   public ReflectionsModel(final String scanPrefix) {
-    this.scanPrefix = scanPrefix;
     this.reflections = new Reflections(
         createConfigurationBuilder()
             .filterInputsBy(new FilterBuilder().includePackage(scanPrefix))
             .setScanners(createScanners())
     );
-  }
-
-  public String scanPrefix() {
-    return scanPrefix;
   }
 
   public void setParallelExecutors(final boolean parallelExecutors) {

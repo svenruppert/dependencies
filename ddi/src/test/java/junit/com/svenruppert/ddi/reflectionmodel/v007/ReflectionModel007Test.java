@@ -43,14 +43,13 @@ package junit.com.svenruppert.ddi.reflectionmodel.v007;
 
 
 import com.svenruppert.ddi.DI;
-import com.svenruppert.ddi.reflections.ReflectionsModel;
+import com.svenruppert.ddi.DIContainer;
 import junit.com.svenruppert.ddi.reflectionmodel.v007.pkg.PkgServiceA;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.Set;
 
@@ -73,13 +72,13 @@ public class ReflectionModel007Test {
   @Test
   public void test001()
       throws Exception {
-    final ReflectionsModel reflectionModel = com.svenruppert.ddi.DIContainer.global().reflectionsModel();
-    final Collection<String> classesForPkg = reflectionModel.getClassesForPkg(PkgServiceA.class.getPackage().getName());
+    final DIContainer container = DIContainer.global();
+    final Collection<String> classesForPkg = container.getClassesForPkg(PkgServiceA.class.getPackage().getName());
     Assertions.assertFalse(classesForPkg.isEmpty());
     Assertions.assertEquals(2, classesForPkg.size());
 
 
-    final Set<String> activatedPkgs = reflectionModel.getActivatedPkgs();
+    final Set<String> activatedPkgs = container.getActivatedPkgs();
     Assertions.assertFalse(activatedPkgs.isEmpty());
     Assertions.assertEquals(2, activatedPkgs.size());
 
