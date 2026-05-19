@@ -82,7 +82,7 @@
         <!--        <deploy-repo-snapshots-url>https://maven.pkg.github.com/svenruppert/dependencies/</deploy-repo-snapshots-url>-->
 
         <jdk.version>26</jdk.version>
-        <minimum-maven.version>3.9.9</minimum-maven.version>
+        <minimum-maven.version>4.0.0-rc-5</minimum-maven.version>
 
         <!--technical-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -98,15 +98,14 @@
         <log4j-api.version>2.25.3</log4j-api.version>
 
         <jacoco.version>0.8.10</jacoco.version>
-        <pitest.version>1.23.0</pitest.version>
+        <pitest.version>1.23.1</pitest.version>
         <pitest-prod-classes>com.svenruppert.*</pitest-prod-classes>
         <pitest-test-classes>junit.com.svenruppert.*</pitest-test-classes>
 
-        <junit-platform-maven-plugin.timeout>300</junit-platform-maven-plugin.timeout>
         <!--        <junit-jupiter-api.version>5.12.1</junit-jupiter-api.version>-->
-        <junit-jupiter-api.version>6.1.0-M1</junit-jupiter-api.version>
+        <junit-jupiter-api.version>6.1.0-RC1</junit-jupiter-api.version>
         <!--        <junit-platform-launcher.version>1.12.1</junit-platform-launcher.version>-->
-        <junit-platform-launcher.version>6.1.0-M1</junit-platform-launcher.version>
+        <junit-platform-launcher.version>6.1.0-RC1</junit-platform-launcher.version>
 
         <!--    <jmh.version>1.26</jmh.version>-->
         <opentracing-api.version>0.33.0</opentracing-api.version>
@@ -126,49 +125,6 @@
         </snapshotRepository>
     </distributionManagement>
 
-    <repositories>
-        <!--        <repository>-->
-        <!--            <snapshots>-->
-        <!--                <enabled>true</enabled>-->
-        <!--                <updatePolicy>always</updatePolicy>-->
-        <!--            </snapshots>-->
-        <!--            <id>reposilite-repository-snapshots</id>-->
-        <!--            <name>Reposilite Repository</name>-->
-        <!--            <url>http://0.0.0.0:8080/snapshots</url>-->
-        <!--        </repository>-->
-        <!--        <repository>-->
-        <!--            <id>reposilite-repository-releases</id>-->
-        <!--            <name>Reposilite Repository</name>-->
-        <!--            <url>http://0.0.0.0:8080/releases</url>-->
-        <!--        </repository>-->
-        <repository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>central</id>
-            <name>libs-release</name>
-            <url>https://repo.maven.apache.org/maven2/</url>
-        </repository>
-
-    </repositories>
-    <pluginRepositories>
-        <!--        <pluginRepository>-->
-        <!--            <snapshots>-->
-        <!--                <enabled>false</enabled>-->
-        <!--            </snapshots>-->
-        <!--            <id>reposilite-repository-releases</id>-->
-        <!--            <name>Reposilite Repository</name>-->
-        <!--            <url>http://0.0.0.0:8080/releases</url>-->
-        <!--        </pluginRepository>-->
-        <pluginRepository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>central</id>
-            <name>libs-release</name>
-            <url>https://repo.maven.apache.org/maven2/</url>
-        </pluginRepository>
-    </pluginRepositories>
 
     <dependencyManagement>
         <!--project versions-->
@@ -752,7 +708,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.5.4</version>
+                    <version>3.5.5</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -762,7 +718,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.4.0</version>
+                    <version>3.5.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -792,7 +748,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.6.2</version>
+                    <version>3.6.3</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -802,18 +758,18 @@
                 <plugin>
                     <groupId>org.owasp</groupId>
                     <artifactId>dependency-check-maven</artifactId>
-                    <version>12.2.0</version>
+                    <version>12.2.2</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-shade-plugin</artifactId>
-                    <version>3.6.1</version>
+                    <version>3.6.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>6.0.0</version>
+                    <version>6.0.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -834,7 +790,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.5.4</version>
+                    <version>3.5.5</version>
                 </plugin>
 
                 <plugin>
@@ -843,14 +799,9 @@
                     <version>4.0.0</version>
                 </plugin>
                 <plugin>
-                    <groupId>de.sormuras.junit</groupId>
-                    <artifactId>junit-platform-maven-plugin</artifactId>
-                    <version>1.1.8</version>
-                </plugin>
-                <plugin>
                     <groupId>com.github.spotbugs</groupId>
                     <artifactId>spotbugs-maven-plugin</artifactId>
-                    <version>4.9.8.2</version>
+                    <version>4.9.8.3</version>
                 </plugin>
 
             </plugins>
@@ -1204,29 +1155,18 @@
             </plugin>
 
             <plugin>
-                <groupId>de.sormuras.junit</groupId>
-                <artifactId>junit-platform-maven-plugin</artifactId>
-                <extensions>true</extensions> <!-- Necessary to execute it in 'test' phase. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <charset>UTF-8</charset>
-                    <timeout>${junit-platform-maven-plugin.timeout}</timeout>
-                    <classNamePatterns>
-                        <pattern>^(Test.*|.*Test*.|.+[.$]Test.*|.*Tests?)$</pattern>
-                        <pattern>.*TestCase</pattern>
-                    </classNamePatterns>
-                    <tweaks>
-                        <failIfNoTests>false</failIfNoTests>
-                    </tweaks>
-                    <executor>JAVA</executor>
-                    <javaOptions>
-                        <additionalOptions>
-                            <additionalOption>--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED</additionalOption>
-                            <additionalOption>--enable-native-access=ALL-UNNAMED</additionalOption>
-                        </additionalOptions>
-                    </javaOptions>
-                    <!--<tags>-->
-                    <!--<tag>vaadin-protools</tag>-->
-                    <!--</tags>-->
+                    <encoding>UTF-8</encoding>
+                    <failIfNoTests>false</failIfNoTests>
+                    <argLine>--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED --enable-native-access=ALL-UNNAMED</argLine>
+                    <includes>
+                        <include>**/Test*.java</include>
+                        <include>**/*Test.java</include>
+                        <include>**/*Tests.java</include>
+                        <include>**/*TestCase.java</include>
+                    </includes>
                 </configuration>
             </plugin>
 
