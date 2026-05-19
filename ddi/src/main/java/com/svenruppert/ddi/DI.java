@@ -40,264 +40,109 @@ package com.svenruppert.ddi;
  * #L%
  */
 
-
-
-
-import com.svenruppert.ddi.bootstrap.ClassResolverCheck001;
-import com.svenruppert.ddi.implresolver.ImplementingClassResolver;
-import com.svenruppert.ddi.producer.InstanceCreator;
-import com.svenruppert.ddi.producer.ProducerLocator;
-import com.svenruppert.ddi.reflections.ReflectionsModel;
-import com.svenruppert.ddi.scopes.InjectionScopeManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import java.io.*;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
 
-import static com.svenruppert.ddi.scopes.InjectionScopeManager.listAllActiveScopeNames;
-import static com.svenruppert.dependencies.core.logger.HasLogger.staticLogger;
-import static java.nio.charset.StandardCharsets.UTF_8;
+/**
+ * Static convenience facade. All operations delegate to
+ * {@link DIContainer#global()}. For hermetic state (parallel test setups, own
+ * Reflections model, own scopes) instantiate a {@link DIContainer} directly.
+ */
+public final class DI {
 
-public class DI {
-
-  public static final String ORG_RAPIDPM_DDI_PACKAGESFILE = "com.svenruppert.ddi.packagesfile";
-  private static final Logger LOGGER = LoggerFactory.getLogger(DI.class);
-  private static ReflectionsModel reflectionsModel = new ReflectionsModel();
-  private static boolean bootstrapedNeeded = true;
-
+  public static final String ORG_RAPIDPM_DDI_PACKAGESFILE = DIContainer.PACKAGES_FILE_PROPERTY;
 
   private DI() {
   }
 
   public static void checkActiveModel() {
-    new ClassResolverCheck001().execute();
+    DIContainer.global().checkActiveModel();
   }
 
-  public static synchronized void bootstrap() {
-    //    reflectionsModel = new ReflectionsModel();
-    ImplementingClassResolver.clearCache();
-    if (bootstrapedNeeded) {
-      final String packageFilePath = System.getProperty(ORG_RAPIDPM_DDI_PACKAGESFILE);
-      if (packageFilePath != null && !packageFilePath.isEmpty()) {
-        bootstrapFromResource(packageFilePath);
-      } else {
-        reflectionsModel.rescan("");
-      }
-    }
-    bootstrapedNeeded = false;
+  public static void bootstrap() {
+    DIContainer.global().bootstrap();
   }
 
-  private static void bootstrapFromResource(String path) {
-    try (InputStream is = ClassLoader.getSystemResourceAsStream(path)) {
-      loadJarResource(is);
-    } catch (IOException e) {
-      loadFilesystemResource(path, e);
-    }
+  public static void clearReflectionModel() {
+    DIContainer.global().clearReflectionModel();
   }
 
-  private static void loadFilesystemResource(String path, IOException e) {
-    try (InputStream is = new FileInputStream(path)) {
-      bootstrapFromResource(is);
-    } catch (IOException e1) {
-      LOGGER.warn(String.format("Error loading file <%s> <%s>", path, e.getMessage()));
-      throw new DDIModelException("Unable to load packages from file", e1);
-    }
+  public static void activatePackages(Class clazz) {
+    DIContainer.global().activatePackages(clazz);
   }
 
-  private static void loadJarResource(InputStream is)
-      throws IOException {
-    if (is != null) {
-      bootstrapFromResource(is);
-    } else {
-      throw new IOException();
-    }
+  public static void activatePackages(String pkg) {
+    DIContainer.global().activatePackages(pkg);
   }
 
-  private static void bootstrapFromResource(InputStream inputStream) {
-    String line;
-    try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, UTF_8))) {
-      while ((line = reader.readLine()) != null) {
-        reflectionsModel.rescan(line);
-      }
-    } catch (IOException e) {
-      LOGGER.warn("Error loading packages");
-      throw new DDIModelException("Unable to load packages from file", e);
-    }
+  public static void activatePackages(String pkg, URL... urls) {
+    DIContainer.global().activatePackages(pkg, urls);
   }
 
-  public static synchronized void clearReflectionModel() {
-    reflectionsModel = new ReflectionsModel();
-    clearCaches();
-    InjectionScopeManager.reInitAllScopes();
-    bootstrapedNeeded = true;
+  public static void activatePackages(String pkg, Collection<URL> urls) {
+    DIContainer.global().activatePackages(pkg, urls);
   }
 
-  private static void clearCaches() {
-    ImplementingClassResolver.clearCache();
-    ProducerLocator.clearCache();
-    InjectionScopeManager.cleanUp();
-    reflectionsModel.clearCaches();
+  public static <T> T activateDI(T instance) {
+    return DIContainer.global().activateDI(instance);
   }
 
-  public static synchronized void activatePackages(Class clazz) {
-    reflectionsModel.rescan(clazz.getPackage().getName());
-    clearCaches();
-    bootstrapedNeeded = false;
-  }
-
-  public static synchronized void activatePackages(String pkg) {
-    reflectionsModel.rescan(pkg);
-    clearCaches();
-    bootstrapedNeeded = false;
-  }
-
-  public static synchronized void activatePackages(String pkg, URL... urls) {
-    reflectionsModel.rescan(pkg, urls);
-    clearCaches();
-    bootstrapedNeeded = false;
-  }
-
-  public static synchronized void activatePackages(String pkg, Collection<URL> urls) {
-    reflectionsModel.rescan(pkg, urls);
-    clearCaches();
-    bootstrapedNeeded = false;
-  }
-
-  public static synchronized <T> T activateDI(T instance) {
-    if (bootstrapedNeeded) bootstrap();
-
-    injectAttributes(instance);
-    initialize(instance);
-    return instance;
-  }
-
-  public static synchronized <T> T activateDI(Class<T> clazz2Instanciate) {
-    if (bootstrapedNeeded) bootstrap();
-
-    final T instance = new InstanceCreator().instantiate(clazz2Instanciate);
-    injectAttributes(instance);
-    initialize(instance);
-    return instance;
+  public static <T> T activateDI(Class<T> clazz2Instanciate) {
+    return DIContainer.global().activateDI(clazz2Instanciate);
   }
 
   public static Set<String> listAllActiveScopes() {
-    return listAllActiveScopeNames();
+    return DIContainer.global().listAllActiveScopeNames();
   }
 
   public static void registerClassForScope(Class clazz, String scope) {
-    InjectionScopeManager.registerClassForScope(clazz, scope);
+    DIContainer.global().registerClassForScope(clazz, scope);
   }
 
   public static void deRegisterClassForScope(Class clazz) {
-    InjectionScopeManager.deRegisterClassForScope(clazz);
+    DIContainer.global().deRegisterClassForScope(clazz);
   }
-
-
-  private static <T> void injectAttributes(final T rootInstance)
-      throws SecurityException {
-    injectAttributesForClass(rootInstance.getClass(), rootInstance);
-  }
-
-
-  private static <T> void injectAttributesForClass(Class targetClass, T rootInstance) {
-    Class<?> superclass = targetClass.getSuperclass();
-    if (superclass != null) {
-      injectAttributesForClass(superclass, rootInstance);
-    }
-
-    final Field[] fields = targetClass.getDeclaredFields();
-    for (final Field field : fields) {
-      if (field.isAnnotationPresent(Inject.class)) {
-        staticLogger().info("found field: {}", field.getName());
-        final Class targetType = field.getType();
-        staticLogger().info("field type: {}", targetType.getName());
-        Object value = new InstanceCreator().instantiate(targetType);
-        DI.activateDI(value);
-        injectIntoField(field, rootInstance, value);
-      }
-    }
-  }
-
-  private static void injectIntoField(final Field field, final Object instance, final Object target) {
-    try {
-      field.setAccessible(true);
-      field.set(instance, target);
-    } catch (IllegalArgumentException | IllegalAccessException ex) {
-      LOGGER.warn("Cannot set field: ", ex);
-      throw new IllegalStateException("Cannot set field: " + field, ex);
-    }
-  }
-
-  private static void initialize(Object instance) {
-    Class<?> clazz = instance.getClass();
-    invokeMethodWithAnnotation(clazz, instance, PostConstruct.class);
-  }
-
-  private static void invokeMethodWithAnnotation(Class clazz, final Object instance,
-                                                 final Class<? extends Annotation> annotationClass)
-      throws IllegalStateException, SecurityException {
-
-    final Set<Method> methodsAnnotatedWith = reflectionsModel.getMethodsAnnotatedWith(clazz, annotationClass);
-
-    methodsAnnotatedWith.forEach(m -> {
-      try {
-        m.setAccessible(true);
-        m.invoke(instance);
-      } catch (IllegalAccessException | InvocationTargetException e) {
-        LOGGER.warn("method could not invoked ", e);
-      }
-    });
-  }
-
-  //delegator
 
   public static <T> Class<? extends T> resolveImplementingClass(final Class<T> interf) {
-    return ImplementingClassResolver.resolve(interf);
+    return DIContainer.global().resolveImplementingClass(interf);
   }
 
   public static boolean isPkgPrefixActivated(final String pkgPrefix) {
-    return reflectionsModel.isPkgPrefixActivated(pkgPrefix);
+    return DIContainer.global().isPkgPrefixActivated(pkgPrefix);
   }
 
   public static boolean isPkgPrefixActivated(final Class clazz) {
-    return reflectionsModel.isPkgPrefixActivated(clazz.getPackage().getName());
+    return DIContainer.global().isPkgPrefixActivated(clazz);
   }
 
   public static LocalDateTime getPkgPrefixActivatedTimestamp(final String pkgPrefix) {
-    return reflectionsModel.getPkgPrefixActivatedTimestamp(pkgPrefix);
+    return DIContainer.global().getPkgPrefixActivatedTimestamp(pkgPrefix);
   }
 
   public static <T> Set<Class<? extends T>> getSubTypesOf(final Class<T> type) {
-    return reflectionsModel.getSubTypesOf(type);
+    return DIContainer.global().getSubTypesOf(type);
   }
 
   public static <T> Set<Class<? extends T>> getSubTypesWithoutInterfacesAndGeneratedOf(final Class<T> type) {
-    return reflectionsModel.getSubTypesWithoutInterfacesAndGeneratedOf(type);
+    return DIContainer.global().getSubTypesWithoutInterfacesAndGeneratedOf(type);
   }
 
   public static Set<Class<?>> getTypesAnnotatedWith(final Class<? extends Annotation> annotation) {
-    return reflectionsModel.getTypesAnnotatedWith(annotation);
+    return DIContainer.global().getTypesAnnotatedWith(annotation);
   }
 
   public static Set<Class<?>> getTypesAnnotatedWith(final Class<? extends Annotation> annotation, final boolean honorInherited) {
-    return reflectionsModel.getTypesAnnotatedWith(annotation, honorInherited);
+    return DIContainer.global().getTypesAnnotatedWith(annotation, honorInherited);
   }
 
   public static Set<Class<?>> getTypesAnnotatedWith(final Annotation annotation) {
-    return reflectionsModel.getTypesAnnotatedWith(annotation);
+    return DIContainer.global().getTypesAnnotatedWith(annotation);
   }
 
   public static Set<Class<?>> getTypesAnnotatedWith(final Annotation annotation, final boolean honorInherited) {
-    return reflectionsModel.getTypesAnnotatedWith(annotation, honorInherited);
+    return DIContainer.global().getTypesAnnotatedWith(annotation, honorInherited);
   }
 }

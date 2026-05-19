@@ -43,14 +43,14 @@ package com.svenruppert.ddi.reflections;
 
 
 import com.svenruppert.functional.model.DataRecords;
-import org.reflections8.Reflections;
-import org.reflections8.scanners.MethodAnnotationsScanner;
-import org.reflections8.scanners.Scanner;
-import org.reflections8.scanners.SubTypesScanner;
-import org.reflections8.scanners.TypeAnnotationsScanner;
-import org.reflections8.util.ClasspathHelper;
-import org.reflections8.util.ConfigurationBuilder;
-import org.reflections8.util.FilterBuilder;
+import org.reflections.Reflections;
+import org.reflections.scanners.MethodAnnotationsScanner;
+import org.reflections.scanners.Scanner;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.scanners.TypeAnnotationsScanner;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
+import org.reflections.util.FilterBuilder;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -65,6 +65,7 @@ import static java.util.Collections.unmodifiableSet;
 
 public class ReflectionsModel {
 
+  public static final String DEFAULT_SCAN_PREFIX = "com.svenruppert";
 
   //TODO refactoring to pessimistic write / concurrent read
 
@@ -75,13 +76,24 @@ public class ReflectionsModel {
   private final Map<String, Set> subTypeOfCacheWithoutInterfacesnadGenerated = new ConcurrentHashMap<>();
   private final Map<Class<? extends Annotation>, Set> typesAnnotatedWithCache = new ConcurrentHashMap<>();
   private final ThreadLocal<Boolean> parallelExecutors = ThreadLocal.withInitial(() -> false);
-  private final Reflections reflections = new Reflections(
-      createConfigurationBuilder()
-          .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix("com.svenruppert")))
-          .setScanners(createScanners())
-  );
+  private final String scanPrefix;
+  private final Reflections reflections;
 
   public ReflectionsModel() {
+    this(DEFAULT_SCAN_PREFIX);
+  }
+
+  public ReflectionsModel(final String scanPrefix) {
+    this.scanPrefix = scanPrefix;
+    this.reflections = new Reflections(
+        createConfigurationBuilder()
+            .filterInputsBy(new FilterBuilder().includePackage(scanPrefix))
+            .setScanners(createScanners())
+    );
+  }
+
+  public String scanPrefix() {
+    return scanPrefix;
   }
 
   public void setParallelExecutors(final boolean parallelExecutors) {
@@ -89,12 +101,9 @@ public class ReflectionsModel {
   }
 
   public void rescan(final String pkgPrefix) {
-    var configurationBuilder = createConfigurationBuilder();
-    var include = new FilterBuilder().include(FilterBuilder.prefix(pkgPrefix));
-    var scanners = createScanners();
-    rescannImpl(configurationBuilder
-                    .filterInputsBy(include)
-                    .setScanners(scanners));
+    rescannImpl(createConfigurationBuilder()
+                    .filterInputsBy(new FilterBuilder().includePackage(pkgPrefix))
+                    .setScanners(createScanners()));
     activatedPackagesMap.put(pkgPrefix, LocalDateTime.now());
   }
 
@@ -111,8 +120,12 @@ public class ReflectionsModel {
   private ConfigurationBuilder createConfigurationBuilder() {
     final ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
     configurationBuilder.setUrls(ClasspathHelper.forJavaClassPath());
-    if (parallelExecutors.get()) return configurationBuilder.useParallelExecutor();
-    else return configurationBuilder;
+    configurationBuilder.setParallel(parallelExecutors.get());
+    // org.reflections 0.10.x expands super-types into the store by default, which causes
+    // classes outside the filter to surface (e.g. via supertype links from scanned subclasses).
+    // The previous reflections8 behaviour did not do this — keep the contract identical.
+    configurationBuilder.setExpandSuperTypes(false);
+    return configurationBuilder;
   }
 
   private Scanner[] createScanners() {
@@ -145,7 +158,7 @@ public class ReflectionsModel {
 
   public void rescan(String pkgPrefix, URL... urls) {
     rescannImpl(createConfigurationBuilder()
-                    .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix(pkgPrefix)))
+                    .filterInputsBy(new FilterBuilder().includePackage(pkgPrefix))
                     .setUrls(urls)
                     .setScanners(createScanners()));
     activatedPackagesMap.put(pkgPrefix, LocalDateTime.now());
@@ -153,7 +166,7 @@ public class ReflectionsModel {
 
   public void rescan(String pkgPrefix, Collection<URL> urls) {
     rescannImpl(createConfigurationBuilder()
-                    .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix(pkgPrefix)))
+                    .filterInputsBy(new FilterBuilder().includePackage(pkgPrefix))
                     .setUrls(urls)
                     .setScanners(createScanners()));
     activatedPackagesMap.put(pkgPrefix, LocalDateTime.now());

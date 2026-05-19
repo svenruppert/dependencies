@@ -48,7 +48,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.reflections8.util.ClasspathHelper;
+import org.reflections.util.ClasspathHelper;
 
 import java.time.LocalDateTime;
 

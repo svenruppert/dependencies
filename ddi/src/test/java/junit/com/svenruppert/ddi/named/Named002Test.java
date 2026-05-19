@@ -48,8 +48,8 @@ import junit.com.svenruppert.ddi.DDIBaseTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
 
 /**
  * Multiple implementations of an Interface, no decission possible

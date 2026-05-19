@@ -40,9 +40,7 @@ package com.svenruppert.ddi.producerresolver;
  * #L%
  */
 
-
-
-import com.svenruppert.ddi.DI;
+import com.svenruppert.ddi.DIContainer;
 import com.svenruppert.ddi.ResponsibleFor;
 
 import java.util.Set;
@@ -50,8 +48,18 @@ import java.util.stream.Collectors;
 
 public class ProducerResolverLocator {
 
+  private final DIContainer container;
+
+  public ProducerResolverLocator() {
+    this(DIContainer.global());
+  }
+
+  public ProducerResolverLocator(DIContainer container) {
+    this.container = container;
+  }
+
   public Set<Class<? extends ProducerResolver>> findProducersResolverFor(final Class clazzOrInterf) {
-    return DI
+    return container
         .getSubTypesOf(ProducerResolver.class)
         .stream()
         .filter(c -> c.isAnnotationPresent(ResponsibleFor.class))

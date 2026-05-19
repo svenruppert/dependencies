@@ -49,7 +49,7 @@ import java.lang.reflect.Type;
 import java.util.Set;
 
 public class DDIReflectionUtils
-    extends org.reflections8.ReflectionUtils {
+    extends org.reflections.ReflectionUtils {
 
   public boolean checkInterface(final Type aClass, Class targetInterface) {
     if (aClass.equals(targetInterface)) return true;

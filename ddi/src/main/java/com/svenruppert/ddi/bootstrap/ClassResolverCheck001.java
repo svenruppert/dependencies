@@ -40,10 +40,8 @@ package com.svenruppert.ddi.bootstrap;
  * #L%
  */
 
-
-
 import com.svenruppert.ddi.DDIModelException;
-import com.svenruppert.ddi.DI;
+import com.svenruppert.ddi.DIContainer;
 import com.svenruppert.ddi.ResponsibleFor;
 import com.svenruppert.ddi.implresolver.ClassResolver;
 
@@ -51,15 +49,22 @@ import java.util.Set;
 
 public class ClassResolverCheck001 {
 
+  private final DIContainer container;
+
+  public ClassResolverCheck001() {
+    this(DIContainer.global());
+  }
+
+  public ClassResolverCheck001(DIContainer container) {
+    this.container = container;
+  }
 
   public void execute() {
-    final Set<Class<? extends ClassResolver>> subTypesOfClassResolver = DI.getSubTypesOf(ClassResolver.class);
-    for (final Class<? extends ClassResolver> aClassResolver : subTypesOfClassResolver) {
+    final Set<Class<? extends ClassResolver>> subTypes = container.getSubTypesOf(ClassResolver.class);
+    for (final Class<? extends ClassResolver> aClassResolver : subTypes) {
       if (!aClassResolver.isAnnotationPresent(ResponsibleFor.class)) {
         throw new DDIModelException("Found ClassResolver without @ResponsibleFor annotation= " + aClassResolver);
       }
     }
   }
-
-
 }

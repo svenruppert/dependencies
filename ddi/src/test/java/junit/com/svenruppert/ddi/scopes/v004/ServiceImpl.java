@@ -44,8 +44,8 @@ package junit.com.svenruppert.ddi.scopes.v004;
 
 import org.junit.jupiter.api.Assertions;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
 
 public class ServiceImpl
     implements Service {

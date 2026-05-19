@@ -73,10 +73,7 @@ public class ReflectionModel007Test {
   @Test
   public void test001()
       throws Exception {
-    final Field declaredField = DI.class.getDeclaredField("reflectionsModel");
-
-    declaredField.setAccessible(true);
-    final ReflectionsModel reflectionModel = (ReflectionsModel) declaredField.get(null);
+    final ReflectionsModel reflectionModel = com.svenruppert.ddi.DIContainer.global().reflectionsModel();
     final Collection<String> classesForPkg = reflectionModel.getClassesForPkg(PkgServiceA.class.getPackage().getName());
     Assertions.assertFalse(classesForPkg.isEmpty());
     Assertions.assertEquals(2, classesForPkg.size());

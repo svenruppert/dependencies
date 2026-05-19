@@ -49,7 +49,7 @@ import junit.com.svenruppert.ddi.DDIBaseTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class Producer007Test
     extends DDIBaseTest {

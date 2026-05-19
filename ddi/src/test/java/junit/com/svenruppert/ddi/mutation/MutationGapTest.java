@@ -48,9 +48,9 @@ import com.svenruppert.ddi.scopes.provided.JVMSingletonInjectionScope;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.reflections8.util.ClasspathHelper;
+import org.reflections.util.ClasspathHelper;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.Collection;

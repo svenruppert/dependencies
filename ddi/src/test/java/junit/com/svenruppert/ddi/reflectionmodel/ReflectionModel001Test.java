@@ -47,7 +47,7 @@ import com.svenruppert.ddi.DI;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class ReflectionModel001Test {
 

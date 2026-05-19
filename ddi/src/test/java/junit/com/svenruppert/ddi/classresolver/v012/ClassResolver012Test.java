@@ -47,7 +47,7 @@ import junit.com.svenruppert.ddi.DDIBaseTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class ClassResolver012Test
     extends DDIBaseTest {

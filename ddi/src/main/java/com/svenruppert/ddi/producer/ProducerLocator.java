@@ -40,40 +40,25 @@ package com.svenruppert.ddi.producer;
  * #L%
  */
 
+import com.svenruppert.ddi.DIContainer;
 
-
-import com.svenruppert.ddi.DI;
-import com.svenruppert.ddi.Produces;
-
-import java.util.Collections;
-import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
-public class ProducerLocator {
-
-  //class 2 producer-set
-  private static final Map<Class, Set<Class<?>>> RESOLVER_CACHE_FOR_CLASS_2_PRODUCER_SET = new ConcurrentHashMap<>();
+/**
+ * Thin static facade over the global {@link DIContainer}'s producer cache.
+ * State now lives entirely in the container; this class keeps its public
+ * static API for backwards compatibility with existing callers and tests.
+ */
+public final class ProducerLocator {
 
   private ProducerLocator() {
   }
 
   public static void clearCache() {
-    RESOLVER_CACHE_FOR_CLASS_2_PRODUCER_SET.clear();
+    DIContainer.global().clearProducerCache();
   }
 
   public static Set<Class<?>> findProducersFor(final Class clazzOrInterf) {
-    return RESOLVER_CACHE_FOR_CLASS_2_PRODUCER_SET.computeIfAbsent(clazzOrInterf, key -> {
-      final Set<Class<?>> typesAnnotatedWith = DI.getTypesAnnotatedWith(Produces.class)
-          .stream()
-          .filter(producerClass -> {
-            final Produces annotation = producerClass.getAnnotation(Produces.class);
-            final Class value = annotation.value();
-            return value.equals(key);
-          })
-          .collect(Collectors.toSet());
-      return Collections.unmodifiableSet(typesAnnotatedWith);
-    });
+    return DIContainer.global().findProducersFor(clazzOrInterf);
   }
 }

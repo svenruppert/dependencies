@@ -40,46 +40,42 @@ package com.svenruppert.ddi.reflections;
  * #L%
  */
 
+import javassist.bytecode.ClassFile;
+import org.reflections.scanners.Scanner;
 
+import java.util.List;
+import java.util.Map;
 
-import org.reflections8.scanners.AbstractScanner;
-import org.reflections8.util.FilterBuilder;
-import org.reflections8.util.SetMultimap;
-
-
+/**
+ * Custom {@link Scanner} that records every scanned class against its package name.
+ * The reflection store can be queried by package via
+ * {@code reflections.getStore().get("PkgTypesScanner")}, which yields a
+ * {@code Map<pkgName, Set<className>>}.
+ *
+ * <p>By default {@code java.lang.Object} is excluded so that the store does not
+ * collapse direct {@code Object}-subtypes into one giant bucket — this matches
+ * the previous {@code reflections8.scanners.AbstractScanner}-based implementation.
+ */
 public class PkgTypesScanner
-    extends AbstractScanner {
+    implements Scanner {
 
-  /**
-   * created new SubTypesScanner. will exclude direct Object subtypes
-   */
+  private final boolean excludeObjectClass;
+
   public PkgTypesScanner() {
-    this(true); //exclude direct Object subtypes by default
+    this(true);
   }
 
-  /**
-   * created new SubTypesScanner.
-   *
-   * @param excludeObjectClass if false, include direct {@link Object} subtypes in results.
-   */
   public PkgTypesScanner(boolean excludeObjectClass) {
-    if (excludeObjectClass) {
-      filterResultsBy(new FilterBuilder().exclude(Object.class.getName())); //exclude direct Object subtypes
-    }
+    this.excludeObjectClass = excludeObjectClass;
   }
 
-  @SuppressWarnings({"unchecked"})
-  public void scan(final Object cls) {
-    String className = getMetadataAdapter().getClassName(cls);
-
-    int index = className.lastIndexOf(".");
-    if (index != -1) {
-
-      final String pkgName = className.substring(0, index);
-      if (acceptResult(className)) {
-        final SetMultimap<String, String> store = getStore();
-        store.putSingle(pkgName, className);
-      }
-    }
+  @Override
+  public List<Map.Entry<String, String>> scan(ClassFile classFile) {
+    final String className = classFile.getName();
+    final int dot = className.lastIndexOf('.');
+    if (dot < 0) return List.of();
+    if (excludeObjectClass && Object.class.getName().equals(className)) return List.of();
+    final String pkgName = className.substring(0, dot);
+    return List.of(entry(pkgName, className));
   }
 }
