@@ -45,10 +45,16 @@ import com.svenruppert.ddi.DIContainer;
 import com.svenruppert.ddi.producerresolver.ProducerResolver;
 import com.svenruppert.ddi.producerresolver.ProducerResolverLocator;
 import com.svenruppert.dependencies.core.logger.HasLogger;
+import jakarta.inject.Inject;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Parameter;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class InstanceCreator
     implements HasLogger {
@@ -121,7 +127,7 @@ public class InstanceCreator
       try {
         final Set<Class<?>> producersForImpl = container.findProducersFor(clazz);
         if (producersForImpl.isEmpty()) {
-          result = (T) clazz.getDeclaredConstructor().newInstance();
+          result = (T) newInstanceFromConstructor(clazz);
         } else if (producersForImpl.size() > 1) {
           final Set<Class<? extends ProducerResolver>> producerResolverClasses
               = new ProducerResolverLocator(container).findProducersResolverFor(resolverTarget);
@@ -192,5 +198,48 @@ public class InstanceCreator
     } else {
       throw new DDIModelException(" to many Producer and no ProducerResolver found for " + classOrInterf + " - " + producerClassses);
     }
+  }
+
+  /**
+   * Instantiates {@code clazz}, preferring an {@code @Inject}-annotated constructor
+   * over the default no-arg constructor. Constructor parameters are resolved
+   * recursively through the owning {@link DIContainer}; each parameter's
+   * {@code @Named} / {@code @Qualifier} annotations narrow its candidate
+   * implementations the same way field injection does.
+   *
+   * <ul>
+   *   <li>Zero {@code @Inject} constructors → fall back to the default constructor.</li>
+   *   <li>Exactly one {@code @Inject} constructor → use it; arguments are activated
+   *       via {@code container.activateDI(paramType, qualifiers)} which also runs
+   *       field injection and {@code @PostConstruct} on each argument.</li>
+   *   <li>More than one {@code @Inject} constructor → {@link DDIModelException}.</li>
+   * </ul>
+   */
+  private <T> T newInstanceFromConstructor(final Class<T> clazz)
+      throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+    final List<Constructor<?>> injectCtors = Arrays.stream(clazz.getDeclaredConstructors())
+        .filter(c -> c.isAnnotationPresent(Inject.class))
+        .collect(Collectors.toList());
+    if (injectCtors.size() > 1) {
+      throw new DDIModelException("multiple @Inject constructors on " + clazz + ": " + injectCtors);
+    }
+    if (injectCtors.isEmpty()) {
+      return clazz.getDeclaredConstructor().newInstance();
+    }
+    final Constructor<?> ctor = injectCtors.get(0);
+    ctor.setAccessible(true);
+    final Object[] args = resolveConstructorArguments(ctor);
+    return (T) ctor.newInstance(args);
+  }
+
+  private Object[] resolveConstructorArguments(final Constructor<?> ctor) {
+    final Parameter[] params = ctor.getParameters();
+    final Object[] args = new Object[params.length];
+    for (int i = 0; i < params.length; i++) {
+      final Parameter p = params[i];
+      final Set<Annotation> qualifiers = DIContainer.extractQualifiers(p);
+      args[i] = container.activateDI(p.getType(), qualifiers);
+    }
+    return args;
   }
 }

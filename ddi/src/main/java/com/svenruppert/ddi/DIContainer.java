@@ -263,8 +263,18 @@ public final class DIContainer {
   }
 
   public synchronized <T> T activateDI(Class<T> clazz2Instanciate) {
+    return activateDI(clazz2Instanciate, Set.of());
+  }
+
+  /**
+   * Same as {@link #activateDI(Class)} but narrows the candidate implementations by
+   * the supplied jakarta.inject qualifiers before instantiation. Used internally for
+   * constructor-injection parameter resolution where the parameter carries
+   * {@code @Named} or a custom {@code @Qualifier}.
+   */
+  public synchronized <T> T activateDI(Class<T> clazz2Instanciate, Set<Annotation> qualifiers) {
     if (bootstrapedNeeded) bootstrap();
-    final T instance = new InstanceCreator(this).instantiate(clazz2Instanciate);
+    final T instance = new InstanceCreator(this).instantiate(clazz2Instanciate, qualifiers);
     injectAttributes(instance);
     initialize(instance);
     return instance;
@@ -295,13 +305,14 @@ public final class DIContainer {
 
   /**
    * Returns the set of jakarta.inject qualifier annotations present on the given
-   * field — i.e. annotations whose type is {@link Named} or itself meta-annotated
-   * with {@link Qualifier}. Used by the interface-resolution path to narrow the
-   * implementation candidates before the {@code ClassResolver} step.
+   * annotated element — i.e. annotations whose type is {@link Named} or itself
+   * meta-annotated with {@link Qualifier}. Used by the interface-resolution path
+   * to narrow the implementation candidates before the {@code ClassResolver} step,
+   * both for {@code @Inject} fields and for {@code @Inject} constructor parameters.
    */
-  static Set<Annotation> extractQualifiers(final Field field) {
+  public static Set<Annotation> extractQualifiers(final java.lang.reflect.AnnotatedElement element) {
     final Set<Annotation> qualifiers = new java.util.LinkedHashSet<>();
-    for (final Annotation a : field.getAnnotations()) {
+    for (final Annotation a : element.getAnnotations()) {
       final Class<? extends Annotation> at = a.annotationType();
       if (at.equals(Named.class) || at.isAnnotationPresent(Qualifier.class)) {
         qualifiers.add(a);

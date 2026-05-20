@@ -1,10 +1,42 @@
 # This is the base definition of the versions used by my projects.
 
-[![License](https://img.shields.io/badge/License-EUPL%201.2-blue.svg)](https://eupl.eu/)
+[![Licence](https://img.shields.io/badge/Licence-EUPL%201.2-blue.svg)](https://eupl.eu/)
 
 ## Info
 
-## Version's
+Multi-module Maven project published under `com.svenruppert`. The parent POM centralises the dependency and plugin versions; every module ships as an independent artefact and can be consumed on its own. Build chain: Apache Maven 4, JDK 17+ (built against JDK 26 in CI), Surefire-based test execution, PIT mutation testing on selected modules, SpotBugs gate.
+
+## Modules
+
+| Module | Artefact | Purpose | Web |
+|---|---|---|---|
+| [core](core/) | `com.svenruppert:core` | Small, dependency-light utility surface: `StringUtils`, `fs/`, `net/HttpStatus`, `serviceprovider/ServiceProvider`, immutable-collection collectors, `HasLogger` re-export, `SystemExitHandler`, `NestedBuilder`. Used as the common base of every other module. | — |
+| [core-properties](core-properties/) | `com.svenruppert:core-properties` | Single-class layered `Properties` resolver — merges values from classpath, working directory, user-home, and a system-property-configurable directory. | — |
+| [functional-reactive](functional-reactive/) | `com.svenruppert:functional-reactive` | Functional toolkit: sealed `Result<T, E>` + `Try`, checked function interfaces, record-based tuples (`Single`…`Sept`), `Memoizer`, `Case`, `StringFunctions`, `CompletableFutureQueue`, plus the legacy `model.Result<T>` behind a bridge. | [frp.svenruppert.com](https://frp.svenruppert.com) |
+| [ddi](ddi/) | `com.svenruppert:ddi` | Dynamic Dependency Injection: classpath-scan bootstrap, `@Inject` field injection, `@Produces` / `Producer<T>`, `ClassResolver`, `ProducerResolver`, scope manager, optional `@Named` / `@Qualifier` narrowing, instance-based `DIContainer` for hermetic test setups. | [ddi.svenruppert.com](https://ddi.svenruppert.com) |
+| [logger-adapter](logger-adapter/) | `com.svenruppert:logger-adapter` | Thin `HasLogger` interface backed by a small SLF4J `MessageFormatter` re-implementation — used by the original logger-driven projects. Currently held out of the default Maven reactor (`<!--<module>logger-adapter</module>-->`) but kept in the tree for historical builds. | — |
+
+Each module's `README.md` is a self-contained handbook covering coordinates, public API, and usage examples.
+
+## Versions
+
+## 06.02.00
+
+Major modernisation wave across `ddi` and `functional-reactive` plus a full build-chain refresh. See [RELEASE-NOTES-06.02.00.md](RELEASE-NOTES-06.02.00.md) for the full breakdown.
+
+**Breaking** — `ddi` consumers must move `@Inject` from `javax.inject` to `jakarta.inject` and `@PostConstruct` from `javax.annotation` to `jakarta.annotation`. The vendored `javax/inject/Inject.java` shipped in earlier releases is gone; depend on `jakarta.inject:jakarta.inject-api:2.0.1` and `jakarta.annotation:jakarta.annotation-api:2.1.1` instead.
+
+Highlights:
+
+* `ddi` — reflection library swapped from the unmaintained `net.oneandone.reflections8` to `org.reflections:reflections:0.10.2`; static singleton state lifted into an instance-based `DIContainer` (with `DIContainer.global()` powering the existing static facade); configurable classpath scan prefix via `DIContainer.builder().withScanPrefix(...)`; optional `@Named` / `@Qualifier` narrowing on the resolver path.
+* `functional-reactive` — new `Result<T, E>` sealed type with records (`Success`, `Failure`), a `Try.of(ThrowingSupplier)` helper, checked function interfaces, and record-based tuples `Single` through `Sept`. Legacy types stay in place behind a `Results` bridge.
+* Build — Apache Maven 4 wrapper pinned to `4.0.0-rc-5` (`only-script` distribution); `de.sormuras.junit:junit-platform-maven-plugin` replaced by `maven-surefire-plugin`; nine plugin patch/minor bumps plus `pitest 1.23.1` and `junit-jupiter / junit-platform-launcher 6.1.0-RC1`.
+* Quality — DDI mutation coverage 88 % → 96 % (PIT), zero SpotBugs findings across the reactor, 304 + 119 tests green in `functional-reactive` and `ddi`.
+
+## 06.01.00
+
+* Project licence changed to the European Union Public Licence 1.2 (EUPL-1.2). Source headers and `LICENSE.txt` updated; SPDX identifier `EUPL-1.2`.
+* Routine maven-plugin and dependency version bumps.
 
 ## 06.00.11
 
@@ -92,7 +124,7 @@ removed the distribution repo definitions, because jitpack is doing it.
 With version 5.x I will switch the namespace from org.rapidpm to com.svenruppert
 This has to do with organisational requirements on my side.
 I will move this repo to the Github organisation **svenruppert**.
-The license will be still the same. The change on your side,
+The licence will be still the same. The change on your side,
 should be only the declaration of the parent pom.
 
 * version updates

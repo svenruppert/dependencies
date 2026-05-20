@@ -132,10 +132,13 @@ Empfehlung: eigene Major-Version (z. B. `07.00.00`). Aufgebaut in mehreren klein
 - Plan: `ThreadScope` (`ThreadLocal`-Storage), `RequestScope` (jakarta.servlet-optional, in eigenem Untermodul), `EventLoopScope` (Vaadin/Reactor-kompatibel).
 - Tests: jeder Scope mit Lifecycle-Tests (enter/leave, parallele Threads).
 
-### 3.2 Constructor-Injection
-- Heute: nur Field-Injection (`@Inject`-Felder) wird in `DI.injectAttributesForClass` ausgewertet.
-- Plan: zusätzlicher Pfad in `InstanceCreator`: konstruktor-Argumente per `@Inject`-Konstruktor auflösen, bevor Default-Konstruktor verwendet wird.
-- Vorteil: erlaubt `final`-Felder, vermeidet Reflection-`setAccessible` für State, ist die heute übliche DI-Idiomatik.
+### 3.2 Constructor-Injection ✅
+- Umgesetzt 2026-05-20. Non-breaking.
+- `InstanceCreator.newInstanceFromConstructor(Class)` bevorzugt einen `@Inject`-annotierten Konstruktor vor dem Default-Konstruktor. Parameter werden via `container.activateDI(paramType, qualifiers)` rekursiv aufgelöst (inkl. `@Inject`-Feld-Injection und `@PostConstruct` pro Argument). Mehrere `@Inject`-Konstruktoren werfen `DDIModelException`.
+- `DIContainer.activateDI(Class<T>, Set<Annotation>)`-Overload neu — gleiches Verhalten wie der no-arg-Variante plus Qualifier-Narrowing für den Instantiate-Pfad.
+- `DIContainer.extractQualifiers(...)` von `Field` auf `AnnotatedElement` generalisiert (Methoden-Parameter implementieren das Interface) und auf `public` gehoben, damit der Helper sowohl bei Field- als auch bei Constructor-Injection wiederverwendet wird.
+- Neuer Test `ConstructorInjectionTest` (5 Methoden, `junit.com.svenruppert.ddi.constructor`): `@Inject`-Konstruktor mit 1 Parameter, `@Named`-Qualifier auf einem Konstruktor-Parameter, mehrere `@Inject`-Konstruktoren → Exception, package-private Konstruktor exerziert `setAccessible(true)`, Backwards-Compat-Test ohne `@Inject`-Konstruktor.
+- Tests: 124/124 grün (vorher 119); PIT: 311/324 (96 %), Line-Coverage 95 %, Test-Strength 96 %, 1 NO_COVERAGE (`matchesAllQualifiers`-Mapping-Quirk, unverändert).
 
 ### 3.3 PIT-Mutation-Score halten
 - Mutation-Run als Bestandteil der CI verankern, Ziel ≥ 80 % Mutation Score auf `com.svenruppert.ddi.*`.

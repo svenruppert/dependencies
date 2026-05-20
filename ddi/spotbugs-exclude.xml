@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    SpotBugs exclude filter for the ddi module.
+
+    Each exclusion documents a deliberate design decision: the affected bug
+    pattern represents an intrinsic property of the dual-mode container
+    architecture introduced in phase 2.3 and is not actionable as written.
+-->
+<FindBugsFilter>
+
+    <!--
+        DIContainer is intentionally a dual-use class: it exposes a process-wide
+        singleton via DIContainer.global() AND a public constructor for hermetic
+        per-test containers (DIContainer(String scanPrefix), DIContainer()).
+
+        SpotBugs flags this combination as "singleton has non-private constructor"
+        and the static accessor as "exposes internal representation". Both are by
+        design — the contract is that callers may share the global state or opt
+        into an isolated container. Suppressed for DIContainer only.
+    -->
+    <Match>
+        <Class name="com.svenruppert.ddi.DIContainer"/>
+        <Bug pattern="MS_EXPOSE_REP,SING_SINGLETON_HAS_NONPRIVATE_CONSTRUCTOR"/>
+    </Match>
+
+    <!--
+        The container-aware helpers (ClassResolverCheck001, InstanceCreator,
+        ProducerResolverLocator) store the DIContainer passed into their
+        constructor by reference. The container is the collaborator they are
+        built around; copying or deep-cloning it would defeat the purpose
+        (state isolation per container). This is the standard collaborator
+        pattern, not a true exposure of internal representation.
+    -->
+    <Match>
+        <Or>
+            <Class name="com.svenruppert.ddi.bootstrap.ClassResolverCheck001"/>
+            <Class name="com.svenruppert.ddi.producer.InstanceCreator"/>
+            <Class name="com.svenruppert.ddi.producerresolver.ProducerResolverLocator"/>
+        </Or>
+        <Bug pattern="EI_EXPOSE_REP2"/>
+    </Match>
+
+</FindBugsFilter>

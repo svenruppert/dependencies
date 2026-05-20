@@ -58,7 +58,10 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import static java.util.Collections.unmodifiableSet;
 
@@ -67,10 +70,14 @@ public class ReflectionsModel {
 
   public static final String DEFAULT_SCAN_PREFIX = "com.svenruppert";
 
-  //TODO refactoring to pessimistic write / concurrent read
+  // Read–write lock guarding the underlying `reflections` store.
+  // - rescannImpl mutates the store (merge) and clears the derived caches → write lock.
+  // - getSubTypesOf / getTypesAnnotatedWith / getClassesForPkg read the store → read lock.
+  // The per-cache `ConcurrentHashMap`s remain in place for cache-level concurrency on hot
+  // (already-populated) reads, but the lock ensures readers never observe a half-merged store.
+  private final ReadWriteLock storeLock = new ReentrantReadWriteLock();
 
   private final Map<String, LocalDateTime> activatedPackagesMap = new ConcurrentHashMap<>();
-  private final Object obj = new Object();
   private final Map<DataRecords.Pair<String, String>, Set<Method>> methodsAnnotatedWithCache = new ConcurrentHashMap<>();
   private final Map<String, Set> subTypeOfCache = new ConcurrentHashMap<>();
   private final Map<String, Set> subTypeOfCacheWithoutInterfacesnadGenerated = new ConcurrentHashMap<>();
@@ -102,12 +109,15 @@ public class ReflectionsModel {
   }
 
   private void rescannImpl(final ConfigurationBuilder configuration) {
-    synchronized (obj) {
+    storeLock.writeLock().lock();
+    try {
       final LocalDateTime now = LocalDateTime.now();
       final Reflections reflections = new Reflections(configuration);
       this.reflections.merge(reflections);
       refreshActivatedPkgMap(now, reflections);
       clearCaches();
+    } finally {
+      storeLock.writeLock().unlock();
     }
   }
 
@@ -181,41 +191,47 @@ public class ReflectionsModel {
   //delegated methods
 
   public Collection<String> getClassesForPkg(final String pkgName) {
-    final Collection<String> clsNames = reflections
-        .getStore()
-        .get(index(PkgTypesScanner.class))
-        .get(pkgName);
-    return Collections.unmodifiableCollection(clsNames);
+    return underReadLock(() -> Collections.unmodifiableCollection(
+        reflections.getStore().get(index(PkgTypesScanner.class)).get(pkgName)));
   }
 
   public <T> Set<Class<? extends T>> getSubTypesOf(final Class<T> type) {
     return (Set<Class<? extends T>>) subTypeOfCache.computeIfAbsent(type.getName(),
-        k -> reflections.getSubTypesOf(type));
+        k -> underReadLock(() -> reflections.getSubTypesOf(type)));
   }
 
 
   public <T> Set<Class<? extends T>> getSubTypesWithoutInterfacesAndGeneratedOf(final Class<T> type) {
     return (Set<Class<? extends T>>) subTypeOfCacheWithoutInterfacesnadGenerated.computeIfAbsent(type.getName(), k -> {
-      final Set<Class<? extends T>> subTypesOf = reflections.getSubTypesOf(type);
+      final Set<Class<? extends T>> subTypesOf = underReadLock(() -> reflections.getSubTypesOf(type));
       return new DDIReflectionUtils().removeInterfacesAndGeneratedFromSubTypes(subTypesOf);
     });
   }
 
   public Set<Class<?>> getTypesAnnotatedWith(final Class<? extends Annotation> annotation) {
     return (Set<Class<?>>) typesAnnotatedWithCache.computeIfAbsent(annotation,
-        k -> unmodifiableSet(reflections.getTypesAnnotatedWith(annotation)));
+        k -> underReadLock(() -> unmodifiableSet(reflections.getTypesAnnotatedWith(annotation))));
   }
 
   public Set<Class<?>> getTypesAnnotatedWith(final Class<? extends Annotation> annotation, final boolean honorInherited) {
-    return reflections.getTypesAnnotatedWith(annotation, honorInherited);
+    return underReadLock(() -> reflections.getTypesAnnotatedWith(annotation, honorInherited));
   }
 
   public Set<Class<?>> getTypesAnnotatedWith(final Annotation annotation) {
-    return reflections.getTypesAnnotatedWith(annotation);
+    return underReadLock(() -> reflections.getTypesAnnotatedWith(annotation));
   }
 
   public Set<Class<?>> getTypesAnnotatedWith(final Annotation annotation, final boolean honorInherited) {
-    return reflections.getTypesAnnotatedWith(annotation, honorInherited);
+    return underReadLock(() -> reflections.getTypesAnnotatedWith(annotation, honorInherited));
+  }
+
+  private <T> T underReadLock(final Supplier<T> read) {
+    storeLock.readLock().lock();
+    try {
+      return read.get();
+    } finally {
+      storeLock.readLock().unlock();
+    }
   }
 
 

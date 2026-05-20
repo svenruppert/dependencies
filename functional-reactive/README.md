@@ -1,251 +1,371 @@
-[![Maven Central](https://maven-badges.sml.io/maven-central/com.svenruppert/functional-reactive/badge.png)](https://maven-badges.sml.io/maven-central/com.svenruppert/functional-reactive/badge.png)
+# SRU — Functional Reactive
 
-![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=functional-reactive_functional-reactive-lib&metric=security_rating)
-![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=functional-reactive_functional-reactive-lib&metric=sqale_rating)
+Project page: **[frp.svenruppert.com](https://frp.svenruppert.com)**
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a0b7d530374d400fa9a79d270cf95c1a)](https://www.codacy.com/app/sven-ruppert/functional-reactive-lib?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=functional-reactive/functional-reactive-lib&amp;utm_campaign=Badge_Grade)
+Nano functional toolkit for core Java: a sealed `Result<T, E>` with records, `Try` exception capture, checked function interfaces, record-based tuples, a thread-safe `Memoizer`, a small `Case`-pattern helper, `StringFunctions`, and a `CompletableFutureQueue` for ordered async pipelines. The legacy `com.svenruppert.functional.model.Result<T>` stays available behind a bridge so older callers keep working.
 
-# Functional Reactive Lib with Core Java
-
-This is a nano lib, based on a few classes that will give you
-a handful of functional elements that you can use in your core Java project.
-If you want to know more about it, have a look at my Youtube Series about this topic.
+YouTube series (background, design choices, walk-throughs):
 
 * (EN): [https://youtu.be/jMP9r5_bi5c](https://youtu.be/jMP9r5_bi5c)
 * (DE): [https://youtu.be/S5ysVvritIg](https://youtu.be/S5ysVvritIg)
 
-## Please, subscribe my **Youtube channel**
+## Licence and module
 
-* Youtube: [DE] - [bit.ly/Youtube-Sven](https://bit.ly/Youtube-Sven)
-* Youtube: [EN] - [bit.ly/Outdoor-Nerd](https://bit.ly/Outdoor-Nerd)
+Licence: EUPL 1.2. Part of the multi-module build `com.svenruppert:dependencies`.
 
-## JDK8 or JDK9 and above
+```xml
+<dependency>
+    <groupId>com.svenruppert</groupId>
+    <artifactId>functional-reactive</artifactId>
+</dependency>
+```
 
-I compiled this with the Open JDK8.
-Previous versions at maven central are build ith JDK10.
-I went away from the JDK10, because most projects I know, are using JDK8 in production right know.
-But, if you want to use this with JDK9/10/11/... you can use it.. it is working perfect!
-Only if you start using the JMS, it could be helpful to add a **module-info.java**
-Add the following lines, switch inside the pom.xml to the JDK version you prefer,
-start a **mvn clean install** and be happy ;-)
+## JDK
+
+Compiled and tested against the JDK declared by the parent build (currently JDK 26). The minimum supported runtime is JDK 17 because the new `Result<T, E>` uses sealed interfaces and records.
+
+If you consume this module under JPMS, add the modules you actually depend on:
 
 ```java
 module com.svenruppert.functional.reactive {
- exports com.svenruppert.frp;
- exports com.svenruppert.functional.functions;
- exports com.svenruppert.functional.matcher;
- exports com.svenruppert.functional.memoizer;
- exports com.svenruppert.functional.model;
- exports com.svenruppert.functional.model.serial;
- exports com.svenruppert.functional.reactive;
+    exports com.svenruppert.functional;
+    exports com.svenruppert.functional.functions;
+    exports com.svenruppert.functional.matcher;
+    exports com.svenruppert.functional.memoizer;
+    exports com.svenruppert.functional.model;
+    exports com.svenruppert.functional.model.serial;
+    exports com.svenruppert.functional.reactive;
+    exports com.svenruppert.functional.result;
+    exports com.svenruppert.functional.result.functions;
+    exports com.svenruppert.functional.tuple;
 }
 ```
 
-# Release Notes
+## Result<T, E>
 
-## 03.00.00 - BREAKING CHANGES
+A `sealed interface` with two records, `Success<T, E>(T value)` and `Failure<T, E>(E error)`. Use it whenever a method can fail in a way the caller is expected to handle — checked exceptions and `Optional` both leave gaps that `Result` fills cleanly.
 
-I switched to dependencies com.svenruppert with version 06.00.00
-This is the same as rapidpm dependencies, but in a new namespace and smaller updates.
-This project is switching to the namespace com.svenruppert as well.
-no new features are included.
+```java
+Result<Integer, String> r = Result.success(42);
 
-## 02.00.04-SRU
+String label = r
+    .map(n -> n * 2)
+    .map(Object::toString)
+    .recover(err -> "fallback: " + err)
+    .getOrThrow();
+```
 
-fixed jdk in jitpack yml
+Factories:
 
-## 02.00.03-SRU
+* `Result.success(T)`
+* `Result.failure(E)`
+* `Result.ofNullable(T value, E errorIfNull)`
+* `Result.ofNullable(T value, Supplier<? extends E> errorIfNull)`
 
-updated parent, and maven minimum version to 3.9.6
+Default methods on every `Result`:
 
-## 02.00.02-SRU
+* Inspection: `isSuccess()`, `isFailure()`.
+* Extraction: `getOrThrow()`, `getOrElse(T)`, `getOrElse(Function<E, T>)`, `toOptional()`, `stream()`.
+* Transformation: `map(Function)`, `flatMap(Function)`, `mapError(Function)`.
+* Recovery: `recover(Function<E, T>)`, `recoverWith(Function<E, Result>)`.
+* Side effects: `peek(Consumer<T>)`, `peekFailure(Consumer<E>)`.
+* Fold: `fold(Function<T, R> onSuccess, Function<E, R> onFailure)`.
 
-Switched groupid to 02.00.02-SRU - jitpack custom domain name is not working properly
-updated to parent version 05.00.03-SRU
+Async overloads run the transformation on the supplied `Executor` (or the common pool by default):
 
-## 02.00.00-SRU
+```java
+ExecutorService io = Executors.newVirtualThreadPerTaskExecutor();
+CompletableFuture<Result<String, Throwable>> future = Try
+    .of(this::readFromDisk)
+    .mapAsync(payload -> parse(payload), io);
+```
 
-Changing to new namespace. The package will be under
-com.svenruppert:functional-reactive now
+## Try
 
-## 01.01.00-RPM-SNAPSHOT
+Captures a checked-exception-throwing supplier as a `Result<T, Throwable>` — the original cause and stack trace are preserved.
 
-This release we will increase test coverage and documentation.
-The basic structures and functions are in production used since longer time.
-Adding Apache Lic header to all files
+```java
+Result<Path, Throwable> file = Try.of(() -> Files.createTempFile("sru-", ".tmp"));
+file.peek(p -> log("created {}", p))
+    .peekFailure(e -> log("creation failed: {}", e.getMessage()));
+```
 
-## 01.00.07-RPM
+Pair it with `ThrowingSupplier<T>` (which permits `throws Exception`) to wrap any JDK API that forces a try/catch on the caller.
 
-* Transformations
-* static <T> Function<Iterator<T>, Stream<T>> iteratorToStream()
-* <V, R> Result<R> thenCombineFlat(V value, BiFunction<T, V, R> func)
-* started Youtube Series about this lib.
-* removed JitCI from production pipeline
+## Checked function interfaces
 
-## 01.00.03-RPM
+Live in `com.svenruppert.functional.result.functions` and allow `throws Exception` in their `apply`/`get`:
 
-* added JitCI for deployment as well
-* version updates
+* `CheckedSupplier<T>`
+* `CheckedFunction<T, R>`
+* `CheckedBiFunction<T, U, R>`
+* `CheckedTriFunction<T, U, V, R>`
 
-## 01.00.02-RPM
+Each interface offers `andThen(...)` plus a bridge that lifts the call into a `Result<T, Throwable>`:
 
-* static <T, R> CheckedFunction<T, R> asCheckedFunc(Function<T, R> f)
-* Converting.convertToString
-* Converting.convertToInteger
-* Converting.convertToDouble
-* SystemProperties Util Functions
-* Single<T>
+```java
+CheckedFunction<String, URL> toUrl = URI::create;
+Function<String, Result<URL, Throwable>> safe = toUrl.lifted();
+```
 
-## 01.00.01-RPM
+## Tuples
 
-* BUGFIX in case, the result was calculated two times.
+Record-based tuples in `com.svenruppert.functional.tuple`:
 
-## 01.00.00-RPM
+| Type | Arity |
+|------|-------|
+| `Single<T1>` | 1 |
+| `Pair<T1, T2>` | 2 |
+| `Triple<T1, T2, T3>` | 3 |
+| `Quad<…>` | 4 |
+| `Quint<…>` | 5 |
+| `Sext<…>` | 6 |
+| `Sept<…>` | 7 |
 
-* defined it as final, as there was no big change since a long time using it in a bunch of projects
-* JDK8 is used to create the jar
-* module-info.java is available inside the folder **_data**
+Use them when you need a small, immutable ad-hoc data structure without writing a class. Record components are accessed by position: `pair.t1()`, `pair.t2()`, etc. The legacy boxes in `com.svenruppert.functional.model.DataRecords` stay in place for callers that depend on the old getter convention (`getT1()`).
 
-## 00.07.06-RPM
+## Memoizer
 
-* parent pom update - version updates
+Thread-safe lazy caches built around standard JDK functional types. The supplier variant is single-evaluation under contention (volatile + double-checked locking); the function variants delegate to `ConcurrentMap.computeIfAbsent`.
 
-## 00.07.05-RPM
+```java
+Supplier<HeavyConfig> cfg = Memoizer.memoize(HeavyConfig::loadFromDisk);
+HeavyConfig first = cfg.get();   // loads
+HeavyConfig second = cfg.get();  // cached
+assert first == second;
 
-* parent pom update - version updates
-* added docker based deploy scripts
+Function<String, Integer> wordCount = Memoizer.memoize(text -> text.split("\\s+").length);
+```
 
-## 00.07.04-RPM
+## Case (pattern helper)
 
-* switched to new version numbers format
-  To make search/replace easier, I started with a new version format.
-  00.07.04-RPM ( -SNAPSHOT). The x.y.z is used in the same way, as before, but added RPM
-  and leading zeros to make this format different from others.
-  With this it is less possible to mix/change version numbers from
-  other dependencies. A **0.7.4** could be used from different
-  dependencies. ;-)
+`Case<T, R>` provides a fluent match-style construction over plain predicates and value mappers — handy when JDK pattern matching cannot express the rule.
 
-## 0.7.3
+## StringFunctions
 
-* dependency updates
-* added ```CompletableFutureQueue<T, N> thenCombineAsyncFromArray(Function<R, N>[] nextTransformations)```
+A grab-bag of locale-safe string operations: `indexOfCaseSensitive`, `indexOfCaseInsensitive`, camelCase / snake-case converters, padding, substring helpers, plus the older predicate stream feeds. All locale-sensitive operations use `Locale.ROOT` internally.
 
-## 0.7.2
+## CompletableFutureQueue
 
-* bug fix for **modules-info.java**
+Builds an ordered sequence of asynchronous transformations and lets you replay it as a single `Function<T, CompletableFuture<R>>`:
 
-## 0.7.1 - DONT USED THIS VERSION !! broken module-info.java
+```java
+CompletableFutureQueue<Input, Output> pipeline = CompletableFutureQueue
+    .define(this::stepOne)
+    .thenCombineAsync(this::stepTwo)
+    .thenCombineAsync(this::stepThree);
 
-* activated JIGSAW
-* updated to rapidpm-dependencies 4.0.2
+CompletableFuture<Output> result = pipeline.apply(input);
+```
 
-## 0.7.0 && 0.7.0-JDK8-SNAPSHOT
+Errors raised by any stage land in the returned future's `exceptionally` instead of escaping the pipeline.
 
-* started with JDK10/11 support
-* using JDK11 for development and JDK10 for deployment
+## Bridge to the legacy Result<T>
 
-## 0.6.2
+The original `com.svenruppert.functional.model.Result<T>` still exists. The static helper `Results` (in `com.svenruppert.functional.result`) converts in both directions:
 
-* latest JDK8 only version! - switching to JDK10/11 -- JDK8 model
+```java
+// legacy -> modern
+Result<Path, String> modern = Results.fromLegacy(legacyResult, "value was null");
 
-## 0.6.1
+// modern -> legacy
+com.svenruppert.functional.model.Result<Path> legacy = Results.toLegacy(modern);
+```
 
-* Added docker scripts for cross JDK compiles
-* updates parent versions
-* deactivated nexus mirror for drone
-* deactivated orig IBM JDK 8/9 Docker images
+For non-`String` error types use the overload `toLegacy(Result<T, E>, Function<E, String>)`.
 
-## 0.6.0
+## Tests and mutation coverage
 
-This release is a maintenance release only, no new functionality
+Test count after release 06.02.00: 304 (1 skipped, 0 failures). Mutation coverage is not gated on this module today; the surface targeted by tests covers the major code paths of `Result`, `Try`, the checked-function bridges, tuples, and the locale-related `StringFunctions` work.
 
-* switched to new dependencies version 0.6.3
-    * this includes the lic header plugin
-    * version updates
-    * minimized profiles
-    * removed indirect dependency to old nexus
-* updated all file headers
+## Roadmap
 
-## 0.5.3
+See `IMPLEMENTATION_PLAN.md` in this directory for the planned next steps (migration of internal callers to the new `Result<T, E>`, async executor overrides on `CompletableFutureQueue`, stream/validation extensions).
 
-* added ```CheckedTriFunction<T1, T2, T3, R> extends TriFunction<T1, T2, T3, Result<R>>```
-* typo unCurryBifunction -> unCurryBiFunction
-* typo unCurryTrifunction -> unCurryTriFunction
-* curry / un-curry Checked Functions ```Transformations```
-    * curryCheckedBiFunction() - ```Function<CheckedBiFunction<A, B, R>, Function<A, CheckedFunction<B, R>>>```
-    * unCurryCheckedBiFunction() - ```Function<Function<A, CheckedFunction<B, R>>, CheckedBiFunction<A, B, R>>```
-    * curryCheckedTriFunction() - ```Function<
-            CheckedTriFunction<A, B, C, R>,
-            Function<A, Function<B, CheckedFunction<C, R>>>>```
-    * unCurryCheckedTriFunction() - ```Function<
-            Function<A, Function<B, CheckedFunction<C, R>>>,
-            CheckedTriFunction<A, B, C, R>>```
+## Release history
 
-## 0.5.2
+Release-by-release notes for older versions are preserved below for historical reference. For the current release, see the parent `RELEASE-NOTES-06.02.00.md`.
 
-* extend Result<T> with a fluent API
-    * void ifFailed -> Result<T> ifFailed
-    * void ifPresent -> Result<T> ifPresent
-    * void ifAbsent -> Result<T> ifAbsent
+### 06.02.00
 
-## 0.5.1
+New `Result<T, E>` sealed type with records (`Success`, `Failure`), `Try.of(ThrowingSupplier)`, checked function interfaces in `result.functions`, record-based tuples `Single`…`Sept`, and the `Results` bridge to the legacy type. Memoizer race condition fixed, `CompletableFutureQueue.define` now wraps synchronous transformation errors into a `failedFuture`, `StringFunctions` uses `Locale.ROOT` throughout, `indexOfCoseSensitive` typo corrected (new `indexOfCaseSensitive`, old method deprecated), `Result.thenCombine*` short-circuits on Failure, `Failure.asFailure()` preserves the original error message.
 
-* renamed Tripel (german) to Triple (en)
-* pitest is working with junit5 now
+### 03.00.00 — BREAKING CHANGES
 
-## 0.5.0
+Re-homed into the `com.svenruppert:dependencies` reactor as a sub-module of version 06.00.00. Same code as the historical `rapidpm`-namespace artefact, no new features.
 
-* Result added ```void ifFailed(Consumer<String> failed);```
-* switched to jUnit5
-* updated parent pom to 3.5.7
+### 02.00.04-SRU
 
-## 0.1.0
+Fixed JDK reference in `jitpack.yml`.
 
-* Result added ```<U> Result<U> asFailure()```
-* Result added ```<U> Result<U> flatMap(Function<T, Result<U>> mapper)```
-* ExceptionFunctions.message() extended exception message with Exception Classname
-* added CompletableFutureQueue
+### 02.00.03-SRU
 
-## 0.0.6
+Updated parent and minimum Maven version to 3.9.6.
 
-* ExceptionFunctions added ```Function<Exception, String> message()```
-* ExceptionFunctions added ```Function<Exception, Stream<StackTraceElement>> toStackTraceStream()```
-* added Sext and Sept data-classes
+### 02.00.02-SRU
 
-## 0.0.5
+Switched groupId — JitPack custom-domain handling was unreliable. Updated to parent 05.00.03-SRU.
 
-* added model.serial pkg with Data classes only for ```extends Serializable``` types
-* Transformations
-    + curry / unCurry - BiFunction / TriFunction
-* StreamFunctions added ```<T> Function<Predicate<T>, Function<Stream<T>, Stream<T>>> streamFilter()```
-* Result.ofNullable
-* Result renamed ```bind(Consumer<T> success, Consumer<String> failure)```
-  to
-  ```ifPresentOrElse(Consumer<T> success, Consumer<String> failure)```
-* Result added JDK9 signature ```ifPresentOrElse(Consumer<? super T> action, Runnable emptyAction)```
-* Result added JDK9 signature ```Stream<T> stream()```
-* Result added ```Result<T> or(Supplier<? extends Result<? extends T>> supplier)```
-* Result added ```void ifAbsent(Runnable action)```
-* Result added ```<U> Result<U> map(Function<? super T, ? extends U> mapper)```
+### 02.00.00-SRU
 
-## 0.0.4
+Namespace migration to `com.svenruppert:functional-reactive`.
 
-* added Result.thenCombine
-* added Result.thenCombineAsync
-* added CheckedBiFunction
+### 01.01.00-RPM-SNAPSHOT
 
-## 0.0.3
+Increased test coverage and documentation. Apache licence header added to every file. Stable structure for the underlying functions (these had been in production for a long time already).
 
-* added CheckedPredicate
+### 01.00.07-RPM
 
-## 0.0.2
+* `Transformations`
+* `static <T> Function<Iterator<T>, Stream<T>> iteratorToStream()`
+* `<V, R> Result<R> thenCombineFlat(V value, BiFunction<T, V, R> func)`
+* Started the YouTube series about this library.
+* Removed JitCI from the production pipeline.
 
-* basic Datastructures like Pair, Triple, Quad
-* added fromOptional and toOptional to the class Result
-* added CheckedFunction , CheckedConsumer and CheckedSupplier
-* extracted TriFunction from Memoizer to pkg functions
-* added QuadFunction
-* added StringFunctions
-* added Transformations
-* added StringFunctions
-* ported Strman-java to functional style
+### 01.00.03-RPM
+
+* Added JitCI for deployment.
+* Version updates.
+
+### 01.00.02-RPM
+
+* `static <T, R> CheckedFunction<T, R> asCheckedFunc(Function<T, R> f)`
+* `Converting.convertToString`, `convertToInteger`, `convertToDouble`
+* `SystemProperties` helper functions
+* `Single<T>`
+
+### 01.00.01-RPM
+
+* Bugfix: the result was being computed twice in one path.
+
+### 01.00.00-RPM
+
+* Locked the API surface as `final` — no significant changes for a long time in production.
+* JDK 8 used to build the jar.
+* `module-info.java` template available inside `_data`.
+
+### 00.07.06-RPM
+
+* Parent POM and version updates.
+
+### 00.07.05-RPM
+
+* Parent POM and version updates.
+* Added docker-based deploy scripts.
+
+### 00.07.04-RPM
+
+* Switched to the new version-number format (leading zeros to keep search/replace simple — `0.7.4` clashed with versions from other libraries).
+
+### 0.7.3
+
+* Dependency updates.
+* Added `CompletableFutureQueue<T, N> thenCombineAsyncFromArray(Function<R, N>[] nextTransformations)`.
+
+### 0.7.2
+
+* Bugfix for `modules-info.java`.
+
+### 0.7.1 — DO NOT USE — broken `module-info.java`
+
+* Activated JIGSAW.
+* Updated to `rapidpm-dependencies` 4.0.2.
+
+### 0.7.0 / 0.7.0-JDK8-SNAPSHOT
+
+* Started JDK 10/11 support.
+* Using JDK 11 for development, JDK 10 for deployment.
+
+### 0.6.2
+
+* Last JDK-8-only release — switching to JDK 10/11 / JDK 8 model.
+
+### 0.6.1
+
+* Added docker scripts for cross-JDK compiles.
+* Updated parent versions.
+* Deactivated the Nexus mirror for drone.
+* Deactivated the original IBM JDK 8/9 Docker images.
+
+### 0.6.0
+
+Maintenance only, no new functionality.
+
+* Switched to dependencies version 0.6.3
+    * This includes the licence header plugin.
+    * Version updates.
+    * Minimised profiles.
+    * Removed the indirect dependency to the old Nexus.
+* Updated all file headers.
+
+### 0.5.3
+
+* Added `CheckedTriFunction<T1, T2, T3, R> extends TriFunction<T1, T2, T3, Result<R>>`.
+* Typo: `unCurryBifunction` → `unCurryBiFunction`.
+* Typo: `unCurryTrifunction` → `unCurryTriFunction`.
+* Curry / uncurry helpers for the checked functions in `Transformations`.
+
+### 0.5.2
+
+* Extended `Result<T>` with a fluent API:
+    * `void ifFailed` → `Result<T> ifFailed`
+    * `void ifPresent` → `Result<T> ifPresent`
+    * `void ifAbsent` → `Result<T> ifAbsent`
+
+### 0.5.1
+
+* Renamed `Tripel` (German) to `Triple` (English).
+* PIT now works with JUnit 5.
+
+### 0.5.0
+
+* `Result` gained `void ifFailed(Consumer<String> failed)`.
+* Switched to JUnit 5.
+* Updated parent POM to 3.5.7.
+
+### 0.1.0
+
+* `Result` gained `<U> Result<U> asFailure()`.
+* `Result` gained `<U> Result<U> flatMap(Function<T, Result<U>> mapper)`.
+* `ExceptionFunctions.message()` now also includes the exception classname.
+* Added `CompletableFutureQueue`.
+
+### 0.0.6
+
+* `ExceptionFunctions` — `Function<Exception, String> message()`.
+* `ExceptionFunctions` — `Function<Exception, Stream<StackTraceElement>> toStackTraceStream()`.
+* Added `Sext` and `Sept` data classes.
+
+### 0.0.5
+
+* Added `model.serial` package with data classes implementing `Serializable`.
+* `Transformations` — curry / uncurry for `BiFunction` / `TriFunction`.
+* `StreamFunctions` — `<T> Function<Predicate<T>, Function<Stream<T>, Stream<T>>> streamFilter()`.
+* `Result.ofNullable`.
+* Renamed `bind(Consumer<T> success, Consumer<String> failure)` to `ifPresentOrElse(Consumer<T> success, Consumer<String> failure)`.
+* Added the JDK 9 signature `ifPresentOrElse(Consumer<? super T>, Runnable)`.
+* Added the JDK 9 signature `Stream<T> stream()`.
+* Added `Result<T> or(Supplier<? extends Result<? extends T>> supplier)`.
+* Added `void ifAbsent(Runnable action)`.
+* Added `<U> Result<U> map(Function<? super T, ? extends U> mapper)`.
+
+### 0.0.4
+
+* Added `Result.thenCombine`.
+* Added `Result.thenCombineAsync`.
+* Added `CheckedBiFunction`.
+
+### 0.0.3
+
+* Added `CheckedPredicate`.
+
+### 0.0.2
+
+* Basic data structures: `Pair`, `Triple`, `Quad`.
+* Added `fromOptional` and `toOptional` to `Result`.
+* Added `CheckedFunction`, `CheckedConsumer`, `CheckedSupplier`.
+* Extracted `TriFunction` from `Memoizer` into the `functions` package.
+* Added `QuadFunction`.
+* Added `StringFunctions`.
+* Added `Transformations`.
+* Ported `Strman-java` into a functional style.
