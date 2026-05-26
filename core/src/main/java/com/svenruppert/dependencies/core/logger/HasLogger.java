@@ -46,26 +46,28 @@ package com.svenruppert.dependencies.core.logger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 public interface HasLogger {
-  // Cache für Klassen-Logger
-  Map<Class<?>, Logger> LOGGER_CACHE = new ConcurrentHashMap<>();
+  // Cache für Klassen-Logger mit ClassValue (verhindert Memory Leaks und ist optimiert)
+  ClassValue<Logger> LOGGER_CACHE = new ClassValue<>() {
+    @Override
+    protected Logger computeValue(Class<?> type) {
+      return LoggerFactory.getLogger(type);
+    }
+  };
+
+  // Wiederverwendbare, thread-safe StackWalker-Instanz
+  StackWalker WALKER = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
 
   static Logger staticLogger() {
-    Class<?> callerClass = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE)
-        .getCallerClass();
-    return LOGGER_CACHE.computeIfAbsent(callerClass, LoggerFactory::getLogger);
+    Class<?> callerClass = WALKER.getCallerClass();
+    return LOGGER_CACHE.get(callerClass);
   }
 
   default Logger logger() {
-    return LoggerFactory.getLogger(getClass());
+    return LOGGER_CACHE.get(getClass());
   }
 
   default Logger logger(Class<?> clazz) {
-    return LoggerFactory.getLogger(clazz);
+    return LOGGER_CACHE.get(clazz);
   }
-
-
 }
