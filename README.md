@@ -10,15 +10,107 @@ Multi-module Maven project published under `com.svenruppert`. The parent POM cen
 
 | Module | Artefact | Purpose | Web |
 |---|---|---|---|
-| [core](core/) | `com.svenruppert:core` | Small, dependency-light utility surface: `StringUtils`, `fs/`, `net/HttpStatus`, `serviceprovider/ServiceProvider`, immutable-collection collectors, `HasLogger` re-export, `SystemExitHandler`, `NestedBuilder`. Used as the common base of every other module. | — |
+| [core](core/) | `com.svenruppert:core` | Small, dependency-light utility surface used as the common base of every other module: `StringUtils`, `fs/PathUtils` + `fs/DirectoryUtils`, `net/HttpStatus` + `net/PortUtils`, `serviceprovider/ServiceProvider`, immutable-collection collectors, `system/SystemExitHandler`, `basepattern/builder/NestedBuilder`, and the SLF4J-backed `logger/HasLogger` mixin (with `ClassValue`-cached loggers and a shared `StackWalker`). | — |
 | [core-properties](core-properties/) | `com.svenruppert:core-properties` | Single-class layered `Properties` resolver — merges values from classpath, working directory, user-home, and a system-property-configurable directory. | — |
 | [functional-reactive](functional-reactive/) | `com.svenruppert:functional-reactive` | Functional toolkit: sealed `Result<T, E>` + `Try`, checked function interfaces, record-based tuples (`Single`…`Sept`), `Memoizer`, `Case`, `StringFunctions`, `CompletableFutureQueue`, plus the legacy `model.Result<T>` behind a bridge. | [frp.svenruppert.com](https://frp.svenruppert.com) |
-| [ddi](ddi/) | `com.svenruppert:ddi` | Dynamic Dependency Injection: classpath-scan bootstrap, `@Inject` field injection, `@Produces` / `Producer<T>`, `ClassResolver`, `ProducerResolver`, scope manager, optional `@Named` / `@Qualifier` narrowing, instance-based `DIContainer` for hermetic test setups. | [ddi.svenruppert.com](https://ddi.svenruppert.com) |
-| [logger-adapter](logger-adapter/) | `com.svenruppert:logger-adapter` | Thin `HasLogger` interface backed by a small SLF4J `MessageFormatter` re-implementation — used by the original logger-driven projects. Currently held out of the default Maven reactor (`<!--<module>logger-adapter</module>-->`) but kept in the tree for historical builds. | — |
+| [ddi](ddi/) | `com.svenruppert:ddi` | Dynamic Dependency Injection: classpath-scan bootstrap, `@Inject` field **and** constructor injection, `@Produces` / `Producer<T>`, `ClassResolver`, `ProducerResolver`, scope manager, optional `@Named` / `@Qualifier` narrowing, instance-based `DIContainer` for hermetic test setups. | [ddi.svenruppert.com](https://ddi.svenruppert.com) |
 
 Each module's `README.md` is a self-contained handbook covering coordinates, public API, and usage examples.
 
+The historical `logger-adapter` module was retired in 06.02.01 — the `HasLogger` mixin lives in `core` now and the SLF4J integration is consumed through the standard `org.slf4j:slf4j-api` dependency.
+
+## Releasing
+
+Releases of this reactor target Maven Central via Sonatype's `central-publishing-maven-plugin`. The release-relevant work is split across four profiles in the parent POM; each profile owns one concern, and the standard `maven-release-plugin` orchestrates them.
+
+### Profile map
+
+| Profile | Owned concern | Activation |
+|---|---|---|
+| `_release_prepare` | Source and Javadoc jars, EUPL header check, `requireReleaseDeps` enforcement (no `-SNAPSHOT` deps). | Auto-activated by `maven-release-plugin` via `<releaseProfiles>_release_prepare</releaseProfiles>` in `_deploy`. **Do not pass `-P_release_prepare` manually.** |
+| `_release_sign-artifacts` | GPG signing of every released artefact (`*.jar`, `*-sources.jar`, `*-javadoc.jar`, `*-tests.jar`, `*-cyclonedx.{xml,json}` and the POMs). | Pass `-P_release_sign-artifacts` explicitly on the command line. |
+| `_release_scan_dependencies` | OWASP Dependency-Check scan (`failBuildOnCVSS=8`); requires `NVD_API_KEY` to be set. | Pass `-P_release_scan_dependencies` explicitly. |
+| `_deploy` | `central-publishing-maven-plugin` plus the `maven-release-plugin` configuration (`autoVersionSubmodules`, `releaseProfiles=_release_prepare`). | Pass `-P_deploy` explicitly for `deploy` / `release:*` goals. |
+
+SBOMs (CycloneDX, both `bom.xml` and `bom.json` per module plus the reactor-aggregate) are generated in the **default** lifecycle from the `package` phase onwards, so they are always in sync with the artefact even when running a plain `mvn install`. No profile flag is required for that.
+
+### Pre-flight checklist
+
+* `JAVA_HOME` points to JDK 17+ (the wrapper resolves Maven 4.0.0-rc-5 itself).
+* `NVD_API_KEY` is set in the environment (used by `_release_scan_dependencies`).
+* A GPG key matching the developer entry is available on the local keyring and unlocked.
+* Working tree is clean and on `develop`; `git fetch` is up to date with `origin`.
+* `./mvnw clean verify` is green (full reactor tests, SpotBugs, CycloneDX SBOM generation).
+
+### Release flow
+
+```sh
+# 1. Final smoke test (also produces the BOMs and runs SpotBugs)
+./mvnw clean verify
+
+# 2. Optional: explicit vulnerability scan
+./mvnw -P_release_scan_dependencies verify
+
+# 3. Cut the release tag + bump to the next SNAPSHOT via maven-release-plugin.
+#    This consumes the _deploy profile (which sets autoVersionSubmodules and
+#    forwards into _release_prepare), and the -Darguments string is what the
+#    plugin passes to its inner mvn invocation that builds the tagged source.
+./mvnw -P_deploy release:prepare release:perform \
+    -DreleaseVersion=06.02.01 \
+    -DdevelopmentVersion=06.02.02-SNAPSHOT \
+    -Darguments="-P_release_sign-artifacts,_release_scan_dependencies"
+```
+
+`release:prepare` creates two commits (release version + next snapshot version) plus a lightweight tag. `release:perform` checks out the tag, runs `mvn verify deploy` against it with `_release_prepare` auto-activated, the `_release_sign-artifacts` and `_release_scan_dependencies` profiles passed through `-Darguments`, and the `_deploy` profile in effect — that gives signed jars, signed source/javadoc/test/SBOM artefacts, an OWASP scan, and a Sonatype Central upload in one shot.
+
+### Manual variant (when `release:perform` is not an option)
+
+For ad-hoc deployments without `maven-release-plugin` (used historically for the 06.02.00 cut), the equivalent sequence is:
+
+```sh
+# 1. Bump versions manually across the reactor
+./mvnw versions:set -DnewVersion=06.02.01 -DprocessAllModules=true -DgenerateBackupPoms=false
+
+# 2. Verify on the release version
+./mvnw clean verify
+
+# 3. Commit + tag
+git commit -am "release 06.02.01"
+git tag 06.02.01
+
+# 4. Deploy from the tagged tree
+./mvnw -P_deploy,_release_sign-artifacts,_release_scan_dependencies deploy
+
+# 5. Bump to the next development cycle and commit
+./mvnw versions:set -DnewVersion=06.02.02-SNAPSHOT -DprocessAllModules=true -DgenerateBackupPoms=false
+git commit -am "prepare 06.02.02-SNAPSHOT"
+
+# 6. Push branch + tag
+git push origin develop 06.02.01
+```
+
+### After the deploy
+
+* Verify on [Maven Central](https://central.sonatype.com/namespace/com.svenruppert) (full indexing typically takes 10–60 minutes for a fresh artefact).
+* Add a new section in this README under "Versions" and a corresponding `RELEASE-NOTES-<version>.md` at the repository root with the per-module change set, migration notes for any breaking change, and the reactor-level verification numbers.
+
 ## Versions
+
+## 06.02.01
+
+Security patch, build-chain hardening, and the retirement of the historical `logger-adapter` module. See [RELEASE-NOTES-06.02.01.md](RELEASE-NOTES-06.02.01.md) for the full breakdown.
+
+**Breaking** — `com.svenruppert:logger-adapter` is no longer published. The `HasLogger` mixin now lives natively in `com.svenruppert:core`; consumers replace the dependency coordinate but keep the import (`com.svenruppert.dependencies.core.logger.HasLogger` is unchanged). Also: `jakarta.annotation-api` jumps from 2.1.1 to 3.0.0 — consumers that pin the 2.x line explicitly should align or drop the pin.
+
+Highlights:
+
+* Security — `tools.jackson.core:jackson-core` / `jackson-databind` bumped past `GHSA-2m67-wjpj-xhg9` (CVSS 7.5, `maxDocumentLength` enforcement bypass). Now pinned at `3.1.3` in `<dependencyManagement>`.
+* `core` — `HasLogger` rewritten on top of `ClassValue<LoggingService>` (no `ConcurrentMap` boxing, class-unloading-safe) with a shared `StackWalker` instance. No API change.
+* Build — `org.cyclonedx:cyclonedx-maven-plugin:2.9.1` now runs in the default lifecycle: every `mvn install` / `mvn deploy` emits per-module `bom.xml` + `bom.json` plus a reactor-aggregate, attached as `*-cyclonedx.{xml,json}` sub-artefacts.
+* Build — `maven-source-plugin` execution split into Apache-conventional `attach-sources` / `attach-test-sources` with the `*-no-fork` goal variants, so downstream POMs that ship their own source-attach setup merge with the parent instead of producing duplicate `sources` attachments.
+* Dependencies — 19 properties / pinned versions refreshed (pitest 1.25.0, junit-jupiter / junit-platform-launcher 6.1.0, ASM 9.10.1, javassist 3.31.0-GA, jakarta.annotation-api 3.0.0, jakarta.inject-api 2.0.1.MR, jackson 3.1.3 / 2.21.3, gson 2.14.0, commons-codec 1.22.0, commons-io 2.22.0, checkstyle 13.4.2, …).
+* Quality — DDI: 124 / 124 tests green, PIT 311 / 324 (96 %), 0 SpotBugs findings; functional-reactive: 304 / 304 green.
+* Documentation — Root README gains a "Releasing" section that documents the four release profiles, the GPG / SBOM / Sonatype flow, and the manual deploy variant. `ddi/README.md` gains a "Constructor injection" section.
 
 ## 06.02.00
 

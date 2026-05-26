@@ -965,6 +965,13 @@
                 <artifactId>maven-dependency-plugin</artifactId>
             </plugin>
 
+            <!--
+                Publish test-jars so downstream modules can reuse their test fixtures
+                via classifier "tests". The default `jar` goal is already bound to the
+                `package` phase by the Maven lifecycle for jar-packaged modules — do
+                not redeclare it here, that would either duplicate or override the
+                primary artefact.
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -1269,6 +1276,14 @@
         </profile>
 
 
+        <!--
+            Internal: auto-activated by maven-release-plugin via the
+            <releaseProfiles>_release_prepare</releaseProfiles> setting in the
+            _deploy profile above. Do NOT pass -P_release_prepare on the command
+            line — the requireReleaseDeps enforcer rule below will refuse to build
+            against -SNAPSHOT dependencies, and the source/javadoc attachments are
+            only meant to run during release:perform.
+        -->
         <profile>
             <id>_release_prepare</id>
             <activation>
@@ -1276,15 +1291,6 @@
             </activation>
             <build>
                 <plugins>
-                    <!--                    <plugin>-->
-                    <!--                        <groupId>org.apache.maven.plugins</groupId>-->
-                    <!--                        <artifactId>maven-release-plugin</artifactId>-->
-                    <!--                        <configuration>-->
-                    <!--                            <useReleaseProfile>false</useReleaseProfile>-->
-                    <!--                            <releaseProfiles>extras</releaseProfiles>-->
-                    <!--                            <autoVersionSubmodules>true</autoVersionSubmodules>-->
-                    <!--                        </configuration>-->
-                    <!--                    </plugin>-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-enforcer-plugin</artifactId>
@@ -1312,49 +1318,6 @@
                             <licenseName>eupl_v1_1</licenseName>
                         </configuration>
                     </plugin>
-                    <!--                    <plugin>-->
-                    <!--                        <groupId>com.mycila</groupId>-->
-                    <!--                        <artifactId>license-maven-plugin</artifactId>-->
-                    <!--                        <configuration>-->
-                    <!--                            <properties>-->
-                    <!--                                <owner>Sven Ruppert</owner>-->
-                    <!--                                <email>sven.ruppert@gmail.com</email>-->
-                    <!--                            </properties>-->
-                    <!--                            <licenseSets>-->
-                    <!--                                <licenseSet>-->
-                    <!--                                    <header>${maven.multiModuleProjectDirectory}/eupl-header.txt</header>-->
-                    <!--                                    <excludes>-->
-                    <!--                                        <exclude>**/README</exclude>-->
-                    <!--                                        <exclude>**/README*</exclude>-->
-                    <!--                                        <exclude>**/LICENSE.txt</exclude>-->
-                    <!--                                        <exclude>src/test/resources/**</exclude>-->
-                    <!--                                        <exclude>src/main/resources/**</exclude>-->
-                    <!--                                        <excludes>**/pnpm-lock.yaml</excludes>-->
-                    <!--                                        <excludes>**/webpack.generated.js</excludes>-->
-                    <!--                                        <excludes>**/webpack.config.js</excludes>-->
-                    <!--                                        <excludes>**/package.json</excludes>-->
-                    <!--                                        <excludes>**/package-lock.json</excludes>-->
-                    <!--                                        <excludes>**/node/**</excludes>-->
-                    <!--                                        <excludes>**/node_modules/**</excludes>-->
-                    <!--                                        <exclude>**/*.iml</exclude>-->
-                    <!--                                        <exclude>**/jacoco.exec*</exclude>-->
-                    <!--                                        <exclude>**/_data/webdrivers/*</exclude>-->
-                    <!--                                        &lt;!&ndash;<exclude>src/test/resources/**</exclude>&ndash;&gt;-->
-                    <!--                                        &lt;!&ndash;<exclude>src/main/resources/**</exclude>&ndash;&gt;-->
-                    <!--                                        <exclude>**/target/**</exclude>-->
-                    <!--                                    </excludes>-->
-                    <!--                                </licenseSet>-->
-                    <!--                            </licenseSets>-->
-
-                    <!--                        </configuration>-->
-                    <!--                        <executions>-->
-                    <!--                            <execution>-->
-                    <!--                                <goals>-->
-                    <!--                                    <goal>check</goal>-->
-                    <!--                                </goals>-->
-                    <!--                            </execution>-->
-                    <!--                        </executions>-->
-                    <!--                    </plugin>-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
@@ -1367,14 +1330,31 @@
                             </execution>
                         </executions>
                     </plugin>
+                    <!--
+                        Source jars (main + tests) for Maven Central. The execution
+                        IDs and the `*-no-fork` goal variants follow the Apache Source
+                        Plugin convention so that downstream POMs which use the same
+                        IDs (attach-sources / attach-test-sources) merge with this
+                        configuration instead of producing duplicate `sources` /
+                        `test-sources` attachments. `jar-no-fork` and
+                        `test-jar-no-fork` produce the same artefacts as `jar` /
+                        `test-jar` but skip the redundant lifecycle fork at the
+                        `generate-sources` phase.
+                    -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
                         <executions>
                             <execution>
+                                <id>attach-sources</id>
                                 <goals>
-                                    <goal>jar</goal>
-                                    <goal>test-jar</goal>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>attach-test-sources</id>
+                                <goals>
+                                    <goal>test-jar-no-fork</goal>
                                 </goals>
                             </execution>
                         </executions>
