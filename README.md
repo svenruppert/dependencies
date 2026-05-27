@@ -63,31 +63,45 @@ SBOMs (CycloneDX, both `bom.xml` and `bom.json` per module plus the reactor-aggr
 
 `release:prepare` creates two commits (release version + next snapshot version) plus a lightweight tag. `release:perform` checks out the tag, runs `mvn verify deploy` against it with `_release_prepare` auto-activated, the `_release_sign-artifacts` and `_release_scan_dependencies` profiles passed through `-Darguments`, and the `_deploy` profile in effect — that gives signed jars, signed source/javadoc/test/SBOM artefacts, an OWASP scan, and a Sonatype Central upload in one shot.
 
-### Manual variant (when `release:perform` is not an option)
+### Current limitation — Maven 4 + central-publishing-maven-plugin
 
-For ad-hoc deployments without `maven-release-plugin` (used historically for the 06.02.00 cut), the equivalent sequence is:
+`central-publishing-maven-plugin` 0.10.0 (the current latest) does not understand the Maven 4 consumer-POM model. It emits the consumer POM as a `consumer`-classified artefact (`*-consumer.pom`), and the Central Portal validator rejects the deployment with `Failed to associate file with coordinates …`. Until a Maven-4-compatible plugin release ships, the `_deploy` profile sets `<skipPublishing>true</skipPublishing>` so that `mvn deploy` builds a signed bundle locally but does **not** upload it.
+
+The working release flow against the current plugin is therefore:
 
 ```sh
-# 1. Bump versions manually across the reactor
-./mvnw versions:set -DnewVersion=06.02.01 -DprocessAllModules=true -DgenerateBackupPoms=false
-
-# 2. Verify on the release version
+# 1. Final smoke test
 ./mvnw clean verify
 
-# 3. Commit + tag
+# 2. Bump versions across the reactor (or use release:prepare, which still works)
+./mvnw versions:set -DnewVersion=06.02.01 -DprocessAllModules=true -DgenerateBackupPoms=false
+
+# 3. Verify on the release version
+./mvnw clean verify
+
+# 4. Commit + tag
 git commit -am "release 06.02.01"
 git tag 06.02.01
 
-# 4. Deploy from the tagged tree
-./mvnw -P_deploy,_release_sign-artifacts,_release_scan_dependencies deploy
+# 5. Build the signed bundle (uploads nothing thanks to skipPublishing=true)
+./mvnw -P_deploy,_release_sign-artifacts,_release_prepare clean deploy
 
-# 5. Bump to the next development cycle and commit
+# 6. Strip the Maven-4 consumer POMs and repackage the bundle
+./scripts/clean-bundle-for-central.sh
+
+# 7. Upload target/central-publishing/central-bundle.zip manually via
+#    https://central.sonatype.com/publishing → Publish Component
+#    (Deployment Name e.g. com.svenruppert:dependencies:<version>, Automatic publish.)
+
+# 8. Bump to the next development cycle and commit
 ./mvnw versions:set -DnewVersion=06.02.02-SNAPSHOT -DprocessAllModules=true -DgenerateBackupPoms=false
 git commit -am "prepare 06.02.02-SNAPSHOT"
 
-# 6. Push branch + tag
+# 9. Push branch + tag
 git push origin develop 06.02.01
 ```
+
+The `_deploy` profile in `pom.xml` carries a comment block documenting the same workaround at the point where `skipPublishing` is set.
 
 ### After the deploy
 
@@ -111,6 +125,7 @@ Highlights:
 * Dependencies — 19 properties / pinned versions refreshed (pitest 1.25.0, junit-jupiter / junit-platform-launcher 6.1.0, ASM 9.10.1, javassist 3.31.0-GA, jakarta.annotation-api 3.0.0, jakarta.inject-api 2.0.1.MR, jackson 3.1.3 / 2.21.3, gson 2.14.0, commons-codec 1.22.0, commons-io 2.22.0, checkstyle 13.4.2, …).
 * Quality — DDI: 124 / 124 tests green, PIT 311 / 324 (96 %), 0 SpotBugs findings; functional-reactive: 304 / 304 green.
 * Documentation — Root README gains a "Releasing" section that documents the four release profiles, the GPG / SBOM / Sonatype flow, and the manual deploy variant. `ddi/README.md` gains a "Constructor injection" section.
+* Deploy — `_deploy` profile now sets `<skipPublishing>true</skipPublishing>` on `central-publishing-maven-plugin` (v0.10.0 is incompatible with Maven 4 consumer POMs; the validator rejects the `-consumer.pom` classifier). `scripts/clean-bundle-for-central.sh` strips those files from the staged bundle so the resulting `central-bundle.zip` can be uploaded manually via [https://central.sonatype.com/publishing](https://central.sonatype.com/publishing). 06.02.01 was published that way.
 
 ## 06.02.00
 

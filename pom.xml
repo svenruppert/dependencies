@@ -26,7 +26,7 @@
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <version>06.02.01-SNAPSHOT</version>
+    <version>06.02.01</version>
 
     <inceptionYear>2013</inceptionYear>
     <organization>
@@ -134,17 +134,17 @@
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core</artifactId>
-                <version>06.02.01-SNAPSHOT</version>
+                <version>06.02.01</version>
             </dependency>
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>core-properties</artifactId>
-                <version>06.02.01-SNAPSHOT</version>
+                <version>06.02.01</version>
             </dependency>
             <dependency>
                 <groupId>com.svenruppert</groupId>
                 <artifactId>functional-reactive</artifactId>
-                <version>06.02.01-SNAPSHOT</version>
+                <version>06.02.01</version>
             </dependency>
 
             <!--API´s-->
@@ -1250,12 +1250,43 @@
             <build>
                 <plugins>
                     <plugin>
+                        <!--
+                            Maven-4 + central-publishing-maven-plugin v0.10.0 compatibility note:
+                            The plugin emits Maven-4 consumer POMs as a `consumer` classified
+                            artefact (`*-consumer.pom`), which the Central Portal validator
+                            rejects with "Failed to associate file with coordinates". Until a
+                            Maven-4 compatible plugin version ships, we build the bundle
+                            locally with skipPublishing=true, strip the `*-consumer.pom*`
+                            files from `target/central-staging/`, re-zip the bundle, and
+                            upload it manually via https://central.sonatype.com/publishing.
+                            See scripts/clean-bundle-for-central.sh if added.
+                        -->
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>
                             <autoPublish>true</autoPublish>
+                            <skipPublishing>true</skipPublishing>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>injected-central-publishing</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>publish</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <!-- Disable the default deploy plugin: publishing is handled by
+                             central-publishing-maven-plugin above. The legacy OSSRH endpoint
+                             configured in distributionManagement is no longer operational. -->
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <configuration>
+                            <skip>true</skip>
                         </configuration>
                     </plugin>
                     <plugin>
