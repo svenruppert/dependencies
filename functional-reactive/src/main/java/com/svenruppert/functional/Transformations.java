@@ -40,10 +40,10 @@ package com.svenruppert.functional;
  * #L%
  */
 
-import com.svenruppert.functional.functions.CheckedBiFunction;
-import com.svenruppert.functional.functions.CheckedFunction;
-import com.svenruppert.functional.functions.CheckedTriFunction;
 import com.svenruppert.functional.functions.TriFunction;
+import com.svenruppert.functional.result.functions.CheckedBiFunction;
+import com.svenruppert.functional.result.functions.CheckedFunction;
+import com.svenruppert.functional.result.functions.CheckedTriFunction;
 
 import java.util.Enumeration;
 import java.util.Iterator;

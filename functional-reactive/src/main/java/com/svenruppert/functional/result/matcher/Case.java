@@ -46,14 +46,11 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 /**
- * Lazy pattern-matching helper over the modern {@link Result Result&lt;T, E&gt;} type.
+ * Lazy pattern-matching helper over the {@link Result Result&lt;T, E&gt;} type.
  *
  * <p>{@link #match(DefaultCase, Case[])} evaluates case conditions in order and returns
  * the first matching case's result. Conditions and result suppliers beyond the first
  * match are never invoked. The default case is invoked only when no case matches.
- *
- * <p>Replaces the legacy {@code com.svenruppert.functional.matcher.Case} which was
- * tied to the legacy String-error {@code Result}.
  */
 public class Case<T, E> {
 

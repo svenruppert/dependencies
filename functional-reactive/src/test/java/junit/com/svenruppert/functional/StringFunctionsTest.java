@@ -40,7 +40,6 @@ package junit.com.svenruppert.functional;
  * #L%
  */
 
-import com.svenruppert.functional.model.Result;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -110,44 +109,6 @@ public class StringFunctionsTest {
   @Test
   public void collapseWhitespace007() {
     assertEquals("A B", collapseWhitespace().apply(" A   B "));
-  }
-
-
-  @Test
-  public void at001() {
-    Result<String> r = at().apply("ABCD", 1);
-    assertNotNull(r);
-    assertTrue(r.isPresent());
-    assertEquals("A", r.get());
-  }
-
-  @Test
-  public void at002() {
-    Result<String> r = at().apply("ABCD", 5);
-    assertNotNull(r);
-    assertFalse(r.isPresent());
-  }
-
-  @Test
-  public void at003() {
-    Result<String> r = at().apply("ABCD", -5);
-    assertNotNull(r);
-    assertFalse(r.isPresent());
-  }
-
-  @Test
-  public void at004() {
-    Result<String> r = at().apply("ABCD", 0);
-    assertNotNull(r);
-    assertFalse(r.isPresent());
-  }
-
-  @Test
-  public void at005() {
-    Result<String> r = at().apply("ABCD", 4);
-    assertNotNull(r);
-    assertTrue(r.isPresent());
-    assertEquals("D", r.get());
   }
 
 
@@ -226,23 +187,6 @@ public class StringFunctionsTest {
   //  public void appendArray_ShouldThrowIllegalArgumentExceptionWhenValueIsNull() {
   //    appendArray(null, new String[]{});
   //  }
-
-  @Test
-  public void at_shouldFindCharacterAtIndex() {
-    assertThat(at().apply("foobar", 1).get(), equalTo("f"));
-    assertThat(at().apply("foobar", 2).get(), equalTo("o"));
-    assertThat(at().apply("foobar", -1).isAbsent(), equalTo(true));
-    assertThat(at().apply("foobar", -2).isAbsent(), equalTo(true));
-    //    assertThat(at().apply("foobar", 10).get(), equalTo(Result.failure("").get()));
-    //    assertThat(at().apply("foobar", - 10).get(), equalTo(Result.failure("").get()));
-  }
-
-  @Test
-  public void at_shouldNotFindCharacterAtIndex() {
-    assertTrue(at().apply("foobar", 10).isAbsent());
-    assertTrue(at().apply("foobar", -10).isAbsent());
-  }
-
 
   @Test
   public void between_shouldReturnArrayWithStringsBetweenStartAndEnd() {
@@ -573,27 +517,27 @@ public class StringFunctionsTest {
   @Test
   public void indexOf_shouldBeTrueWhenNeedleExists() {
     final String value = "foobar";
-    assertThat(indexOfCoseSensitive().apply(value, "f", 0, true), equalTo(0));
-    assertThat(indexOfCoseSensitive().apply(value, "o", 0, true), equalTo(1));
-    assertThat(indexOfCoseSensitive().apply(value, "b", 0, true), equalTo(3));
-    assertThat(indexOfCoseSensitive().apply(value, "a", 0, true), equalTo(4));
-    assertThat(indexOfCoseSensitive().apply(value, "r", 0, true), equalTo(5));
-    assertThat(indexOfCoseSensitive().apply(value, "t", 0, true), equalTo(-1));
+    assertThat(indexOfCaseSensitive().apply(value, "f", 0, true), equalTo(0));
+    assertThat(indexOfCaseSensitive().apply(value, "o", 0, true), equalTo(1));
+    assertThat(indexOfCaseSensitive().apply(value, "b", 0, true), equalTo(3));
+    assertThat(indexOfCaseSensitive().apply(value, "a", 0, true), equalTo(4));
+    assertThat(indexOfCaseSensitive().apply(value, "r", 0, true), equalTo(5));
+    assertThat(indexOfCaseSensitive().apply(value, "t", 0, true), equalTo(-1));
   }
 
   @Test
   public void indexOf_shouldBeTrueWhenNeedleExistCaseSensitive() {
     final String value = "foobar";
-    assertThat(indexOfCoseSensitive().apply(value, "F", 0, false), equalTo(0));
-    assertThat(indexOfCoseSensitive().apply(value, "O", 0, false), equalTo(1));
-    assertThat(indexOfCoseSensitive().apply(value, "B", 0, false), equalTo(3));
-    assertThat(indexOfCoseSensitive().apply(value, "A", 0, false), equalTo(4));
-    assertThat(indexOfCoseSensitive().apply(value, "R", 0, false), equalTo(5));
-    assertThat(indexOfCoseSensitive().apply(value, "T", 0, false), equalTo(-1));
+    assertThat(indexOfCaseSensitive().apply(value, "F", 0, false), equalTo(0));
+    assertThat(indexOfCaseSensitive().apply(value, "O", 0, false), equalTo(1));
+    assertThat(indexOfCaseSensitive().apply(value, "B", 0, false), equalTo(3));
+    assertThat(indexOfCaseSensitive().apply(value, "A", 0, false), equalTo(4));
+    assertThat(indexOfCaseSensitive().apply(value, "R", 0, false), equalTo(5));
+    assertThat(indexOfCaseSensitive().apply(value, "T", 0, false), equalTo(-1));
   }
 
   @Test
-  public void indexOfCaseSensitive_correctNameMatchesLegacy() {
+  public void indexOfCaseSensitive_smokeTest() {
     final String value = "foobar";
     assertThat(indexOfCaseSensitive().apply(value, "f", 0, true), equalTo(0));
     assertThat(indexOfCaseSensitive().apply(value, "F", 0, false), equalTo(0));

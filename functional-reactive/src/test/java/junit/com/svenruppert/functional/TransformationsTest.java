@@ -98,7 +98,7 @@ public class TransformationsTest {
         .<String, String, String, String>unCurryCheckedTriFunction()
         .apply(inputA -> inputB -> inputC -> inputA + " " + inputB + " " + inputC)
         .apply("Hello", "World", "!")
-        .get();
+        .getOrThrow();
     assertEquals("Hello World !", helloWorld);
   }
 
@@ -110,7 +110,7 @@ public class TransformationsTest {
           throw new RuntimeException("");
         })
         .apply("Hello", "World", "!")
-        .ifPresent(e -> Assertions.fail("should be false"));
+        .peek(e -> Assertions.fail("should be false"));
   }
 
 
@@ -121,7 +121,7 @@ public class TransformationsTest {
         .<String, String, String, String>curryCheckedTriFunction()
         .apply((s1, s2, s3) -> s1 + " " + s2 + " " + s3)
         .apply("Hello").apply("World").apply("!")
-        .get();
+        .getOrThrow();
     assertEquals("Hello World !", helloWorld);
   }
 
@@ -131,7 +131,7 @@ public class TransformationsTest {
         .<String, String, String, String>curryCheckedTriFunction()
         .apply((s1, s2, s3) -> { throw new RuntimeException(""); })
         .apply("Hello").apply("World").apply("!")
-        .ifPresent(e -> Assertions.fail("should be false"));
+        .peek(e -> Assertions.fail("should be false"));
   }
 
   @Test
@@ -140,7 +140,7 @@ public class TransformationsTest {
         .<String, String, String>curryCheckedBiFunction()
         .apply((s1, s2) -> s1 + " " + s2)
         .apply("Hello").apply("World")
-        .get();
+        .getOrThrow();
     assertEquals("Hello World", helloWorld);
   }
 
@@ -150,7 +150,7 @@ public class TransformationsTest {
         .<String, String, String>curryCheckedBiFunction()
         .apply((s1, s2) -> { throw new RuntimeException(""); })
         .apply("Hello").apply("World")
-        .ifPresent(e -> Assertions.fail("should be false"));
+        .peek(e -> Assertions.fail("should be false"));
   }
 
   @Test
@@ -159,7 +159,7 @@ public class TransformationsTest {
         .<String, String, String>unCurryCheckedBiFunction()
         .apply(inputA -> inputB -> inputA + " " + inputB)
         .apply("Hello", "World")
-        .get();
+        .getOrThrow();
     assertEquals("Hello World", helloWorld);
   }
 
@@ -169,7 +169,7 @@ public class TransformationsTest {
         .<String, String, String>unCurryCheckedBiFunction()
         .apply(inputA -> inputB -> { throw new RuntimeException(""); })
         .apply("Hello", "World")
-        .ifPresent(e -> Assertions.fail("should be false"));
+        .peek(e -> Assertions.fail("should be false"));
   }
 
 }

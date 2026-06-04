@@ -55,9 +55,6 @@ import java.util.stream.Stream;
  * Disjoint union of a success value of type {@code T} or a failure value of type {@code E}.
  * Empty and failure are intentionally distinct: a {@link Success} must hold a non-null value;
  * use {@link #ofNullable(Object, Object)} to lift a possibly-null reference into a {@code Result}.
- *
- * <p>This is the modern replacement for {@code com.svenruppert.functional.model.Result}.
- * The old type stays in place during the migration window.
  */
 public sealed interface Result<T, E> permits Result.Success, Result.Failure {
 
