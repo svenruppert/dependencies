@@ -40,27 +40,85 @@ package demo;
  * #L%
  */
 
+import com.svenruppert.functional.result.Result;
+import com.svenruppert.functional.result.Results;
 import org.junit.jupiter.api.Test;
 
-import java.util.function.Function;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Demonstrates how to migrate from the legacy
+ * {@link com.svenruppert.functional.model.Result Result&lt;T&gt;} to the modern
+ * {@link Result Result&lt;T, E&gt;} using the {@link Results} bridge.
+ *
+ * <p>Migration paths:
+ * <ol>
+ *   <li>Producer migrated, consumer not yet — wrap modern result via
+ *       {@code Results.toLegacy(modern)} before returning.</li>
+ *   <li>Consumer migrated, producer not yet — lift legacy result via
+ *       {@code Results.fromLegacy(legacy, errorIfEmpty)} before consuming.</li>
+ *   <li>Typed errors on the modern side — use the overload
+ *       {@code Results.toLegacy(modern, errorRenderer)} that flattens
+ *       the typed error to a String.</li>
+ * </ol>
+ */
+@SuppressWarnings("removal")
 public class DemoMigration {
 
+  @Test
+  void modernSuccessLoweredToLegacy() {
+    Result<String, String> modern = Result.success("ok");
+    com.svenruppert.functional.model.Result<String> legacy = Results.toLegacy(modern);
+    assertTrue(legacy.isPresent());
+    assertEquals("ok", legacy.get());
+  }
 
   @Test
-  void test001() {
+  void modernFailureLoweredToLegacy() {
+    Result<String, String> modern = Result.failure("boom");
+    com.svenruppert.functional.model.Result<String> legacy = Results.toLegacy(modern);
+    assertTrue(legacy.isAbsent());
+    legacy.ifFailed(msg -> assertEquals("boom", msg));
+  }
 
+  @Test
+  void legacySuccessLiftedToModern() {
+    com.svenruppert.functional.model.Result<String> legacy =
+        com.svenruppert.functional.model.Result.success("hello");
+    Result<String, String> modern = Results.fromLegacy(legacy, "missing");
+    assertTrue(modern.isSuccess());
+    assertEquals("hello", modern.getOrThrow());
+  }
 
-    Function<Integer, Integer> plus2 = (i) -> i + 2;
-    Function<Integer, Integer> plus5 = (i) -> i + 5;
-    Function<Integer, Integer> plus10 = (i) -> i + 10;
+  @Test
+  void legacyFailureLiftedToModernPreservesMessage() {
+    com.svenruppert.functional.model.Result<String> legacy =
+        com.svenruppert.functional.model.Result.failure("upstream-error");
+    Result<String, String> modern = Results.fromLegacy(legacy, "fallback");
+    assertTrue(modern.isFailure());
+    assertEquals("upstream-error", ((Result.Failure<String, String>) modern).error());
+  }
 
-    Function<Integer, Function<Integer, Integer>>
-        adder = (con) -> (i) -> i + con;
+  @Test
+  void legacyEmptySuccessLiftedAsFailure() {
+    // Legacy Result allows success(null); modern forbids it. The bridge maps
+    // null success to a failure using the supplied fallback error.
+    com.svenruppert.functional.model.Result<String> emptyLegacy =
+        com.svenruppert.functional.model.Result.ofNullable(null);
+    Result<String, String> modern = Results.fromLegacy(emptyLegacy, "was empty");
+    assertTrue(modern.isFailure());
+  }
 
-    Function<Integer, Integer> plusTwo
-        = adder.apply(2);
-
-
+  @Test
+  void typedErrorFlattenedToLegacy() {
+    // Modern Result with a typed error (an enum here) is flattened by
+    // mapping the error to a String at the boundary.
+    enum Code { NOT_FOUND, INVALID }
+    Result<Integer, Code> modern = Result.failure(Code.NOT_FOUND);
+    com.svenruppert.functional.model.Result<Integer> legacy =
+        Results.toLegacy(modern, code -> "error-code:" + code.name());
+    assertTrue(legacy.isAbsent());
+    legacy.ifFailed(msg -> assertEquals("error-code:NOT_FOUND", msg));
   }
 }

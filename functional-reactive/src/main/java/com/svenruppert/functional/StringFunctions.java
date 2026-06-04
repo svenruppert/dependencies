@@ -42,7 +42,6 @@ package com.svenruppert.functional;
 
 import com.svenruppert.functional.functions.QuadFunction;
 import com.svenruppert.functional.functions.TriFunction;
-import com.svenruppert.functional.matcher.Case;
 import com.svenruppert.functional.model.Result;
 
 import java.util.*;
@@ -54,8 +53,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static com.svenruppert.functional.Transformations.not;
-import static com.svenruppert.functional.matcher.Case.match;
-import static com.svenruppert.functional.matcher.Case.matchCase;
+import static com.svenruppert.functional.result.matcher.Case.match;
+import static com.svenruppert.functional.result.matcher.Case.matchCase;
 import static java.lang.Character.toChars;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.valueOf;
@@ -116,14 +115,53 @@ public interface StringFunctions {
    *
    * @return an Optional String if found else empty
    */
+  /**
+   * @deprecated Use {@link #atResult()} which returns the modern {@code Result<String, String>}
+   * and properly orders guards so that a null {@code value} no longer triggers an NPE
+   * via the previously eagerly-bound {@code value::isEmpty} method reference.
+   */
+  @Deprecated(forRemoval = true)
+  @SuppressWarnings("removal")
   static BiFunction<String, Integer, Result<String>> at() {
     return (String value, Integer humanIndex) ->
+        com.svenruppert.functional.matcher.Case.match(
+            com.svenruppert.functional.matcher.Case.matchCase(
+                () -> Result.success(valueOf(value.charAt(humanIndex - 1)))),
+            com.svenruppert.functional.matcher.Case.matchCase(
+                () -> value == null, () -> Result.failure("value should not be null")),
+            com.svenruppert.functional.matcher.Case.matchCase(
+                () -> value != null && value.isEmpty(), () -> Result.failure("value should not be empty")),
+            com.svenruppert.functional.matcher.Case.matchCase(
+                () -> humanIndex - 1 >= value.length(), () -> Result.failure("index out of bounds")),
+            com.svenruppert.functional.matcher.Case.matchCase(
+                () -> humanIndex - 1 < 0, () -> Result.failure("index out of lower bounds"))
+        );
+  }
+
+  /**
+   * Modern replacement for {@link #at()}. Returns the character at the 1-based human
+   * index, wrapped in a modern {@link com.svenruppert.functional.result.Result Result&lt;String, String&gt;}.
+   *
+   * <p>Guards are ordered so that a {@code null} value is rejected before any other
+   * predicate accesses {@code value}.
+   */
+  static BiFunction<String, Integer, com.svenruppert.functional.result.Result<String, String>> atResult() {
+    return (String value, Integer humanIndex) ->
         match(
-            matchCase(() -> Result.success(valueOf(value.charAt(humanIndex - 1)))),
-            matchCase(() -> value == null, () -> Result.failure("value should not be null")),
-            matchCase(value::isEmpty, () -> Result.failure("value should not be empty")),
-            matchCase(() -> humanIndex - 1 >= value.length(), () -> Result.failure("index out of bounds")),
-            matchCase(() -> humanIndex - 1 < 0, () -> Result.failure("index out of lower bounds"))
+            matchCase(() -> com.svenruppert.functional.result.Result
+                .<String, String>success(valueOf(value.charAt(humanIndex - 1)))),
+            matchCase(() -> value == null,
+                () -> com.svenruppert.functional.result.Result
+                    .<String, String>failure("value should not be null")),
+            matchCase(() -> value.isEmpty(),
+                () -> com.svenruppert.functional.result.Result
+                    .<String, String>failure("value should not be empty")),
+            matchCase(() -> humanIndex - 1 >= value.length(),
+                () -> com.svenruppert.functional.result.Result
+                    .<String, String>failure("index out of bounds")),
+            matchCase(() -> humanIndex - 1 < 0,
+                () -> com.svenruppert.functional.result.Result
+                    .<String, String>failure("index out of lower bounds"))
         );
   }
 
@@ -162,9 +200,11 @@ public interface StringFunctions {
   static TriFunction<String, String, Boolean, Boolean> containsCaseSensitive() {
     return (value, needle, caseSensitive) ->
         match(
-            matchCase(() -> Result.success(value.toLowerCase(Locale.ROOT).contains(needle.toLowerCase(Locale.ROOT)))),
-            matchCase(() -> caseSensitive, () -> Result.success(value.contains(needle)))
-        ).get();
+            matchCase(() -> com.svenruppert.functional.result.Result
+                .<Boolean, String>success(value.toLowerCase(Locale.ROOT).contains(needle.toLowerCase(Locale.ROOT)))),
+            matchCase(() -> caseSensitive, () -> com.svenruppert.functional.result.Result
+                .<Boolean, String>success(value.contains(needle)))
+        ).getOrThrow();
   }
 
 
@@ -1001,14 +1041,16 @@ public interface StringFunctions {
    * @return a {@link TriFunction} object.
    */
   static TriFunction<String, Integer, String, String> truncate() {
-    return (value, length, filler) -> Case
-        .match(
-            Case.matchCase(
-                () -> Result.success(
+    return (value, length, filler) ->
+        match(
+            matchCase(() -> com.svenruppert.functional.result.Result
+                .<String, String>success(
                     append().apply(value.substring(0, length - filler.length()), filler))),
-            Case.matchCase(() -> length == 0, () -> Result.success("")),
-            Case.matchCase(() -> length >= value.length(), () -> Result.success(value))
-        ).get();
+            matchCase(() -> length == 0, () -> com.svenruppert.functional.result.Result
+                .<String, String>success("")),
+            matchCase(() -> length >= value.length(), () -> com.svenruppert.functional.result.Result
+                .<String, String>success(value))
+        ).getOrThrow();
   }
 
   /**
@@ -1064,13 +1106,17 @@ public interface StringFunctions {
    * @return a {@link TriFunction} object.
    */
   static TriFunction<String, String, String, String> surround() {
-    return (value, prefix, suffix) -> Case
-        .match(
-            Case.matchCase(() -> Result.success(prefix + value + suffix)),
-            Case.matchCase(() -> prefix == null && suffix == null, () -> Result.success(value)),
-            Case.matchCase(() -> prefix != null && suffix == null, () -> Result.success(prefix + value + prefix)),
-            Case.matchCase(() -> prefix == null && suffix != null, () -> Result.success(suffix + value + suffix))
-        ).get();
+    return (value, prefix, suffix) ->
+        match(
+            matchCase(() -> com.svenruppert.functional.result.Result
+                .<String, String>success(prefix + value + suffix)),
+            matchCase(() -> prefix == null && suffix == null,
+                () -> com.svenruppert.functional.result.Result.<String, String>success(value)),
+            matchCase(() -> prefix != null && suffix == null,
+                () -> com.svenruppert.functional.result.Result.<String, String>success(prefix + value + prefix)),
+            matchCase(() -> prefix == null && suffix != null,
+                () -> com.svenruppert.functional.result.Result.<String, String>success(suffix + value + suffix))
+        ).getOrThrow();
   }
 
   /**

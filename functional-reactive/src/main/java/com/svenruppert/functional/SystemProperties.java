@@ -45,11 +45,25 @@ import com.svenruppert.functional.model.Result;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import static com.svenruppert.functional.Converting.*;
+import static com.svenruppert.functional.Converting.convertToBooleanResult;
+import static com.svenruppert.functional.Converting.convertToDoubleResult;
+import static com.svenruppert.functional.Converting.convertToIntegerResult;
 import static com.svenruppert.functional.model.Result.ofNullable;
 import static java.lang.System.getProperty;
 
+/**
+ * Read JVM system properties through a uniform API. Property keys are namespaced via
+ * the qualifier class' fully-qualified name ({@code qualifier.getName() + "." + key}).
+ *
+ * <p>Legacy methods returning {@link Result com.svenruppert.functional.model.Result} are
+ * deprecated; prefer the {@code *Result} variants returning
+ * {@link com.svenruppert.functional.result.Result Result&lt;T, String&gt;}.
+ */
 public interface SystemProperties {
+
+  // -------------------------------------------------------------------------
+  // Key qualification + presence checks (unchanged, no Result involvement)
+  // -------------------------------------------------------------------------
 
   static BiFunction<Class, String, String> qualifiedParameter() {
     return (clazz, unqualifiedName) -> clazz.getName() + "." + unqualifiedName;
@@ -63,63 +77,181 @@ public interface SystemProperties {
     return (key) -> hasSystemProperty().apply(qualifier, key);
   }
 
+  // -------------------------------------------------------------------------
+  // Modern variants: Result<X, String>
+  // -------------------------------------------------------------------------
 
+  static BiFunction<Class<?>, String, com.svenruppert.functional.result.Result<String, String>>
+  systemPropertyResult() {
+    return (clazz, key) -> {
+      String qualified = clazz.getName() + "." + key;
+      return com.svenruppert.functional.result.Result.ofNullable(
+          getProperty(qualified),
+          "system property '" + qualified + "' was null");
+    };
+  }
+
+  static BiFunction<Class<?>, String, com.svenruppert.functional.result.Result<String, String>>
+  systemPropertyResult(String defaultValue) {
+    return (clazz, key) -> {
+      String qualified = clazz.getName() + "." + key;
+      return com.svenruppert.functional.result.Result.ofNullable(
+          getProperty(qualified, defaultValue),
+          "system property '" + qualified + "' was null");
+    };
+  }
+
+  static Function<String, com.svenruppert.functional.result.Result<String, String>>
+  systemPropertyResult(Class<?> qualifier) {
+    BiFunction<Class<?>, String, com.svenruppert.functional.result.Result<String, String>> bi = systemPropertyResult();
+    return key -> bi.apply(qualifier, key);
+  }
+
+  static Function<String, com.svenruppert.functional.result.Result<String, String>>
+  systemPropertyResult(Class<?> qualifier, String defaultValue) {
+    BiFunction<Class<?>, String, com.svenruppert.functional.result.Result<String, String>> bi = systemPropertyResult(defaultValue);
+    return key -> bi.apply(qualifier, key);
+  }
+
+  static Function<String, com.svenruppert.functional.result.Result<Boolean, String>>
+  systemPropertyBooleanResult(Class<?> qualifier) {
+    return key -> systemPropertyResult(qualifier).apply(key)
+        .flatMap(convertToBooleanResult());
+  }
+
+  static Function<String, com.svenruppert.functional.result.Result<Boolean, String>>
+  systemPropertyBooleanResult(Class<?> qualifier, String defaultValue) {
+    return key -> systemPropertyResult(qualifier, defaultValue).apply(key)
+        .flatMap(convertToBooleanResult());
+  }
+
+  static Function<String, com.svenruppert.functional.result.Result<Integer, String>>
+  systemPropertyIntResult(Class<?> qualifier) {
+    return key -> systemPropertyResult(qualifier).apply(key)
+        .flatMap(convertToIntegerResult());
+  }
+
+  static Function<String, com.svenruppert.functional.result.Result<Integer, String>>
+  systemPropertyIntResult(Class<?> qualifier, String defaultValue) {
+    return key -> systemPropertyResult(qualifier, defaultValue).apply(key)
+        .flatMap(convertToIntegerResult());
+  }
+
+  static Function<String, com.svenruppert.functional.result.Result<Double, String>>
+  systemPropertyDoubleResult(Class<?> qualifier) {
+    return key -> systemPropertyResult(qualifier).apply(key)
+        .flatMap(convertToDoubleResult());
+  }
+
+  static Function<String, com.svenruppert.functional.result.Result<Double, String>>
+  systemPropertyDoubleResult(Class<?> qualifier, String defaultValue) {
+    return key -> systemPropertyResult(qualifier, defaultValue).apply(key)
+        .flatMap(convertToDoubleResult());
+  }
+
+  // -------------------------------------------------------------------------
+  // Legacy variants: Result<X> (deprecated)
+  // -------------------------------------------------------------------------
+
+  /**
+   * @deprecated Use {@link #systemPropertyResult()}.
+   */
+  @Deprecated(forRemoval = true)
   static BiFunction<Class, String, Result<String>> systemProperty() {
     return qualifiedParameter().andThen(key -> ofNullable(getProperty(key)));
   }
 
+  /**
+   * @deprecated Use {@link #systemPropertyResult(String)}.
+   */
+  @Deprecated(forRemoval = true)
   static BiFunction<Class, String, Result<String>> systemProperty(String defaultValue) {
     return qualifiedParameter().andThen(key -> ofNullable(getProperty(key, defaultValue)));
   }
 
-
+  /**
+   * @deprecated Use {@link #systemPropertyResult(Class)}.
+   */
+  @Deprecated(forRemoval = true)
   static Function<String, Result<String>> systemProperty(Class qualifier) {
     return (key) -> qualifiedParameter()
         .andThen(k -> ofNullable(getProperty(k)))
         .apply(qualifier, key);
   }
 
+  /**
+   * @deprecated Use {@link #systemPropertyResult(Class, String)}.
+   */
+  @Deprecated(forRemoval = true)
   static Function<String, Result<String>> systemProperty(Class qualifier, String defaultValue) {
     return (key) -> qualifiedParameter()
         .andThen(k -> ofNullable(getProperty(k, defaultValue)))
         .apply(qualifier, key);
   }
 
-
+  /**
+   * @deprecated Use {@link #systemPropertyBooleanResult(Class)}.
+   */
+  @Deprecated(forRemoval = true)
+  @SuppressWarnings("removal")
   static Function<String, Result<Boolean>> systemPropertyBoolean(Class qualifier) {
     return (key) -> systemProperty(qualifier)
         .apply(key)
-        .flatMap(convertToBoolean());
+        .flatMap(Converting.convertToBoolean());
   }
 
+  /**
+   * @deprecated Use {@link #systemPropertyBooleanResult(Class, String)}.
+   */
+  @Deprecated(forRemoval = true)
+  @SuppressWarnings("removal")
   static Function<String, Result<Boolean>> systemPropertyBoolean(Class qualifier, String defaultValue) {
     return (key) -> systemProperty(qualifier, defaultValue)
         .apply(key)
-        .flatMap(convertToBoolean());
+        .flatMap(Converting.convertToBoolean());
   }
 
+  /**
+   * @deprecated Use {@link #systemPropertyIntResult(Class)}.
+   */
+  @Deprecated(forRemoval = true)
+  @SuppressWarnings("removal")
   static Function<String, Result<Integer>> systemPropertyInt(Class qualifier) {
     return (key) -> systemProperty(qualifier)
         .apply(key)
-        .flatMap(convertToInteger());
+        .flatMap(Converting.convertToInteger());
   }
 
+  /**
+   * @deprecated Use {@link #systemPropertyIntResult(Class, String)}.
+   */
+  @Deprecated(forRemoval = true)
+  @SuppressWarnings("removal")
   static Function<String, Result<Integer>> systemPropertyInt(Class qualifier, String defaultValue) {
     return (key) -> systemProperty(qualifier, defaultValue)
         .apply(key)
-        .flatMap(convertToInteger());
+        .flatMap(Converting.convertToInteger());
   }
 
+  /**
+   * @deprecated Use {@link #systemPropertyDoubleResult(Class)}.
+   */
+  @Deprecated(forRemoval = true)
+  @SuppressWarnings("removal")
   static Function<String, Result<Double>> systemPropertyDouble(Class qualifier) {
     return (key) -> systemProperty(qualifier)
         .apply(key)
-        .flatMap(convertToDouble());
+        .flatMap(Converting.convertToDouble());
   }
 
+  /**
+   * @deprecated Use {@link #systemPropertyDoubleResult(Class, String)}.
+   */
+  @Deprecated(forRemoval = true)
+  @SuppressWarnings("removal")
   static Function<String, Result<Double>> systemPropertyDouble(Class qualifier, String defaultValue) {
     return (key) -> systemProperty(qualifier, defaultValue)
         .apply(key)
-        .flatMap(convertToDouble());
+        .flatMap(Converting.convertToDouble());
   }
-
 }

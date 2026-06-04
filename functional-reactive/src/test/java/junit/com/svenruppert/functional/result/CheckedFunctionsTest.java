@@ -41,13 +41,16 @@ package junit.com.svenruppert.functional.result;
  */
 
 import com.svenruppert.functional.result.Result;
+import com.svenruppert.functional.result.Unit;
 import com.svenruppert.functional.result.functions.CheckedBiFunction;
+import com.svenruppert.functional.result.functions.CheckedExecutor;
 import com.svenruppert.functional.result.functions.CheckedFunction;
 import com.svenruppert.functional.result.functions.CheckedSupplier;
 import com.svenruppert.functional.result.functions.CheckedTriFunction;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -111,5 +114,47 @@ class CheckedFunctionsTest {
     assertTrue(bad.isFailure());
     assertInstanceOf(IllegalStateException.class,
         ((Result.Failure<Integer, Throwable>) bad).error());
+  }
+
+  @Test
+  void checkedExecutorReturnsUnitOnSuccess() {
+    AtomicBoolean ran = new AtomicBoolean(false);
+    CheckedExecutor e = () -> ran.set(true);
+    Result<Unit, Throwable> r = e.execute();
+    assertTrue(r.isSuccess());
+    assertSame(Unit.INSTANCE, r.getOrThrow());
+    assertTrue(ran.get());
+  }
+
+  @Test
+  void checkedExecutorGetMirrorsExecute() {
+    CheckedExecutor e = () -> { /* no-op */ };
+    Result<Unit, Throwable> r = e.get();
+    assertTrue(r.isSuccess());
+    assertSame(Unit.INSTANCE, r.getOrThrow());
+  }
+
+  @Test
+  void checkedExecutorWrapsCheckedException() {
+    IOException cause = new IOException("io");
+    CheckedExecutor e = () -> { throw cause; };
+    Result<Unit, Throwable> r = e.execute();
+    assertTrue(r.isFailure());
+    assertSame(cause, ((Result.Failure<Unit, Throwable>) r).error());
+  }
+
+  @Test
+  void checkedExecutorWrapsRuntimeException() {
+    CheckedExecutor e = () -> { throw new RuntimeException("noop"); };
+    Result<Unit, Throwable> r = e.execute();
+    assertTrue(r.isFailure());
+    assertInstanceOf(RuntimeException.class,
+        ((Result.Failure<Unit, Throwable>) r).error());
+  }
+
+  @Test
+  void checkedExecutorLetsErrorsPropagate() {
+    CheckedExecutor e = () -> { throw new OutOfMemoryError("fake"); };
+    assertThrows(OutOfMemoryError.class, e::execute);
   }
 }

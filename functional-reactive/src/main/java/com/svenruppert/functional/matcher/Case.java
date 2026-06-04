@@ -46,6 +46,12 @@ import com.svenruppert.functional.model.Result;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
+/**
+ * @deprecated Use {@link com.svenruppert.functional.result.matcher.Case} which is
+ * built around the modern {@code Result<T, E>} and no longer inherits from
+ * {@code DataRecords.Pair}. Scheduled for removal in the next major release.
+ */
+@Deprecated(forRemoval = true)
 public class Case<T>
     extends DataRecords.Pair<Supplier<Boolean>, Supplier<Result<T>>> {
 

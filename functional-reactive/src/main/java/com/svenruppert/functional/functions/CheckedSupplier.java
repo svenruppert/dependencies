@@ -48,7 +48,13 @@ import static com.svenruppert.functional.ExceptionFunctions.message;
 
 /**
  * Created by svenruppert on 25.04.17.
+ *
+ * @deprecated Use {@link com.svenruppert.functional.result.functions.CheckedSupplier}
+ * instead. The modern variant returns {@code Result<T, Throwable>} and preserves the
+ * original cause and stacktrace; this legacy variant collapses any failure into a
+ * String message. Scheduled for removal in the next major release.
  */
+@Deprecated(forRemoval = true)
 @FunctionalInterface
 public interface CheckedSupplier<T>
     extends Supplier<Result<T>> {

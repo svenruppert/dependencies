@@ -13,7 +13,7 @@
  * See the Licence for the specific language governing permissions and
  * limitations under the Licence.
  */
-package com.svenruppert.functional.functions;
+package com.svenruppert.functional.result.functions;
 
 /*-
  * #%L
@@ -40,33 +40,36 @@ package com.svenruppert.functional.functions;
  * #L%
  */
 
-import com.svenruppert.functional.model.Result;
+import com.svenruppert.functional.result.Result;
+import com.svenruppert.functional.result.Unit;
 
-import java.util.function.Function;
-
-import static com.svenruppert.functional.ExceptionFunctions.message;
+import java.util.function.Supplier;
 
 /**
- * Created by svenruppert on 25.04.17.
+ * Executor variant of {@link CheckedSupplier} for side-effecting computations that may
+ * throw any {@link Throwable}. Success is represented by {@link Unit#INSTANCE} so that
+ * the no-null-success invariant of {@link Result} is preserved.
  *
- * @deprecated Use {@link com.svenruppert.functional.result.functions.CheckedFunction}
- * instead. The modern variant returns {@code Result<R, Throwable>} and preserves the
- * original cause and stacktrace; this legacy variant collapses any failure into a
- * String message. Scheduled for removal in the next major release.
+ * <p>{@link Error}s propagate rather than being captured.
  */
-@Deprecated(forRemoval = true)
 @FunctionalInterface
-public interface CheckedFunction<T, R>
-    extends Function<T, Result<R>> {
+public interface CheckedExecutor extends Supplier<Result<Unit, Throwable>> {
+
+  void executeWithException() throws Throwable;
+
   @Override
-  default Result<R> apply(T t) {
+  default Result<Unit, Throwable> get() {
     try {
-      return Result.success(applyWithException(t));
-    } catch (Exception e) {
-      return Result.failure(message().apply(e));
+      executeWithException();
+      return Result.success(Unit.INSTANCE);
+    } catch (Error e) {
+      throw e;
+    } catch (Throwable t) {
+      return Result.failure(t);
     }
   }
 
-  R applyWithException(T t)
-      throws Exception;
+  default Result<Unit, Throwable> execute() {
+    return get();
+  }
 }

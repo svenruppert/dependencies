@@ -13,7 +13,7 @@
  * See the Licence for the specific language governing permissions and
  * limitations under the Licence.
  */
-package com.svenruppert.functional.functions;
+package com.svenruppert.functional.result;
 
 /*-
  * #%L
@@ -40,33 +40,13 @@ package com.svenruppert.functional.functions;
  * #L%
  */
 
-import com.svenruppert.functional.model.Result;
-
-import java.util.function.Function;
-
-import static com.svenruppert.functional.ExceptionFunctions.message;
-
 /**
- * Created by svenruppert on 25.04.17.
+ * Non-null success marker for void-returning operations modelled as {@link Result}.
  *
- * @deprecated Use {@link com.svenruppert.functional.result.functions.CheckedFunction}
- * instead. The modern variant returns {@code Result<R, Throwable>} and preserves the
- * original cause and stacktrace; this legacy variant collapses any failure into a
- * String message. Scheduled for removal in the next major release.
+ * <p>{@code Result<T, E>} forbids {@code null} success values, so a side-effecting
+ * computation cannot use {@code Result<Void, E>} with {@code Result.success(null)}.
+ * Use {@code Result<Unit, E>} instead and return {@link #INSTANCE} on success.
  */
-@Deprecated(forRemoval = true)
-@FunctionalInterface
-public interface CheckedFunction<T, R>
-    extends Function<T, Result<R>> {
-  @Override
-  default Result<R> apply(T t) {
-    try {
-      return Result.success(applyWithException(t));
-    } catch (Exception e) {
-      return Result.failure(message().apply(e));
-    }
-  }
-
-  R applyWithException(T t)
-      throws Exception;
+public enum Unit {
+  INSTANCE
 }

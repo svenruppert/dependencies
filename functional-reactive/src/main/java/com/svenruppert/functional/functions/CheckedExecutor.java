@@ -51,7 +51,14 @@ import static com.svenruppert.functional.ExceptionFunctions.message;
  *
  * @author svenruppert
  * @version $Id: $Id
+ * @deprecated Use {@link com.svenruppert.functional.result.functions.CheckedExecutor}
+ * instead. The modern variant returns {@code Result<Unit, Throwable>} (using
+ * {@link com.svenruppert.functional.result.Unit#INSTANCE} as the non-null success
+ * marker) and preserves the original cause and stacktrace; this legacy variant
+ * stores {@code null} as success value and collapses any failure into a String
+ * message. Scheduled for removal in the next major release.
  */
+@Deprecated(forRemoval = true)
 @FunctionalInterface
 public interface CheckedExecutor
     extends Function<Void, Result<Void>> {

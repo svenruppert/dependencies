@@ -47,8 +47,12 @@ import java.util.function.BiFunction;
 import static com.svenruppert.functional.ExceptionFunctions.message;
 
 /**
- *
+ * @deprecated Use {@link com.svenruppert.functional.result.functions.CheckedBiFunction}
+ * instead. The modern variant returns {@code Result<R, Throwable>} and preserves the
+ * original cause and stacktrace; this legacy variant collapses any failure into a
+ * String message. Scheduled for removal in the next major release.
  */
+@Deprecated(forRemoval = true)
 public interface CheckedBiFunction<T1, T2, R>
     extends BiFunction<T1, T2, Result<R>> {
   @Override
