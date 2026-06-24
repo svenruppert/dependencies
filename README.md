@@ -65,7 +65,7 @@ SBOMs (CycloneDX, both `bom.xml` and `bom.json` per module plus the reactor-aggr
 
 ### Current limitation — Maven 4 + central-publishing-maven-plugin
 
-`central-publishing-maven-plugin` 0.10.0 (the current latest) does not understand the Maven 4 consumer-POM model. It emits the consumer POM as a `consumer`-classified artefact (`*-consumer.pom`), and the Central Portal validator rejects the deployment with `Failed to associate file with coordinates …`. Until a Maven-4-compatible plugin release ships, the `_deploy` profile sets `<skipPublishing>true</skipPublishing>` so that `mvn deploy` builds a signed bundle locally but does **not** upload it.
+`central-publishing-maven-plugin` 0.10.0 did not understand the Maven 4 consumer-POM model: it emits the consumer POM as a `consumer`-classified artefact (`*-consumer.pom`), and the Central Portal validator rejects the deployment with `Failed to associate file with coordinates …`. As of 06.02.03 the plugin is pinned at 0.11.0; whether 0.11.0 resolves this is **still to be verified at the next deploy**. Until confirmed, the `_deploy` profile keeps `<skipPublishing>true</skipPublishing>` so that `mvn deploy` builds a signed bundle locally but does **not** upload it, and the manual bundle flow below remains the working path.
 
 The working release flow against the current plugin is therefore:
 
@@ -109,6 +109,36 @@ The `_deploy` profile in `pom.xml` carries a comment block documenting the same 
 * Add a new section in this README under "Versions" and a corresponding `RELEASE-NOTES-<version>.md` at the repository root with the per-module change set, migration notes for any breaking change, and the reactor-level verification numbers.
 
 ## Versions
+
+## 06.02.03
+
+Maintenance release: dependency / plugin refresh, migration of the deploy
+infrastructure to the Sonatype Central Portal endpoints, and adoption of
+SpotBugs 4.10.2. No source-level API changes — consumers upgrade without code
+changes. See [RELEASE-NOTES-06.02.03.md](RELEASE-NOTES-06.02.03.md) for the full
+breakdown.
+
+Highlights:
+
+* Dependencies — jackson 2.21.3 → 2.22.0 and 3.1.3 → 3.2.0, HikariCP 7.0.2 → 7.1.0, byte-buddy 1.18.8 → 1.18.10, javassist 3.31.0-GA → 3.32.0-GA, pitest 1.25.0 → 1.25.5, checkstyle 13.4.2 → 13.6.0.
+* Plugins — spotbugs-maven-plugin 4.9.8.3 → 4.10.2.0, maven-dependency-plugin 3.10.0 → 3.11.0, cyclonedx-maven-plugin 2.9.1 → 2.9.2, central-publishing-maven-plugin 0.10.0 → 0.11.0. The Maven core plugins offering only `4.0.0-beta` / `3.6.0-M1` pre-releases were intentionally left on their stable lines.
+* Deploy — `distributionManagement` and the deploy URLs moved to the Central Portal (`central.sonatype.com`); the OSSRH host `s01.oss.sonatype.org` was decommissioned on 2025-06-30. Repository ids are now `central` / `central-snapshots`.
+* Quality — SpotBugs 4.10.2 added two new detectors; both findings were fixed at source rather than excluded. `functional-reactive`: `Case` validates in its factory methods so the constructor no longer throws (`CT_CONSTRUCTOR_THROW`). `ddi`: `DIContainer` synchronizes on a private lock instead of `this` (`USO_UNSAFE_METHOD_SYNCHRONIZATION`). Both changes are behaviour-preserving.
+* Verification — core 16/16, core-properties 4/4, functional-reactive 312/312 (1 skipped), ddi 124/124; 0 SpotBugs findings reactor-wide.
+
+## 06.02.02
+
+Removal of the legacy single-type `Result<T>` API from `functional-reactive` and
+the new typed `MediaType` enum in `core`. See
+[RELEASE-NOTES-06.02.02.md](RELEASE-NOTES-06.02.02.md) for the full breakdown.
+
+**Breaking** — `functional-reactive`: the legacy `com.svenruppert.functional.model.Result<T>`, the `functional.result.Results` bridge, the six `functional.functions.Checked*` interfaces and `functional.matcher.Case` (all deprecated `forRemoval` in 06.02.01) are deleted; migrate to `com.svenruppert.functional.result.Result<T, E>`. `core`: the `HttpStatusContentTypes` string constants are replaced by the typed `MediaType` enum.
+
+Highlights:
+
+* `functional-reactive` — modern `Result<T, E>` is now the only `Result` surface. New `Unit` void-marker, `result.functions.CheckedExecutor` returning `Result<Unit, Throwable>`, and a `result.matcher.Case<T, E>` with lazy condition evaluation.
+* `core` — new `MediaType` enum (RFC 9110 §8.3 with RFC 6839 `*+json` / `*+xml` structured-syntax-suffix predicates), 33 constants plus charset helpers and `fromMime(String)`.
+* Release tooling — `scripts/clean-bundle-for-central.sh` rebuilt for Maven 4.
 
 ## 06.02.01
 

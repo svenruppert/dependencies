@@ -106,6 +106,12 @@ public final class DIContainer {
   private final Map<String, String> classNameToScopeName = new ConcurrentHashMap<>();
   private final Map<String, InjectionScope> injectionScopeMap = new ConcurrentHashMap<>();
 
+  // Private monitor for the lifecycle / activation methods. A dedicated lock keeps
+  // the container's mutual exclusion out of reach of external code: the singleton is
+  // exposed via global(), so synchronizing on `this` would let unrelated callers
+  // contend for (or deadlock on) our intrinsic lock (SpotBugs USO_UNSAFE_METHOD_SYNCHRONIZATION).
+  private final Object lock = new Object();
+
   /**
    * Default container — scans the {@value ReflectionsModel#DEFAULT_SCAN_PREFIX} package
    * prefix. For a different prefix use {@link #DIContainer(String)} or
@@ -165,48 +171,60 @@ public final class DIContainer {
 
   // ===== bootstrap / lifecycle ===========================================================
 
-  public synchronized void bootstrap() {
-    clearImplResolverCache();
-    if (bootstrapedNeeded) {
-      final String packageFilePath = System.getProperty(PACKAGES_FILE_PROPERTY);
-      if (packageFilePath != null && !packageFilePath.isEmpty()) {
-        bootstrapFromResource(packageFilePath);
-      } else {
-        reflectionsModel.rescan("");
+  public void bootstrap() {
+    synchronized (lock) {
+      clearImplResolverCache();
+      if (bootstrapedNeeded) {
+        final String packageFilePath = System.getProperty(PACKAGES_FILE_PROPERTY);
+        if (packageFilePath != null && !packageFilePath.isEmpty()) {
+          bootstrapFromResource(packageFilePath);
+        } else {
+          reflectionsModel.rescan("");
+        }
       }
+      bootstrapedNeeded = false;
     }
-    bootstrapedNeeded = false;
   }
 
-  public synchronized void clearReflectionModel() {
-    reflectionsModel = new ReflectionsModel(scanPrefix);
-    clearCaches();
-    reInitAllScopes();
-    bootstrapedNeeded = true;
+  public void clearReflectionModel() {
+    synchronized (lock) {
+      reflectionsModel = new ReflectionsModel(scanPrefix);
+      clearCaches();
+      reInitAllScopes();
+      bootstrapedNeeded = true;
+    }
   }
 
-  public synchronized void activatePackages(Class<?> clazz) {
-    reflectionsModel.rescan(clazz.getPackage().getName());
-    clearCaches();
-    bootstrapedNeeded = false;
+  public void activatePackages(Class<?> clazz) {
+    synchronized (lock) {
+      reflectionsModel.rescan(clazz.getPackage().getName());
+      clearCaches();
+      bootstrapedNeeded = false;
+    }
   }
 
-  public synchronized void activatePackages(String pkg) {
-    reflectionsModel.rescan(pkg);
-    clearCaches();
-    bootstrapedNeeded = false;
+  public void activatePackages(String pkg) {
+    synchronized (lock) {
+      reflectionsModel.rescan(pkg);
+      clearCaches();
+      bootstrapedNeeded = false;
+    }
   }
 
-  public synchronized void activatePackages(String pkg, URL... urls) {
-    reflectionsModel.rescan(pkg, urls);
-    clearCaches();
-    bootstrapedNeeded = false;
+  public void activatePackages(String pkg, URL... urls) {
+    synchronized (lock) {
+      reflectionsModel.rescan(pkg, urls);
+      clearCaches();
+      bootstrapedNeeded = false;
+    }
   }
 
-  public synchronized void activatePackages(String pkg, Collection<URL> urls) {
-    reflectionsModel.rescan(pkg, urls);
-    clearCaches();
-    bootstrapedNeeded = false;
+  public void activatePackages(String pkg, Collection<URL> urls) {
+    synchronized (lock) {
+      reflectionsModel.rescan(pkg, urls);
+      clearCaches();
+      bootstrapedNeeded = false;
+    }
   }
 
   public void checkActiveModel() {
@@ -255,15 +273,19 @@ public final class DIContainer {
 
   // ===== activateDI / injection ==========================================================
 
-  public synchronized <T> T activateDI(T instance) {
-    if (bootstrapedNeeded) bootstrap();
-    injectAttributes(instance);
-    initialize(instance);
-    return instance;
+  public <T> T activateDI(T instance) {
+    synchronized (lock) {
+      if (bootstrapedNeeded) bootstrap();
+      injectAttributes(instance);
+      initialize(instance);
+      return instance;
+    }
   }
 
-  public synchronized <T> T activateDI(Class<T> clazz2Instanciate) {
-    return activateDI(clazz2Instanciate, Set.of());
+  public <T> T activateDI(Class<T> clazz2Instanciate) {
+    synchronized (lock) {
+      return activateDI(clazz2Instanciate, Set.of());
+    }
   }
 
   /**
@@ -272,12 +294,14 @@ public final class DIContainer {
    * constructor-injection parameter resolution where the parameter carries
    * {@code @Named} or a custom {@code @Qualifier}.
    */
-  public synchronized <T> T activateDI(Class<T> clazz2Instanciate, Set<Annotation> qualifiers) {
-    if (bootstrapedNeeded) bootstrap();
-    final T instance = new InstanceCreator(this).instantiate(clazz2Instanciate, qualifiers);
-    injectAttributes(instance);
-    initialize(instance);
-    return instance;
+  public <T> T activateDI(Class<T> clazz2Instanciate, Set<Annotation> qualifiers) {
+    synchronized (lock) {
+      if (bootstrapedNeeded) bootstrap();
+      final T instance = new InstanceCreator(this).instantiate(clazz2Instanciate, qualifiers);
+      injectAttributes(instance);
+      initialize(instance);
+      return instance;
+    }
   }
 
   private <T> void injectAttributes(final T rootInstance) {
@@ -515,10 +539,12 @@ public final class DIContainer {
     return classNameToScopeName.containsKey(clazz.getName());
   }
 
-  public synchronized void cleanUpScopes() {
-    final Set<Class<? extends InjectionScope>> scopesFromModel = getSubTypesOf(InjectionScope.class);
-    registerNewScopes(scopesFromModel);
-    removeOldScopes(scopesFromModel);
+  public void cleanUpScopes() {
+    synchronized (lock) {
+      final Set<Class<? extends InjectionScope>> scopesFromModel = getSubTypesOf(InjectionScope.class);
+      registerNewScopes(scopesFromModel);
+      removeOldScopes(scopesFromModel);
+    }
   }
 
   private void registerNewScopes(Set<Class<? extends InjectionScope>> scopeClasses) {
@@ -598,17 +624,20 @@ public final class DIContainer {
     });
   }
 
-  public synchronized void reInitAllScopes() {
-    classNameToScopeName.clear();
-    injectionScopeMap.values().forEach(InjectionScope::clear);
-    injectionScopeMap.clear();
-    final Set<Class<? extends InjectionScope>> subTypesOf = getSubTypesOf(InjectionScope.class);
-    for (Class<? extends InjectionScope> c : subTypesOf) {
-      try {
-        final InjectionScope scope = c.getDeclaredConstructor().newInstance();
-        injectionScopeMap.put(scope.getScopeName(), scope);
-      } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-        LOGGER.warn("could not create an instance ", e);
+  public void reInitAllScopes() {
+    synchronized (lock) {
+      classNameToScopeName.clear();
+      injectionScopeMap.values().forEach(InjectionScope::clear);
+      injectionScopeMap.clear();
+      final Set<Class<? extends InjectionScope>> subTypesOf = getSubTypesOf(InjectionScope.class);
+      for (Class<? extends InjectionScope> c : subTypesOf) {
+        try {
+          final InjectionScope scope = c.getDeclaredConstructor().newInstance();
+          injectionScopeMap.put(scope.getScopeName(), scope);
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
+                 InvocationTargetException e) {
+          LOGGER.warn("could not create an instance ", e);
+        }
       }
     }
   }

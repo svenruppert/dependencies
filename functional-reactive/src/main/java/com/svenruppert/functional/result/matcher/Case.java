@@ -58,16 +58,22 @@ public class Case<T, E> {
   final Supplier<Result<T, E>> result;
 
   Case(Supplier<Boolean> condition, Supplier<Result<T, E>> result) {
-    this.condition = Objects.requireNonNull(condition, "condition supplier must not be null");
-    this.result = Objects.requireNonNull(result, "result supplier must not be null");
+    // Arguments are validated in the static factory methods below, so the
+    // constructor stays throw-free (SpotBugs CT_CONSTRUCTOR_THROW): a
+    // throwing constructor on a non-final class is open to finalizer attacks.
+    this.condition = condition;
+    this.result = result;
   }
 
   public static <T, E> Case<T, E> matchCase(Supplier<Boolean> condition,
                                             Supplier<Result<T, E>> value) {
+    Objects.requireNonNull(condition, "condition supplier must not be null");
+    Objects.requireNonNull(value, "result supplier must not be null");
     return new Case<>(condition, value);
   }
 
   public static <T, E> DefaultCase<T, E> matchCase(Supplier<Result<T, E>> value) {
+    Objects.requireNonNull(value, "result supplier must not be null");
     return new DefaultCase<>(value);
   }
 
