@@ -79,8 +79,9 @@
             with server id `central-snapshots`.
 
             The ids double as the credential lookup keys in
-            ~/.m2/settings.xml. The _deploy-jsentinel profile overrides all
-            four properties to point at repo.jsentinel.eu instead.
+            ~/.m2/settings.xml. The _deploy-jsentinel and
+            _deploy-jsentinel-sensitive profiles override all four properties
+            to point at repo.jsentinel.eu instead.
         -->
         <deploy-repo-id>central</deploy-repo-id>
         <deploy-repo-url>https://central.sonatype.com/api/v1/publisher/upload</deploy-repo-url>
@@ -1170,6 +1171,30 @@
                 <deploy-repo-url>https://repo.jsentinel.eu/releases</deploy-repo-url>
                 <deploy-repo-snapshots-id>jsentinel-releases</deploy-repo-snapshots-id>
                 <deploy-repo-snapshots-url>https://repo.jsentinel.eu/snapshots</deploy-repo-snapshots-url>
+            </properties>
+        </profile>
+
+        <!--
+            Deploy target for closed-source artefacts: the access-protected
+            `sensitive` channel on repo.jsentinel.eu. Same mechanics as
+            _deploy-jsentinel, but releases AND snapshots go to the sensitive
+            repository; the credential lookup uses the `jsentinel-sensitive`
+            server id from ~/.m2/settings.xml.
+
+                ./mvnw -P_deploy-jsentinel-sensitive clean deploy
+
+            Mutually exclusive with _deploy and _deploy-jsentinel.
+        -->
+        <profile>
+            <id>_deploy-jsentinel-sensitive</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <deploy-repo-id>jsentinel-sensitive</deploy-repo-id>
+                <deploy-repo-url>https://repo.jsentinel.eu/sensitive</deploy-repo-url>
+                <deploy-repo-snapshots-id>jsentinel-sensitive</deploy-repo-snapshots-id>
+                <deploy-repo-snapshots-url>https://repo.jsentinel.eu/sensitive</deploy-repo-snapshots-url>
             </properties>
         </profile>
 
