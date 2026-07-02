@@ -112,15 +112,19 @@ The `_deploy` profile in `pom.xml` carries a comment block documenting the same 
 
 ## 06.02.03
 
-Maintenance release: dependency / plugin refresh, migration of the deploy
-infrastructure to the Sonatype Central Portal endpoints, and adoption of
-SpotBugs 4.10.2. No source-level API changes — consumers upgrade without code
-changes. See [RELEASE-NOTES-06.02.03.md](RELEASE-NOTES-06.02.03.md) for the full
-breakdown.
+Maintenance release: dependency / plugin refresh, BOM modernisation, migration
+of the deploy infrastructure to the Sonatype Central Portal endpoints, adoption
+of SpotBugs 4.10.2, and EUPL 1.2 licence-header alignment. No source-level API
+changes — consumers of the modules upgrade without code changes; BOM importers
+should review the coordinate moves. See
+[RELEASE-NOTES-06.02.03.md](RELEASE-NOTES-06.02.03.md) for the full breakdown.
 
 Highlights:
 
-* Dependencies — jackson 2.21.3 → 2.22.0 and 3.1.3 → 3.2.0, HikariCP 7.0.2 → 7.1.0, byte-buddy 1.18.8 → 1.18.10, javassist 3.31.0-GA → 3.32.0-GA, pitest 1.25.0 → 1.25.5, checkstyle 13.4.2 → 13.6.0.
+* Dependencies — jackson 2.21.3 → 2.22.0 and 3.1.3 → 3.2.0, HikariCP 7.0.2 → 7.1.0, byte-buddy 1.18.8 → 1.18.10, javassist 3.31.0-GA → 3.32.0-GA, pitest 1.25.0 → 1.25.5, checkstyle 13.4.2 → 13.7.0.
+* BOM modernisation — managed entries move to their maintained successors: HttpClient 4 → `org.apache.httpcomponents.client5:httpclient5` 5.6.1, `javax.servlet` → `jakarta.servlet:jakarta.servlet-api` 6.1.0, defunct `dom4j:org.dom4j` → `org.dom4j:dom4j` 2.1.4, abandoned javafaker → `net.datafaker:datafaker` 2.4.3. The archived OpenTracing artefacts and the 1.x-only `cache2k-base-bom` are removed. Pre-release pins are replaced by stable versions (slf4j 2.0.17, log4j 2.26.0, jackson-annotations 2.22, assertj 3.27.3).
+* `slf4j-simple` moves to `test` scope in the parent — published libraries ship only `slf4j-api`; consumers bring their own binding.
+* Licence — generated file headers now carry the declared EUPL 1.2 text (custom licence descriptor under `src/license/`); previously they still said EUPL 1.1.
 * Plugins — spotbugs-maven-plugin 4.9.8.3 → 4.10.2.0, maven-dependency-plugin 3.10.0 → 3.11.0, cyclonedx-maven-plugin 2.9.1 → 2.9.2, central-publishing-maven-plugin 0.10.0 → 0.11.0. The Maven core plugins offering only `4.0.0-beta` / `3.6.0-M1` pre-releases were intentionally left on their stable lines.
 * Deploy — `distributionManagement` and the deploy URLs moved to the Central Portal (`central.sonatype.com`); the OSSRH host `s01.oss.sonatype.org` was decommissioned on 2025-06-30. Repository ids are now `central` / `central-snapshots`.
 * Quality — SpotBugs 4.10.2 added two new detectors; both findings were fixed at source rather than excluded. `functional-reactive`: `Case` validates in its factory methods so the constructor no longer throws (`CT_CONSTRUCTOR_THROW`). `ddi`: `DIContainer` synchronizes on a private lock instead of `this` (`USO_UNSAFE_METHOD_SYNCHRONIZATION`). Both changes are behaviour-preserving.
