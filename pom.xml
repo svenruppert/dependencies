@@ -70,15 +70,21 @@
     <properties>
         <licenseName>European Union Public Licence 1.2</licenseName>
         <!--
-            Maven Central Portal endpoints. The legacy OSSRH host
+            Deploy target, default: Maven Central Portal. The legacy OSSRH host
             (s01.oss.sonatype.org) was decommissioned on 2025-06-30. Releases
             are published via the central-publishing-maven-plugin (see the
             _deploy profile); the URL below is kept for documentation and as
             a fallback for tools that read distributionManagement directly.
             Snapshots use the dedicated Central Portal snapshot repository
             with server id `central-snapshots`.
+
+            The ids double as the credential lookup keys in
+            ~/.m2/settings.xml. The _deploy-jsentinel profile overrides all
+            four properties to point at repo.jsentinel.eu instead.
         -->
+        <deploy-repo-id>central</deploy-repo-id>
         <deploy-repo-url>https://central.sonatype.com/api/v1/publisher/upload</deploy-repo-url>
+        <deploy-repo-snapshots-id>central-snapshots</deploy-repo-snapshots-id>
         <deploy-repo-snapshots-url>https://central.sonatype.com/repository/maven-snapshots/</deploy-repo-snapshots-url>
 
         <jdk.version>26</jdk.version>
@@ -116,13 +122,11 @@
     <distributionManagement>
 
         <repository>
-            <id>central</id>
-            <name>Maven Central Portal</name>
+            <id>${deploy-repo-id}</id>
             <url>${deploy-repo-url}</url>
         </repository>
         <snapshotRepository>
-            <id>central-snapshots</id>
-            <name>Maven Central Portal Snapshots</name>
+            <id>${deploy-repo-snapshots-id}</id>
             <url>${deploy-repo-snapshots-url}</url>
         </snapshotRepository>
 
@@ -1137,6 +1141,36 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+
+        <!--
+            Alternative deploy target: the in-house repository at
+            repo.jsentinel.eu. Overrides the four deploy-repo-* properties so
+            distributionManagement points at the jsentinel repository; the
+            credential lookup uses the `jsentinel-releases` server id from
+            ~/.m2/settings.xml.
+
+            Unlike the Central Portal path (_deploy profile + bundle upload),
+            this is a plain Maven repository — the standard maven-deploy-plugin
+            pushes directly:
+
+                ./mvnw -P_deploy-jsentinel clean deploy
+
+            Do NOT combine with -P_deploy (that profile skips the deploy
+            plugin and builds a Central bundle instead). Add
+            -P_release_sign-artifacts if signed artefacts are wanted.
+        -->
+        <profile>
+            <id>_deploy-jsentinel</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <deploy-repo-id>jsentinel-releases</deploy-repo-id>
+                <deploy-repo-url>https://repo.jsentinel.eu/releases</deploy-repo-url>
+                <deploy-repo-snapshots-id>jsentinel-releases</deploy-repo-snapshots-id>
+                <deploy-repo-snapshots-url>https://repo.jsentinel.eu/snapshots</deploy-repo-snapshots-url>
+            </properties>
         </profile>
 
 
