@@ -110,6 +110,16 @@ The `_deploy` profile in `pom.xml` carries a comment block documenting the same 
 
 ## Versions
 
+## 06.02.04
+
+Infrastructure release: selectable deploy targets. `distributionManagement` is
+fully parameterised and two new profiles switch the destination —
+`-P_deploy-jsentinel` (repo.jsentinel.eu releases/snapshots) and
+`-P_deploy-jsentinel-sensitive` (access-protected sensitive channels) — with
+Maven Central remaining the default. Inherited by every child project; no code
+or dependency changes. See
+[RELEASE-NOTES-06.02.04.md](RELEASE-NOTES-06.02.04.md).
+
 ## 06.02.03
 
 Maintenance release: dependency / plugin refresh, BOM modernisation, migration
