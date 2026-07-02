@@ -1169,7 +1169,7 @@
             <properties>
                 <deploy-repo-id>jsentinel-releases</deploy-repo-id>
                 <deploy-repo-url>https://repo.jsentinel.eu/releases</deploy-repo-url>
-                <deploy-repo-snapshots-id>jsentinel-releases</deploy-repo-snapshots-id>
+                <deploy-repo-snapshots-id>jsentinel-snapshots</deploy-repo-snapshots-id>
                 <deploy-repo-snapshots-url>https://repo.jsentinel.eu/snapshots</deploy-repo-snapshots-url>
             </properties>
         </profile>
