@@ -1178,8 +1178,9 @@
             Deploy target for closed-source artefacts: the access-protected
             `sensitive` / `sensitive-snapshots` channels on repo.jsentinel.eu.
             Same mechanics as _deploy-jsentinel; the credential lookup uses
-            the `jsentinel-sensitive` server id from ~/.m2/settings.xml for
-            both repositories.
+            the route-scoped server ids `jsentinel-sensitive` (releases) and
+            `jsentinel-sensitive-snapshots` (snapshots) from
+            ~/.m2/settings.xml.
 
                 ./mvnw -P_deploy-jsentinel-sensitive clean deploy
 
@@ -1193,7 +1194,7 @@
             <properties>
                 <deploy-repo-id>jsentinel-sensitive</deploy-repo-id>
                 <deploy-repo-url>https://repo.jsentinel.eu/sensitive</deploy-repo-url>
-                <deploy-repo-snapshots-id>jsentinel-sensitive</deploy-repo-snapshots-id>
+                <deploy-repo-snapshots-id>jsentinel-sensitive-snapshots</deploy-repo-snapshots-id>
                 <deploy-repo-snapshots-url>https://repo.jsentinel.eu/sensitive-snapshots</deploy-repo-snapshots-url>
             </properties>
         </profile>
