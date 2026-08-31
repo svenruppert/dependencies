@@ -110,6 +110,18 @@ The `_deploy` profile in `pom.xml` carries a comment block documenting the same 
 
 ## Versions
 
+## 06.02.05
+
+Dependency refresh: the managed set moves to the latest stable releases
+(Jackson 2.22.2 / 3.2.2, HttpClient5 5.6.4, AssertJ 3.27.7, dom4j 2.2.0,
+Datafaker 2.7.0, PIT 1.30.0, JUnit 6.1.3, Checkstyle 14.1.0, …); the
+SLF4J/Log4j pins move to 2.1.0-alpha1 / 3.0.0-beta3 deliberately (the managed
+Jackson dependencies require the newer logging line). Consumer-visible: the
+managed Testcontainers Selenium module changes coordinates from
+`org.testcontainers:selenium` to `org.testcontainers:testcontainers-selenium`
+(2.0.5), matching the managed core. No code changes. See
+[RELEASE-NOTES-06.02.05.md](RELEASE-NOTES-06.02.05.md).
+
 ## 06.02.04
 
 Infrastructure release: selectable deploy targets. `distributionManagement` is
