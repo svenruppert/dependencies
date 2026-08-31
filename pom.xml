@@ -100,8 +100,13 @@
         <maven.compiler.testSource>${jdk.version}</maven.compiler.testSource>
         <maven.compiler.testTarget>${jdk.version}</maven.compiler.testTarget>
 
-        <slf4j.version>2.0.18</slf4j.version>
-        <log4j.version>2.26.1</log4j.version>
+        <!--
+            SLF4J / Log4j intentionally track the pre-release lines — the
+            managed Jackson dependencies require them. Do not downgrade to
+            the stable 2.0.x / 2.2x.x releases in version update passes.
+        -->
+        <slf4j.version>2.1.0-alpha1</slf4j.version>
+        <log4j.version>3.0.0-beta3</log4j.version>
 
         <pitest.version>1.30.0</pitest.version>
         <pitest-prod-classes>com.svenruppert.*</pitest-prod-classes>
