@@ -146,3 +146,7 @@ local.properties
 /vaadin-dependencies/vaadin-vXX/package.json
 /vaadin-dependencies/vaadin-vXX/webpack.generated.js
 /vaadin-dependencies/vaadin-vXX/webpack.config.js
+
+# Claude session state — local, never versioned (public repo)
+/CLAUDE.md
+/.claude/
