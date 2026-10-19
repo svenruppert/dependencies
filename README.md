@@ -110,6 +110,16 @@ The `_deploy` profile in `pom.xml` carries a comment block documenting the same 
 
 ## Versions
 
+## 06.02.06
+
+Dependency and build-plugin refresh, stable releases only (Jackson 3.2.4 /
+2.22.4, Byte Buddy 1.18.15, commons-lang3 3.21.0, REST Assured 6.2.0, Gatling
+3.16.0, Surefire/Failsafe 3.6.0, compiler plugin 3.16.0, SpotBugs plugin
+4.10.5.0, Dependency-Check 13.0.0, central-publishing 0.12.0, …). The only
+source change drops a SpotBugs suppression in `core`'s `PortUtils` that the
+newer SpotBugs flags as useless. No API changes. See
+[RELEASE-NOTES-06.02.06.md](RELEASE-NOTES-06.02.06.md).
+
 ## 06.02.05
 
 Dependency refresh: the managed set moves to the latest stable releases
